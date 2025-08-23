@@ -503,6 +503,326 @@ body {
   padding: 2rem;
 }
 
+/* Year Detail Page Styles */
+.year-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: calc(100vh - 120px);
+}
+
+.year-detail-content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.year-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(139, 0, 0, 0.1));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.year-badge {
+  background: linear-gradient(135deg, #c41e3a, #8b0000);
+  color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Cinzel", serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 8px 25px rgba(196, 30, 58, 0.3);
+}
+
+.year-title-section h1 {
+  color: #fff;
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.year-title-section p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.year-overview-section,
+.highlights-section,
+.activities-section,
+.images-section {
+  padding: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.year-overview-section:last-child,
+.highlights-section:last-child,
+.activities-section:last-child,
+.images-section:last-child {
+  border-bottom: none;
+}
+
+.year-overview-section h2,
+.highlights-section h2,
+.activities-section h2,
+.images-section h2 {
+  color: #c41e3a;
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.overview-content p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.highlight-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.highlight-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.highlight-image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.highlight-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.highlight-card:hover .highlight-image {
+  transform: scale(1.05);
+}
+
+.highlight-content {
+  padding: 1.5rem;
+}
+
+.highlight-title {
+  color: #fff;
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.highlight-description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.activities-container {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.activities-list {
+  color: rgba(255, 255, 255, 0.85);
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.activity-item {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  position: relative;
+}
+
+.activity-item::marker {
+  color: #c41e3a;
+}
+
+.images-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-icon {
+  color: white;
+  font-size: 2rem;
+}
+
+.year-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-year-btn {
+  background: linear-gradient(135deg, #c41e3a, #8b0000);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: "Cinzel", serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+}
+
+.nav-year-btn:hover {
+  background: linear-gradient(135deg, #e02244, #a00000);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+}
+
+/* Image Modal */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.image-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-modal-close {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  background: rgba(196, 30, 58, 0.8);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.image-modal-close:hover {
+  background: #c41e3a;
+  transform: rotate(90deg);
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: calc(90vh - 100px);
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal-info {
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Year item arrow indicator */
+.year-arrow {
+  color: #c41e3a;
+  font-size: 1.2rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.year-item:hover .year-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
 /* Loading and Error States */
 .loading-message {
   text-align: center;
@@ -526,6 +846,15 @@ body {
   .section-overview {
     position: relative;
     top: auto;
+  }
+  
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .highlight-card {
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 
@@ -570,10 +899,6 @@ body {
     padding: 1.5rem;
   }
   
-  .highlights-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .highlight-item {
     flex-direction: column;
     text-align: center;
@@ -585,6 +910,49 @@ body {
   
   .images-gallery {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  /* Year Detail Page Mobile Styles */
+  .year-detail-container {
+    padding: 1rem;
+  }
+  
+  .year-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .year-badge {
+    width: 80px;
+    height: 80px;
+    font-size: 1.2rem;
+  }
+  
+  .year-title-section h1 {
+    font-size: 1.8rem;
+  }
+  
+  .year-overview-section,
+  .highlights-section,
+  .activities-section,
+  .images-section {
+    padding: 1.5rem;
+  }
+  
+  .highlight-card {
+    margin: 0 auto;
+  }
+  
+  .year-navigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-year-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -617,6 +985,55 @@ body {
   }
   
   .modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  /* Year Detail Mobile Adjustments */
+  .year-badge {
+    width: 70px;
+    height: 70px;
+    font-size: 1rem;
+  }
+  
+  .year-title-section h1 {
+    font-size: 1.5rem;
+  }
+  
+  .year-overview-section h2,
+  .highlights-section h2,
+  .activities-section h2,
+  .images-section h2 {
+    font-size: 1.3rem;
+  }
+  
+  .overview-content p {
+    font-size: 1rem;
+  }
+  
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .highlight-image-container {
+    height: 150px;
+  }
+  
+  .highlight-title {
+    font-size: 1.1rem;
+  }
+  
+  .images-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .image-modal {
+    padding: 1rem;
+  }
+  
+  .image-modal-close {
+    top: -50px;
+    width: 40px;
+    height: 40px;
     font-size: 1.5rem;
   }
 }

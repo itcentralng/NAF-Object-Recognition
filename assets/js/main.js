@@ -128,7 +128,7 @@ function handleSectionClick(event) {
 
 function navigateToSection(sectionType) {
     // Navigate to the section viewer with the section ID as a parameter
-    window.location.href = `section-viewer.html?section=${sectionType}`;
+    window.location.href = `section.html?section=${sectionType}`;
 }
 
 // Add some interactive effects

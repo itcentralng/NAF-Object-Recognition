@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge" />
+    <meta name="author" content="Sunday Joseph" />
+    <meta name="description" content="Year Detail - Nigerian Air Force Museum" />
+    <meta
+      name="keywords"
+      content="Nigerian Air Force, NAF, History, Military Aviation, Museum, Finance, NAFSFA"
+    />
+
+    <title id="page-title">Year Detail - Nigerian Air Force Museum</title>
+    <link
+      rel="icon"
+      href="images/Nigerian_Air_Force-Logo.wine 1.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="assets/css/utilities.css" />
+    <link rel="stylesheet" href="assets/css/shared.css" />
+    <link rel="stylesheet" href="assets/css/section.css" />
+  </head>
+  <body class="flex justify-center align-start">
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+      <div class="nav-content">
+        <button class="back-btn" onclick="goBackToSection()">
+          <span>←</span> Back to Section
+        </button>
+        <div class="nav-title">
+          <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="NAF Logo" class="nav-logo" />
+          <h2 id="nav-year-title">Year Detail</h2>
+        </div>
+      </div>
+    </nav>
+
+    <div class="year-detail-container" id="year-detail-container">
+      <!-- Loading State -->
+      <div class="loading-message" id="loading-message">
+        <p>Loading year details...</p>
+      </div>
+
+      <!-- Year Detail Content -->
+      <div class="year-detail-content" id="year-detail-content" style="display: none;">
+        <!-- Year Header -->
+        <div class="year-header">
+          <div class="year-badge">
+            <span id="year-number">1972</span>
+          </div>
+          <div class="year-title-section">
+            <h1 id="year-title">Loading...</h1>
+            <p id="year-summary">Loading summary...</p>
+          </div>
+        </div>
+
+        <!-- Year Overview -->
+        <div class="year-overview-section">
+          <h2>Historical Context</h2>
+          <div class="overview-content">
+            <p id="year-content">Loading content...</p>
+          </div>
+        </div>
+
+        <!-- Key Highlights -->
+        <div class="highlights-section">
+          <h2>Key Highlights</h2>
+          <div id="highlights-grid" class="highlights-grid">
+            <!-- Highlights will be loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Major Activities -->
+        <div class="activities-section">
+          <h2>Major Activities & Events</h2>
+          <div class="activities-container">
+            <ul id="activities-list" class="activities-list">
+              <!-- Activities will be loaded dynamically -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Historical Images Gallery -->
+        <div class="images-section">
+          <h2>Historical Images</h2>
+          <div id="images-gallery" class="images-gallery">
+            <!-- Images will be loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Navigation to Previous/Next Years -->
+        <div class="year-navigation">
+          <button id="prev-year-btn" class="nav-year-btn" style="display: none;" onclick="navigateToPreviousYear()">
+            <span>←</span> <span id="prev-year-text">Previous Year</span>
+          </button>
+          <button id="next-year-btn" class="nav-year-btn" style="display: none;" onclick="navigateToNextYear()">
+            <span id="next-year-text">Next Year</span> <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div class="error-message" id="error-message" style="display: none;">
+        <p>Error loading year details. Please try again.</p>
+        <button onclick="goBackToSection()" class="btn-secondary">Return to Section</button>
+      </div>
+    </div>
+
+    <script src="assets/js/year-detail.js"></script>
+  </body>
+</html>

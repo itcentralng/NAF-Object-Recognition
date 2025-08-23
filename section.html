@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge" />
+    <meta name="author" content="Sunday Joseph" />
+    <meta name="description" content="Section Viewer - Nigerian Air Force Museum" />
+    <meta
+      name="keywords"
+      content="Nigerian Air Force, NAF, History, Military Aviation, Museum, Finance, NAFSFA"
+    />
+
+    <title id="page-title">Section - Nigerian Air Force Museum</title>
+    <link
+      rel="icon"
+      href="images/Nigerian_Air_Force-Logo.wine 1.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="assets/css/utilities.css" />
+    <link rel="stylesheet" href="assets/css/shared.css" />
+    <link rel="stylesheet" href="assets/css/section.css" />
+  </head>
+  <body class="flex justify-center align-start">
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+      <div class="nav-content">
+        <button class="back-btn" onclick="window.history.back()">
+          <span>←</span> Back to Museum
+        </button>
+        <div class="nav-title">
+          <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="NAF Logo" class="nav-logo" />
+          <h2 id="nav-section-title">Section</h2>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-container" id="main-container">
+      <!-- Section Overview Panel (Left Side) -->
+      <div class="section-overview">
+        <div class="overview-content">
+          <div class="section-header">
+            <div class="section-icon" id="section-icon">🛩️</div>
+            <h1 class="section-title" id="section-title">Loading...</h1>
+          </div>
+          <p class="section-description" id="section-description">Loading section content...</p>
+          <div class="section-summary">
+            <h3>Section Overview</h3>
+            <p id="section-summary-text">Loading summary...</p>
+          </div>
+          <div class="section-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="total-years">0</span>
+              <span class="stat-label">Years Covered</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="total-events">0</span>
+              <span class="stat-label">Historical Events</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Years Timeline Panel (Right Side) -->
+      <div class="years-timeline">
+        <div class="timeline-header">
+          <h2>Historical Timeline</h2>
+          <p>Select a year to explore its details</p>
+        </div>
+        <div class="years-container" id="years-container">
+          <div class="loading-message">
+            <p>Loading timeline...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/section.js"></script>
+  </body>
+</html>
