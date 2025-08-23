@@ -5,92 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-compatible" content="IE=edge" />
     <meta name="author" content="Sunday Joseph" />
-    <meta name="description" content="Official Website of Ibadan Museum" />
+    <meta name="description" content="Official Website of Nigerian Air Force Museum" />
     <meta
       name="keywords"
-      content="Ibadan Museum, Museum, History, Culture, Heritage, Artifacts"
+      content="Nigerian Air Force, NAF, Museum, History, Culture, Heritage, Military"
     />
 
-    <title>Ibadan Museum</title>
+    <title>Nigerian Air Force Museum</title>
     <link
       rel="icon"
-      href="ChatGPT Image May 9, 2025, 12_40_48 AM.png"
+      href="images/Nigerian_Air_Force-Logo.wine 1.png"
       type="image/png"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
     <link rel="stylesheet" href="utilites.css" />
     <link rel="stylesheet" href="shared.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="flex flex-column justify-center align-center">
-      <div class="header-bg flex flex-column justify-center align-center p-400">
-        <div class="header-image welcome-msg">
-          <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="" />
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="welcome-screen active">
+      <div class="glass-overlay"></div>
+      <div class="welcome-content">
+        <div class="logo-container">
+          <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="Nigerian Air Force Logo" />
         </div>
-        <div
-          class="flex flex-column justify-center align-center gap-4 welcome-msg"
-        >
-          <h1 class="text-center font-bold text-lg">
-            WELCOME TO THE NIGERIAN AIR FORCE MUSEUM
-          </h1>
-          <p class="text-base">Willing, Able and Ready</p>
+        <div class="welcome-text">
+          <h1>WELCOME TO THE<br>NIGERIAN AIR FORCE<br>MUSEUM</h1>
+          <p>Willing, Able and Ready</p>
+          <button id="enter-museum" class="enter-btn">Enter Museum</button>
         </div>
       </div>
-    </header>
-    <main>
-      <section class="logisticts">
-        <div class="logisticts-wrapper">
-          <div
-            class="sticky-text flex flex-column justify-center align-start gap-4 bg-pry backdrop bx-shadow p-200 rounded-lg"
-          >
-            <h1 class="text-200">ABOUT LOGISTICS</h1>
-            <p class="text-100">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-              necessitatibus repellat ipsa? Doloremque eius quo dignissimos
-              temporibus eligendi. Dolor error autem reiciendis voluptas quae
-              libero blanditiis debitis repellat cum distinctio quasi similique
-              consequatur expedita obcaecati, dolores quis? Est, culpa veniam.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-              expedita obcaecati quidem et facere <br />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptates eveniet enim minus, impedit animi ut dolor blanditiis,
-              temporibus voluptatem debitis repudiandae suscipit eaque! Ex,
-              odio. <br />Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Earum minima quidem, iste sequi harum quam dolorem nesciunt
-              illum illo autem reprehenderit repudiandae a optio, perspiciatis
-              eaque dolorum natus deleniti quo.
-            </p>
+    </div>
+
+    <!-- Main Navigation Screen -->
+    <div id="main-screen" class="main-screen">
+      <header class="main-header">
+        <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="NAF Logo" class="header-logo" />
+        <h2>Nigerian Air Force Museum</h2>
+      </header>
+      
+      <main class="sections-container">
+        <div class="section-cards">
+          <div class="section-card" data-section="naf-history">
+            <div class="card-content">
+              <h3>NAF History</h3>
+              <p>Explore the rich history and evolution of the Nigerian Air Force</p>
+              <div class="card-icon">✈️</div>
+            </div>
           </div>
-          <div class="logistic-year scroller">
-            <div class="inner-scroller flex flex-column gap-200">
-              <a href="/1972-1990/index.html">
-                <div class="bg-pry p-5 rounded-lg">1972-1990</div>
-              </a>
-              <a href="/late-1990s/index.html">
-                <div class="bg-pry p-5 rounded-lg">1990-2000</div>
-              </a>
-              <a href="/2003-2010/index.html">
-                <div class="bg-pry p-5 rounded-lg">2003-2010</div>
-              </a>
-              <a href="/2014-2018/index.html">
-                <div class="bg-pry p-5 rounded-lg">2014-2018</div>
-              </a>
-              <a href="/2021-2025/index.html">
-                <div class="bg-pry p-5 rounded-lg">2021-2025</div>
-              </a>
+          
+          <div class="section-card" data-section="nafsfa-history">
+            <div class="card-content">
+              <h3>NAFSFA History</h3>
+              <p>Discover the Nigerian Air Force Special Forces Academy heritage</p>
+              <div class="card-icon">🎖️</div>
+            </div>
+          </div>
+          
+          <div class="section-card" data-section="finance-evolution">
+            <div class="card-content">
+              <h3>Evolution of NAF Finance Specialty</h3>
+              <p>Learn about the development of NAF financial operations</p>
+              <div class="card-icon">💰</div>
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
