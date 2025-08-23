@@ -93,13 +93,13 @@ function navigateToSection(sectionType) {
     
     switch (sectionType) {
         case 'naf-history':
-            targetUrl = './1972-1990/index.html';
+            targetUrl = './sections/naf-history/index.html';
             break;
         case 'nafsfa-history':
-            targetUrl = './2003-2010/index.html';
+            targetUrl = './sections/nafsfa-history/index.html';
             break;
         case 'finance-evolution':
-            targetUrl = './2014-2018/index.html';
+            targetUrl = './sections/finance-evolution/index.html';
             break;
         default:
             console.error('Unknown section type:', sectionType);
