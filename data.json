@@ -1,0 +1,20 @@
+{
+    "section":[
+        {
+            "id": "naf-history",
+            "icon": "../images/naf-history-icon.png",
+            "title": "NAF History",
+            "years": [
+                {
+                    "year": "1972",
+                    "title": "Year of Establishment",
+                    "content": "At inception, the financial administration of the NAF was vested with the Nigerian Army. With the passage of time, the NAF became self accounting on Apr 72 and was headed by a chief PayMaster. With broader roles, growing manpower and expanded force structure witnessed in the early 1980s, the NAF Pay and Records was separated thereby giving birth to 2 independent establishments designed as the Pay and Accounting Group and the Personnel Management Group respectively.",
+                    "images": [
+                        "../images/Rectangle 5.png",
+                        "../images/Rectangle 3.png"
+                    ]
+                }
+            ]
+        }
+    ]
+}
