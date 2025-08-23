@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge" />
+    <meta name="author" content="Sunday Joseph" />
+    <meta name="description" content="Section Viewer - Nigerian Air Force Museum" />
+    <meta
+      name="keywords"
+      content="Nigerian Air Force, NAF, History, Military Aviation, Museum, Finance, NAFSFA"
+    />
+
+    <title id="page-title">Section Viewer - Nigerian Air Force Museum</title>
+    <link
+      rel="icon"
+      href="images/Nigerian_Air_Force-Logo.wine 1.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="assets/css/utilities.css" />
+    <link rel="stylesheet" href="assets/css/shared.css" />
+    <link rel="stylesheet" href="assets/css/naf-history.css" />
+  </head>
+  <body class="flex justify-center align-start">
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+      <div class="nav-content">
+        <button class="back-btn" onclick="window.history.back()">
+          <span>←</span> Back to Museum
+        </button>
+        <div class="nav-title">
+          <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="NAF Logo" class="nav-logo" />
+          <h2 id="nav-section-title">Section Viewer</h2>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" id="sections-container">
+      <!-- Content will be loaded dynamically -->
+      <div class="loading-message">
+        <p>Loading section content...</p>
+      </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation-controls" id="navigation-controls" style="display: none;">
+      <button class="nav-btn prev-btn" onclick="previousSection()">Previous</button>
+      <div class="section-indicator" id="section-indicators">
+        <!-- Indicators will be generated dynamically -->
+      </div>
+      <button class="nav-btn next-btn" onclick="nextSection()">Next</button>
+    </div>
+
+    <script>
+      let currentSectionData = null;
+      let currentSectionIndex = 0;
+      let currentPeriodIndex = 0;
+
+      // Get section ID from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const sectionId = urlParams.get('section');
+
+      if (!sectionId) {
+        window.location.href = 'index.html';
+      }
+
+      // Load section data from JSON
+      async function loadSectionData() {
+        try {
+          const response = await fetch('data.json');
+          const data = await response.json();
+          
+          currentSectionData = data.sections.find(section => section.id === sectionId);
+          
+          if (!currentSectionData) {
+            throw new Error('Section not found');
+          }
+
+          // Update page title and navigation title
+          document.getElementById('page-title').textContent = `${currentSectionData.title} - Nigerian Air Force Museum`;
+          document.getElementById('nav-section-title').textContent = currentSectionData.title;
+          
+          renderSection();
+          setupNavigation();
+          
+        } catch (error) {
+          console.error('Error loading section data:', error);
+          document.getElementById('sections-container').innerHTML = 
+            '<div class="error-message"><p>Error loading section content. Please try again.</p></div>';
+        }
+      }
+
+      function renderSection() {
+        const container = document.getElementById('sections-container');
+        let sectionsHTML = '';
+
+        currentSectionData.periods.forEach((period, index) => {
+          const isActive = index === 0 ? 'active' : '';
+          const yearDisplay = period.year || period.yearRange;
+          const titleClass = period.year ? 'text-300 underline' : 'text-300 underline';
+          const headerClass = period.yearRange ? 'section-2__header text-200' : '';
+          
+          let keyInfo = '';
+          if (period.keyPersonnel) {
+            keyInfo = `<span class="text-200 key-personnel">KEY PERSONNEL: ${period.keyPersonnel}</span>`;
+          } else if (period.keyMilestone) {
+            keyInfo = `<span class="text-200 key-personnel">KEY MILESTONE: ${period.keyMilestone}</span>`;
+          } else if (period.keyInitiative) {
+            keyInfo = `<span class="text-200 key-personnel">KEY INITIATIVE: ${period.keyInitiative}</span>`;
+          } else if (period.keyOutcome) {
+            keyInfo = `<span class="text-200 key-outcome">KEY OUTCOME: ${period.keyOutcome}</span>`;
+          }
+
+          sectionsHTML += `
+            <div class="section p-100 ${isActive}" id="section${index + 1}">
+              <div class="text flex flex-column gap-4">
+                ${headerClass ? `<h2 class="${headerClass}">${yearDisplay.split(' - ')[0] || yearDisplay}</h2>` : ''}
+                <h1 class="${titleClass}">${period.year ? yearDisplay : (yearDisplay.split(' - ')[1] || yearDisplay)}</h1>
+                ${period.subtitle ? `<h3 class="text-100 font-bold">${period.subtitle}</h3>` : ''}
+                ${!period.subtitle && !headerClass ? `<h3 class="text-200">${period.title}</h3>` : ''}
+                ${period.subtitle || headerClass ? `<h1 class="text-300 underline">${period.title}</h1>` : ''}
+                <p class="text-100">${period.content}</p>
+                ${keyInfo}
+              </div>
+              <div class="image-container bx-shadow rounded-lg scroller">
+                <div class="images flex flex-column gap-4 inner-scroller">
+                  ${period.images.map(img => `<img src="${img}" alt="Historical Image" class="rounded-lg" />`).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = sectionsHTML;
+      }
+
+      function setupNavigation() {
+        const indicatorsContainer = document.getElementById('section-indicators');
+        let indicatorsHTML = '';
+        
+        currentSectionData.periods.forEach((_, index) => {
+          const isActive = index === 0 ? 'active' : '';
+          indicatorsHTML += `<span class="indicator ${isActive}" data-section="${index + 1}"></span>`;
+        });
+        
+        indicatorsContainer.innerHTML = indicatorsHTML;
+        document.getElementById('navigation-controls').style.display = 'flex';
+      }
+
+      function nextSection() {
+        const currentSection = document.querySelector('.section.active');
+        const nextSection = currentSection.nextElementSibling;
+        
+        if (nextSection && nextSection.classList.contains('section')) {
+          currentSection.classList.remove('active');
+          nextSection.classList.add('active');
+          
+          // Update indicators
+          const currentIndicator = document.querySelector('.indicator.active');
+          const nextIndicator = currentIndicator.nextElementSibling;
+          
+          if (nextIndicator) {
+            currentIndicator.classList.remove('active');
+            nextIndicator.classList.add('active');
+          }
+        }
+      }
+
+      function previousSection() {
+        const currentSection = document.querySelector('.section.active');
+        const prevSection = currentSection.previousElementSibling;
+        
+        if (prevSection && prevSection.classList.contains('section')) {
+          currentSection.classList.remove('active');
+          prevSection.classList.add('active');
+          
+          // Update indicators
+          const currentIndicator = document.querySelector('.indicator.active');
+          const prevIndicator = currentIndicator.previousElementSibling;
+          
+          if (prevIndicator) {
+            currentIndicator.classList.remove('active');
+            prevIndicator.classList.add('active');
+          }
+        }
+      }
+
+      // Initialize the section viewer
+      loadSectionData();
+    </script>
+  </body>
+</html>

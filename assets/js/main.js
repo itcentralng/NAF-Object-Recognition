@@ -3,23 +3,61 @@
 // DOM Elements
 const welcomeScreen = document.getElementById('welcome-screen');
 const mainScreen = document.getElementById('main-screen');
-const sectionCards = document.querySelectorAll('.section-card');
+let sectionCards = [];
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
 });
 
-function initializeApp() {
+async function initializeApp() {
+    // Load sections from JSON
+    await loadSections();
+    
     // Auto-transition to main screen after 3 seconds
     setTimeout(() => {
         handleEnterMuseum();
     }, 3000);
+}
 
-    // Add section card event listeners
-    sectionCards.forEach(card => {
-        card.addEventListener('click', handleSectionClick);
-    });
+async function loadSections() {
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        
+        const sectionsContainer = document.getElementById('section-cards');
+        let sectionsHTML = '';
+        
+        data.sections.forEach(section => {
+            sectionsHTML += `
+                <div class="section-card" data-section="${section.id}">
+                    <div class="card-content">
+                        <h3>${section.title}</h3>
+                        <p>${section.description}</p>
+                        <div class="card-icon">${section.icon}</div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        sectionsContainer.innerHTML = sectionsHTML;
+        
+        // Re-query section cards after dynamic loading
+        sectionCards = document.querySelectorAll('.section-card');
+        
+        // Add section card event listeners
+        sectionCards.forEach(card => {
+            card.addEventListener('click', handleSectionClick);
+        });
+        
+        // Add interactive effects
+        addInteractiveEffects();
+        
+    } catch (error) {
+        console.error('Error loading sections:', error);
+        document.getElementById('section-cards').innerHTML = 
+            '<div class="error-message"><p>Error loading sections. Please refresh the page.</p></div>';
+    }
 }
 
 function handleEnterMuseum() {
@@ -89,25 +127,8 @@ function handleSectionClick(event) {
 }
 
 function navigateToSection(sectionType) {
-    let targetUrl = '';
-    
-    switch (sectionType) {
-        case 'naf-history':
-            targetUrl = './sections/naf-history.html';
-            break;
-        case 'nafsfa-history':
-            targetUrl = './sections/nafsfa-history.html';
-            break;
-        case 'finance-evolution':
-            targetUrl = './sections/finance-evolution.html';
-            break;
-        default:
-            console.error('Unknown section type:', sectionType);
-            return;
-    }
-    
-    // Navigate to the target page
-    window.location.href = targetUrl;
+    // Navigate to the section viewer with the section ID as a parameter
+    window.location.href = `section-viewer.html?section=${sectionType}`;
 }
 
 // Add some interactive effects
