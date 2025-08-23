@@ -7,6 +7,28 @@ body {
   padding-top: 100px; /* Account for fixed navigation */
 }
 
+/* Full page view for year detail page */
+.year-detail-page {
+  padding-top: 100px;
+  margin: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #0f0f0f);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* Navigation Header */
 .nav-header {
   position: fixed;
@@ -505,51 +527,80 @@ body {
 
 /* Year Detail Page Styles */
 .year-detail-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  min-height: calc(100vh - 120px);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: calc(100vh - 100px);
 }
 
 .year-detail-content {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
+  min-height: calc(100vh - 100px);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .year-header {
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(139, 0, 0, 0.1));
+  padding: 3rem 2rem 2rem 2rem;
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.15), rgba(139, 0, 0, 0.15));
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.year-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.02"><rect width="11" height="11"/></g></svg>') repeat;
+  pointer-events: none;
 }
 
 .year-badge {
   background: linear-gradient(135deg, #c41e3a, #8b0000);
   color: white;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Cinzel", serif;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  box-shadow: 0 8px 25px rgba(196, 30, 58, 0.3);
+  box-shadow: 0 12px 30px rgba(196, 30, 58, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.1);
 }
 
 .year-title-section h1 {
   color: #fff;
   font-family: "Playfair Display", serif;
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   margin: 0 0 1rem 0;
   line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .year-title-section p {
@@ -563,7 +614,7 @@ body {
 .highlights-section,
 .activities-section,
 .images-section {
-  padding: 2rem;
+  padding: 3rem 2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -589,12 +640,15 @@ body {
   font-size: 1.1rem;
   line-height: 1.8;
   text-align: justify;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .highlights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  max-width: none;
 }
 
 .highlight-card {
@@ -648,7 +702,9 @@ body {
 .activities-container {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 0.5rem;
-  padding: 1.5rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .activities-list {
@@ -669,8 +725,8 @@ body {
 
 .images-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .gallery-item {
@@ -721,8 +777,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   background: rgba(255, 255, 255, 0.03);
+  min-height: 120px;
 }
 
 .nav-year-btn {
@@ -914,14 +971,15 @@ body {
   
   /* Year Detail Page Mobile Styles */
   .year-detail-container {
-    padding: 1rem;
+    padding: 0;
   }
   
   .year-header {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+    min-height: 180px;
   }
   
   .year-badge {
@@ -938,7 +996,7 @@ body {
   .highlights-section,
   .activities-section,
   .images-section {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
   
   .highlight-card {
@@ -948,6 +1006,8 @@ body {
   .year-navigation {
     flex-direction: column;
     gap: 1rem;
+    padding: 1.5rem 1rem;
+    min-height: 80px;
   }
   
   .nav-year-btn {
