@@ -3,7 +3,6 @@
 // DOM Elements
 const welcomeScreen = document.getElementById('welcome-screen');
 const mainScreen = document.getElementById('main-screen');
-const enterBtn = document.getElementById('enter-museum');
 const sectionCards = document.querySelectorAll('.section-card');
 
 // Initialize the app
@@ -12,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
-    // Add enter button event listener
-    if (enterBtn) {
-        enterBtn.addEventListener('click', handleEnterMuseum);
-    }
+    // Auto-transition to main screen after 3 seconds
+    setTimeout(() => {
+        handleEnterMuseum();
+    }, 3000);
 
     // Add section card event listeners
     sectionCards.forEach(card => {
