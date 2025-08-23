@@ -528,8 +528,9 @@ body {
 /* Year Detail Page Styles */
 .year-detail-container {
   width: 100%;
-  margin: 0;
-  padding: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
   min-height: calc(100vh - 100px);
 }
 
@@ -537,11 +538,12 @@ body {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: none;
-  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
   overflow: hidden;
   min-height: calc(100vh - 100px);
   animation: fadeInUp 0.8s ease-out;
+  margin-top: 2rem;
 }
 
 @keyframes fadeInUp {
@@ -641,7 +643,7 @@ body {
   line-height: 1.8;
   text-align: justify;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .highlights-grid {
@@ -704,17 +706,17 @@ body {
   border-radius: 0.5rem;
   padding: 2rem;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .activities-list {
   color: rgba(255, 255, 255, 0.85);
-  padding-left: 1.5rem;
+  padding-left: 0;
   margin: 0;
 }
 
 .activity-item {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   line-height: 1.6;
   position: relative;
 }
@@ -971,7 +973,11 @@ body {
   
   /* Year Detail Page Mobile Styles */
   .year-detail-container {
-    padding: 0;
+    padding: 0 0.75rem;
+  }
+  
+  .year-detail-content {
+    margin-top: 0.5rem;
   }
   
   .year-header {
