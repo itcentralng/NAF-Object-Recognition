@@ -5,29 +5,94 @@
             "icon": "🛩️",
             "title": "NAF History",
             "description": "Explore the rich history and evolution of the Nigerian Air Force",
-            "periods": [
+            "summary": "The Nigerian Air Force has undergone significant transformation since its establishment. From its early days of financial dependence on the Nigerian Army to becoming a self-accounting organization, the NAF has continuously evolved to meet modern operational demands. This section chronicles the major milestones, organizational changes, and technological advancements that have shaped the force into what it is today.",
+            "years": [
                 {
                     "year": "1972",
                     "title": "ESTABLISHMENT OF THE NAF PAY AND RECORDS GROUP",
+                    "summary": "The Nigerian Air Force achieved financial independence from the Army, marking the beginning of autonomous financial operations.",
                     "content": "At inception, the financial administration of the NAF was vested with the Nigerian Army. With the passage of time, the NAF became self accounting on Apr 72 and was headed by a chief PayMaster. With broader roles, growing manpower and expanded force structure witnessed in the early 1980s, the NAF Pay and Records was separated thereby giving birth to 2 independent establishments designed as the Pay and Accounting Group and the Personnel Management Group respectively.",
                     "keyPersonnel": "Lt Col FO Folaji",
+                    "highlights": [
+                        {
+                            "title": "First Chief PayMaster Appointed",
+                            "description": "Lt Col FO Folaji became the first Chief PayMaster, leading the newly independent financial operations.",
+                            "image": "images/Rectangle 5.png"
+                        },
+                        {
+                            "title": "Financial Independence Achieved",
+                            "description": "NAF gained autonomy in financial administration, separating from Nigerian Army oversight.",
+                            "image": "images/Rectangle 3.png"
+                        }
+                    ],
+                    "activities": [
+                        "Establishment of independent financial reporting systems",
+                        "Creation of specialized accounting procedures for air force operations",
+                        "Training of personnel in military financial management"
+                    ],
                     "images": [
-                        "../images/Rectangle 5.png",
-                        "../images/Rectangle 3.png",
-                        "../images/Rectangle 9.png",
-                        "../images/Rectangle 11.png"
+                        "images/Rectangle 5.png",
+                        "images/Rectangle 3.png",
+                        "images/Rectangle 9.png",
+                        "images/Rectangle 11.png"
                     ]
                 },
                 {
-                    "yearRange": "1972 - MID-1980S",
-                    "title": "ABOLISHMENT OF TABLE PAYMENT IN THE NAF AND TRANSITION TO BANKING OPERATIONS",
-                    "content": "Before the 1980s NAF personnel were paid salaries, allowances and other entitlements in cash via table payment. The process required a lot of manual actions such as physical cash handling that was slow and largely inaccurate. With the evolution of banking system and operation in Nigeria, the NAF Finance Corps at the time pushed for the abolishment of the table payment method and began to make payments to individual salary accounts of personnel through banks. This change brought about ease for NAF personnel and also improved efficiency and accountability.",
-                    "keyOutcome": "Modernized salary disbursement system",
+                    "year": "1980",
+                    "title": "ORGANIZATIONAL RESTRUCTURING",
+                    "summary": "Major organizational changes led to the separation of Pay and Records into two independent groups.",
+                    "content": "The early 1980s witnessed significant organizational restructuring as the NAF expanded its operations. The Pay and Records Group was strategically separated into two independent establishments: the Pay and Accounting Group and the Personnel Management Group, reflecting the growing complexity of air force operations.",
+                    "highlights": [
+                        {
+                            "title": "Pay and Accounting Group Formation",
+                            "description": "Dedicated financial management unit established to handle all monetary transactions.",
+                            "image": "images/Rectangle 1.png"
+                        },
+                        {
+                            "title": "Personnel Management Group Creation",
+                            "description": "Specialized unit formed to manage human resources and personnel records.",
+                            "image": "images/Rectangle 2.png"
+                        }
+                    ],
+                    "activities": [
+                        "Separation of financial and personnel management functions",
+                        "Development of specialized training programs",
+                        "Implementation of improved record-keeping systems"
+                    ],
                     "images": [
-                        "../images/Rectangle 1.png",
-                        "../images/Rectangle 2.png",
-                        "../images/Rectangle 4.png",
-                        "../images/Rectangle 6.png"
+                        "images/Rectangle 1.png",
+                        "images/Rectangle 2.png",
+                        "images/Rectangle 4.png",
+                        "images/Rectangle 6.png"
+                    ]
+                },
+                {
+                    "year": "1985",
+                    "title": "BANKING SYSTEM INTEGRATION",
+                    "summary": "Revolutionary transition from cash payments to modern banking operations transformed financial management.",
+                    "content": "The mid-1980s marked a revolutionary change in NAF financial operations with the abolishment of table payment systems. This transition to modern banking operations brought unprecedented efficiency and accountability to salary disbursement and financial management.",
+                    "highlights": [
+                        {
+                            "title": "End of Table Payment Era",
+                            "description": "Traditional cash payment methods were completely phased out in favor of bank transfers.",
+                            "image": "images/Rectangle 7.png"
+                        },
+                        {
+                            "title": "Individual Salary Accounts",
+                            "description": "Each NAF personnel received individual bank accounts for salary and allowances.",
+                            "image": "images/Rectangle 8.png"
+                        }
+                    ],
+                    "activities": [
+                        "Partnership agreements with commercial banks",
+                        "Training programs for personnel on banking procedures",
+                        "Implementation of electronic payment systems"
+                    ],
+                    "images": [
+                        "images/Rectangle 7.png",
+                        "images/Rectangle 8.png",
+                        "images/Rectangle 9.png",
+                        "images/Rectangle 10.png"
                     ]
                 }
             ]
@@ -37,30 +102,94 @@
             "icon": "🎖️",
             "title": "NAFSFA History",
             "description": "Discover the Nigerian Air Force School of Finance and Accounting",
-            "periods": [
+            "summary": "The Nigerian Air Force School of Finance and Accounting represents the pinnacle of specialized financial education within the Nigerian Air Force. Established to meet the growing demands for professional financial management in military operations, NAFSFA has evolved into a center of excellence for financial training, producing highly skilled finance professionals who serve across all NAF commands and units.",
+            "years": [
                 {
                     "year": "2003",
-                    "title": "ESTABLISHMENT OF THE NIGERIAN AIR FORCE SPECIAL FORCES ACADEMY",
-                    "content": "The Nigerian Air Force Special Forces Academy (NAFSFA) was established in 2003 to train elite special forces personnel for specialized operations. The academy was created to meet the growing need for highly trained special operations forces capable of handling complex security challenges. Located in strategic facilities, NAFSFA became the premier training ground for NAF special forces operations, counter-terrorism, and specialized military tactics.",
-                    "keyMilestone": "First Special Forces Graduation",
+                    "title": "ESTABLISHMENT OF NAFSFA",
+                    "summary": "The Nigerian Air Force School of Finance and Accounting was established to provide specialized financial training.",
+                    "content": "The Nigerian Air Force School of Finance and Accounting (NAFSFA) was established in 2003 to train specialized finance personnel for the growing needs of the Nigerian Air Force. The school was created to provide comprehensive training in military financial management, accounting principles, and modern financial systems to ensure professional excellence in NAF financial operations.",
+                    "keyPersonnel": "Air Commodore M.A. Balogun (First Commandant)",
+                    "highlights": [
+                        {
+                            "title": "First Training Course",
+                            "description": "Initial batch of 45 officers completed the comprehensive finance training program.",
+                            "image": "images/Rectangle 14.png"
+                        },
+                        {
+                            "title": "Curriculum Development",
+                            "description": "Specialized curriculum designed for military finance operations and accounting.",
+                            "image": "images/Rectangle 15.png"
+                        }
+                    ],
+                    "activities": [
+                        "Development of specialized finance training curriculum",
+                        "Recruitment of qualified instructors",
+                        "Establishment of modern training facilities"
+                    ],
                     "images": [
-                        "../images/Rectangle 14.png",
-                        "../images/Rectangle 15.png",
-                        "../images/Rectangle 16.png",
-                        "../images/Rectangle 17.png"
+                        "images/Rectangle 14.png",
+                        "images/Rectangle 15.png",
+                        "images/Rectangle 16.png",
+                        "images/Rectangle 17.png"
                     ]
                 },
                 {
-                    "yearRange": "2003-2010",
-                    "title": "EXPANSION AND MODERNIZATION",
-                    "subtitle": "DEVELOPMENT OF ADVANCED TRAINING PROGRAMS AND INTERNATIONAL PARTNERSHIPS",
-                    "content": "Between 2003 and 2010, NAFSFA underwent significant expansion and modernization. The academy developed comprehensive training programs covering various aspects of special operations, including urban warfare, counter-terrorism, reconnaissance, and specialized combat techniques. International partnerships were established with allied military academies to enhance training standards and share best practices in special forces operations.",
-                    "keyOutcome": "Enhanced Special Forces Capabilities",
+                    "year": "2007",
+                    "title": "INTERNATIONAL PARTNERSHIPS",
+                    "summary": "Strategic partnerships with international military finance institutions enhanced training standards.",
+                    "content": "NAFSFA established strategic partnerships with international military finance institutions to enhance training standards and introduce global best practices. These collaborations brought in expertise from allied nations and improved the quality of financial education within the Nigerian Air Force.",
+                    "highlights": [
+                        {
+                            "title": "UK Royal Air Force Collaboration",
+                            "description": "Partnership established for exchange programs and curriculum enhancement.",
+                            "image": "images/Rectangle 19.png"
+                        },
+                        {
+                            "title": "Advanced Training Modules",
+                            "description": "Introduction of advanced financial management and auditing courses.",
+                            "image": "images/Rectangle 21.png"
+                        }
+                    ],
+                    "activities": [
+                        "Exchange programs with international institutions",
+                        "Advanced training module development",
+                        "Instructor certification programs"
+                    ],
                     "images": [
-                        "../images/Rectangle 19.png",
-                        "../images/Rectangle 21.png",
-                        "../images/Rectangle 23.png",
-                        "../images/Rectangle 31.png"
+                        "images/Rectangle 19.png",
+                        "images/Rectangle 21.png",
+                        "images/Rectangle 23.png",
+                        "images/Rectangle 31.png"
+                    ]
+                },
+                {
+                    "year": "2010",
+                    "title": "MODERNIZATION AND EXPANSION",
+                    "summary": "Major infrastructure upgrade and program expansion to meet growing demands.",
+                    "content": "NAFSFA underwent significant modernization and expansion to accommodate the growing demand for specialized finance training. New facilities were constructed, modern equipment installed, and training programs diversified to cover emerging areas of military finance.",
+                    "highlights": [
+                        {
+                            "title": "New Training Complex",
+                            "description": "State-of-the-art training facilities with modern classrooms and laboratories.",
+                            "image": "images/Rectangle 32.png"
+                        },
+                        {
+                            "title": "Digital Finance Training",
+                            "description": "Introduction of computer-based training systems and digital finance simulations.",
+                            "image": "images/Rectangle 34.png"
+                        }
+                    ],
+                    "activities": [
+                        "Construction of new training facilities",
+                        "Installation of modern equipment",
+                        "Launch of digital finance training programs"
+                    ],
+                    "images": [
+                        "images/Rectangle 32.png",
+                        "images/Rectangle 34.png",
+                        "images/2019.png",
+                        "images/2020.png"
                     ]
                 }
             ]
@@ -70,30 +199,95 @@
             "icon": "💰",
             "title": "Evolution of NAF Finance Specialty",
             "description": "Learn about the development of NAF financial operations",
-            "periods": [
+            "summary": "The evolution of NAF Finance Specialty represents a journey from traditional manual processes to cutting-edge digital financial management systems. This transformation reflects the Nigerian Air Force's commitment to maintaining world-class financial operations that support its operational readiness and effectiveness in defending Nigeria's airspace and national interests.",
+            "years": [
                 {
                     "year": "2014",
-                    "title": "MODERNIZATION OF FINANCIAL SYSTEMS AND DIGITAL TRANSFORMATION",
+                    "title": "DIGITAL TRANSFORMATION INITIATIVE",
+                    "summary": "Comprehensive modernization of financial systems through digital technology adoption.",
                     "content": "The year 2014 marked a significant milestone in the evolution of NAF Finance Specialty with the introduction of comprehensive digital transformation initiatives. Modern financial management systems were implemented to enhance transparency, accountability, and efficiency in financial operations. This included the adoption of advanced accounting software, electronic payment systems, and digital record management that revolutionized how financial operations were conducted within the Nigerian Air Force.",
                     "keyInitiative": "Digital Financial Management",
+                    "highlights": [
+                        {
+                            "title": "ERP System Implementation",
+                            "description": "Enterprise Resource Planning system deployed for integrated financial management.",
+                            "image": "images/Rectangle 23.png"
+                        },
+                        {
+                            "title": "Electronic Payment Gateway",
+                            "description": "Modern payment systems implemented for faster and more secure transactions.",
+                            "image": "images/Rectangle 32.png"
+                        }
+                    ],
+                    "activities": [
+                        "Implementation of advanced accounting software",
+                        "Training programs for digital systems adoption",
+                        "Development of electronic payment infrastructure"
+                    ],
                     "images": [
-                        "../images/Rectangle 23.png",
-                        "../images/Rectangle 32.png",
-                        "../images/Rectangle 34.png",
-                        "../images/2019.png"
+                        "images/Rectangle 23.png",
+                        "images/Rectangle 32.png",
+                        "images/Rectangle 34.png",
+                        "images/2019.png"
                     ]
                 },
                 {
-                    "yearRange": "2014-2018",
+                    "year": "2018",
                     "title": "ENHANCED FINANCIAL GOVERNANCE",
-                    "subtitle": "IMPLEMENTATION OF ADVANCED AUDIT SYSTEMS AND COMPLIANCE FRAMEWORKS",
-                    "content": "Between 2014 and 2018, the NAF Finance Specialty underwent major reforms focusing on enhanced financial governance and compliance. Advanced audit systems were implemented to ensure strict adherence to financial regulations and government policies. The period saw the establishment of robust internal control mechanisms, improved financial reporting standards, and the development of specialized training programs for finance personnel to keep pace with evolving financial management best practices.",
+                    "summary": "Advanced audit systems and compliance frameworks established for improved accountability.",
+                    "content": "The implementation of enhanced financial governance systems marked another major milestone in NAF Finance Specialty evolution. Advanced audit systems were implemented to ensure strict adherence to financial regulations and government policies. The period saw the establishment of robust internal control mechanisms, improved financial reporting standards, and the development of specialized training programs for finance personnel.",
                     "keyOutcome": "Enhanced Financial Accountability",
+                    "highlights": [
+                        {
+                            "title": "Internal Audit Enhancement",
+                            "description": "Advanced internal audit systems implemented for real-time monitoring.",
+                            "image": "images/2020.png"
+                        },
+                        {
+                            "title": "Compliance Framework",
+                            "description": "Comprehensive compliance framework established for regulatory adherence.",
+                            "image": "images/2021.png"
+                        }
+                    ],
+                    "activities": [
+                        "Development of internal control mechanisms",
+                        "Implementation of advanced audit systems",
+                        "Specialized training program development"
+                    ],
                     "images": [
-                        "../images/2020.png",
-                        "../images/2021.png",
-                        "../images/2022.png",
-                        "../images/2023.png"
+                        "images/2020.png",
+                        "images/2021.png",
+                        "images/2022.png",
+                        "images/2023.png"
+                    ]
+                },
+                {
+                    "year": "2024",
+                    "title": "AI-POWERED FINANCE SYSTEMS",
+                    "summary": "Integration of artificial intelligence and machine learning in financial operations.",
+                    "content": "The latest evolution in NAF Finance Specialty involves the integration of artificial intelligence and machine learning technologies to further enhance financial operations. These advanced systems provide predictive analytics, automated reporting, and intelligent fraud detection capabilities, positioning the Nigerian Air Force at the forefront of military financial management.",
+                    "highlights": [
+                        {
+                            "title": "Predictive Analytics",
+                            "description": "AI-powered systems for budget forecasting and financial planning.",
+                            "image": "images/2024.png"
+                        },
+                        {
+                            "title": "Automated Reporting",
+                            "description": "Machine learning algorithms for real-time financial reporting and analysis.",
+                            "image": "images/2025.png"
+                        }
+                    ],
+                    "activities": [
+                        "AI system implementation and training",
+                        "Machine learning model development",
+                        "Advanced analytics platform deployment"
+                    ],
+                    "images": [
+                        "images/2024.png",
+                        "images/2025.png",
+                        "images/2026.png",
+                        "images/Frame 15 (1).png"
                     ]
                 }
             ]
