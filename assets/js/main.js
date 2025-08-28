@@ -126,23 +126,20 @@ function showConnectionStatus(message, type) {
 }
 
 function showObjectSelection(selectedObject) {
-    // Find the object element and highlight it
-    const objectElement = document.querySelector(`[data-object="${selectedObject.id}"]`);
-    if (objectElement) {
-        // Add selection animation
-        objectElement.style.transform = 'scale(0.9)';
-        objectElement.style.filter = 'brightness(1.3)';
-        objectElement.classList.add('selected-via-socket');
-        
-        // Create selection burst effect
-        createSelectionBurst(objectElement);
+    // Update detection status to show detected object
+    const detectionStatus = document.getElementById('detection-status');
+    if (detectionStatus) {
+        detectionStatus.innerHTML = `
+            <div class="detection-indicator">
+                <div class="pulse-animation detected"></div>
+                <p>Object Detected: ${selectedObject.title}</p>
+                <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Navigating to section...</p>
+            </div>
+        `;
     }
 }
 
 async function initializeApp() {
-    // Load objects for selection
-    await loadObjects();
-    
     // Create floating particles
     createFloatingParticles();
     
@@ -152,6 +149,8 @@ async function initializeApp() {
     }, 3000);
 }
 
+// Object loading functionality removed - interaction is socket-only
+/*
 async function loadObjects() {
     try {
         const objectsContainer = document.getElementById('objects-grid');
@@ -199,6 +198,7 @@ async function loadObjects() {
             '<div class="error-message"><p>Error loading objects. Please refresh the page.</p></div>';
     }
 }
+*/
 
 function createFloatingParticles() {
     const particlesContainer = document.getElementById('particles-container');
@@ -321,6 +321,8 @@ function createGlassFragment(container, index) {
     container.appendChild(fragment);
 }
 
+// Manual object clicking disabled - socket-only interaction
+/*
 function handleObjectClick(event) {
     const objectId = event.currentTarget.getAttribute('data-object');
     const sectionType = event.currentTarget.getAttribute('data-section');
@@ -339,6 +341,7 @@ function handleObjectClick(event) {
         navigateToSection(sectionType, objectId);
     }, 800);
 }
+*/
 
 function createSelectionBurst(element) {
     const burstCount = 8;
@@ -400,25 +403,7 @@ function addInteractiveEffects() {
         });
     }
 
-    // Add parallax effect to object items
-    objectItems.forEach((item, index) => {
-        item.addEventListener('mousemove', (e) => {
-            const rect = item.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.05)`;
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
-        });
-    });
+    // Object item interactions removed - socket-only interface
 }
 
 // Add necessary CSS animations
