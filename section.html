@@ -39,42 +39,44 @@
     </nav>
 
     <div class="main-container" id="main-container">
-      <!-- Section Overview Panel (Left Side) -->
-      <div class="section-overview">
-        <div class="overview-content">
-          <div class="section-header">
-            <div class="section-icon" id="section-icon">🛩️</div>
-            <h1 class="section-title" id="section-title">Loading...</h1>
-          </div>
+      <!-- Year Range Detection Area (Full Width) -->
+      <div class="year-range-detection-area">
+        <div class="section-header">
+          <div class="section-icon" id="section-icon">🛩️</div>
+          <h1 class="section-title" id="section-title">Loading...</h1>
+        </div>
+        
+        <div class="section-description-container">
           <p class="section-description" id="section-description">Loading section content...</p>
-          <div class="section-summary">
-            <h3>Section Overview</h3>
-            <p id="section-summary-text">Loading summary...</p>
-          </div>
-          <div class="section-stats">
-            <div class="stat-item">
-              <span class="stat-number" id="total-years">0</span>
-              <span class="stat-label">Years Covered</span>
+        </div>
+        
+        <div class="year-range-drop-zone">
+          <div class="drop-zone-content">
+            <h2>Awaiting Year Range Detection</h2>
+            <p>Please drop a year range object (e.g., 1967-1977) in this area to explore the historical timeline of the Nigerian Air Force</p>
+            
+            <div class="detection-status" id="detection-status">
+              <div class="detection-indicator">
+                <div class="pulse-animation"></div>
+                <p>Waiting for year range detection...</p>
+              </div>
             </div>
-            <div class="stat-item">
-              <span class="stat-number" id="total-events">0</span>
-              <span class="stat-label">Historical Events</span>
-            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Years Timeline Panel (Right Side) -->
-      <div class="years-timeline">
-        <div class="timeline-header">
-          <h2>Historical Timeline</h2>
-          <p>Select a year to explore its details</p>
-        </div>
-        <div class="years-container" id="years-container">
-          <div class="loading-message">
-            <p>Loading timeline...</p>
+        
+        <div class="section-stats" id="section-stats" style="display: none;">
+          <div class="stat-item">
+            <span class="stat-number" id="total-years">0</span>
+            <span class="stat-label">Years Covered</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="total-events">0</span>
+            <span class="stat-label">Historical Events</span>
           </div>
         </div>
+        
+        <!-- Floating particles background -->
+        <div class="particles-container" id="particles-container"></div>
       </div>
     </div>
 

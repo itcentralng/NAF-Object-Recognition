@@ -69,7 +69,19 @@ function setupSocketListeners() {
 }
 
 function showYearRangeDetected(yearRange) {
-    // Show full screen notification for year range detection
+    // Update the detection status to show detected year range
+    const detectionStatus = document.getElementById('detection-status');
+    if (detectionStatus) {
+        detectionStatus.innerHTML = `
+            <div class="detection-indicator">
+                <div class="pulse-animation detected" style="background: linear-gradient(135deg, #c41e3a, #8b0000); animation: pulseDetected 1s ease-in-out infinite;"></div>
+                <p>Year Range Detected: ${yearRange}</p>
+                <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Loading year list...</p>
+            </div>
+        `;
+    }
+    
+    // Show full screen notification as well
     const notification = document.createElement('div');
     notification.className = 'year-range-notification';
     notification.innerHTML = `
@@ -91,6 +103,17 @@ function showYearRangeDetected(yearRange) {
 }
 
 function showReturnToSectionNotification() {
+    // Reset detection status
+    const detectionStatus = document.getElementById('detection-status');
+    if (detectionStatus) {
+        detectionStatus.innerHTML = `
+            <div class="detection-indicator">
+                <div class="pulse-animation"></div>
+                <p>Waiting for year range detection...</p>
+            </div>
+        `;
+    }
+    
     const notification = document.createElement('div');
     notification.className = 'year-range-notification';
     notification.innerHTML = `
@@ -173,7 +196,6 @@ async function loadSectionData() {
     }
 
     renderSectionOverview();
-    renderYearsTimeline();
     
   } catch (error) {
     console.error('Error loading section data:', error);
@@ -191,9 +213,8 @@ function renderSectionOverview() {
   document.getElementById('section-icon').textContent = currentSectionData.icon;
   document.getElementById('section-title').textContent = currentSectionData.title;
   document.getElementById('section-description').textContent = currentSectionData.description;
-  document.getElementById('section-summary-text').textContent = currentSectionData.summary;
   
-  // Update stats
+  // Update stats (but keep them hidden initially)
   document.getElementById('total-years').textContent = currentSectionData.years.length;
   
   let totalEvents = 0;
@@ -201,58 +222,48 @@ function renderSectionOverview() {
     totalEvents += (year.highlights?.length || 0) + (year.activities?.length || 0);
   });
   document.getElementById('total-events').textContent = totalEvents;
+  
+  // Initialize floating particles
+  createFloatingParticles();
 }
 
-function renderYearsTimeline() {
-  const container = document.getElementById('years-container');
-  let timelineHTML = '';
-
-  currentSectionData.years.forEach((yearData, index) => {
-    timelineHTML += `
-      <div class="year-item" data-year="${yearData.year}">
-        <div class="year-marker">
-          <span class="year-number">${yearData.year}</span>
-        </div>
-        <div class="year-info">
-          <h4 class="year-title">${yearData.title}</h4>
-          <p class="year-summary">${yearData.summary}</p>
-          <div class="year-meta">
-            <span class="highlight-count">${yearData.highlights?.length || 0} highlights</span>
-            <span class="activity-count">${yearData.activities?.length || 0} activities</span>
-          </div>
-        </div>
-        <div class="year-arrow">
-          <span style="opacity: 0.5; font-size: 0.9rem;">Drop year range to navigate</span>
-        </div>
-      </div>
-    `;
-  });
-
-  // Add notice about interaction method
-  timelineHTML += `
-    <div class="interaction-notice" style="
-      text-align: center; 
-      padding: 30px; 
-      background: rgba(196, 30, 58, 0.1);
-      border: 2px solid rgba(196, 30, 58, 0.3);
-      border-radius: 15px;
-      margin-top: 20px;
-      color: rgba(255, 255, 255, 0.8);
-    ">
-      <h4 style="color: #c41e3a; margin-bottom: 15px;">🎯 Navigation Instructions</h4>
-      <p style="margin: 0; line-height: 1.6;">
-        Drop a <strong>year range object</strong> (e.g., 1967-1977) to view the list of individual years within that range. 
-        Years are not clickable until a year range is detected.
-      </p>
-    </div>
-  `;
-
-  container.innerHTML = timelineHTML;
+function createFloatingParticles() {
+    const particlesContainer = document.getElementById('particles-container');
+    if (!particlesContainer) return;
+    
+    const particleCount = 30;
+    
+    for (let i = 0; i < particleCount; i++) {
+        setTimeout(() => {
+            createParticle(particlesContainer);
+        }, i * 200);
+    }
+    
+    // Create new particles periodically
+    setInterval(() => {
+        createParticle(particlesContainer);
+    }, 3000);
 }
 
-function navigateToYearDetail(year) {
-  // This function is now disabled - navigation happens via year-list page
-  console.log('Direct year navigation disabled. Use year range detection to navigate to year list first.');
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Random horizontal position
+    const startX = Math.random() * container.offsetWidth;
+    particle.style.left = `${startX}px`;
+    
+    // Random animation delay
+    particle.style.animationDelay = `${Math.random() * 2}s`;
+    
+    container.appendChild(particle);
+    
+    // Remove particle after animation
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+        }
+    }, 25000);
 }
 
 // Initialize the section viewer
@@ -302,16 +313,6 @@ const additionalSectionStyles = `
     color: white;
 }
 
-.year-item {
-    position: relative;
-    transition: all 0.3s ease;
-    cursor: default;
-}
-
-.year-item:hover {
-    background: rgba(196, 30, 58, 0.05);
-}
-
 .year-range-notification {
     position: fixed;
     top: 0;
@@ -353,6 +354,7 @@ const additionalSectionStyles = `
     height: 60px;
     border-radius: 50%;
     margin: 0 auto 15px;
+    border: none !important;
 }
 
 @keyframes pulseDetected {
