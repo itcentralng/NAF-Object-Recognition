@@ -1,6 +1,7 @@
 let currentSectionData = null;
 let currentYearData = null;
 let currentYearIndex = -1;
+let currentYearRange = null; // Track the year range for navigation
 
 // Socket.IO Connection
 const socket = io('http://127.0.0.1:5550');
@@ -9,6 +10,7 @@ const socket = io('http://127.0.0.1:5550');
 const urlParams = new URLSearchParams(window.location.search);
 const sectionId = urlParams.get('section');
 const yearParam = urlParams.get('year');
+const rangeParam = urlParams.get('range'); // New parameter for year range
 
 if (!sectionId || !yearParam) {
   window.location.href = 'index.html';
@@ -96,11 +98,24 @@ async function loadYearData() {
       throw new Error('Section not found');
     }
 
+    // Try to find exact year data first
     currentYearData = currentSectionData.years.find(year => year.year === yearParam);
     currentYearIndex = currentSectionData.years.findIndex(year => year.year === yearParam);
     
+    // Store the year range for navigation
+    currentYearRange = rangeParam;
+    
     if (!currentYearData) {
-      throw new Error('Year not found');
+      // If no specific data exists, create generic year data
+      currentYearData = {
+        year: yearParam,
+        title: `Year ${yearParam}`,
+        summary: `Historical period from ${yearParam} within the ${currentSectionData.title} timeline.`,
+        content: `This year falls within the documented history of the ${currentSectionData.title}. While specific detailed records for ${yearParam} may not be available, this period represents an important part of the overall historical timeline.`,
+        highlights: [],
+        activities: [`General operations continued during ${yearParam}`, "Maintained organizational structure", "Continued service to the Nigerian Air Force"],
+        images: []
+      };
     }
 
     renderYearDetail();
@@ -120,6 +135,14 @@ function renderYearDetail() {
   // Update page title and navigation
   document.getElementById('page-title').textContent = `${currentYearData.year} - ${currentSectionData.title} - Nigerian Air Force Museum`;
   document.getElementById('nav-year-title').textContent = `${currentSectionData.title} - ${currentYearData.year}`;
+  
+  // Update back button text based on navigation context
+  const backBtnText = document.getElementById('back-btn-text');
+  if (currentYearRange) {
+    backBtnText.textContent = `Back to ${currentYearRange} List`;
+  } else {
+    backBtnText.textContent = 'Back to Section';
+  }
   
   // Update year header
   document.getElementById('year-number').textContent = currentYearData.year;
@@ -207,19 +230,52 @@ function setupNavigation() {
   const prevText = document.getElementById('prev-year-text');
   const nextText = document.getElementById('next-year-text');
   
-  // Check if there's a previous year
-  if (currentYearIndex > 0) {
-    const prevYear = currentSectionData.years[currentYearIndex - 1];
-    prevBtn.style.display = 'flex';
-    prevText.textContent = `${prevYear.year}`;
+  // If we have a year range, set up navigation within that range
+  if (currentYearRange) {
+    const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
+    const currentYear = parseInt(yearParam);
+    
+    // Check if there's a previous year within the range
+    if (currentYear > startYear) {
+      const prevYear = currentYear - 1;
+      prevBtn.style.display = 'flex';
+      prevText.textContent = `${prevYear}`;
+      prevBtn.onclick = () => navigateToYearWithinRange(prevYear);
+    }
+    
+    // Check if there's a next year within the range
+    if (currentYear < endYear) {
+      const nextYear = currentYear + 1;
+      nextBtn.style.display = 'flex';
+      nextText.textContent = `${nextYear}`;
+      nextBtn.onclick = () => navigateToYearWithinRange(nextYear);
+    }
+  } else {
+    // Fallback to original navigation (within documented years only)
+    if (currentYearIndex > 0) {
+      const prevYear = currentSectionData.years[currentYearIndex - 1];
+      prevBtn.style.display = 'flex';
+      prevText.textContent = `${prevYear.year}`;
+      prevBtn.onclick = () => navigateToPreviousYear();
+    }
+    
+    if (currentYearIndex < currentSectionData.years.length - 1) {
+      const nextYear = currentSectionData.years[currentYearIndex + 1];
+      nextBtn.style.display = 'flex';
+      nextText.textContent = `${nextYear.year}`;
+      nextBtn.onclick = () => navigateToNextYear();
+    }
   }
-  
-  // Check if there's a next year
-  if (currentYearIndex < currentSectionData.years.length - 1) {
-    const nextYear = currentSectionData.years[currentYearIndex + 1];
-    nextBtn.style.display = 'flex';
-    nextText.textContent = `${nextYear.year}`;
+}
+
+function navigateToYearWithinRange(year) {
+  const queryParams = new URLSearchParams();
+  queryParams.set('section', sectionId);
+  queryParams.set('year', year.toString());
+  if (currentYearRange) {
+    queryParams.set('range', currentYearRange);
   }
+  window.location.href = `year-detail.html?${queryParams.toString()}`;
 }
 
 function navigateToPreviousYear() {
@@ -237,7 +293,18 @@ function navigateToNextYear() {
 }
 
 function goBackToSection() {
-  window.location.href = `section.html?section=${sectionId}`;
+  // If we came from a year range, go back to the year list instead of section
+  if (currentYearRange) {
+    const objectMap = {
+      'naf-history': 'naf',
+      'nafsfa-history': 'nafsfa', 
+      'finance-evolution': 'evol'
+    };
+    const objectParam = objectMap[sectionId];
+    window.location.href = `year-list.html?section=${sectionId}&year=${currentYearRange}&object=${objectParam}`;
+  } else {
+    window.location.href = `section.html?section=${sectionId}`;
+  }
 }
 
 function openImageModal(imageSrc, index) {

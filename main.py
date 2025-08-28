@@ -18,6 +18,8 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 picked_object = None
 # Possible Dropped Years = ['1967-1977', '1977-1987', '1987-1997', '1997-2007', '2007-2017', '2017-2027']
 dropped_year = None
+# Track current state for proper navigation
+current_state = 'main'  # 'main', 'section', 'year-list', 'year-detail'
 
 # Configure the serial port (commented out for later Arduino implementation)
 # ser = serial.Serial(port=os.getenv("SERIAL_PORT"), baudrate=9600)
@@ -124,14 +126,15 @@ def handle_disconnect():
 @socketio.on('simulate_pick')
 def handle_simulate_pick(data):
     """Handle manual object picking from client"""
-    global picked_object
+    global picked_object, current_state
     object_name = data.get('object', '').lower()
     
     if object_name in ['naf', 'nafsfa', 'evol']:
         picked_object = object_name
-        print(f"Manual pick: Object '{picked_object}' selected via socket")
+        current_state = 'section'
+        print(f"Object '{picked_object}' picked - navigating to section")
         emit('object_picked', {'object': picked_object}, broadcast=True)
-        emit('status', {'msg': f'Object {picked_object} picked'})
+        emit('status', {'msg': f'Object {picked_object} picked - navigate to section'})
     else:
         emit('error', {'msg': 'Invalid object. Choose: naf, nafsfa, or evol'})
 
@@ -139,20 +142,22 @@ def handle_simulate_pick(data):
 @socketio.on('simulate_drop')
 def handle_simulate_drop(data):
     """Handle manual year dropping from client"""
-    global dropped_year, picked_object
+    global dropped_year, picked_object, current_state
     year_range = data.get('year', '')
     
     valid_years = ['1967-1977', '1977-1987', '1987-1997', '1997-2007', '2007-2017', '2017-2027']
     
-    if year_range in valid_years and picked_object and picked_object != 'dropped':
+    # Year range detection only works when a section object is picked
+    if not picked_object or picked_object == 'dropped':
+        emit('error', {'msg': 'No object picked. Pick an object first before dropping a year range.'})
+        return
+    
+    if year_range in valid_years:
         dropped_year = year_range
-        print(f"Manual drop: Object '{picked_object}' dropped in year '{dropped_year}' via socket")
+        current_state = 'year-list'
+        print(f"Year range '{dropped_year}' detected for object '{picked_object}' - navigating to year list")
         emit('year_dropped', {'year': dropped_year, 'object': picked_object}, broadcast=True)
-        emit('status', {'msg': f'Object {picked_object} dropped in {dropped_year}'})
-        
-        # Reset for next cycle
-        picked_object = 'dropped'
-        dropped_year = None
+        emit('status', {'msg': f'Year range {dropped_year} detected for {picked_object} - navigate to year list'})
     else:
         emit('error', {'msg': 'Invalid year range or no object picked'})
 
@@ -160,9 +165,10 @@ def handle_simulate_drop(data):
 @socketio.on('reset_simulation')
 def handle_reset():
     """Reset the simulation state"""
-    global picked_object, dropped_year
+    global picked_object, dropped_year, current_state
     picked_object = None
     dropped_year = None
+    current_state = 'main'
     print("Simulation reset via socket")
     emit('object_reset', {'message': 'Simulation reset'}, broadcast=True)
     emit('status', {'msg': 'Simulation reset'})
@@ -174,6 +180,7 @@ def handle_get_status():
     emit('simulation_status', {
         'picked_object': picked_object,
         'dropped_year': dropped_year,
+        'current_state': current_state,
         'available_objects': ['naf', 'nafsfa', 'evol'],
         'available_years': ['1967-1977', '1977-1987', '1987-1997', '1997-2007', '2007-2017', '2017-2027']
     })
@@ -182,11 +189,12 @@ def handle_get_status():
 @socketio.on('simulate_object_drop')
 def handle_object_drop():
     """Handle object being dropped/removed - goes back to main page"""
-    global picked_object, dropped_year
+    global picked_object, dropped_year, current_state
     
     print("Object dropped/removed - returning to main page")
     picked_object = None
     dropped_year = None
+    current_state = 'main'
     
     # Emit event to all clients to return to main page
     emit('object_dropped', {'message': 'Object removed, returning to main page'}, broadcast=True)
@@ -195,7 +203,7 @@ def handle_object_drop():
 def read_from_serial():
 
     # uid_pattern = re.compile(r"0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2}")
-    global picked_object, dropped_year
+    global picked_object, dropped_year, current_state
 
     while True:
         # if ser.in_waiting > 0:
@@ -208,10 +216,26 @@ def read_from_serial():
         #         socketio.emit("rfid_status", {"status": "removed"})
         if not picked_object or picked_object=='dropped':
             picked_object = input("Enter picked object: ")
+            current_state = 'section'
             socketio.emit("object_picked", {"object": picked_object})
-        if not dropped_year:
+        if not dropped_year and picked_object and picked_object != 'dropped':
             dropped_year = input("Enter dropped year: ")
-            socketio.emit("year_dropped", {"year": dropped_year})
+            current_state = 'year-list'
+            socketio.emit("year_dropped", {"year": dropped_year, "object": picked_object})
+
+
+@socketio.on('year_range_not_detected')
+def handle_year_range_not_detected():
+    """Handle when year range is not detected - goes back to section page"""
+    global dropped_year, current_state
+    
+    if picked_object and current_state in ['year-list', 'year-detail']:
+        dropped_year = None
+        current_state = 'section'
+        print("Year range not detected - returning to section page")
+        emit('return_to_section', {'object': picked_object, 'message': 'Year range not detected, returning to section page'}, broadcast=True)
+    else:
+        emit('error', {'msg': 'No valid section to return to'})
 
 
 @app.route("/")
@@ -222,6 +246,11 @@ def main():
 @app.route("/section")
 def section():
     return render_template("section.html")
+
+
+@app.route("/year-list")
+def year_list():
+    return render_template("year-list.html")
 
 
 @app.route("/year-detail")

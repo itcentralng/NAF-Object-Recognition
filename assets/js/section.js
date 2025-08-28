@@ -15,26 +15,26 @@ if (!sectionId) {
 function setupSocketListeners() {
     // Listen for year_dropped events from Python backend
     socket.on('year_dropped', function(data) {
-        console.log('Year dropped via socket:', data.year);
+        console.log('Year range dropped via socket:', data.year);
         
-        // Find the corresponding year in current section
-        if (currentSectionData) {
-            const yearData = currentSectionData.years.find(y => {
-                // Match various year formats: '1972', '1967-1977', etc.
-                return y.year === data.year || 
-                       (data.year.includes('-') && isYearInRange(y.year, data.year));
-            });
+        // Navigate to year list page with the detected year range
+        if (data.year && data.object) {
+            // Highlight effect for visual feedback
+            showYearRangeDetected(data.year);
             
-            if (yearData) {
-                // Highlight the selected year
-                highlightSelectedYear(yearData.year);
-                
-                // Navigate to year detail after animation
-                setTimeout(() => {
-                    navigateToYearDetail(yearData.year);
-                }, 1000);
-            }
+            // Navigate to year list after animation
+            setTimeout(() => {
+                navigateToYearList(data.year, data.object);
+            }, 1000);
         }
+    });
+    
+    // Listen for return_to_section events - when year range not detected
+    socket.on('return_to_section', function(data) {
+        console.log('Returning to section due to year range not detected');
+        
+        // Show notification that we're back
+        showReturnToSectionNotification();
     });
     
     // Listen for object_dropped events - return to main page
@@ -68,28 +68,59 @@ function setupSocketListeners() {
     });
 }
 
-function isYearInRange(singleYear, yearRange) {
-    if (!yearRange.includes('-')) return false;
+function showYearRangeDetected(yearRange) {
+    // Show full screen notification for year range detection
+    const notification = document.createElement('div');
+    notification.className = 'year-range-notification';
+    notification.innerHTML = `
+        <div class="range-indicator">
+            <div class="pulse-animation detected" style="background: #c41e3a; animation: pulseDetected 1s ease-in-out infinite;"></div>
+            <h3>Year Range Detected!</h3>
+            <p>${yearRange}</p>
+            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Loading year list...</p>
+        </div>
+    `;
     
-    const [startYear, endYear] = yearRange.split('-').map(y => parseInt(y));
-    const year = parseInt(singleYear);
+    document.body.appendChild(notification);
     
-    return year >= startYear && year <= endYear;
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 1500);
 }
 
-function showConnectionStatus(message, type) {
-    const statusEl = document.getElementById('connection-status');
-    if (statusEl) {
-        statusEl.textContent = message;
-        statusEl.className = `connection-status ${type}`;
-        
-        // Hide status after 3 seconds if successful
-        if (type === 'success') {
-            setTimeout(() => {
-                statusEl.style.opacity = '0';
-            }, 3000);
+function showReturnToSectionNotification() {
+    const notification = document.createElement('div');
+    notification.className = 'year-range-notification';
+    notification.innerHTML = `
+        <div class="range-indicator" style="background: rgba(255, 193, 7, 0.95);">
+            <div class="pulse-animation" style="background: #fff; animation: pulseWarning 1s ease-in-out infinite;"></div>
+            <h3>Year Range Not Detected</h3>
+            <p>Returned to Section</p>
+            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Drop a year range to continue</p>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
         }
-    }
+    }, 2000);
+}
+
+function navigateToYearList(yearRange, object) {
+    // Navigate to the year list page with year range and object parameters
+    const sectionMap = {
+        'naf': 'naf-history',
+        'nafsfa': 'nafsfa-history',
+        'evol': 'finance-evolution'
+    };
+    
+    const sectionId = sectionMap[object] || sectionId;
+    window.location.href = `year-list.html?section=${sectionId}&year=${yearRange}&object=${object}`;
 }
 
 function showObjectRemovalNotification() {
@@ -114,45 +145,19 @@ function showObjectRemovalNotification() {
     }, 2000);
 }
 
-function highlightSelectedYear(year) {
-    // Find and highlight the selected year item
-    const yearElement = document.querySelector(`[data-year="${year}"]`);
-    if (yearElement) {
-        yearElement.classList.add('selected-via-socket');
+function showConnectionStatus(message, type) {
+    const statusEl = document.getElementById('connection-status');
+    if (statusEl) {
+        statusEl.textContent = message;
+        statusEl.className = `connection-status ${type}`;
         
-        // Create selection animation
-        createYearSelectionEffect(yearElement);
-        
-        // Scroll to the selected year
-        yearElement.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center' 
-        });
-    }
-}
-
-function createYearSelectionEffect(element) {
-    // Create a pulsing effect around the selected year
-    const pulseEffect = document.createElement('div');
-    pulseEffect.className = 'year-selection-pulse';
-    pulseEffect.style.position = 'absolute';
-    pulseEffect.style.top = '0';
-    pulseEffect.style.left = '0';
-    pulseEffect.style.right = '0';
-    pulseEffect.style.bottom = '0';
-    pulseEffect.style.border = '3px solid #c41e3a';
-    pulseEffect.style.borderRadius = '8px';
-    pulseEffect.style.animation = 'yearPulse 2s ease-in-out';
-    pulseEffect.style.pointerEvents = 'none';
-    
-    element.style.position = 'relative';
-    element.appendChild(pulseEffect);
-    
-    setTimeout(() => {
-        if (pulseEffect.parentNode) {
-            pulseEffect.parentNode.removeChild(pulseEffect);
+        // Hide status after 3 seconds if successful
+        if (type === 'success') {
+            setTimeout(() => {
+                statusEl.style.opacity = '0';
+            }, 3000);
         }
-    }, 2000);
+    }
 }
 
 // Load section data from JSON
@@ -204,7 +209,7 @@ function renderYearsTimeline() {
 
   currentSectionData.years.forEach((yearData, index) => {
     timelineHTML += `
-      <div class="year-item" onclick="navigateToYearDetail('${yearData.year}')" data-year="${yearData.year}">
+      <div class="year-item" data-year="${yearData.year}">
         <div class="year-marker">
           <span class="year-number">${yearData.year}</span>
         </div>
@@ -216,17 +221,38 @@ function renderYearsTimeline() {
             <span class="activity-count">${yearData.activities?.length || 0} activities</span>
           </div>
         </div>
-        <div class="year-arrow">→</div>
+        <div class="year-arrow">
+          <span style="opacity: 0.5; font-size: 0.9rem;">Drop year range to navigate</span>
+        </div>
       </div>
     `;
   });
+
+  // Add notice about interaction method
+  timelineHTML += `
+    <div class="interaction-notice" style="
+      text-align: center; 
+      padding: 30px; 
+      background: rgba(196, 30, 58, 0.1);
+      border: 2px solid rgba(196, 30, 58, 0.3);
+      border-radius: 15px;
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.8);
+    ">
+      <h4 style="color: #c41e3a; margin-bottom: 15px;">🎯 Navigation Instructions</h4>
+      <p style="margin: 0; line-height: 1.6;">
+        Drop a <strong>year range object</strong> (e.g., 1967-1977) to view the list of individual years within that range. 
+        Years are not clickable until a year range is detected.
+      </p>
+    </div>
+  `;
 
   container.innerHTML = timelineHTML;
 }
 
 function navigateToYearDetail(year) {
-  // Navigate to the year detail page with section and year parameters
-  window.location.href = `year-detail.html?section=${sectionId}&year=${year}`;
+  // This function is now disabled - navigation happens via year-list page
+  console.log('Direct year navigation disabled. Use year range detection to navigate to year list first.');
 }
 
 // Initialize the section viewer
@@ -279,6 +305,78 @@ const additionalSectionStyles = `
 .year-item {
     position: relative;
     transition: all 0.3s ease;
+    cursor: default;
+}
+
+.year-item:hover {
+    background: rgba(196, 30, 58, 0.05);
+}
+
+.year-range-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+    animation: fadeInNotification 0.3s ease-in;
+}
+
+.range-indicator {
+    background: rgba(40, 167, 69, 0.95);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideInRemoval 0.5s ease-out;
+}
+
+.range-indicator h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.range-indicator p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.pulse-animation.detected {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+}
+
+@keyframes pulseDetected {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseWarning {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.8;
+        background: #fff;
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 1;
+        background: #ffc107;
+    }
 }
 
 .object-removal-notification {

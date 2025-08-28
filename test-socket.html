@@ -86,6 +86,7 @@
             <h3>Current State</h3>
             <p><strong>Picked Object:</strong> <span id="currentObject">None</span></p>
             <p><strong>Dropped Year:</strong> <span id="currentYear">None</span></p>
+            <p><strong>Current State:</strong> <span id="currentState">main</span></p>
         </div>
 
         <div class="controls">
@@ -122,6 +123,11 @@
             <button onclick="simulateObjectDrop()" style="background-color: #dc3545;">Remove Object (Return to Main)</button>
         </div>
 
+        <div class="control-group" style="margin: 20px 0; text-align: center;">
+            <h3>Year Range Not Detected</h3>
+            <button onclick="simulateYearRangeNotDetected()" style="background-color: #ffc107; color: #000;">Simulate Year Range Not Detected</button>
+        </div>
+
         <div style="text-align: center; margin: 20px 0;">
             <button class="reset" onclick="resetSimulation()">Reset Simulation</button>
             <button onclick="getStatus()">Get Status</button>
@@ -151,6 +157,7 @@
         const connectionStatus = document.getElementById('connectionStatus');
         const currentObject = document.getElementById('currentObject');
         const currentYear = document.getElementById('currentYear');
+        const currentState = document.getElementById('currentState');
 
         function addToLog(message, type = 'info') {
             const timestamp = new Date().toLocaleTimeString();
@@ -170,9 +177,10 @@
             }
         }
 
-        function updateCurrentState(object = null, year = null) {
+        function updateCurrentState(object = null, year = null, state = null) {
             if (object !== null) currentObject.textContent = object || 'None';
             if (year !== null) currentYear.textContent = year || 'None';
+            if (state !== null) currentState.textContent = state || 'main';
         }
 
         // Socket event handlers
@@ -198,27 +206,32 @@
 
         socket.on('object_picked', function(data) {
             addToLog(`Object picked: ${data.object}`, 'success');
-            updateCurrentState(data.object, null);
+            updateCurrentState(data.object, null, 'section');
         });
 
         socket.on('year_dropped', function(data) {
             addToLog(`Year dropped: ${data.year} (Object: ${data.object})`, 'success');
-            updateCurrentState(null, data.year);
+            updateCurrentState(null, data.year, 'year-list');
         });
 
         socket.on('object_reset', function(data) {
             addToLog('Simulation reset', 'warning');
-            updateCurrentState('None', 'None');
+            updateCurrentState('None', 'None', 'main');
         });
 
         socket.on('simulation_status', function(data) {
-            addToLog(`Status - Object: ${data.picked_object || 'None'}, Year: ${data.dropped_year || 'None'}`, 'socket');
-            updateCurrentState(data.picked_object, data.dropped_year);
+            addToLog(`Status - Object: ${data.picked_object || 'None'}, Year: ${data.dropped_year || 'None'}, State: ${data.current_state || 'main'}`, 'socket');
+            updateCurrentState(data.picked_object, data.dropped_year, data.current_state);
         });
 
         socket.on('object_dropped', function(data) {
             addToLog('Object dropped/removed - application will return to main page', 'warning');
-            updateCurrentState('None', 'None');
+            updateCurrentState('None', 'None', 'main');
+        });
+
+        socket.on('return_to_section', function(data) {
+            addToLog('Year range not detected - returned to section page', 'warning');
+            updateCurrentState(data.object, 'None', 'section');
         });
 
         // Control functions
@@ -247,6 +260,11 @@
         function simulateObjectDrop() {
             socket.emit('simulate_object_drop');
             addToLog('Sending object drop/removal command', 'info');
+        }
+
+        function simulateYearRangeNotDetected() {
+            socket.emit('year_range_not_detected');
+            addToLog('Sending year range not detected command', 'info');
         }
 
         function resetSimulation() {

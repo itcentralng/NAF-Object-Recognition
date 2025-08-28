@@ -7,6 +7,7 @@ const socket = io('http://127.0.0.1:5550');
 const welcomeScreen = document.getElementById('welcome-screen');
 const mainScreen = document.getElementById('main-screen');
 let objectItems = [];
+let interactionEnabled = false; // Disable interactions by default
 
 // Object categories mapped to socket events
 const objectCategories = [
@@ -77,6 +78,7 @@ function setupSocketListeners() {
     // Listen for object_picked events from Python backend
     socket.on('object_picked', function(data) {
         console.log('Object picked via socket:', data.object);
+        interactionEnabled = false; // Disable interactions on main page until object is handled
         
         // Find the corresponding object category
         const selectedObject = objectCategories.find(obj => obj.socketValue === data.object);
@@ -95,6 +97,7 @@ function setupSocketListeners() {
     // Listen for object_dropped events - return to main page
     socket.on('object_dropped', function(data) {
         console.log('Object dropped via socket:', data.message);
+        interactionEnabled = true; // Re-enable interactions when back to main
         
         // Show notification that object was removed
         showObjectRemovalNotification();
@@ -111,11 +114,13 @@ function setupSocketListeners() {
     socket.on('connect', function() {
         console.log('Connected to Socket.IO server');
         showConnectionStatus('Connected', 'success');
+        interactionEnabled = true; // Enable interactions when connected
     });
     
     socket.on('disconnect', function() {
         console.log('Disconnected from Socket.IO server');
         showConnectionStatus('Disconnected', 'error');
+        interactionEnabled = false; // Disable interactions when disconnected
     });
     
     // Handle any socket errors
@@ -509,6 +514,37 @@ const additionalStyles = `
 
 .object-item {
     position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.object-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.interaction-disabled-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+}
+
+.disabled-message {
+    background: rgba(196, 30, 58, 0.95);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
 .object-removal-notification {
