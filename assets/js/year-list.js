@@ -186,11 +186,6 @@ function createYearCard(year, title, description, hasData) {
     return `
         <div class="year-card" onclick="navigateToYear(${year}, ${hasData})" data-year="${year}">
             <span class="year-number">${year}</span>
-            <h3 class="year-description">${title}</h3>
-            <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 15px; font-size: 0.9rem;">
-                ${description.substring(0, 100)}${description.length > 100 ? '...' : ''}
-            </p>
-            <span class="year-indicator">${hasData ? 'Detailed Records' : 'General Period'}</span>
         </div>
     `;
 }
