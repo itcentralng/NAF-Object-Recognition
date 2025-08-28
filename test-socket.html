@@ -117,6 +117,11 @@
             </div>
         </div>
 
+        <div class="control-group" style="margin: 20px 0; text-align: center;">
+            <h3>Object Removal</h3>
+            <button onclick="simulateObjectDrop()" style="background-color: #dc3545;">Remove Object (Return to Main)</button>
+        </div>
+
         <div style="text-align: center; margin: 20px 0;">
             <button class="reset" onclick="resetSimulation()">Reset Simulation</button>
             <button onclick="getStatus()">Get Status</button>
@@ -211,6 +216,11 @@
             updateCurrentState(data.picked_object, data.dropped_year);
         });
 
+        socket.on('object_dropped', function(data) {
+            addToLog('Object dropped/removed - application will return to main page', 'warning');
+            updateCurrentState('None', 'None');
+        });
+
         // Control functions
         function simulatePick() {
             const object = document.getElementById('objectSelect').value;
@@ -232,6 +242,11 @@
             
             socket.emit('simulate_drop', { year: year });
             addToLog(`Sending drop command: ${year}`, 'info');
+        }
+
+        function simulateObjectDrop() {
+            socket.emit('simulate_object_drop');
+            addToLog('Sending object drop/removal command', 'info');
         }
 
         function resetSimulation() {

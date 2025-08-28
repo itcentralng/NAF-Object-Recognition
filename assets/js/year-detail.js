@@ -2,6 +2,9 @@ let currentSectionData = null;
 let currentYearData = null;
 let currentYearIndex = -1;
 
+// Socket.IO Connection
+const socket = io('http://127.0.0.1:5550');
+
 // Get parameters from URL
 const urlParams = new URLSearchParams(window.location.search);
 const sectionId = urlParams.get('section');
@@ -9,6 +12,76 @@ const yearParam = urlParams.get('year');
 
 if (!sectionId || !yearParam) {
   window.location.href = 'index.html';
+}
+
+// Socket.IO Event Listeners
+function setupSocketListeners() {
+    // Listen for object_dropped events - return to main page
+    socket.on('object_dropped', function(data) {
+        console.log('Object dropped via socket, returning to main page:', data.message);
+        
+        // Show removal notification
+        showObjectRemovalNotification();
+        
+        // Navigate back to main page after notification
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
+    });
+    
+    // Handle socket connection events
+    socket.on('connect', function() {
+        console.log('Connected to Socket.IO server');
+        showConnectionStatus('Connected', 'success');
+    });
+    
+    socket.on('disconnect', function() {
+        console.log('Disconnected from Socket.IO server');
+        showConnectionStatus('Disconnected', 'error');
+    });
+    
+    // Handle any socket errors
+    socket.on('error', function(error) {
+        console.error('Socket.IO error:', error);
+        showConnectionStatus('Connection Error', 'error');
+    });
+}
+
+function showConnectionStatus(message, type) {
+    const statusEl = document.getElementById('connection-status');
+    if (statusEl) {
+        statusEl.textContent = message;
+        statusEl.className = `connection-status ${type}`;
+        
+        // Hide status after 3 seconds if successful
+        if (type === 'success') {
+            setTimeout(() => {
+                statusEl.style.opacity = '0';
+            }, 3000);
+        }
+    }
+}
+
+function showObjectRemovalNotification() {
+    // Create a notification overlay for object removal
+    const notification = document.createElement('div');
+    notification.className = 'object-removal-notification';
+    notification.innerHTML = `
+        <div class="removal-indicator">
+            <div class="pulse-animation removed"></div>
+            <p>Object Removed</p>
+            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Returning to main page...</p>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove notification after animation
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 2000);
 }
 
 // Load section and year data
@@ -215,4 +288,101 @@ document.addEventListener('keydown', function(e) {
 // Initialize the year detail viewer
 document.addEventListener('DOMContentLoaded', function() {
   loadYearData();
+  setupSocketListeners();
 });
+
+// Add CSS styles for object removal notification
+const yearDetailStyles = `
+.connection-status {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 10000;
+    transition: opacity 0.3s ease;
+    font-size: 0.9em;
+}
+
+.connection-status.success {
+    background: rgba(40, 167, 69, 0.9);
+    color: white;
+}
+
+.connection-status.error {
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+}
+
+.object-removal-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+    animation: fadeInNotification 0.3s ease-in;
+}
+
+.removal-indicator {
+    background: rgba(220, 53, 69, 0.95);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideInRemoval 0.5s ease-out;
+}
+
+.removal-indicator p {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.pulse-animation.removed {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 auto 15px;
+    animation: pulseRemoved 1s ease-in-out infinite;
+}
+
+@keyframes fadeInNotification {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInRemoval {
+    from { 
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseRemoved {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+`;
+
+// Inject styles
+const yearDetailStyleSheet = document.createElement('style');
+yearDetailStyleSheet.textContent = yearDetailStyles;
+document.head.appendChild(yearDetailStyleSheet);

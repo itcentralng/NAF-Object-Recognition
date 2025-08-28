@@ -179,6 +179,19 @@ def handle_get_status():
     })
 
 
+@socketio.on('simulate_object_drop')
+def handle_object_drop():
+    """Handle object being dropped/removed - goes back to main page"""
+    global picked_object, dropped_year
+    
+    print("Object dropped/removed - returning to main page")
+    picked_object = None
+    dropped_year = None
+    
+    # Emit event to all clients to return to main page
+    emit('object_dropped', {'message': 'Object removed, returning to main page'}, broadcast=True)
+
+
 def read_from_serial():
 
     # uid_pattern = re.compile(r"0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2}")
