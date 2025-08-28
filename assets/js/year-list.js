@@ -225,18 +225,8 @@ function navigateToYear(year, hasData) {
     window.location.href = `year-detail.html?section=${sectionId}&year=${year}&range=${currentYearRange}`;
 }
 
-function backToSection() {
-    if (!currentObject) return;
-    
-    const sectionMap = {
-        'naf': 'naf-history',
-        'nafsfa': 'nafsfa-history',
-        'evol': 'finance-evolution'
-    };
-    
-    const sectionId = sectionMap[currentObject];
-    window.location.href = `section.html?section=${sectionId}`;
-}
+// Remove backToSection function as it's no longer needed per requirements
+// Users can only change year range by dropping a new year range object
 
 function getSectionIdFromObject(object) {
     const sectionMap = {
