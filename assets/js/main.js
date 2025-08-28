@@ -84,13 +84,8 @@ function setupSocketListeners() {
         const selectedObject = objectCategories.find(obj => obj.socketValue === data.object);
         
         if (selectedObject) {
-            // Simulate object selection
-            showObjectSelection(selectedObject);
-            
-            // Navigate to section after animation
-            setTimeout(() => {
-                navigateToSection(selectedObject.targetSection, selectedObject.id);
-            }, 800);
+            // Navigate to section immediately
+            navigateToSection(selectedObject.targetSection, selectedObject.id);
         }
     });
     
@@ -99,17 +94,18 @@ function setupSocketListeners() {
         console.log('Object dropped via socket:', data.message);
         interactionEnabled = true; // Re-enable interactions when back to main
         
-        // Show notification that object was removed
-        showObjectRemovalNotification();
-        
-        // If we're not already on the main page, navigate back
+        // If we're not already on the main page, navigate back immediately
         if (window.location.pathname !== '/index.html' && window.location.pathname !== '/') {
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1500);
+            window.location.href = 'index.html';
         }
     });
     
+    // Handle no object detected - gentle feedback without navigation
+    socket.on('no_object_detected', function(data) {
+        console.log('No object detected:', data.message);
+        // No visual feedback needed - system continues waiting
+    });
+
     // Handle socket connection events
     socket.on('connect', function() {
         console.log('Connected to Socket.IO server');
@@ -127,42 +123,6 @@ function setupSocketListeners() {
     });
 }
 
-function showObjectSelection(selectedObject) {
-    // Update detection status to show detected object
-    const detectionStatus = document.getElementById('detection-status');
-    if (detectionStatus) {
-        detectionStatus.innerHTML = `
-            <div class="detection-indicator">
-                <div class="pulse-animation detected"></div>
-                <p>Object Detected: ${selectedObject.title}</p>
-                <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Navigating to section...</p>
-            </div>
-        `;
-    }
-}
-
-function showObjectRemovalNotification() {
-    // Create a notification overlay for object removal
-    const notification = document.createElement('div');
-    notification.className = 'object-removal-notification';
-    notification.innerHTML = `
-        <div class="removal-indicator">
-            <div class="pulse-animation removed"></div>
-            <p>Object Removed</p>
-            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Returning to main page...</p>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Remove notification after animation
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 2000);
-}
-
 async function initializeApp() {
     // Create floating particles
     createFloatingParticles();
@@ -171,6 +131,32 @@ async function initializeApp() {
     setTimeout(() => {
         handleEnterMuseum();
     }, 3000);
+}
+
+// Utility function for smooth transition indicators
+function createSmoothIndicator(message, type = 'info', duration = 3000) {
+    const indicator = document.createElement('div');
+    indicator.className = `smooth-indicator ${type}`;
+    indicator.textContent = message;
+    
+    document.body.appendChild(indicator);
+    
+    // Slide in
+    setTimeout(() => {
+        indicator.classList.add('visible');
+    }, 100);
+    
+    // Slide out and remove
+    setTimeout(() => {
+        indicator.classList.remove('visible');
+        setTimeout(() => {
+            if (indicator.parentNode) {
+                indicator.parentNode.removeChild(indicator);
+            }
+        }, 300);
+    }, duration);
+    
+    return indicator;
 }
 
 // Object loading functionality removed - interaction is socket-only
@@ -506,72 +492,6 @@ const additionalStyles = `
     text-align: center;
     font-size: 1.1rem;
     font-weight: bold;
-}
-
-.object-removal-notification {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10001;
-    animation: fadeInNotification 0.3s ease-in;
-}
-
-.removal-indicator {
-    background: rgba(220, 53, 69, 0.95);
-    color: white;
-    padding: 30px 40px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    animation: slideInRemoval 0.5s ease-out;
-}
-
-.removal-indicator p {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.pulse-animation.removed {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #fff;
-    margin: 0 auto 15px;
-    animation: pulseRemoved 1s ease-in-out infinite;
-}
-
-@keyframes fadeInNotification {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideInRemoval {
-    from { 
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to { 
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes pulseRemoved {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: scale(1.2);
-        opacity: 1;
-    }
 }
 `;
 

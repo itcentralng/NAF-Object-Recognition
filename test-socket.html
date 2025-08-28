@@ -128,6 +128,11 @@
             <button onclick="simulateYearRangeNotDetected()" style="background-color: #ffc107; color: #000;">Simulate Year Range Not Detected</button>
         </div>
 
+        <div class="control-group" style="margin: 20px 0; text-align: center;">
+            <h3>No Object Detected</h3>
+            <button onclick="simulateNoObjectDetected()" style="background-color: #6c757d;">Simulate No Object Detected</button>
+        </div>
+
         <div style="text-align: center; margin: 20px 0;">
             <button class="reset" onclick="resetSimulation()">Reset Simulation</button>
             <button onclick="getStatus()">Get Status</button>
@@ -265,6 +270,11 @@
         function simulateYearRangeNotDetected() {
             socket.emit('year_range_not_detected');
             addToLog('Sending year range not detected command', 'info');
+        }
+
+        function simulateNoObjectDetected() {
+            socket.emit('no_object_detected');
+            addToLog('Sending no object detected command', 'info');
         }
 
         function resetSimulation() {

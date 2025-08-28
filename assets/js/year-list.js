@@ -44,26 +44,16 @@ function setupSocketListeners() {
     socket.on('object_dropped', function(data) {
         console.log('Object dropped via socket, returning to main page:', data.message);
         
-        // Show removal notification
-        showObjectRemovalNotification();
-        
-        // Navigate back to main page after notification
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 1500);
+        // Navigate back to main page immediately
+        window.location.href = 'index.html';
     });
     
     // Listen for return_to_section event - when year range not detected
     socket.on('return_to_section', function(data) {
         console.log('Year range not detected, returning to section:', data.message);
         
-        // Show notification
-        showYearRangeNotDetectedNotification();
-        
-        // Navigate back to section after notification
-        setTimeout(() => {
-            window.location.href = `section.html?section=${getSectionIdFromObject(data.object)}`;
-        }, 1500);
+        // Navigate back to section immediately
+        window.location.href = `section.html?section=${getSectionIdFromObject(data.object)}`;
     });
     
     // Handle socket connection events
@@ -248,46 +238,6 @@ function showNoInteractionOverlay() {
     }
 }
 
-function showObjectRemovalNotification() {
-    const notification = document.createElement('div');
-    notification.className = 'object-removal-notification';
-    notification.innerHTML = `
-        <div class="removal-indicator">
-            <div class="pulse-animation removed"></div>
-            <p>Object Removed</p>
-            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Returning to main page...</p>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 2000);
-}
-
-function showYearRangeNotDetectedNotification() {
-    const notification = document.createElement('div');
-    notification.className = 'object-removal-notification';
-    notification.innerHTML = `
-        <div class="removal-indicator" style="background: rgba(255, 193, 7, 0.95);">
-            <div class="pulse-animation" style="background: #fff; animation: pulseWarning 1s ease-in-out infinite;"></div>
-            <p>Year Range Not Detected</p>
-            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Returning to section page...</p>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 2000);
-}
-
 function showWaitingMessage() {
     const overlay = document.getElementById('no-interaction-overlay');
     if (overlay) {
@@ -307,97 +257,3 @@ function showErrorMessage(message) {
         </div>
     `;
 }
-
-// Add CSS styles for animations
-const additionalStyles = `
-.object-removal-notification {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10001;
-    animation: fadeInNotification 0.3s ease-in;
-}
-
-.removal-indicator {
-    background: rgba(220, 53, 69, 0.95);
-    color: white;
-    padding: 30px 40px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    animation: slideInRemoval 0.5s ease-out;
-}
-
-.removal-indicator p {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.pulse-animation.removed {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #fff;
-    margin: 0 auto 15px;
-    animation: pulseRemoved 1s ease-in-out infinite;
-}
-
-.pulse-animation {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin: 0 auto 15px;
-}
-
-@keyframes pulseRemoved {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: scale(1.2);
-        opacity: 1;
-    }
-}
-
-@keyframes pulseWarning {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.8;
-        background: #fff;
-    }
-    50% { 
-        transform: scale(1.2);
-        opacity: 1;
-        background: #ffc107;
-    }
-}
-
-@keyframes fadeInNotification {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideInRemoval {
-    from { 
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to { 
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-`;
-
-// Inject styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);

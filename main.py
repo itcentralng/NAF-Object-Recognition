@@ -238,6 +238,17 @@ def handle_year_range_not_detected():
         emit('error', {'msg': 'No valid section to return to'})
 
 
+@socketio.on('no_object_detected')
+def handle_no_object_detected():
+    """Handle when no object is detected - stays on main page with gentle feedback"""
+    global picked_object, current_state
+    
+    print("No object detected - staying on main page")
+    current_state = 'main'
+    picked_object = None
+    emit('no_object_detected', {'message': 'No object detected, ready for next attempt'}, broadcast=True)
+
+
 @app.route("/")
 def main():
     return render_template("index.html")

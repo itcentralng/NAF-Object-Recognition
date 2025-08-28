@@ -19,35 +19,23 @@ function setupSocketListeners() {
         
         // Navigate to year list page with the detected year range
         if (data.year && data.object) {
-            // Highlight effect for visual feedback
-            showYearRangeDetected(data.year);
-            
-            // Navigate to year list after animation
-            setTimeout(() => {
-                navigateToYearList(data.year, data.object);
-            }, 1000);
+            // Navigate directly without any visual feedback or delay
+            navigateToYearList(data.year, data.object);
         }
     });
     
     // Listen for return_to_section events - when year range not detected
     socket.on('return_to_section', function(data) {
         console.log('Returning to section due to year range not detected');
-        
-        // Show notification that we're back
-        showReturnToSectionNotification();
+        // No notification needed - user stays on current page
     });
     
     // Listen for object_dropped events - return to main page
     socket.on('object_dropped', function(data) {
         console.log('Object dropped via socket, returning to main page:', data.message);
         
-        // Show removal notification
-        showObjectRemovalNotification();
-        
-        // Navigate back to main page after notification
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 1500);
+        // Navigate back to main page immediately
+        window.location.href = 'index.html';
     });
     
     // Handle socket connection events
@@ -65,72 +53,6 @@ function setupSocketListeners() {
     });
 }
 
-function showYearRangeDetected(yearRange) {
-    // Update the detection status to show detected year range
-    const detectionStatus = document.getElementById('detection-status');
-    if (detectionStatus) {
-        detectionStatus.innerHTML = `
-            <div class="detection-indicator">
-                <div class="pulse-animation detected" style="background: linear-gradient(135deg, #c41e3a, #8b0000); animation: pulseDetected 1s ease-in-out infinite;"></div>
-                <p>Year Range Detected: ${yearRange}</p>
-                <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Loading year list...</p>
-            </div>
-        `;
-    }
-    
-    // Show full screen notification as well
-    const notification = document.createElement('div');
-    notification.className = 'year-range-notification';
-    notification.innerHTML = `
-        <div class="range-indicator">
-            <div class="pulse-animation detected" style="background: #c41e3a; animation: pulseDetected 1s ease-in-out infinite;"></div>
-            <h3>Year Range Detected!</h3>
-            <p>${yearRange}</p>
-            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Loading year list...</p>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 1500);
-}
-
-function showReturnToSectionNotification() {
-    // Reset detection status
-    const detectionStatus = document.getElementById('detection-status');
-    if (detectionStatus) {
-        detectionStatus.innerHTML = `
-            <div class="detection-indicator">
-                <div class="pulse-animation"></div>
-                <p>Waiting for year range detection...</p>
-            </div>
-        `;
-    }
-    
-    const notification = document.createElement('div');
-    notification.className = 'year-range-notification';
-    notification.innerHTML = `
-        <div class="range-indicator" style="background: rgba(255, 193, 7, 0.95);">
-            <div class="pulse-animation" style="background: #fff; animation: pulseWarning 1s ease-in-out infinite;"></div>
-            <h3>Year Range Not Detected</h3>
-            <p>Returned to Section</p>
-            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Drop a year range to continue</p>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 2000);
-}
-
 function navigateToYearList(yearRange, object) {
     // Navigate to the year list page with year range and object parameters
     const sectionMap = {
@@ -141,28 +63,6 @@ function navigateToYearList(yearRange, object) {
     
     const sectionId = sectionMap[object] || sectionId;
     window.location.href = `year-list.html?section=${sectionId}&year=${yearRange}&object=${object}`;
-}
-
-function showObjectRemovalNotification() {
-    // Create a notification overlay for object removal
-    const notification = document.createElement('div');
-    notification.className = 'object-removal-notification';
-    notification.innerHTML = `
-        <div class="removal-indicator">
-            <div class="pulse-animation removed"></div>
-            <p>Object Removed</p>
-            <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">Returning to main page...</p>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Remove notification after animation
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 2000);
 }
 
 // Load section data from JSON
@@ -270,140 +170,6 @@ const additionalSectionStyles = `
     50% { 
         border-color: #ff4444;
         transform: scale(1.05);
-    }
-}
-
-.year-range-notification {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10001;
-    animation: fadeInNotification 0.3s ease-in;
-}
-
-.range-indicator {
-    background: rgba(40, 167, 69, 0.95);
-    color: white;
-    padding: 30px 40px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    animation: slideInRemoval 0.5s ease-out;
-}
-
-.range-indicator h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.range-indicator p {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.pulse-animation.detected {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    border: none !important;
-}
-
-@keyframes pulseDetected {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: scale(1.2);
-        opacity: 1;
-    }
-}
-
-@keyframes pulseWarning {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.8;
-        background: #fff;
-    }
-    50% { 
-        transform: scale(1.2);
-        opacity: 1;
-        background: #ffc107;
-    }
-}
-
-.object-removal-notification {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10001;
-    animation: fadeInNotification 0.3s ease-in;
-}
-
-.removal-indicator {
-    background: rgba(220, 53, 69, 0.95);
-    color: white;
-    padding: 30px 40px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    animation: slideInRemoval 0.5s ease-out;
-}
-
-.removal-indicator p {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.pulse-animation.removed {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #fff;
-    margin: 0 auto 15px;
-    animation: pulseRemoved 1s ease-in-out infinite;
-}
-
-@keyframes fadeInNotification {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideInRemoval {
-    from { 
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to { 
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes pulseRemoved {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: scale(1.2);
-        opacity: 1;
     }
 }
 `;
