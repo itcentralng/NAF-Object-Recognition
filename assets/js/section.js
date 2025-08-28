@@ -53,18 +53,15 @@ function setupSocketListeners() {
     // Handle socket connection events
     socket.on('connect', function() {
         console.log('Connected to Socket.IO server');
-        showConnectionStatus('Connected', 'success');
     });
     
     socket.on('disconnect', function() {
         console.log('Disconnected from Socket.IO server');
-        showConnectionStatus('Disconnected', 'error');
     });
     
     // Handle any socket errors
     socket.on('error', function(error) {
         console.error('Socket.IO error:', error);
-        showConnectionStatus('Connection Error', 'error');
     });
 }
 
@@ -166,21 +163,6 @@ function showObjectRemovalNotification() {
             notification.parentNode.removeChild(notification);
         }
     }, 2000);
-}
-
-function showConnectionStatus(message, type) {
-    const statusEl = document.getElementById('connection-status');
-    if (statusEl) {
-        statusEl.textContent = message;
-        statusEl.className = `connection-status ${type}`;
-        
-        // Hide status after 3 seconds if successful
-        if (type === 'success') {
-            setTimeout(() => {
-                statusEl.style.opacity = '0';
-            }, 3000);
-        }
-    }
 }
 
 // Load section data from JSON
@@ -289,28 +271,6 @@ const additionalSectionStyles = `
         border-color: #ff4444;
         transform: scale(1.05);
     }
-}
-
-.connection-status {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    z-index: 10000;
-    transition: opacity 0.3s ease;
-    font-size: 0.9em;
-}
-
-.connection-status.success {
-    background: rgba(40, 167, 69, 0.9);
-    color: white;
-}
-
-.connection-status.error {
-    background: rgba(220, 53, 69, 0.9);
-    color: white;
 }
 
 .year-range-notification {

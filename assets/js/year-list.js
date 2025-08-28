@@ -69,7 +69,6 @@ function setupSocketListeners() {
     // Handle socket connection events
     socket.on('connect', function() {
         console.log('Connected to Socket.IO server');
-        showConnectionStatus('Connected', 'success');
         
         // Request current status to sync state
         socket.emit('get_status');
@@ -77,7 +76,6 @@ function setupSocketListeners() {
     
     socket.on('disconnect', function() {
         console.log('Disconnected from Socket.IO server');
-        showConnectionStatus('Disconnected', 'error');
     });
     
     // Handle simulation status response
@@ -103,7 +101,6 @@ function setupSocketListeners() {
     // Handle any socket errors
     socket.on('error', function(error) {
         console.error('Socket.IO error:', error);
-        showConnectionStatus('Connection Error', 'error');
     });
 }
 
@@ -248,21 +245,6 @@ function showNoInteractionOverlay() {
     const overlay = document.getElementById('no-interaction-overlay');
     if (overlay) {
         overlay.style.display = 'flex';
-    }
-}
-
-function showConnectionStatus(message, type) {
-    const statusEl = document.getElementById('connection-status');
-    if (statusEl) {
-        statusEl.textContent = message;
-        statusEl.className = `connection-status ${type}`;
-        
-        // Hide status after 3 seconds if successful
-        if (type === 'success') {
-            setTimeout(() => {
-                statusEl.style.opacity = '0.5';
-            }, 3000);
-        }
     }
 }
 

@@ -113,36 +113,18 @@ function setupSocketListeners() {
     // Handle socket connection events
     socket.on('connect', function() {
         console.log('Connected to Socket.IO server');
-        showConnectionStatus('Connected', 'success');
         interactionEnabled = true; // Enable interactions when connected
     });
     
     socket.on('disconnect', function() {
         console.log('Disconnected from Socket.IO server');
-        showConnectionStatus('Disconnected', 'error');
         interactionEnabled = false; // Disable interactions when disconnected
     });
     
     // Handle any socket errors
     socket.on('error', function(error) {
         console.error('Socket.IO error:', error);
-        showConnectionStatus('Connection Error', 'error');
     });
-}
-
-function showConnectionStatus(message, type) {
-    const statusEl = document.getElementById('connection-status');
-    if (statusEl) {
-        statusEl.textContent = message;
-        statusEl.className = `connection-status ${type}`;
-        
-        // Hide status after 3 seconds if successful
-        if (type === 'success') {
-            setTimeout(() => {
-                statusEl.style.opacity = '0';
-            }, 3000);
-        }
-    }
 }
 
 function showObjectSelection(selectedObject) {
@@ -489,27 +471,6 @@ const additionalStyles = `
     border-radius: 12px;
     font-size: 0.7em;
     font-weight: bold;
-}
-
-.connection-status {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    z-index: 10000;
-    transition: opacity 0.3s ease;
-}
-
-.connection-status.success {
-    background: rgba(40, 167, 69, 0.9);
-    color: white;
-}
-
-.connection-status.error {
-    background: rgba(220, 53, 69, 0.9);
-    color: white;
 }
 
 .object-item {
