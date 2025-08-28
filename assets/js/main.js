@@ -1,18 +1,22 @@
 "use strict";
 
+// Socket.IO Connection
+const socket = io('http://127.0.0.1:5550');
+
 // DOM Elements
 const welcomeScreen = document.getElementById('welcome-screen');
 const mainScreen = document.getElementById('main-screen');
 let objectItems = [];
 
-// Object categories with representative images from the sections
+// Object categories mapped to socket events
 const objectCategories = [
     {
         id: 'aircraft',
-        title: 'Aircraft Models',
+        title: 'Aircraft Models', 
         description: 'Explore various military aircraft used by the Nigerian Air Force',
         category: 'Military Equipment',
         image: 'images/Rectangle 23-aircraft.png',
+        socketValue: 'naf',
         targetSection: 'naf-history'
     },
     {
@@ -21,6 +25,7 @@ const objectCategories = [
         description: 'Official records and important documents from NAF history',
         category: 'Archives',
         image: 'images/Rectangle 5.png',
+        socketValue: 'naf',
         targetSection: 'naf-history'
     },
     {
@@ -29,6 +34,7 @@ const objectCategories = [
         description: 'Evolution of NAF uniforms through different eras',
         category: 'Artifacts',
         image: 'images/Rectangle 1.png',
+        socketValue: 'naf',
         targetSection: 'naf-history'
     },
     {
@@ -37,6 +43,7 @@ const objectCategories = [
         description: 'Military ranks, badges, and ceremonial insignia',
         category: 'Regalia',
         image: 'images/Rectangle 14.png',
+        socketValue: 'nafsfa',
         targetSection: 'nafsfa-history'
     },
     {
@@ -45,6 +52,7 @@ const objectCategories = [
         description: 'Educational and training tools used at NAFSFA',
         category: 'Education',
         image: 'images/Rectangle 32.png',
+        socketValue: 'nafsfa',
         targetSection: 'nafsfa-history'
     },
     {
@@ -53,6 +61,7 @@ const objectCategories = [
         description: 'Advanced systems and digital innovations in NAF operations',
         category: 'Innovation',
         image: 'images/2024.png',
+        socketValue: 'evol',
         targetSection: 'finance-evolution'
     }
 ];
@@ -60,7 +69,75 @@ const objectCategories = [
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
+    setupSocketListeners();
 });
+
+// Socket.IO Event Listeners
+function setupSocketListeners() {
+    // Listen for object_picked events from Python backend
+    socket.on('object_picked', function(data) {
+        console.log('Object picked via socket:', data.object);
+        
+        // Find the corresponding object category
+        const selectedObject = objectCategories.find(obj => obj.socketValue === data.object);
+        
+        if (selectedObject) {
+            // Simulate object selection
+            showObjectSelection(selectedObject);
+            
+            // Navigate to section after animation
+            setTimeout(() => {
+                navigateToSection(selectedObject.targetSection, selectedObject.id);
+            }, 800);
+        }
+    });
+    
+    // Handle socket connection events
+    socket.on('connect', function() {
+        console.log('Connected to Socket.IO server');
+        showConnectionStatus('Connected', 'success');
+    });
+    
+    socket.on('disconnect', function() {
+        console.log('Disconnected from Socket.IO server');
+        showConnectionStatus('Disconnected', 'error');
+    });
+    
+    // Handle any socket errors
+    socket.on('error', function(error) {
+        console.error('Socket.IO error:', error);
+        showConnectionStatus('Connection Error', 'error');
+    });
+}
+
+function showConnectionStatus(message, type) {
+    const statusEl = document.getElementById('connection-status');
+    if (statusEl) {
+        statusEl.textContent = message;
+        statusEl.className = `connection-status ${type}`;
+        
+        // Hide status after 3 seconds if successful
+        if (type === 'success') {
+            setTimeout(() => {
+                statusEl.style.opacity = '0';
+            }, 3000);
+        }
+    }
+}
+
+function showObjectSelection(selectedObject) {
+    // Find the object element and highlight it
+    const objectElement = document.querySelector(`[data-object="${selectedObject.id}"]`);
+    if (objectElement) {
+        // Add selection animation
+        objectElement.style.transform = 'scale(0.9)';
+        objectElement.style.filter = 'brightness(1.3)';
+        objectElement.classList.add('selected-via-socket');
+        
+        // Create selection burst effect
+        createSelectionBurst(objectElement);
+    }
+}
 
 async function initializeApp() {
     // Load objects for selection
@@ -82,7 +159,7 @@ async function loadObjects() {
         
         objectCategories.forEach((object, index) => {
             objectsHTML += `
-                <div class="object-item" data-object="${object.id}" data-section="${object.targetSection}">
+                <div class="object-item" data-object="${object.id}" data-section="${object.targetSection}" data-socket-value="${object.socketValue}">
                     <div class="object-image-container">
                         <img src="${object.image}" alt="${object.title}" class="object-image">
                     </div>
@@ -90,6 +167,9 @@ async function loadObjects() {
                         <h3>${object.title}</h3>
                         <p>${object.description}</p>
                         <span class="object-category">${object.category}</span>
+                    </div>
+                    <div class="socket-indicator">
+                        <span class="socket-label">Socket: ${object.socketValue}</span>
                     </div>
                 </div>
             `;
@@ -100,7 +180,7 @@ async function loadObjects() {
         // Re-query object items after dynamic loading
         objectItems = document.querySelectorAll('.object-item');
         
-        // Add object item event listeners
+        // Add object item event listeners (for manual testing)
         objectItems.forEach(item => {
             item.addEventListener('click', handleObjectClick);
             
@@ -244,6 +324,9 @@ function createGlassFragment(container, index) {
 function handleObjectClick(event) {
     const objectId = event.currentTarget.getAttribute('data-object');
     const sectionType = event.currentTarget.getAttribute('data-section');
+    const socketValue = event.currentTarget.getAttribute('data-socket-value');
+    
+    console.log('Manual object click:', objectId, 'Socket value:', socketValue);
     
     // Add selection animation
     event.currentTarget.style.transform = 'scale(0.9)';
@@ -356,6 +439,54 @@ const additionalStyles = `
         transform: translate(var(--endX), var(--endY)) scale(0);
         opacity: 0;
     }
+}
+
+.selected-via-socket {
+    outline: 3px solid #c41e3a;
+    outline-offset: 5px;
+    animation: socketSelection 2s ease-in-out;
+}
+
+@keyframes socketSelection {
+    0%, 100% { outline-color: #c41e3a; }
+    50% { outline-color: #ff4444; }
+}
+
+.socket-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(196, 30, 58, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.connection-status {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 10000;
+    transition: opacity 0.3s ease;
+}
+
+.connection-status.success {
+    background: rgba(40, 167, 69, 0.9);
+    color: white;
+}
+
+.connection-status.error {
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+}
+
+.object-item {
+    position: relative;
 }
 `;
 

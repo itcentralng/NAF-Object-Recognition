@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Test - NAF Object Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .connected { background-color: #d4edda; color: #155724; }
+        .disconnected { background-color: #f8d7da; color: #721c24; }
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .control-group {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        button.reset { background-color: #dc3545; }
+        button.reset:hover { background-color: #c82333; }
+        select {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .log {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .current-state {
+            background-color: #e7f3ff;
+            border: 1px solid #b6d7ff;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NAF Object Recognition - Socket.IO Test</h1>
+        
+        <div id="connectionStatus" class="status disconnected">
+            Disconnected
+        </div>
+
+        <div class="current-state">
+            <h3>Current State</h3>
+            <p><strong>Picked Object:</strong> <span id="currentObject">None</span></p>
+            <p><strong>Dropped Year:</strong> <span id="currentYear">None</span></p>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <h3>Pick Object</h3>
+                <select id="objectSelect">
+                    <option value="">Select object...</option>
+                    <option value="naf">NAF</option>
+                    <option value="nafsfa">NAFSFA</option>
+                    <option value="evol">EVOL</option>
+                </select>
+                <br>
+                <button onclick="simulatePick()">Pick Object</button>
+            </div>
+
+            <div class="control-group">
+                <h3>Drop in Year</h3>
+                <select id="yearSelect">
+                    <option value="">Select year range...</option>
+                    <option value="1967-1977">1967-1977</option>
+                    <option value="1977-1987">1977-1987</option>
+                    <option value="1987-1997">1987-1997</option>
+                    <option value="1997-2007">1997-2007</option>
+                    <option value="2007-2017">2007-2017</option>
+                    <option value="2017-2027">2017-2027</option>
+                </select>
+                <br>
+                <button onclick="simulateDrop()">Drop Object</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="reset" onclick="resetSimulation()">Reset Simulation</button>
+            <button onclick="getStatus()">Get Status</button>
+        </div>
+
+        <div>
+            <h3>Socket Events Log</h3>
+            <div id="log" class="log"></div>
+            <button onclick="clearLog()">Clear Log</button>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #dee2e6;">
+            <h3>Instructions</h3>
+            <ol>
+                <li>Start the Python server: <code>python main.py</code></li>
+                <li>Use the controls above to simulate object picking and dropping</li>
+                <li>Monitor the socket events in the log below</li>
+                <li>Test the main application at <a href="http://127.0.0.1:5550" target="_blank">127.0.0.1:5550</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="/assets/js/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://127.0.0.1:5550');
+        const log = document.getElementById('log');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const currentObject = document.getElementById('currentObject');
+        const currentYear = document.getElementById('currentYear');
+
+        function addToLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<span style="color: #666;">[${timestamp}]</span> <span style="color: ${getColorForType(type)};">${message}</span>`;
+            log.appendChild(logEntry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function getColorForType(type) {
+            switch(type) {
+                case 'success': return '#28a745';
+                case 'error': return '#dc3545';
+                case 'warning': return '#ffc107';
+                case 'socket': return '#007bff';
+                default: return '#333';
+            }
+        }
+
+        function updateCurrentState(object = null, year = null) {
+            if (object !== null) currentObject.textContent = object || 'None';
+            if (year !== null) currentYear.textContent = year || 'None';
+        }
+
+        // Socket event handlers
+        socket.on('connect', function() {
+            connectionStatus.className = 'status connected';
+            connectionStatus.textContent = 'Connected to server';
+            addToLog('Connected to server', 'success');
+        });
+
+        socket.on('disconnect', function() {
+            connectionStatus.className = 'status disconnected';
+            connectionStatus.textContent = 'Disconnected from server';
+            addToLog('Disconnected from server', 'error');
+        });
+
+        socket.on('status', function(data) {
+            addToLog(`Server: ${data.msg}`, 'socket');
+        });
+
+        socket.on('error', function(data) {
+            addToLog(`Error: ${data.msg}`, 'error');
+        });
+
+        socket.on('object_picked', function(data) {
+            addToLog(`Object picked: ${data.object}`, 'success');
+            updateCurrentState(data.object, null);
+        });
+
+        socket.on('year_dropped', function(data) {
+            addToLog(`Year dropped: ${data.year} (Object: ${data.object})`, 'success');
+            updateCurrentState(null, data.year);
+        });
+
+        socket.on('object_reset', function(data) {
+            addToLog('Simulation reset', 'warning');
+            updateCurrentState('None', 'None');
+        });
+
+        socket.on('simulation_status', function(data) {
+            addToLog(`Status - Object: ${data.picked_object || 'None'}, Year: ${data.dropped_year || 'None'}`, 'socket');
+            updateCurrentState(data.picked_object, data.dropped_year);
+        });
+
+        // Control functions
+        function simulatePick() {
+            const object = document.getElementById('objectSelect').value;
+            if (!object) {
+                alert('Please select an object first');
+                return;
+            }
+            
+            socket.emit('simulate_pick', { object: object });
+            addToLog(`Sending pick command: ${object}`, 'info');
+        }
+
+        function simulateDrop() {
+            const year = document.getElementById('yearSelect').value;
+            if (!year) {
+                alert('Please select a year range first');
+                return;
+            }
+            
+            socket.emit('simulate_drop', { year: year });
+            addToLog(`Sending drop command: ${year}`, 'info');
+        }
+
+        function resetSimulation() {
+            socket.emit('reset_simulation');
+            addToLog('Sending reset command', 'info');
+        }
+
+        function getStatus() {
+            socket.emit('get_status');
+            addToLog('Requesting status', 'info');
+        }
+
+        function clearLog() {
+            log.innerHTML = '';
+        }
+
+        // Initialize
+        addToLog('Socket.IO test page loaded');
+    </script>
+</body>
+</html>
