@@ -36,20 +36,29 @@
       </div>
     </div>
 
-    <!-- Main Navigation Screen -->
+    <!-- Object Selection Screen -->
     <div id="main-screen" class="main-screen">
       <header class="main-header">
         <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="NAF Logo" class="header-logo" />
         <h2>Nigerian Air Force Museum</h2>
       </header>
       
-      <main class="sections-container">
-        <div class="section-cards" id="section-cards">
-          <!-- Section cards will be loaded dynamically from data.json -->
+      <main class="object-selection-container">
+        <div class="selection-title">
+          <h2>Pick an Object to Continue</h2>
+          <p>Select any object below to explore the rich history of the Nigerian Air Force</p>
+        </div>
+        
+        <div class="objects-grid" id="objects-grid">
+          <!-- Objects will be loaded dynamically -->
           <div class="loading-message">
-            <p>Loading sections...</p>
+            <div class="loading-spinner"></div>
+            <p>Loading interactive objects...</p>
           </div>
         </div>
+        
+        <!-- Floating particles background -->
+        <div class="particles-container" id="particles-container"></div>
       </main>
     </div>
 
