@@ -104,79 +104,117 @@ function renderYearDetail() {
   document.getElementById('year-title').textContent = currentYearData.title;
   document.getElementById('year-summary').textContent = currentYearData.summary;
   
-  // Update overview content
-  document.getElementById('year-content').textContent = currentYearData.content;
-  
-  // Render highlights
-  renderHighlights();
-  
-  // Render activities
-  renderActivities();
-  
-  // Render images
-  renderImages();
+  // Render events timeline
+  renderEventsTimeline();
 }
 
-function renderHighlights() {
-  const highlightsContainer = document.getElementById('highlights-grid');
-  let highlightsHTML = '';
+function renderEventsTimeline() {
+  const timelineContainer = document.getElementById('events-timeline');
+  let timelineHTML = '';
   
   if (currentYearData.highlights && currentYearData.highlights.length > 0) {
-    currentYearData.highlights.forEach(highlight => {
-      highlightsHTML += `
-        <div class="highlight-card">
-          <div class="highlight-image-container">
-            <img src="${highlight.image}" alt="${highlight.title}" class="highlight-image" />
+    // Create events from highlights
+    currentYearData.highlights.forEach((highlight, index) => {
+      const eventImages = [highlight.image];
+      // Add related images from the year's image collection if available
+      if (currentYearData.images && currentYearData.images.length > 0) {
+        const additionalImages = currentYearData.images
+          .filter(img => img !== highlight.image)
+          .slice(0, 3); // Limit to 3 additional images per event
+        eventImages.push(...additionalImages);
+      }
+      
+      timelineHTML += `
+        <div class="event-card" data-event-index="${index}">
+          <div class="event-number">
+            <span>${index + 1}</span>
           </div>
-          <div class="highlight-content">
-            <h3 class="highlight-title">${highlight.title}</h3>
-            <p class="highlight-description">${highlight.description}</p>
-          </div>
-        </div>
-      `;
-    });
-  } else {
-    highlightsHTML = '<div class="no-content"><p>No highlights available for this year.</p></div>';
-  }
-  
-  highlightsContainer.innerHTML = highlightsHTML;
-}
-
-function renderActivities() {
-  const activitiesContainer = document.getElementById('activities-list');
-  let activitiesHTML = '';
-  
-  if (currentYearData.activities && currentYearData.activities.length > 0) {
-    currentYearData.activities.forEach(activity => {
-      activitiesHTML += `<li class="activity-item">${activity}</li>`;
-    });
-  } else {
-    activitiesHTML = '<li class="no-content">No specific activities recorded for this year.</li>';
-  }
-  
-  activitiesContainer.innerHTML = activitiesHTML;
-}
-
-function renderImages() {
-  const imagesContainer = document.getElementById('images-gallery');
-  let imagesHTML = '';
-  
-  if (currentYearData.images && currentYearData.images.length > 0) {
-    currentYearData.images.forEach((image, index) => {
-      imagesHTML += `
-        <div class="gallery-item" onclick="openImageModal('${image}', ${index})">
-          <img src="${image}" alt="Historical Image from ${currentYearData.year}" class="gallery-image" />
-          <div class="gallery-overlay">
-            <span class="gallery-icon">🔍</span>
+          <div class="event-content">
+            <div class="event-header">
+              <h3 class="event-title">${highlight.title}</h3>
+              <div class="event-date">${currentYearData.year}</div>
+            </div>
+            <p class="event-description">${highlight.description}</p>
+            
+            <div class="event-images-grid">
+              ${eventImages.map((img, imgIndex) => `
+                <div class="event-image-container" onclick="openImageModal('${img}', ${imgIndex}, ${index})">
+                  <img src="${img}" alt="${highlight.title} - Image ${imgIndex + 1}" class="event-image" />
+                  <div class="image-overlay">
+                    <span class="zoom-icon">🔍</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            
+            ${currentYearData.activities && currentYearData.activities.length > 0 ? `
+              <div class="event-activities">
+                <h4>Related Activities:</h4>
+                <ul class="event-activities-list">
+                  ${currentYearData.activities.slice(0, 3).map(activity => `
+                    <li>${activity}</li>
+                  `).join('')}
+                </ul>
+              </div>
+            ` : ''}
           </div>
         </div>
       `;
     });
   } else {
-    imagesHTML = '<div class="no-content"><p>No images available for this year.</p></div>';
+    // Create a general event from available data
+    const eventImages = currentYearData.images || [];
+    timelineHTML = `
+      <div class="event-card">
+        <div class="event-number">
+          <span>1</span>
+        </div>
+        <div class="event-content">
+          <div class="event-header">
+            <h3 class="event-title">${currentYearData.title}</h3>
+            <div class="event-date">${currentYearData.year}</div>
+          </div>
+          <p class="event-description">${currentYearData.content || currentYearData.summary}</p>
+          
+          ${eventImages.length > 0 ? `
+            <div class="event-images-grid">
+              ${eventImages.map((img, imgIndex) => `
+                <div class="event-image-container" onclick="openImageModal('${img}', ${imgIndex}, 0)">
+                  <img src="${img}" alt="${currentYearData.title} - Image ${imgIndex + 1}" class="event-image" />
+                  <div class="image-overlay">
+                    <span class="zoom-icon">🔍</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          
+          ${currentYearData.activities && currentYearData.activities.length > 0 ? `
+            <div class="event-activities">
+              <h4>Key Activities:</h4>
+              <ul class="event-activities-list">
+                ${currentYearData.activities.map(activity => `
+                  <li>${activity}</li>
+                `).join('')}
+              </ul>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
   }
   
-  imagesContainer.innerHTML = imagesHTML;
+  timelineContainer.innerHTML = timelineHTML;
+  
+  // Add animation to event cards
+  setTimeout(() => {
+    const eventCards = document.querySelectorAll('.event-card');
+    eventCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('animate-in');
+      }, index * 200);
+    });
+  }, 100);
 }
 
 function setupNavigation() {
@@ -262,16 +300,38 @@ function goBackToSection() {
   }
 }
 
-function openImageModal(imageSrc, index) {
+function openImageModal(imageSrc, imageIndex, eventIndex) {
   // Create and show image modal
   const modal = document.createElement('div');
   modal.className = 'image-modal';
+  
+  // Get all images from the event for navigation
+  let allImages = [];
+  if (currentYearData.highlights && currentYearData.highlights[eventIndex]) {
+    allImages.push(currentYearData.highlights[eventIndex].image);
+    if (currentYearData.images) {
+      const additionalImages = currentYearData.images
+        .filter(img => img !== currentYearData.highlights[eventIndex].image)
+        .slice(0, 3);
+      allImages.push(...additionalImages);
+    }
+  } else {
+    allImages = currentYearData.images || [imageSrc];
+  }
+  
   modal.innerHTML = `
     <div class="image-modal-content">
       <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
-      <img src="${imageSrc}" alt="Historical Image" class="modal-image" />
+      <div class="modal-image-container">
+        <img src="${imageSrc}" alt="Historical Image" class="modal-image" />
+        ${allImages.length > 1 ? `
+          <button class="modal-nav-btn prev-btn" onclick="navigateModalImage(-1)" ${imageIndex === 0 ? 'disabled' : ''}>‹</button>
+          <button class="modal-nav-btn next-btn" onclick="navigateModalImage(1)" ${imageIndex === allImages.length - 1 ? 'disabled' : ''}>›</button>
+        ` : ''}
+      </div>
       <div class="image-modal-info">
-        <p>Image ${index + 1} of ${currentYearData.images.length} - ${currentYearData.year}</p>
+        <p>Image ${imageIndex + 1} of ${allImages.length} - ${currentYearData.year}</p>
+        <p class="image-event-title">Event ${eventIndex + 1}: ${currentYearData.highlights && currentYearData.highlights[eventIndex] ? currentYearData.highlights[eventIndex].title : currentYearData.title}</p>
       </div>
     </div>
   `;
@@ -279,12 +339,47 @@ function openImageModal(imageSrc, index) {
   document.body.appendChild(modal);
   document.body.style.overflow = 'hidden';
   
+  // Store modal data for navigation
+  modal.dataset.currentIndex = imageIndex;
+  modal.dataset.eventIndex = eventIndex;
+  modal.dataset.allImages = JSON.stringify(allImages);
+  
   // Close modal when clicking outside
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       closeImageModal();
     }
   });
+}
+
+function navigateModalImage(direction) {
+  const modal = document.querySelector('.image-modal');
+  if (!modal) return;
+  
+  const currentIndex = parseInt(modal.dataset.currentIndex);
+  const eventIndex = parseInt(modal.dataset.eventIndex);
+  const allImages = JSON.parse(modal.dataset.allImages);
+  
+  const newIndex = currentIndex + direction;
+  if (newIndex < 0 || newIndex >= allImages.length) return;
+  
+  const newImageSrc = allImages[newIndex];
+  const modalImage = modal.querySelector('.modal-image');
+  modalImage.src = newImageSrc;
+  
+  // Update modal data
+  modal.dataset.currentIndex = newIndex;
+  
+  // Update navigation buttons
+  const prevBtn = modal.querySelector('.prev-btn');
+  const nextBtn = modal.querySelector('.next-btn');
+  
+  if (prevBtn) prevBtn.disabled = newIndex === 0;
+  if (nextBtn) nextBtn.disabled = newIndex === allImages.length - 1;
+  
+  // Update info
+  const info = modal.querySelector('.image-modal-info p');
+  if (info) info.textContent = `Image ${newIndex + 1} of ${allImages.length} - ${currentYearData.year}`;
 }
 
 function closeImageModal() {
@@ -300,10 +395,18 @@ function showError() {
   document.getElementById('error-message').style.display = 'block';
 }
 
-// Handle escape key for image modal
+// Handle escape key for image modal and arrow keys for navigation
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeImageModal();
+  } else if (document.querySelector('.image-modal')) {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      navigateModalImage(-1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      navigateModalImage(1);
+    }
   }
 });
 
