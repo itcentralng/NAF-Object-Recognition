@@ -56,7 +56,23 @@ async function loadYearData() {
     // Find the year data that contains this specific year
     const targetYear = parseInt(yearParam);
     currentYearData = findYearDataForSpecificYear(targetYear);
-    currentYearIndex = currentSectionData.years.findIndex(year => year === currentYearData);
+    
+    // Find the index for navigation - we need to build a flat list of all years
+    const allYears = [];
+    if (currentSectionData["year-ranges"]) {
+      currentSectionData["year-ranges"].forEach(rangeObj => {
+        Object.keys(rangeObj).forEach(rangeKey => {
+          const yearArray = rangeObj[rangeKey];
+          allYears.push(...yearArray);
+        });
+      });
+      // Sort by year for proper navigation
+      allYears.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+      currentYearIndex = allYears.findIndex(year => parseInt(year.year) === targetYear);
+    }
+    
+    // Store all years for navigation
+    currentSectionData.allYears = allYears;
     
     // Store the year range for navigation
     currentYearRange = rangeParam;
@@ -93,21 +109,24 @@ async function loadYearData() {
 }
 
 function findYearDataForSpecificYear(targetYear) {
-  if (!currentSectionData || !currentSectionData.years) return null;
+  if (!currentSectionData || !currentSectionData["year-ranges"]) return null;
   
   // Find the year data entry that contains this specific year
-  return currentSectionData.years.find(yearData => {
-    const year = yearData.year;
-    
-    // Handle single years (e.g., "1964")
-    if (!year.includes('-')) {
-      return parseInt(year) === targetYear;
+  for (const rangeObj of currentSectionData["year-ranges"]) {
+    // Each range object has keys like "1962-1972", "1973-1982", etc.
+    for (const rangeKey of Object.keys(rangeObj)) {
+      const yearArray = rangeObj[rangeKey];
+      // Look for a year object that matches our target year
+      const yearData = yearArray.find(yearEntry => {
+        return parseInt(yearEntry.year) === targetYear;
+      });
+      if (yearData) {
+        return yearData;
+      }
     }
-    
-    // Handle year ranges (e.g., "1965-1967")
-    const [rangeStart, rangeEnd] = year.split('-').map(y => parseInt(y));
-    return targetYear >= rangeStart && targetYear <= rangeEnd;
-  });
+  }
+  
+  return null;
 }
 
 function adaptDataForSpecificYear(yearData, targetYear) {
@@ -168,15 +187,6 @@ function renderEventsTimeline() {
   if (currentYearData.highlights && currentYearData.highlights.length > 0) {
     // Create events from highlights
     currentYearData.highlights.forEach((highlight, index) => {
-      const eventImages = [highlight.image];
-      // Add related images from the year's image collection if available
-      if (currentYearData.images && currentYearData.images.length > 0) {
-        const additionalImages = currentYearData.images
-          .filter(img => img !== highlight.image)
-          .slice(0, 3); // Limit to 3 additional images per event
-        eventImages.push(...additionalImages);
-      }
-      
       timelineHTML += `
         <div class="event-card" data-event-index="${index}">
           <div class="event-number">
@@ -189,25 +199,14 @@ function renderEventsTimeline() {
             </div>
             <p class="event-description">${highlight.description}</p>
             
-            <div class="event-images-grid">
-              ${eventImages.map((img, imgIndex) => `
-                <div class="event-image-container" onclick="openImageModal('${img}', ${imgIndex}, ${index})">
-                  <img src="${img}" alt="${highlight.title} - Image ${imgIndex + 1}" class="event-image" />
+            ${highlight.image ? `
+              <div class="event-images-grid">
+                <div class="event-image-container" onclick="openImageModal('${highlight.image}', 0, ${index})">
+                  <img src="${highlight.image}" alt="${highlight.title}" class="event-image" />
                   <div class="image-overlay">
                     <span class="zoom-icon">🔍</span>
                   </div>
                 </div>
-              `).join('')}
-            </div>
-            
-            ${currentYearData.activities && currentYearData.activities.length > 0 ? `
-              <div class="event-activities">
-                <h4>Related Activities:</h4>
-                <ul class="event-activities-list">
-                  ${currentYearData.activities.slice(0, 3).map(activity => `
-                    <li>${activity}</li>
-                  `).join('')}
-                </ul>
               </div>
             ` : ''}
           </div>
@@ -216,7 +215,6 @@ function renderEventsTimeline() {
     });
   } else {
     // Create a general event from available data
-    const eventImages = currentYearData.images || [];
     timelineHTML = `
       <div class="event-card">
         <div class="event-number">
@@ -228,19 +226,6 @@ function renderEventsTimeline() {
             <div class="event-date">${currentYearData.year}</div>
           </div>
           <p class="event-description">${currentYearData.content || currentYearData.summary}</p>
-          
-          ${eventImages.length > 0 ? `
-            <div class="event-images-grid">
-              ${eventImages.map((img, imgIndex) => `
-                <div class="event-image-container" onclick="openImageModal('${img}', ${imgIndex}, 0)">
-                  <img src="${img}" alt="${currentYearData.title} - Image ${imgIndex + 1}" class="event-image" />
-                  <div class="image-overlay">
-                    <span class="zoom-icon">🔍</span>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          ` : ''}
           
           ${currentYearData.activities && currentYearData.activities.length > 0 ? `
             <div class="event-activities">
@@ -298,16 +283,16 @@ function setupNavigation() {
     }
   } else {
     // Fallback: navigate through all available documented years
-    if (currentSectionData && currentSectionData.years && currentYearIndex >= 0) {
+    if (currentSectionData && currentSectionData.allYears && currentYearIndex >= 0) {
       if (currentYearIndex > 0) {
-        const prevYear = currentSectionData.years[currentYearIndex - 1];
+        const prevYear = currentSectionData.allYears[currentYearIndex - 1];
         prevBtn.style.display = 'flex';
         prevText.textContent = `${prevYear.year}`;
         prevBtn.onclick = () => navigateToYearInSection(prevYear.year);
       }
       
-      if (currentYearIndex < currentSectionData.years.length - 1) {
-        const nextYear = currentSectionData.years[currentYearIndex + 1];
+      if (currentYearIndex < currentSectionData.allYears.length - 1) {
+        const nextYear = currentSectionData.allYears[currentYearIndex + 1];
         nextBtn.style.display = 'flex';
         nextText.textContent = `${nextYear.year}`;
         nextBtn.onclick = () => navigateToYearInSection(nextYear.year);
@@ -337,15 +322,15 @@ function navigateToYearWithinRange(year) {
 }
 
 function navigateToPreviousYear() {
-  if (currentYearIndex > 0) {
-    const prevYear = currentSectionData.years[currentYearIndex - 1];
+  if (currentSectionData.allYears && currentYearIndex > 0) {
+    const prevYear = currentSectionData.allYears[currentYearIndex - 1];
     window.location.href = `year-detail.html?section=${sectionId}&year=${prevYear.year}`;
   }
 }
 
 function navigateToNextYear() {
-  if (currentYearIndex < currentSectionData.years.length - 1) {
-    const nextYear = currentSectionData.years[currentYearIndex + 1];
+  if (currentSectionData.allYears && currentYearIndex < currentSectionData.allYears.length - 1) {
+    const nextYear = currentSectionData.allYears[currentYearIndex + 1];
     window.location.href = `year-detail.html?section=${sectionId}&year=${nextYear.year}`;
   }
 }
@@ -368,44 +353,21 @@ function openImageModal(imageSrc, imageIndex, eventIndex) {
   const modal = document.createElement('div');
   modal.className = 'image-modal';
   
-  // Get all images from the event for navigation
-  let allImages = [];
-  if (currentYearData.highlights && currentYearData.highlights[eventIndex]) {
-    allImages.push(currentYearData.highlights[eventIndex].image);
-    if (currentYearData.images) {
-      const additionalImages = currentYearData.images
-        .filter(img => img !== currentYearData.highlights[eventIndex].image)
-        .slice(0, 3);
-      allImages.push(...additionalImages);
-    }
-  } else {
-    allImages = currentYearData.images || [imageSrc];
-  }
-  
   modal.innerHTML = `
     <div class="image-modal-content">
       <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
       <div class="modal-image-container">
         <img src="${imageSrc}" alt="Historical Image" class="modal-image" />
-        ${allImages.length > 1 ? `
-          <button class="modal-nav-btn prev-btn" onclick="navigateModalImage(-1)" ${imageIndex === 0 ? 'disabled' : ''}>‹</button>
-          <button class="modal-nav-btn next-btn" onclick="navigateModalImage(1)" ${imageIndex === allImages.length - 1 ? 'disabled' : ''}>›</button>
-        ` : ''}
       </div>
       <div class="image-modal-info">
-        <p>Image ${imageIndex + 1} of ${allImages.length} - ${currentYearData.year}</p>
-        <p class="image-event-title">Event ${eventIndex + 1}: ${currentYearData.highlights && currentYearData.highlights[eventIndex] ? currentYearData.highlights[eventIndex].title : currentYearData.title}</p>
+        <p>Historical Image - ${currentYearData.year}</p>
+        <p class="image-event-title">${currentYearData.highlights && currentYearData.highlights[eventIndex] ? currentYearData.highlights[eventIndex].title : currentYearData.title}</p>
       </div>
     </div>
   `;
   
   document.body.appendChild(modal);
   document.body.style.overflow = 'hidden';
-  
-  // Store modal data for navigation
-  modal.dataset.currentIndex = imageIndex;
-  modal.dataset.eventIndex = eventIndex;
-  modal.dataset.allImages = JSON.stringify(allImages);
   
   // Close modal when clicking outside
   modal.addEventListener('click', function(e) {
@@ -416,33 +378,8 @@ function openImageModal(imageSrc, imageIndex, eventIndex) {
 }
 
 function navigateModalImage(direction) {
-  const modal = document.querySelector('.image-modal');
-  if (!modal) return;
-  
-  const currentIndex = parseInt(modal.dataset.currentIndex);
-  const eventIndex = parseInt(modal.dataset.eventIndex);
-  const allImages = JSON.parse(modal.dataset.allImages);
-  
-  const newIndex = currentIndex + direction;
-  if (newIndex < 0 || newIndex >= allImages.length) return;
-  
-  const newImageSrc = allImages[newIndex];
-  const modalImage = modal.querySelector('.modal-image');
-  modalImage.src = newImageSrc;
-  
-  // Update modal data
-  modal.dataset.currentIndex = newIndex;
-  
-  // Update navigation buttons
-  const prevBtn = modal.querySelector('.prev-btn');
-  const nextBtn = modal.querySelector('.next-btn');
-  
-  if (prevBtn) prevBtn.disabled = newIndex === 0;
-  if (nextBtn) nextBtn.disabled = newIndex === allImages.length - 1;
-  
-  // Update info
-  const info = modal.querySelector('.image-modal-info p');
-  if (info) info.textContent = `Image ${newIndex + 1} of ${allImages.length} - ${currentYearData.year}`;
+  // Simplified version - no navigation for now
+  // This function can be expanded later if multi-image support is needed
 }
 
 function closeImageModal() {

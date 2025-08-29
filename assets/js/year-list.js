@@ -185,20 +185,18 @@ function renderYearsFromRange(yearRange) {
 }
 
 function hasDataForYear(targetYear) {
-    if (!currentSectionData || !currentSectionData.years) return false;
+    if (!currentSectionData || !currentSectionData["year-ranges"]) return false;
     
-    // Check if we have data for this specific year
-    return currentSectionData.years.some(yearData => {
-        const year = yearData.year;
-        
-        // Handle single years (e.g., "1964")
-        if (!year.includes('-')) {
-            return parseInt(year) === targetYear;
-        }
-        
-        // Handle year ranges (e.g., "1965-1967")
-        const [rangeStart, rangeEnd] = year.split('-').map(y => parseInt(y));
-        return targetYear >= rangeStart && targetYear <= rangeEnd;
+    // Check if we have data for this specific year in any year range
+    return currentSectionData["year-ranges"].some(rangeObj => {
+        // Each range object has keys like "1962-1972", "1973-1982", etc.
+        return Object.keys(rangeObj).some(rangeKey => {
+            const yearArray = rangeObj[rangeKey];
+            // Check if any year in this range matches our target year
+            return yearArray.some(yearData => {
+                return parseInt(yearData.year) === targetYear;
+            });
+        });
     });
 }
 
