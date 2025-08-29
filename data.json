@@ -2,88 +2,53 @@
     "sections": [
         {
             "id": "naf-history",
-            "icon": "🛩️",
+            "logo": "image/naf-logo.png",
             "title": "NAF History",
-            "description": "Explore the rich history and evolution of the Nigerian Air Force",
-            "summary": "The Nigerian Air Force was formally established on 18 April 1964 with the passage of the Air Force Act 1964. From its humble beginnings with training partnerships with various international air forces to becoming a formidable force in West Africa, the NAF has continuously evolved to meet modern operational demands. This section chronicles the major milestones, achievements, and transformations that have shaped the force into what it is today.",
-            "years": [
+            "year-ranges": [
                 {
-                    "year": "1962",
-                    "title": "EARLY TRAINING PARTNERSHIPS",
-                    "summary": "First batches of Nigerian cadets were sent for training with international air forces to build the foundation of the Nigerian Air Force.",
-                    "content": "In June 1962, the first batch of 10 cadets were enlisted to undergo training with the Imperial Ethiopian Air Force. This marked the beginning of Nigeria's journey towards establishing its own air force. Subsequently, in February 1963, a second batch of 16 cadets were enlisted to train with the Royal Canadian Air Force, while a third batch of 6 cadets were sent to train with the Indian Air Force. West Germany received the contract for the establishment of the Nigerian Air Force with technical assistance from the German Air Force Technical Assistance Group (GAFTAG), headed by Colonel Gerhard Kahtz, who would later become the first Commander of the Nigerian Air Force. The fourth batch of cadets were sent to train with the German Air Force.",
-                    "keyPersonnel": "Colonel Gerhard Kahtz (First Commander)",
-                    "highlights": [
+                    "1962-1972": [
                         {
-                            "title": "First Training Batch",
-                            "description": "10 cadets enlisted for training with Imperial Ethiopian Air Force in June 1962.",
-                            "image": "images/naf-history/1962-1-1.jpg"
-                        },
-                        {
-                            "title": "International Partnerships",
-                            "description": "Training partnerships established with Canadian, Indian, and German Air Forces.",
-                            "image": "images/naf-history/1963-1-1.jpg"
-                        },
-                        {
-                            "title": "GAFTAG Establishment",
-                            "description": "German Air Force Technical Assistance Group formed to help establish the NAF.",
-                            "image": "images/naf-history/1963-2-1.jpg"
-                        }
-                    ],
-                    "activities": [
-                        "Training of first batches of Nigerian cadets internationally",
-                        "Establishment of German technical assistance program",
-                        "Foundation laying for Nigerian Air Force structure"
-                    ],
-                    "images": [
-                        "images/naf-history/1962-1-1.jpg",
-                        "images/naf-history/1963-1-1.jpg",
-                        "images/naf-history/1963-1-2.jpg",
-                        "images/naf-history/1963-3-1.jpg"
-                    ]
-                },
-                {
-                    "year": "1964",
-                    "title": "FORMAL ESTABLISHMENT OF THE NIGERIAN AIR FORCE",
-                    "summary": "The Nigerian Air Force was formally established on 18 April 1964 with the passage of the Air Force Act 1964 by the National Assembly.",
-                    "content": "On 18 April 1964, the Nigerian Air Force was formally established with the passage of the Air Force Act 1964 by the National Assembly. Alhaji Tanko Galadima became the first Minister of the Nigerian Air Force (1964-1966). The Nigerian Air Force commenced operations as an air transport and training unit. The Germans supplied the first-generation air assets which included the Aerospatiale Allouette helicopter, 20 Dornier DO-27 transport aircraft, 14 Piaggio 149D trainer aircraft, and Nord Noratlas platforms for transport. Construction of the first Nigerian Air Force base begun and was established in Kaduna. Squadron Leader John Chukwu became the First Qualified Flight Instructor (QFI) of the Nigerian Air Force.",
-                    "keyPersonnel": "Alhaji Tanko Galadima (First Minister), Squadron Leader John Chukwu (First QFI)",
-                    "highlights": [
-                        {
-                            "title": "Air Force Act Passed",
-                            "description": "Nigerian Air Force formally established by National Assembly on 18 April 1964.",
-                            "image": "images/naf-history/1964-1-1.jpg"
-                        },
-                        {
-                            "title": "First Aircraft Delivery",
-                            "description": "Germans supplied Allouette helicopters, Dornier DO-27s, and Piaggio 149D trainers.",
-                            "image": "images/naf-history/1964-2-1.jpg"
-                        },
-                        {
-                            "title": "Kaduna Base Construction",
-                            "description": "Construction of the first Nigerian Air Force base begun in Kaduna.",
-                            "image": "images/naf-history/1964-3-1.jpg"
-                        }
-                    ],
-                    "activities": [
-                        "Formal establishment through legislative act",
-                        "Acquisition of first-generation aircraft",
-                        "Construction of first air force base in Kaduna",
-                        "Appointment of first qualified flight instructor"
-                    ],
-                    "images": [
-                        "images/naf-history/1964-4-1.jpg",
-                        "images/naf-history/1964-4-2.jpg",
-                        "images/naf-history/1964-4-3.jpg",
-                        "images/naf-history/1964-4-4.jpg"
-                    ]
+                            "year": "1962",
+                            "highlights": [
+                            {
+                                "title": "First Training Batch",
+                                "description": "10 cadets enlisted for training with Imperial Ethiopian Air Force in June 1962.",
+                                "image": "images/naf-history/1962-1-1.jpg"
+                            },
+                            {
+                                "title": "International Partnerships",
+                                "description": "Training partnerships established with Canadian, Indian, and German Air Forces.",
+                                "image": "images/naf-history/1963-1-1.jpg"
+                            },
+                            {
+                                "title": "GAFTAG Establishment",
+                                "description": "German Air Force Technical Assistance Group formed to help establish the NAF.",
+                                "image": "images/naf-history/1963-2-1.jpg"
+                            }
+                        ]
+                    },
+                    {
+                        "year": "1964",
+                        "highlights": [
+                            {
+                                "title": "Air Force Act Passed",
+                                "description": "Nigerian Air Force formally established by National Assembly on 18 April 1964.",
+                                "image": "images/naf-history/1964-1-1.jpg"
+                            },
+                            {
+                                "title": "First Aircraft Delivery",
+                                "description": "Germans supplied Allouette helicopters, Dornier DO-27s, and Piaggio 149D trainers.",
+                                "image": "images/naf-history/1964-2-1.jpg"
+                            },
+                            {
+                                "title": "Kaduna Base Construction",
+                                "description": "Construction of the first Nigerian Air Force base begun in Kaduna.",
+                                "image": "images/naf-history/1964-3-1.jpg"
+                            }
+                        ]
                 },
                 {
                     "year": "1965-1967",
-                    "title": "EARLY OPERATIONS AND FIRST TRAGEDIES",
-                    "summary": "The NAF experienced leadership changes and faced its first aircraft accidents during this formative period.",
-                    "content": "On 24 November 1965, Colonel W Timming was appointed the Second Commander of the Nigerian Air Force. On 19 January 1966, George T Kurubo was appointed the Third Commander and was the first indigenous Commander of the Nigerian Air Force. In January 1966, the First Nigerian Air Force hangar was commissioned at the Nigerian Air Force Base Kaduna. Tragically, on 23 May 1966, the First Nigerian Air Force plane crash occurred at Ibadan Airport killing Lieutenant Jasper Onyeji and Lieutenant D.F Onyirimba in a Piaggio P-149D while doing aerobatics. On 5 August 1967, the First Nigerian Air Force helicopter crash occurred killing Colonel Joseph Akahan who was the Chief of Army Staff and two young pilots: 2nd Lieutenant G Ozie and 2nd Lieutenant Olawale Lawal. Colonel Shittu Akanji Alao was appointed the Fourth Commander of the Nigerian Air Force on 5 August 1967, holding office until his death on 15 December 1969.",
-                    "keyPersonnel": "George T Kurubo (First Indigenous Commander), Colonel Shittu Akanji Alao (Fourth Commander)",
                     "highlights": [
                         {
                             "title": "First Indigenous Commander",
@@ -338,6 +303,8 @@
                         "images/naf-history/2021-2-1.jpg",
                         "images/naf-history/2021-2-2.jpg",
                         "images/naf-history/2021-2-3.jpg"
+                    ]
+                }
                     ]
                 }
             ]
