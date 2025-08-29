@@ -53,9 +53,10 @@ async function loadYearData() {
       throw new Error('Section not found');
     }
 
-    // Find the year data - handle both individual years and ranges
-    currentYearData = currentSectionData.years.find(year => year.year === yearParam);
-    currentYearIndex = currentSectionData.years.findIndex(year => year.year === yearParam);
+    // Find the year data that contains this specific year
+    const targetYear = parseInt(yearParam);
+    currentYearData = findYearDataForSpecificYear(targetYear);
+    currentYearIndex = currentSectionData.years.findIndex(year => year === currentYearData);
     
     // Store the year range for navigation
     currentYearRange = rangeParam;
@@ -65,12 +66,21 @@ async function loadYearData() {
       currentYearData = {
         year: yearParam,
         title: `Year ${yearParam}`,
-        summary: `Historical period from ${yearParam} within the ${currentSectionData.title} timeline.`,
-        content: `This year falls within the documented history of the ${currentSectionData.title}. While specific detailed records for ${yearParam} may not be available, this period represents an important part of the overall historical timeline.`,
+        summary: `Historical period from ${yearParam} within the Nigerian Air Force timeline.`,
+        content: `This year (${yearParam}) represents a part of the Nigerian Air Force's ongoing history. While specific detailed records for this individual year may not be available, it falls within the documented timeline of the force's development and operations.`,
         highlights: [],
-        activities: [`General operations continued during ${yearParam}`, "Maintained organizational structure", "Continued service to the Nigerian Air Force"],
-        images: []
+        activities: [
+          `Continued Nigerian Air Force operations during ${yearParam}`,
+          "Maintained organizational structure and training programs",
+          "Ongoing service to defend Nigeria's airspace"
+        ],
+        images: [],
+        keyPersonnel: "Various NAF personnel",
+        isGeneric: true
       };
+    } else {
+      // Adapt the data for this specific year
+      currentYearData = adaptDataForSpecificYear(currentYearData, targetYear);
     }
 
     renderYearDetail();
@@ -82,19 +92,62 @@ async function loadYearData() {
   }
 }
 
+function findYearDataForSpecificYear(targetYear) {
+  if (!currentSectionData || !currentSectionData.years) return null;
+  
+  // Find the year data entry that contains this specific year
+  return currentSectionData.years.find(yearData => {
+    const year = yearData.year;
+    
+    // Handle single years (e.g., "1964")
+    if (!year.includes('-')) {
+      return parseInt(year) === targetYear;
+    }
+    
+    // Handle year ranges (e.g., "1965-1967")
+    const [rangeStart, rangeEnd] = year.split('-').map(y => parseInt(y));
+    return targetYear >= rangeStart && targetYear <= rangeEnd;
+  });
+}
+
+function adaptDataForSpecificYear(yearData, targetYear) {
+  // Create a version of the data adapted for the specific year
+  const adaptedData = {
+    ...yearData,
+    year: targetYear.toString(),
+    title: `${targetYear} - ${yearData.title}`,
+    summary: `Events and developments from ${targetYear} within the period: ${yearData.summary}`,
+    isGeneric: false,
+    originalYearRange: yearData.year
+  };
+  
+  // If this is a year range, try to filter events/highlights that might be specific to this year
+  if (yearData.year.includes('-')) {
+    // For now, we'll show all highlights from the range period
+    // In the future, you could add year-specific data to highlights
+    adaptedData.content = `During ${targetYear}, the Nigerian Air Force continued the activities documented for the ${yearData.year} period. ${yearData.content}`;
+  }
+  
+  return adaptedData;
+}
+
 function renderYearDetail() {
   // Hide loading message and show content
   document.getElementById('loading-message').style.display = 'none';
   document.getElementById('year-detail-content').style.display = 'block';
   
   // Update page title and navigation
-  document.getElementById('page-title').textContent = `${currentYearData.year} - ${currentSectionData.title} - Nigerian Air Force Museum`;
+  const pageTitle = currentYearData.isGeneric ? 
+    `${currentYearData.year} - Nigerian Air Force - Historical Period` :
+    `${currentYearData.year} - ${currentSectionData.title}`;
+    
+  document.getElementById('page-title').textContent = `${pageTitle} - Nigerian Air Force Museum`;
   document.getElementById('nav-year-title').textContent = `${currentSectionData.title} - ${currentYearData.year}`;
   
   // Update back button text based on navigation context
   const backBtnText = document.getElementById('back-btn-text');
   if (currentYearRange) {
-    backBtnText.textContent = `Back to ${currentYearRange} List`;
+    backBtnText.textContent = `Back to ${currentYearRange} Years`;
   } else {
     backBtnText.textContent = 'Back to Section';
   }
@@ -223,22 +276,42 @@ function setupNavigation() {
   const prevText = document.getElementById('prev-year-text');
   const nextText = document.getElementById('next-year-text');
   
-  // Set up navigation based on available years in the section
-  if (currentSectionData && currentSectionData.years && currentYearIndex >= 0) {
-    // Check if there's a previous year
-    if (currentYearIndex > 0) {
-      const prevYear = currentSectionData.years[currentYearIndex - 1];
+  // If we have a year range, set up navigation within that range
+  if (currentYearRange) {
+    const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
+    const currentYear = parseInt(yearParam);
+    
+    // Check if there's a previous year within the range
+    if (currentYear > startYear) {
+      const prevYear = currentYear - 1;
       prevBtn.style.display = 'flex';
-      prevText.textContent = `${prevYear.year}`;
-      prevBtn.onclick = () => navigateToYearInSection(prevYear.year);
+      prevText.textContent = `${prevYear}`;
+      prevBtn.onclick = () => navigateToYearInSection(prevYear.toString());
     }
     
-    // Check if there's a next year
-    if (currentYearIndex < currentSectionData.years.length - 1) {
-      const nextYear = currentSectionData.years[currentYearIndex + 1];
+    // Check if there's a next year within the range
+    if (currentYear < endYear) {
+      const nextYear = currentYear + 1;
       nextBtn.style.display = 'flex';
-      nextText.textContent = `${nextYear.year}`;
-      nextBtn.onclick = () => navigateToYearInSection(nextYear.year);
+      nextText.textContent = `${nextYear}`;
+      nextBtn.onclick = () => navigateToYearInSection(nextYear.toString());
+    }
+  } else {
+    // Fallback: navigate through all available documented years
+    if (currentSectionData && currentSectionData.years && currentYearIndex >= 0) {
+      if (currentYearIndex > 0) {
+        const prevYear = currentSectionData.years[currentYearIndex - 1];
+        prevBtn.style.display = 'flex';
+        prevText.textContent = `${prevYear.year}`;
+        prevBtn.onclick = () => navigateToYearInSection(prevYear.year);
+      }
+      
+      if (currentYearIndex < currentSectionData.years.length - 1) {
+        const nextYear = currentSectionData.years[currentYearIndex + 1];
+        nextBtn.style.display = 'flex';
+        nextText.textContent = `${nextYear.year}`;
+        nextBtn.onclick = () => navigateToYearInSection(nextYear.year);
+      }
     }
   }
 }
