@@ -127,14 +127,12 @@ async function loadSectionData(object) {
         const response = await fetch('data.json');
         const data = await response.json();
         
-        // Map object to section
+        // Map object to section - updated to only support NAF history
         const sectionMap = {
-            'naf': 'naf-history',
-            'nafsfa': 'nafsfa-history',
-            'evol': 'finance-evolution'
+            'naf': 'naf-history'
         };
         
-        const targetSectionId = sectionMap[object];
+        const targetSectionId = sectionMap[object] || 'naf-history'; // Default to naf-history
         currentSectionData = data.sections.find(section => section.id === targetSectionId);
         
         if (!currentSectionData) {
@@ -149,43 +147,50 @@ async function loadSectionData(object) {
 
 function updatePageHeader(yearRange, object) {
     const sectionNames = {
-        'naf': 'NAF History',
-        'nafsfa': 'NAFSFA History',
-        'evol': 'Evolution of NAF Finance'
+        'naf': 'NAF History'
     };
     
-    document.getElementById('page-title').textContent = `Years ${yearRange} - ${sectionNames[object]} - Nigerian Air Force Museum`;
+    const sectionName = sectionNames[object] || 'NAF History';
+    
+    document.getElementById('page-title').textContent = `Years ${yearRange} - ${sectionName} - Nigerian Air Force Museum`;
     document.getElementById('year-range-title').textContent = `Years ${yearRange}`;
-    document.getElementById('section-info').textContent = `${sectionNames[object]} - Select a specific year to explore`;
+    document.getElementById('section-info').textContent = `${sectionName} - Select a specific year to explore`;
 }
 
 function renderYearsFromRange(yearRange) {
     const yearsGrid = document.getElementById('years-grid');
-    const [startYear, endYear] = yearRange.split('-').map(y => parseInt(y));
     
     let yearsHTML = '';
     
-    // Generate individual years within the range
-    for (let year = startYear; year <= endYear; year++) {
-        // Check if we have data for this specific year
-        const yearData = currentSectionData.years.find(y => parseInt(y.year) === year);
-        
-        if (yearData) {
-            // We have specific data for this year
-            yearsHTML += createYearCard(year, yearData.title, yearData.summary, true);
-        } else {
-            // Generate a generic card for years without specific data
-            yearsHTML += createYearCard(year, `Year ${year}`, `Historical period within the ${yearRange} era`, false);
-        }
+    // Get all available years from the current section data
+    if (currentSectionData && currentSectionData.years) {
+        // Display all available years as cards
+        currentSectionData.years.forEach(yearData => {
+            yearsHTML += createYearCard(yearData.year, yearData.title, yearData.summary, true, yearData);
+        });
+    } else {
+        yearsHTML = `
+            <div class="error-message" style="grid-column: 1 / -1; text-align: center; color: #c41e3a; padding: 40px;">
+                <h3>No Data Available</h3>
+                <p>No historical data found for this section.</p>
+            </div>
+        `;
     }
     
     yearsGrid.innerHTML = yearsHTML;
 }
 
-function createYearCard(year, title, description, hasData) {
+function createYearCard(year, title, description, hasData, yearData = null) {
+    // Handle year ranges by extracting a representative year or using the range itself
+    let displayYear = year;
+    let isRange = year.includes('-');
+    
     return `
-        <div class="year-card" onclick="navigateToYear(${year}, ${hasData})" data-year="${year}">
-            <span class="year-number">${year}</span>
+        <div class="year-card" onclick="navigateToYear('${year}', ${hasData})" data-year="${year}">
+            <div style="text-align: center;">
+                <div class="year-number">${displayYear}</div>
+                ${title ? `<div class="year-title">${title}</div>` : ''}
+            </div>
         </div>
     `;
 }
@@ -198,13 +203,11 @@ function navigateToYear(year, hasData) {
     
     // Navigate to year detail page
     const sectionMap = {
-        'naf': 'naf-history',
-        'nafsfa': 'nafsfa-history', 
-        'evol': 'finance-evolution'
+        'naf': 'naf-history'
     };
     
-    const sectionId = sectionMap[currentObject];
-    window.location.href = `year-detail.html?section=${sectionId}&year=${year}&range=${currentYearRange}`;
+    const sectionId = sectionMap[currentObject] || 'naf-history';
+    window.location.href = `year-detail.html?section=${sectionId}&year=${encodeURIComponent(year)}&range=${currentYearRange}`;
 }
 
 // Remove backToSection function as it's no longer needed per requirements
@@ -212,11 +215,9 @@ function navigateToYear(year, hasData) {
 
 function getSectionIdFromObject(object) {
     const sectionMap = {
-        'naf': 'naf-history',
-        'nafsfa': 'nafsfa-history',
-        'evol': 'finance-evolution'
+        'naf': 'naf-history'
     };
-    return sectionMap[object];
+    return sectionMap[object] || 'naf-history';
 }
 
 function hideNoInteractionOverlay() {

@@ -53,7 +53,7 @@ async function loadYearData() {
       throw new Error('Section not found');
     }
 
-    // Try to find exact year data first
+    // Find the year data - handle both individual years and ranges
     currentYearData = currentSectionData.years.find(year => year.year === yearParam);
     currentYearIndex = currentSectionData.years.findIndex(year => year.year === yearParam);
     
@@ -223,42 +223,34 @@ function setupNavigation() {
   const prevText = document.getElementById('prev-year-text');
   const nextText = document.getElementById('next-year-text');
   
-  // If we have a year range, set up navigation within that range
-  if (currentYearRange) {
-    const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
-    const currentYear = parseInt(yearParam);
-    
-    // Check if there's a previous year within the range
-    if (currentYear > startYear) {
-      const prevYear = currentYear - 1;
-      prevBtn.style.display = 'flex';
-      prevText.textContent = `${prevYear}`;
-      prevBtn.onclick = () => navigateToYearWithinRange(prevYear);
-    }
-    
-    // Check if there's a next year within the range
-    if (currentYear < endYear) {
-      const nextYear = currentYear + 1;
-      nextBtn.style.display = 'flex';
-      nextText.textContent = `${nextYear}`;
-      nextBtn.onclick = () => navigateToYearWithinRange(nextYear);
-    }
-  } else {
-    // Fallback to original navigation (within documented years only)
+  // Set up navigation based on available years in the section
+  if (currentSectionData && currentSectionData.years && currentYearIndex >= 0) {
+    // Check if there's a previous year
     if (currentYearIndex > 0) {
       const prevYear = currentSectionData.years[currentYearIndex - 1];
       prevBtn.style.display = 'flex';
       prevText.textContent = `${prevYear.year}`;
-      prevBtn.onclick = () => navigateToPreviousYear();
+      prevBtn.onclick = () => navigateToYearInSection(prevYear.year);
     }
     
+    // Check if there's a next year
     if (currentYearIndex < currentSectionData.years.length - 1) {
       const nextYear = currentSectionData.years[currentYearIndex + 1];
       nextBtn.style.display = 'flex';
       nextText.textContent = `${nextYear.year}`;
-      nextBtn.onclick = () => navigateToNextYear();
+      nextBtn.onclick = () => navigateToYearInSection(nextYear.year);
     }
   }
+}
+
+function navigateToYearInSection(year) {
+  const queryParams = new URLSearchParams();
+  queryParams.set('section', sectionId);
+  queryParams.set('year', year);
+  if (currentYearRange) {
+    queryParams.set('range', currentYearRange);
+  }
+  window.location.href = `year-detail.html?${queryParams.toString()}`;
 }
 
 function navigateToYearWithinRange(year) {
@@ -289,11 +281,9 @@ function goBackToSection() {
   // If we came from a year range, go back to the year list instead of section
   if (currentYearRange) {
     const objectMap = {
-      'naf-history': 'naf',
-      'nafsfa-history': 'nafsfa', 
-      'finance-evolution': 'evol'
+      'naf-history': 'naf'
     };
-    const objectParam = objectMap[sectionId];
+    const objectParam = objectMap[sectionId] || 'naf';
     window.location.href = `year-list.html?section=${sectionId}&year=${currentYearRange}&object=${objectParam}`;
   } else {
     window.location.href = `section.html?section=${sectionId}`;
