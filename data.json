@@ -917,13 +917,13 @@
             ]
         },
         {
-            "id":"nafsfa",
+            "id":"nafsfa-history",
             "logo":"image/nafsfa-logo.png",
             "title":"NAF School of Finance and Account",
             "year-ranges":[]
         },
         {
-            "id":"evolution-naffs",
+            "id":"finance-evolution",
             "logo":"image/nafsfa-logo.png",
             "title":"Evolution of NAF Finance Specialty",
             "year-ranges":[]
