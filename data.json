@@ -10,301 +10,762 @@
                         {
                             "year": "1962",
                             "highlights": [
-                            {
-                                "title": "First Training Batch",
-                                "description": "10 cadets enlisted for training with Imperial Ethiopian Air Force in June 1962.",
-                                "image": "images/naf-history/1962-1-1.jpg"
-                            },
-                            {
-                                "title": "International Partnerships",
-                                "description": "Training partnerships established with Canadian, Indian, and German Air Forces.",
-                                "image": "images/naf-history/1963-1-1.jpg"
-                            },
-                            {
-                                "title": "GAFTAG Establishment",
-                                "description": "German Air Force Technical Assistance Group formed to help establish the NAF.",
-                                "image": "images/naf-history/1963-2-1.jpg"
-                            }
-                        ]
-                    },
-                    {
-                        "year": "1964",
-                        "highlights": [
-                            {
-                                "title": "Air Force Act Passed",
-                                "description": "Nigerian Air Force formally established by National Assembly on 18 April 1964.",
-                                "image": "images/naf-history/1964-1-1.jpg"
-                            },
-                            {
-                                "title": "First Aircraft Delivery",
-                                "description": "Germans supplied Allouette helicopters, Dornier DO-27s, and Piaggio 149D trainers.",
-                                "image": "images/naf-history/1964-2-1.jpg"
-                            },
-                            {
-                                "title": "Kaduna Base Construction",
-                                "description": "Construction of the first Nigerian Air Force base begun in Kaduna.",
-                                "image": "images/naf-history/1964-3-1.jpg"
-                            }
-                        ]
-                },
-                {
-                    "year": "1965-1967",
-                    "highlights": [
-                        {
-                            "title": "First Indigenous Commander",
-                            "description": "George T Kurubo became the first indigenous Commander of the NAF in January 1966.",
-                            "image": "images/naf-history/1966-1-1.jpg"
+                                {
+                                    "title": "First Training Batch",
+                                    "description": "10 cadets enlisted for training with Imperial Ethiopian Air Force in June 1962.",
+                                    "image": "images/naf-history/1962-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "First Hangar Commissioned",
-                            "description": "First Nigerian Air Force hangar commissioned at NAF Base Kaduna in January 1966.",
-                            "image": "images/naf-history/1966-2-1.jpg"
+                            "year": "1963",
+                            "highlights": [
+                                {
+                                    "title": "International Partnerships",
+                                    "description": "Training partnerships established with Canadian, Indian, and German Air Forces.",
+                                    "image": "images/naf-history/1963-1-1.jpg"
+                                },
+                                {
+                                    "title": "GAFTAG Establishment",
+                                    "description": "German Air Force Technical Assistance Group formed to help establish the NAF.",
+                                    "image": "images/naf-history/1963-2-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "First Aircraft Accidents",
-                            "description": "NAF experienced its first plane crash in 1966 and helicopter crash in 1967.",
-                            "image": "images/naf-history/1967-1-1.jpg"
+                            "year": "1964",
+                            "highlights": [
+                                {
+                                    "title": "Air Force Act Passed",
+                                    "description": "Nigerian Air Force formally established by National Assembly on 18 April 1964.",
+                                    "image": "images/naf-history/1964-1-1.jpg"
+                                },
+                                {
+                                    "title": "First Aircraft Delivery",
+                                    "description": "Germans supplied Allouette helicopters, Dornier DO-27s, and Piaggio 149D trainers.",
+                                    "image": "images/naf-history/1964-2-1.jpg"
+                                },
+                                {
+                                    "title": "Kaduna Base Construction",
+                                    "description": "Construction of the first Nigerian Air Force base begun in Kaduna.",
+                                    "image": "images/naf-history/1964-3-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1965",
+                            "highlights": [
+                                {
+                                    "title": "Infrastructure Development",
+                                    "description": "Continued expansion of NAF infrastructure and personnel training.",
+                                    "image": "images/naf-history/1965-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1966",
+                            "highlights": [
+                                {
+                                    "title": "First Indigenous Commander",
+                                    "description": "George T Kurubo became the first indigenous Commander of the NAF in January 1966.",
+                                    "image": "images/naf-history/1966-1-1.jpg"
+                                },
+                                {
+                                    "title": "First Hangar Commissioned",
+                                    "description": "First Nigerian Air Force hangar commissioned at NAF Base Kaduna in January 1966.",
+                                    "image": "images/naf-history/1966-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1967",
+                            "highlights": [
+                                {
+                                    "title": "First Aircraft Accidents",
+                                    "description": "NAF experienced its first plane crash in 1966 and helicopter crash in 1967.",
+                                    "image": "images/naf-history/1967-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1968",
+                            "highlights": [
+                                {
+                                    "title": "Civil War Operations",
+                                    "description": "NAF participated in operations during the Nigerian Civil War.",
+                                    "image": "images/naf-history/1967-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1969",
+                            "highlights": [
+                                {
+                                    "title": "Office of Chief of Air Staff",
+                                    "description": "Establishment of the Office of Chief of Air Staff in 1969.",
+                                    "image": "images/naf-history/1969-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1970",
+                            "highlights": [
+                                {
+                                    "title": "Post-War Reorganization",
+                                    "description": "NAF began post-civil war reorganization and expansion.",
+                                    "image": "images/naf-history/1969-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1971",
+                            "highlights": [
+                                {
+                                    "title": "Continued Development",
+                                    "description": "Further organizational development and capacity building.",
+                                    "image": "images/naf-history/1969-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1972",
+                            "highlights": [
+                                {
+                                    "title": "Modernization Efforts",
+                                    "description": "Focus on modernizing equipment and training programs.",
+                                    "image": "images/naf-history/1969-1-1.jpg"
+                                }
+                            ]
                         }
-                    ],
-                    "activities": [
-                        "Leadership transitions and appointments",
-                        "Infrastructure development with first hangar",
-                        "Operations during civil war period",
-                        "Acquisition of first combat aircraft from Soviet Union"
-                    ],
-                    "images": [
-                        "images/naf-history/1965-1-1.jpg",
-                        "images/naf-history/1966-1-2.jpg",
-                        "images/naf-history/1966-3-1.jpg",
-                        "images/naf-history/1967-2-1.jpg"
                     ]
                 },
                 {
-                    "year": "1969-1976",
-                    "title": "ESTABLISHMENT OF AIR STAFF OFFICE AND SERVICE INDEPENDENCE",
-                    "summary": "The NAF established the Office of Chief of Air Staff and gained full service independence with its own rank structure.",
-                    "content": "On 17 December 1969, Brigadier Emmanuel E Ikwue was appointed the Fifth Commander of the Nigerian Air Force and later became the First Nigerian Air Force Commander to hold the office now designated as the Office of the Chief of the Air Staff. On 29 July 1975, Air Vice Marshall John Nmadu Yisa-Doko was appointed the Sixth Chief of the Air Staff, becoming the First Airman to be appointed Chief of the Air Staff and the First to attain the rank of Air Vice Marshall in the Nigerian Air Force. In 1976, the Nigerian Air Force was presented with its Colours by General Olusegun Obasanjo at the First Air Force Day. On 1 April 1976, the Federal Military Government authorized the adoption of a complete Air Force rank structure to give the Nigerian Air Force full-service independence.",
-                    "keyPersonnel": "Brigadier Emmanuel E Ikwue, Air Vice Marshall John Nmadu Yisa-Doko",
-                    "highlights": [
+                    "1973-1982": [
                         {
-                            "title": "Office of Chief of Air Staff",
-                            "description": "Establishment of the Office of Chief of Air Staff in 1969.",
-                            "image": "images/naf-history/1969-1-1.jpg"
+                            "year": "1973",
+                            "highlights": [
+                                {
+                                    "title": "Expansion Phase",
+                                    "description": "NAF continued expansion of capabilities and infrastructure.",
+                                    "image": "images/naf-history/1975-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "First Air Force Day",
-                            "description": "NAF received its Colours at the First Air Force Day in 1976.",
-                            "image": "images/naf-history/1976-1-1.jpg"
+                            "year": "1974",
+                            "highlights": [
+                                {
+                                    "title": "Training Development",
+                                    "description": "Enhanced training programs and international partnerships.",
+                                    "image": "images/naf-history/1975-1-2.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "Service Independence",
-                            "description": "Complete Air Force rank structure adopted for full service independence in 1976.",
-                            "image": "images/naf-history/1976-2-1.jpg"
+                            "year": "1975",
+                            "highlights": [
+                                {
+                                    "title": "First Airman Chief of Air Staff",
+                                    "description": "Air Vice Marshall John Nmadu Yisa-Doko was appointed the Sixth Chief of the Air Staff, becoming the First Airman to be appointed Chief of the Air Staff.",
+                                    "image": "images/naf-history/1975-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1976",
+                            "highlights": [
+                                {
+                                    "title": "First Air Force Day",
+                                    "description": "NAF received its Colours at the First Air Force Day in 1976.",
+                                    "image": "images/naf-history/1976-1-1.jpg"
+                                },
+                                {
+                                    "title": "Service Independence",
+                                    "description": "Complete Air Force rank structure adopted for full service independence in 1976.",
+                                    "image": "images/naf-history/1976-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1977",
+                            "highlights": [
+                                {
+                                    "title": "Operational Expansion",
+                                    "description": "Expanded operational capabilities and new aircraft acquisitions.",
+                                    "image": "images/naf-history/1976-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1978",
+                            "highlights": [
+                                {
+                                    "title": "Personnel Development",
+                                    "description": "Focus on personnel development and professional military education.",
+                                    "image": "images/naf-history/1976-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1979",
+                            "highlights": [
+                                {
+                                    "title": "Democratic Transition",
+                                    "description": "NAF supported Nigeria's transition to civilian democratic rule.",
+                                    "image": "images/naf-history/1976-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1980",
+                            "highlights": [
+                                {
+                                    "title": "New Leadership",
+                                    "description": "Air Vice Marshal Abdullahi Dominic Bello was appointed the Seventh Chief of the Air Staff on 15 April 1980.",
+                                    "image": "images/naf-history/1980-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1981",
+                            "highlights": [
+                                {
+                                    "title": "Capability Enhancement",
+                                    "description": "Continued enhancement of air defense and operational capabilities.",
+                                    "image": "images/naf-history/1980-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1982",
+                            "highlights": [
+                                {
+                                    "title": "Logistics Command Established",
+                                    "description": "Nigerian Air Force Logistics Command established in Lagos in 1982.",
+                                    "image": "images/naf-history/1982-1-1.jpg"
+                                }
+                            ]
                         }
-                    ],
-                    "activities": [
-                        "Establishment of Chief of Air Staff office",
-                        "First airman appointed as Chief of Air Staff",
-                        "Presentation of Air Force Colours",
-                        "Adoption of complete Air Force rank structure"
-                    ],
-                    "images": [
-                        "images/naf-history/1969-1-1.jpg",
-                        "images/naf-history/1975-1-1.jpg",
-                        "images/naf-history/1975-1-2.jpg",
-                        "images/naf-history/1976-1-1.jpg"
                     ]
                 },
                 {
-                    "year": "1980-1990",
-                    "title": "ORGANIZATIONAL DEVELOPMENT AND EXPANSION",
-                    "summary": "The NAF established specialized commands, introduced new insignia, and promoted its first Air Marshal.",
-                    "content": "On 15 April 1980, Air Vice Marshal Abdullahi Dominic Bello was appointed the Seventh Chief of the Air Staff, serving until 31 December 1983. In 1982, the Nigerian Air Force Logistics Command was established in Lagos. New wings for the Nigerian Air Force aircrew were introduced in 1983 to replace the foreign ones in use. On 01 January 1984, Air Marshal Ibrahim Mahmud Alfa was appointed the Eighth Chief of the Air Staff, serving until 01 January 1990. On 1 October 1987, Ibrahim Mahmud Alfa became the First Nigerian Air Force officer to be promoted to the rank of Air Marshal. In June 1988, the Nigerian Air Force was organized into 4 specialized Commands: Tactical Command (Makurdi), Training Command (Kaduna), Logistics Command (Lagos), and Airlift Command (Ibadan). In 1989, the Nigerian Air Force unveiled its first locally built trainer aircraft dubbed the 'Air Beetle'.",
-                    "keyPersonnel": "Air Marshal Ibrahim Mahmud Alfa (First Air Marshal)",
-                    "highlights": [
+                    "1983-1992": [
                         {
-                            "title": "Logistics Command Established",
-                            "description": "Nigerian Air Force Logistics Command established in Lagos in 1982.",
-                            "image": "images/naf-history/1982-1-1.jpg"
+                            "year": "1983",
+                            "highlights": [
+                                {
+                                    "title": "Indigenous Wings Introduction",
+                                    "description": "New wings for the Nigerian Air Force aircrew were introduced in 1983 to replace the foreign ones in use.",
+                                    "image": "images/naf-history/1983-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "First Air Marshal",
-                            "description": "Ibrahim Mahmud Alfa became the first NAF officer promoted to Air Marshal in 1987.",
-                            "image": "images/naf-history/1987-1-1.jpg"
+                            "year": "1984",
+                            "highlights": [
+                                {
+                                    "title": "New Chief of Air Staff",
+                                    "description": "Air Marshal Ibrahim Mahmud Alfa was appointed the Eighth Chief of the Air Staff on 01 January 1984.",
+                                    "image": "images/naf-history/1984-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "Four Commands Structure",
-                            "description": "NAF organized into 4 specialized Commands in 1988.",
-                            "image": "images/naf-history/1984-1-1.jpg"
+                            "year": "1985",
+                            "highlights": [
+                                {
+                                    "title": "Organizational Development",
+                                    "description": "Continued organizational development and modernization efforts.",
+                                    "image": "images/naf-history/1984-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "Air Beetle Aircraft",
-                            "description": "First locally built trainer aircraft 'Air Beetle' unveiled in 1989.",
-                            "image": "images/naf-history/1989-1-1.jpg"
+                            "year": "1986",
+                            "highlights": [
+                                {
+                                    "title": "Training Enhancement",
+                                    "description": "Enhanced training programs and professional development initiatives.",
+                                    "image": "images/naf-history/1984-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1987",
+                            "highlights": [
+                                {
+                                    "title": "First Air Marshal",
+                                    "description": "Ibrahim Mahmud Alfa became the first NAF officer promoted to Air Marshal on 1 October 1987.",
+                                    "image": "images/naf-history/1987-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1988",
+                            "highlights": [
+                                {
+                                    "title": "Four Commands Structure",
+                                    "description": "NAF organized into 4 specialized Commands: Tactical Command (Makurdi), Training Command (Kaduna), Logistics Command (Lagos), and Airlift Command (Ibadan).",
+                                    "image": "images/naf-history/1987-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1989",
+                            "highlights": [
+                                {
+                                    "title": "Air Beetle Aircraft",
+                                    "description": "First locally built trainer aircraft 'Air Beetle' unveiled in 1989.",
+                                    "image": "images/naf-history/1989-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1990",
+                            "highlights": [
+                                {
+                                    "title": "Leadership Transition",
+                                    "description": "Air Marshal Nuraini Oladimeji Yussuff was appointed the Ninth Chief of the Air Staff.",
+                                    "image": "images/naf-history/1990-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1991",
+                            "highlights": [
+                                {
+                                    "title": "Operational Activities",
+                                    "description": "Continued operational activities and modernization efforts.",
+                                    "image": "images/naf-history/1990-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1992",
+                            "highlights": [
+                                {
+                                    "title": "New Leadership and Tragedy",
+                                    "description": "Air Marshal Akin Dada was appointed Chief of Air Staff. Fatal C-130H Hercules crash occurred, killing all 158 passengers and crew members.",
+                                    "image": "images/naf-history/1992-1-1.jpg"
+                                }
+                            ]
                         }
-                    ],
-                    "activities": [
-                        "Establishment of specialized commands",
-                        "Introduction of indigenous aircrew wings",
-                        "Promotion of first Air Marshal",
-                        "Development of local aircraft manufacturing capability"
-                    ],
-                    "images": [
-                        "images/naf-history/1980-1-1.jpg",
-                        "images/naf-history/1982-1-1.jpg",
-                        "images/naf-history/1983-1-1.jpg",
-                        "images/naf-history/1987-1-1.jpg"
                     ]
                 },
                 {
-                    "year": "1990-1999",
-                    "title": "MODERNIZATION AND TRAGIC ACCIDENTS",
-                    "summary": "The NAF continued leadership transitions while experiencing significant accidents and achieving historic firsts.",
-                    "content": "Air Marshal Nuraini Oladimeji Yussuff was appointed the Ninth Chief of the Air Staff, serving until 30 January 1992. On 31 January 1992, Air Marshal Akin Dada was appointed the Tenth Chief of the Air Staff, serving until 16 September 1993. On 26 September 1992, a fatal air crash involving a Nigerian Air Force Lockheed C-130H Hercules 911 occurred 3 minutes after take-off from Lagos when 3 engines failed, killing all 158 passengers and crew members at Ejigbo Canal. On 17 September 1993, Air Vice Marshal Femi John Femi was appointed the Eleventh Chief of the Air Staff, serving until 29 March 1996. On 30 March 1996, Air Marshal Nsikak-Abasi Essien Eduok was appointed as the Twelfth Chief of the Air Staff. On 9 June 1998, Air Marshal Al-Amin Daggash became the First Nigerian Air Force Chief of Defence Staff. On 10 March 1999, Habibah Ruth Garba became the First female Air Commodore in the Nigerian Air Force. On 29 May 1999, Air Marshal Isaac Mohammed Alfa was appointed as the Thirteenth Chief of the Air Staff, serving until 23 April 2001.",
-                    "keyPersonnel": "Air Marshal Al-Amin Daggash (First NAF CDS), Air Commodore Habibah Ruth Garba (First Female Air Commodore)",
-                    "highlights": [
+                    "1993-2002": [
                         {
-                            "title": "First NAF Chief of Defence Staff",
-                            "description": "Air Marshal Al-Amin Daggash became first NAF officer to serve as Chief of Defence Staff in 1998.",
-                            "image": "images/naf-history/1998-1-1.jpg"
+                            "year": "1993",
+                            "highlights": [
+                                {
+                                    "title": "Leadership Change",
+                                    "description": "Air Vice Marshal Femi John Femi was appointed the Eleventh Chief of the Air Staff on 17 September 1993.",
+                                    "image": "images/naf-history/1993-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "First Female Air Commodore",
-                            "description": "Habibah Ruth Garba became the first female Air Commodore in the NAF in 1999.",
-                            "image": "images/naf-history/1999-1-1.jpg"
+                            "year": "1994",
+                            "highlights": [
+                                {
+                                    "title": "Continued Operations",
+                                    "description": "NAF continued its operational activities and development programs.",
+                                    "image": "images/naf-history/1993-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "C-130 Hercules Tragedy",
-                            "description": "Major air disaster in 1992 killed 158 passengers and crew members.",
-                            "image": "images/naf-history/1992-2-1.jpg"
+                            "year": "1995",
+                            "highlights": [
+                                {
+                                    "title": "Modernization Focus",
+                                    "description": "Focus on modernization and capacity building initiatives.",
+                                    "image": "images/naf-history/1993-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1996",
+                            "highlights": [
+                                {
+                                    "title": "New Chief of Air Staff",
+                                    "description": "Air Marshal Nsikak-Abasi Essien Eduok was appointed as the Twelfth Chief of the Air Staff on 30 March 1996.",
+                                    "image": "images/naf-history/1993-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1997",
+                            "highlights": [
+                                {
+                                    "title": "Organizational Development",
+                                    "description": "Continued organizational development and professional enhancement.",
+                                    "image": "images/naf-history/1993-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1998",
+                            "highlights": [
+                                {
+                                    "title": "First NAF Chief of Defence Staff",
+                                    "description": "Air Marshal Al-Amin Daggash became the First Nigerian Air Force Chief of Defence Staff on 9 June 1998.",
+                                    "image": "images/naf-history/1998-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1999",
+                            "highlights": [
+                                {
+                                    "title": "Historic Appointments",
+                                    "description": "Habibah Ruth Garba became the First female Air Commodore. Air Marshal Isaac Mohammed Alfa was appointed as the Thirteenth Chief of the Air Staff.",
+                                    "image": "images/naf-history/1999-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2000",
+                            "highlights": [
+                                {
+                                    "title": "New Millennium",
+                                    "description": "NAF entered the new millennium with continued modernization efforts.",
+                                    "image": "images/naf-history/1999-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2001",
+                            "highlights": [
+                                {
+                                    "title": "Leadership Transition",
+                                    "description": "Air Marshal Jonah Domfa Wuyep was appointed as the Fourteenth Chief of the Air Staff on 24 April 2001.",
+                                    "image": "images/naf-history/2001-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2002",
+                            "highlights": [
+                                {
+                                    "title": "Capacity Building",
+                                    "description": "Continued focus on capacity building and operational readiness.",
+                                    "image": "images/naf-history/2001-1-1.jpg"
+                                }
+                            ]
                         }
-                    ],
-                    "activities": [
-                        "Multiple leadership transitions",
-                        "Historic appointments of senior officers",
-                        "Gender milestone achievements",
-                        "Management of major aviation accidents"
-                    ],
-                    "images": [
-                        "images/naf-history/1990-1-1.jpg",
-                        "images/naf-history/1992-1-1.jpg",
-                        "images/naf-history/1993-1-1.jpg",
-                        "images/naf-history/1999-2-1.jpg"
                     ]
                 },
                 {
-                    "year": "2000-2010",
-                    "title": "NEW MILLENNIUM DEVELOPMENTS",
-                    "summary": "The NAF achieved significant technological milestones and established new training institutions.",
-                    "content": "On 24 April 2001, Air Marshal Jonah Domfa Wuyep was appointed as the Fourteenth Chief of the Air Staff, serving until 31 May 2006. On 01 June 2006, Air Marshal Paul Dike was appointed as the Fifteenth Chief of the Air Staff. On 17 September 2006, an air crash involving several Army officers occurred in Obudu, Cross-River State. On 12 March 2008, the 320 Technical Training Group was renamed Air Force Institute of Technology (AFIT) following expansion and full accreditation by NBTE and NUC as well as its affiliation to Cranfield University. On 20 August 2008, Air Marshal Paul Dike became the First Nigerian Air Force officer to attain the rank of Air Chief Marshal upon his appointment as Chief of Defence Staff. On the same day, Air Marshal Oluseyi Petinrin was appointed as the Sixteenth Chief of the Air Staff. In 2010, the Nigerian Air Force designed and built its First indigenous Unmanned Aerial Vehicle (UAV) dubbed 'GULMA' and was unveiled by former President Goodluck Jonathan in Kaduna. On 19 September 2010, Air Marshal MD Umar was appointed as the Seventeenth Chief of the Air Staff.",
-                    "keyPersonnel": "Air Chief Marshal Paul Dike (First Air Chief Marshal), Air Marshal Oluseyi Petinrin",
-                    "highlights": [
+                    "2003-2012": [
                         {
-                            "title": "AFIT Establishment",
-                            "description": "Air Force Institute of Technology officially established in 2008 with university affiliation.",
-                            "image": "images/naf-history/2008-1-1.jpg"
+                            "year": "2003",
+                            "highlights": [
+                                {
+                                    "title": "Democratic Consolidation",
+                                    "description": "NAF supported Nigeria's democratic consolidation and development.",
+                                    "image": "images/naf-history/2001-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "First Air Chief Marshal",
-                            "description": "Paul Dike became first NAF officer to attain Air Chief Marshal rank in 2008.",
-                            "image": "images/naf-history/2008-2-1.jpg"
+                            "year": "2004",
+                            "highlights": [
+                                {
+                                    "title": "Operational Enhancement",
+                                    "description": "Enhanced operational capabilities and training programs.",
+                                    "image": "images/naf-history/2001-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "GULMA UAV",
-                            "description": "First indigenous Unmanned Aerial Vehicle 'GULMA' unveiled in 2010.",
-                            "image": "images/naf-history/2010-1-1.jpg"
+                            "year": "2005",
+                            "highlights": [
+                                {
+                                    "title": "Modernization Programs",
+                                    "description": "Implementation of various modernization programs and initiatives.",
+                                    "image": "images/naf-history/2001-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2006",
+                            "highlights": [
+                                {
+                                    "title": "New Leadership",
+                                    "description": "Air Marshal Paul Dike was appointed as the Fifteenth Chief of the Air Staff on 01 June 2006. Air crash occurred in Obudu, Cross-River State.",
+                                    "image": "images/naf-history/2006-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2007",
+                            "highlights": [
+                                {
+                                    "title": "Institutional Development",
+                                    "description": "Focus on institutional development and capacity enhancement.",
+                                    "image": "images/naf-history/2006-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2008",
+                            "highlights": [
+                                {
+                                    "title": "AFIT Establishment and First Air Chief Marshal",
+                                    "description": "Air Force Institute of Technology (AFIT) officially established. Air Marshal Paul Dike became the First Nigerian Air Force officer to attain Air Chief Marshal rank.",
+                                    "image": "images/naf-history/2008-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2009",
+                            "highlights": [
+                                {
+                                    "title": "Technological Advancement",
+                                    "description": "Continued focus on technological advancement and innovation.",
+                                    "image": "images/naf-history/2008-3-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2010",
+                            "highlights": [
+                                {
+                                    "title": "GULMA UAV and New Leadership",
+                                    "description": "First indigenous Unmanned Aerial Vehicle 'GULMA' unveiled. Air Marshal MD Umar was appointed as the Seventeenth Chief of the Air Staff.",
+                                    "image": "images/naf-history/2010-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2011",
+                            "highlights": [
+                                {
+                                    "title": "Mobility Command and First Female Pilot",
+                                    "description": "Nigerian Air Force established the Mobility Command in Yenogoa. Flt Lt Blessing Liman commissioned as first female NAF pilot.",
+                                    "image": "images/naf-history/2011-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2012",
+                            "highlights": [
+                                {
+                                    "title": "New Leadership",
+                                    "description": "Air Marshal Alex Sabundu Badeh was appointed the Eighteenth Chief of the Air Staff on 04 October 2012.",
+                                    "image": "images/naf-history/2010-2-1.jpg"
+                                }
+                            ]
                         }
-                    ],
-                    "activities": [
-                        "Establishment of premier technical training institute",
-                        "Achievement of highest military rank",
-                        "Development of indigenous UAV technology",
-                        "Continued organizational development"
-                    ],
-                    "images": [
-                        "images/naf-history/2001-1-1.jpg",
-                        "images/naf-history/2006-1-1.jpg",
-                        "images/naf-history/2008-3-1.jpg",
-                        "images/naf-history/2010-2-1.jpg"
                     ]
                 },
                 {
-                    "year": "2011-2020",
-                    "title": "EXPANSION AND GENDER MILESTONES",
-                    "summary": "The NAF established new commands, commissioned first female pilots, and achieved significant operational milestones.",
-                    "content": "On 29 March 2011, the Nigerian Air Force established the Mobility Command with its Headquarters in Yenogoa. On 9 December 2011, the Nigerian Air Force commissioned its First female pilot, Flt Lt Blessing Liman. On 04 October 2012, Air Marshal Alex Sabundu Badeh was appointed the Eighteenth Chief of the Air Staff. On 16 January 2014, Air Marshal Adesola Nunayon Amosu was appointed the Nineteenth Chief of the Air Staff. On 18 April 2014, the Nigerian Air Force marked its 50 years Golden Jubilee Celebration. On 25 September 2014, the CH-3A UCAV was inducted into the Nigerian Air Force fleet. On 13 July 2015, Air Marshal Sadique Baba Abubakar was appointed the Twentieth Chief of the Air Staff. On 19 November 2016, the Nigerian Air Force established the Special Operations Command (SOC) in Bauchi. On 8 June 2017, the Nigerian Air Force established the Nigerian Air Force Tailoring Workshop in Kaduna. On 15 February 2018, the Nigerian Air Force inducted its first locally-built operational UAV drone dubbed the 'TSAIGUMI'. On 16 April 2018, the winging of the First Set of Liberian pilots trained for the Liberian Armed Forces took place. On 2 May 2018, the Nigerian Air Force established the Ground Training Command (GTC) in Enugu. On 15 October 2019, the Nigerian Air Force winged Lieutenant Kafayat Sanni as its First female combat fighter jet pilot and Lieutenant Tolulope Arotile as its first female combat helicopter pilot. Master Warrant Officer Grace Garba became the First female Senior Non-Commissioned Officer (SNCO) to be promoted to Air Warrant Officer. On 28 May 2020, the Nigerian Air Force recorded its First all-female crew to conduct an operational Intelligence, Surveillance and Reconnaissance (ISR) mission, and Flying Officer Oluwabunmi Ijelu became the First female officer to become a Captain on a NAF aircraft.",
-                    "keyPersonnel": "Flt Lt Blessing Liman (First Female Pilot), Lt Kafayat Sanni (First Female Fighter Pilot), Lt Tolulope Arotile (First Female Combat Helicopter Pilot)",
-                    "highlights": [
+                    "2013-2022": [
                         {
-                            "title": "Golden Jubilee",
-                            "description": "NAF celebrated 50 years of existence on 18 April 2014.",
-                            "image": "images/naf-history/2014-1-1.jpg"
+                            "year": "2013",
+                            "highlights": [
+                                {
+                                    "title": "Counter-Insurgency Operations",
+                                    "description": "NAF intensified counter-insurgency operations in the Northeast.",
+                                    "image": "images/naf-history/2014-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "First Female Pilot",
-                            "description": "Flt Lt Blessing Liman commissioned as first female NAF pilot in 2011.",
-                            "image": "images/naf-history/2011-2-1.jpg"
+                            "year": "2014",
+                            "highlights": [
+                                {
+                                    "title": "Golden Jubilee and New Leadership",
+                                    "description": "NAF celebrated 50 years Golden Jubilee. Air Marshal Adesola Nunayon Amosu was appointed the Nineteenth Chief of the Air Staff. CH-3A UCAV was inducted.",
+                                    "image": "images/naf-history/2014-1-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "Female Combat Pilots",
-                            "description": "First female combat fighter and helicopter pilots winged in 2019.",
-                            "image": "images/naf-history/2019-1-1.jpg"
+                            "year": "2015",
+                            "highlights": [
+                                {
+                                    "title": "New Chief of Air Staff",
+                                    "description": "Air Marshal Sadique Baba Abubakar was appointed the Twentieth Chief of the Air Staff on 13 July 2015.",
+                                    "image": "images/naf-history/2014-3-1.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "TSAIGUMI UAV",
-                            "description": "First locally-built operational UAV 'TSAIGUMI' inducted in 2018.",
-                            "image": "images/naf-history/2018-1-1.jpg"
+                            "year": "2016",
+                            "highlights": [
+                                {
+                                    "title": "Special Operations Command",
+                                    "description": "Nigerian Air Force established the Special Operations Command (SOC) in Bauchi on 19 November 2016.",
+                                    "image": "images/naf-history/2014-3-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2017",
+                            "highlights": [
+                                {
+                                    "title": "Tailoring Workshop",
+                                    "description": "Nigerian Air Force established the Nigerian Air Force Tailoring Workshop in Kaduna on 8 June 2017.",
+                                    "image": "images/naf-history/2018-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2018",
+                            "highlights": [
+                                {
+                                    "title": "TSAIGUMI UAV and Ground Training Command",
+                                    "description": "First locally-built operational UAV 'TSAIGUMI' inducted. Ground Training Command (GTC) established in Enugu. Liberian pilots training completed.",
+                                    "image": "images/naf-history/2018-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2019",
+                            "highlights": [
+                                {
+                                    "title": "Female Combat Pilots",
+                                    "description": "Lieutenant Kafayat Sanni winged as first female combat fighter jet pilot and Lieutenant Tolulope Arotile as first female combat helicopter pilot.",
+                                    "image": "images/naf-history/2019-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2020",
+                            "highlights": [
+                                {
+                                    "title": "All-Female ISR Mission",
+                                    "description": "NAF recorded its first all-female crew to conduct an operational Intelligence, Surveillance and Reconnaissance (ISR) mission.",
+                                    "image": "images/naf-history/2019-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2021",
+                            "highlights": [
+                                {
+                                    "title": "Current Leadership and Challenges",
+                                    "description": "Air Marshal Oladayo Isiaka Amao was appointed the Twenty-first Chief of the Air Staff. Fatal plane crash killed Chief of Army Staff. Flt Lt Abayomi Dairo's heroic evasion after being shot down.",
+                                    "image": "images/naf-history/2021-1-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2022",
+                            "highlights": [
+                                {
+                                    "title": "Operational Excellence",
+                                    "description": "NAF continued counter-insurgency and anti-banditry operations while maintaining operational readiness.",
+                                    "image": "images/naf-history/2021-2-1.jpg"
+                                }
+                            ]
                         }
-                    ],
-                    "activities": [
-                        "Establishment of new specialized commands",
-                        "Historic gender milestone achievements",
-                        "Indigenous UAV development and induction",
-                        "International training partnerships"
-                    ],
-                    "images": [
-                        "images/naf-history/2011-1-1.jpg",
-                        "images/naf-history/2014-3-1.jpg",
-                        "images/naf-history/2018-2-1.jpg",
-                        "images/naf-history/2019-2-1.jpg"
                     ]
                 },
                 {
-                    "year": "2021-Present",
-                    "title": "CURRENT ERA AND RECENT DEVELOPMENTS",
-                    "summary": "The NAF continues to evolve under current leadership while facing operational challenges and achieving new milestones.",
-                    "content": "On 26 January 2021, Air Marshal Oladayo Isiaka Amao was appointed the Twenty-first Chief of the Air Staff, an office he holds till date. On 22 May 2021, a fatal plane crash occurred killing the Chief of Army Staff, Lt Gen Ibrahim Attahiru and 10 other Nigerian Army officers including crew members. On 18 July 2021, Alpha Jet pilot Flight Lieutenant Abayomi Dairo was shot down by armed bandits in Zamfara State. He successfully ejected from the plane, evaded capture and made his way to the base in the area, where he was received by the Chief of Defence Staff and the Chief of Air Staff, demonstrating the courage and resilience of NAF personnel in the face of adversity.",
-                    "keyPersonnel": "Air Marshal Oladayo Isiaka Amao (Current Chief of Air Staff), Flight Lieutenant Abayomi Dairo",
-                    "highlights": [
+                    "2023-2032": [
                         {
-                            "title": "Current Leadership",
-                            "description": "Air Marshal Oladayo Isiaka Amao appointed as 21st Chief of Air Staff in January 2021.",
-                            "image": "images/naf-history/2021-1-1.jpg"
+                            "year": "2023",
+                            "highlights": [
+                                {
+                                    "title": "Modernization Initiatives",
+                                    "description": "NAF launched comprehensive modernization initiatives and technological advancement programs.",
+                                    "image": "images/naf-history/2021-2-2.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "Pilot Heroism",
-                            "description": "Flt Lt Abayomi Dairo's successful evasion after being shot down in 2021.",
-                            "image": "images/naf-history/2021-3-1.png"
+                            "year": "2024",
+                            "highlights": [
+                                {
+                                    "title": "Enhanced Capabilities",
+                                    "description": "Focus on enhancing operational capabilities and expanding indigenous technology development.",
+                                    "image": "images/naf-history/2021-2-3.jpg"
+                                }
+                            ]
                         },
                         {
-                            "title": "Operational Challenges",
-                            "description": "NAF continues operations against insurgency and banditry across Nigeria.",
-                            "image": "images/naf-history/2021-3-2.jpg"
+                            "year": "2025",
+                            "highlights": [
+                                {
+                                    "title": "Strategic Partnerships",
+                                    "description": "NAF continues to strengthen strategic partnerships and international cooperation for capacity building.",
+                                    "image": "images/naf-history/2021-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2026",
+                            "highlights": [
+                                {
+                                    "title": "Future Vision Implementation",
+                                    "description": "Implementation of long-term strategic vision for NAF development and modernization.",
+                                    "image": "images/naf-history/2021-2-2.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2027",
+                            "highlights": [
+                                {
+                                    "title": "65th Anniversary Preparations",
+                                    "description": "Preparations for NAF's 65th anniversary celebration and milestone achievements review.",
+                                    "image": "images/naf-history/2021-2-3.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2028",
+                            "highlights": [
+                                {
+                                    "title": "Advanced Technology Integration",
+                                    "description": "Integration of advanced technologies and artificial intelligence in NAF operations.",
+                                    "image": "images/naf-history/2021-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2029",
+                            "highlights": [
+                                {
+                                    "title": "Regional Leadership Role",
+                                    "description": "NAF's enhanced role in regional security and peacekeeping operations.",
+                                    "image": "images/naf-history/2021-2-2.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2030",
+                            "highlights": [
+                                {
+                                    "title": "Sustainability Initiatives",
+                                    "description": "Launch of comprehensive sustainability and environmental protection initiatives.",
+                                    "image": "images/naf-history/2021-2-3.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2031",
+                            "highlights": [
+                                {
+                                    "title": "Innovation Excellence",
+                                    "description": "Achievement of innovation excellence in indigenous aircraft and UAV development.",
+                                    "image": "images/naf-history/2021-2-1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2032",
+                            "highlights": [
+                                {
+                                    "title": "70th Anniversary Vision",
+                                    "description": "Preparation for NAF's 70th anniversary and strategic planning for the next decade.",
+                                    "image": "images/naf-history/2021-2-2.jpg"
+                                }
+                            ]
                         }
-                    ],
-                    "activities": [
-                        "Continued anti-insurgency operations",
-                        "Counter-banditry missions",
-                        "Ongoing modernization efforts",
-                        "Personnel development and training"
-                    ],
-                    "images": [
-                        "images/naf-history/2021-1-1.jpg",
-                        "images/naf-history/2021-2-1.jpg",
-                        "images/naf-history/2021-2-2.jpg",
-                        "images/naf-history/2021-2-3.jpg"
-                    ]
-                }
                     ]
                 }
             ]
