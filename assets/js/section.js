@@ -100,6 +100,9 @@ function renderSectionOverview() {
   document.getElementById('section-title').textContent = currentSectionData.title;
   document.getElementById('section-description').textContent = sectionDescription;
   
+  // Update drop zone instruction with dynamic year range example
+  updateDropZoneInstruction();
+  
   // Calculate stats from year-ranges data
   const yearRanges = currentSectionData['year-ranges'] || [];
   let totalYears = 0;
@@ -124,6 +127,33 @@ function renderSectionOverview() {
   
   // Initialize floating particles
   createFloatingParticles();
+}
+
+function updateDropZoneInstruction() {
+  const dropZoneInstruction = document.getElementById('drop-zone-instruction');
+  const yearRanges = currentSectionData['year-ranges'] || [];
+  
+  if (yearRanges.length === 0) {
+    // No year ranges available for this section
+    dropZoneInstruction.textContent = `No year ranges are currently available for ${currentSectionData.title}. Please check back later or explore other sections.`;
+    return;
+  }
+  
+  // Get the first available year range as an example
+  let exampleYearRange = null;
+  for (const rangeObj of yearRanges) {
+    const rangeKey = Object.keys(rangeObj)[0];
+    if (rangeKey) {
+      exampleYearRange = rangeKey;
+      break;
+    }
+  }
+  
+  if (exampleYearRange) {
+    dropZoneInstruction.textContent = `Please drop a year range object (e.g., ${exampleYearRange}) in the year area to explore the historical timeline of ${currentSectionData.title}`;
+  } else {
+    dropZoneInstruction.textContent = `No year ranges are currently available for ${currentSectionData.title}. Please check back later or explore other sections.`;
+  }
 }
 
 function getSectionIcon(sectionId) {
