@@ -91,22 +91,57 @@ function renderSectionOverview() {
   document.getElementById('page-title').textContent = `${currentSectionData.title} - Nigerian Air Force Museum`;
   document.getElementById('nav-section-title').textContent = currentSectionData.title;
   
+  // Set default values for missing properties
+  const sectionIcon = getSectionIcon(currentSectionData.id);
+  const sectionDescription = getSectionDescription(currentSectionData.id);
+  
   // Update overview panel
-  document.getElementById('section-icon').textContent = currentSectionData.icon;
+  document.getElementById('section-icon').textContent = sectionIcon;
   document.getElementById('section-title').textContent = currentSectionData.title;
-  document.getElementById('section-description').textContent = currentSectionData.description;
+  document.getElementById('section-description').textContent = sectionDescription;
+  
+  // Calculate stats from year-ranges data
+  const yearRanges = currentSectionData['year-ranges'] || [];
+  let totalYears = 0;
+  let totalEvents = 0;
+  
+  // Count years and events from year-ranges
+  yearRanges.forEach(rangeObj => {
+    Object.keys(rangeObj).forEach(rangeKey => {
+      const years = rangeObj[rangeKey];
+      if (Array.isArray(years)) {
+        totalYears += years.length;
+        years.forEach(year => {
+          totalEvents += (year.highlights?.length || 0) + (year.activities?.length || 0);
+        });
+      }
+    });
+  });
   
   // Update stats (but keep them hidden initially)
-  document.getElementById('total-years').textContent = currentSectionData.years.length;
-  
-  let totalEvents = 0;
-  currentSectionData.years.forEach(year => {
-    totalEvents += (year.highlights?.length || 0) + (year.activities?.length || 0);
-  });
+  document.getElementById('total-years').textContent = totalYears;
   document.getElementById('total-events').textContent = totalEvents;
   
   // Initialize floating particles
   createFloatingParticles();
+}
+
+function getSectionIcon(sectionId) {
+  const iconMap = {
+    'naf-history': '✈️',
+    'nafsfa-history': '🎖️', 
+    'finance-evolution': '💰'
+  };
+  return iconMap[sectionId] || '🛩️';
+}
+
+function getSectionDescription(sectionId) {
+  const descriptionMap = {
+    'naf-history': 'Explore the rich history and heritage of the Nigerian Air Force from its inception to the present day.',
+    'nafsfa-history': 'Discover the evolution and achievements of the NAF School of Finance and Administration through the years.',
+    'finance-evolution': 'Learn about the development and modernization of NAF finance specialty and its impact on operations.'
+  };
+  return descriptionMap[sectionId] || 'Explore the history and heritage of this section.';
 }
 
 function createFloatingParticles() {
