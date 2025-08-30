@@ -1,93 +1,138 @@
-# NAF Object Recognition - Socket.IO Integration
+# NAF Object Recognition System
 
-This project now includes Socket.IO integration for real-time communication between hardware and web interface.
+An interactive museum display system that uses Arduino-based hardware to detect physical objects and RFID cards, providing real-time web interface updates through Socket.IO.
 
-## Features
+## System Overview
 
-### Socket.IO Integration
-- Real-time object picking and year dropping simulation
-- Web-based testing interface
-- Automatic section loading based on selected objects
-- Connection status monitoring
+This system combines physical hardware interaction with web-based display:
+- **Light sensors** detect when visitors pick up museum objects
+- **RFID readers** identify specific year range cards
+- **Web interface** updates automatically based on hardware interactions
+- **Socket.IO** provides real-time communication between Arduino and web clients
 
-### Hardware Simulation
-The `main.py` file includes two simulation modes:
+## Hardware Requirements
 
-1. **Console Simulation** (run with `python main.py --console`)
-   - Terminal-based input for testing
-   - Interactive prompts for object picking and year dropping
+### Arduino Components
+- Arduino Uno or Nano
+- MFRC522 RFID module (SPI connection)
+- 3x Light sensors (LDR/Photoresistor) for object detection
+- RFID cards programmed with specific year ranges
+- USB cable for Arduino connection
 
-2. **Socket.IO Simulation** (default mode)
-   - Web-based simulation through Socket.IO events
-   - Test interface at `/test-socket.html`
+### Wiring Configuration
+Based on `arduino.ino`:
+- **RFID Module**: RST_PIN = 9, SS_PIN = 10 (SPI connection)
+- **Light Sensors**: 
+  - NAF sensor: Pin A0
+  - NAFSFA sensor: Pin A1  
+  - EVOL sensor: Pin A2
 
-## Available Socket Events
+## Software Installation
 
-### Client to Server
-- `simulate_pick` - Simulate picking an object
-- `simulate_drop` - Simulate dropping an object in a year
-- `reset_simulation` - Reset the current state
-- `get_status` - Get current simulation status
+### 1. Python Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-### Server to Client
-- `object_picked` - Object has been picked
-- `year_dropped` - Object dropped in specific year
-- `object_reset` - Simulation has been reset
-- `status` - Server status messages
-- `error` - Error messages
+### 2. Arduino Setup
+1. Upload `arduino.ino` to your Arduino
+2. Verify serial communication at 9600 baud
+3. Test light sensors and RFID reader functionality
 
-## How to Use
+### 3. Environment Configuration
+Update `.env` file with your Arduino's serial port:
+```env
+SERIAL_PORT=/dev/cu.usbmodem1101  # macOS
+# SERIAL_PORT=/dev/ttyUSB0        # Linux
+# SERIAL_PORT=COM3                # Windows
+```
 
-### 1. Start the Server
+## How the System Works
+
+### Object Detection
+1. Visitor picks up a physical object (naf, nafsfa, or evol)
+2. Light sensor detects the object removal (light level changes)
+3. Arduino sends `OBJECT_PICKED:objectname` via serial
+4. Web interface automatically navigates to section page
+
+### Year Range Selection
+1. With object picked, visitor places RFID card on reader
+2. Arduino identifies the card and maps it to a year range
+3. Arduino sends `YEAR_DETECTED:yearrange:objectname` via serial
+4. Web interface navigates to the year-specific content
+
+### Object Replacement
+1. Visitor returns object to its original position
+2. Light sensors detect bright light (object replaced)
+3. Arduino sends `OBJECT_REMOVED:objectname` via serial
+4. Web interface returns to main page
+
+## Available Objects
+- `naf` - Nigerian Air Force History
+- `nafsfa` - Nigerian Air Force Special Forces Academy
+- `evol` - Financial Evolution
+
+## Year Ranges (RFID Mapping)
+Based on Arduino RFID configuration:
+- 1962-1972
+- 1973-1982  
+- 1983-1992
+- 1993-2002
+- 2003-2012
+- 2013-2022
+- 2023-2032
+
+## Running the System
+
+### Start the Server
 ```bash
 python main.py
 ```
-The server will start on `http://localhost:5550`
 
-### 2. Test Socket.IO Connection
-Open `http://localhost:5550/test-socket.html` to test the Socket.IO functionality
+The system will:
+1. Attempt to connect to Arduino via serial port
+2. Start background thread for Arduino communication
+3. Launch web server on http://localhost:5550
+4. Display connection status and system information
 
-### 3. Use the Main Application
-Open `http://localhost:5550` for the main museum interface
+### Web Interface
+- **Main Interface**: http://localhost:5550
+- **Section Pages**: Automatically loaded based on object detection
+- **Year Details**: Automatically loaded based on RFID detection
 
-### 4. Console Mode (Optional)
-```bash
-python main.py --console
-```
-This enables terminal-based simulation input
+## Socket.IO Events
 
-## Object Flow
+### Server to Client Events
+- `object_picked` - Physical object was picked up
+- `year_dropped` - RFID card detected for specific year
+- `object_dropped` - Physical object was returned
+- `unknown_rfid` - Unrecognized RFID card detected
+- `arduino_ready` - Arduino system initialized
+- `arduino_disconnected` - Arduino connection lost
 
-1. **Index Page** - Shows object selection interface only
-2. **Object Selection** - User picks an object (naf, nafsfa, evol)
-3. **Socket Event** - `object_picked` event is sent
-4. **Section Page** - Automatically opens the section for the picked object
-5. **Year Selection** - User drops object in a year range
-6. **Socket Event** - `year_dropped` event is sent
-7. **Year Detail** - Shows detailed information for the selected year
+### Client to Server Events
+- `get_status` - Request current system status
+- `get_arduino_status` - Check Arduino connection
+- `test_arduino_connection` - Test/reconnect Arduino
 
-## Arduino Implementation (Future)
+## Troubleshooting
 
-The Arduino/serial implementation is commented out in `main.py` and ready for hardware integration:
+### Arduino Connection Issues
+1. Check USB cable connection
+2. Verify serial port in `.env` file
+3. Test Arduino IDE serial monitor at 9600 baud
+4. Check Arduino sketch upload was successful
 
-```python
-# Commented lines for Arduino implementation:
-# import serial
-# ser = serial.Serial(port=os.getenv("SERIAL_PORT"), baudrate=9600)
-# Arduino communication code in read_from_serial()
-```
+### Light Sensor Issues
+- Verify sensor wiring to analog pins A0, A1, A2
+- Check light thresholds in Arduino code
+- Test sensor values via serial monitor
 
-To enable Arduino mode later, uncomment the serial code and set the `SERIAL_PORT` environment variable.
+### RFID Issues  
+- Verify SPI wiring (RST=9, SS=10)
+- Check RFID card UIDs match Arduino mapping
+- Test RFID detection via serial monitor
 
-## Available Objects
-- `naf` - Nigerian Air Force
-- `nafsfa` - Nigerian Air Force Special Forces Academy  
-- `evol` - Evolution
+## Development Notes
 
-## Available Year Ranges
-- 1967-1977
-- 1977-1987
-- 1987-1997
-- 1997-2007
-- 2007-2017
-- 2017-2027
+The system is designed for production use with real Arduino hardware. All simulation code has been removed in favor of proper hardware integration. For testing without hardware, you would need to modify the Arduino communication code or use a hardware simulator.
