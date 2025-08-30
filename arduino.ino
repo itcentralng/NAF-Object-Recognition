@@ -30,14 +30,15 @@ struct YearMapping {
   String yearRange;
 };
 
-// Define RFID UIDs for each year range (these will need to be updated with actual card UIDs)
+// Define RFID UIDs for each year range
 YearMapping yearMappings[] = {
-  {"04 XX XX XX", "1967-1977"},  // Replace XX with actual UID bytes
-  {"04 XX XX XY", "1977-1987"},  // Replace XX with actual UID bytes
-  {"04 XX XX XZ", "1987-1997"},  // Replace XX with actual UID bytes
-  {"04 XX XX XA", "1997-2007"},  // Replace XX with actual UID bytes
-  {"04 XX XX XB", "2007-2017"},  // Replace XX with actual UID bytes
-  {"04 XX XX XC", "2017-2027"}   // Replace XX with actual UID bytes
+  {"93 09 04 2D", "1962-1972"},
+  {"33 18 E3 13", "1973-1982"},
+  {"B3 4E E6 00", "1983-1992"},
+  {"CA D3 42 00", "1993-2002"},
+  {"D3 4F E6 0C", "2003-2012"},
+  {"53 AA DB 13", "2013-2022"},
+  {"13 35 A7 14", "2023-2032"}
 };
 
 const int NUM_YEAR_MAPPINGS = sizeof(yearMappings) / sizeof(yearMappings[0]);
