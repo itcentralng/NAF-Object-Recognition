@@ -87,6 +87,7 @@
             <p><strong>Picked Object:</strong> <span id="currentObject">None</span></p>
             <p><strong>Dropped Year:</strong> <span id="currentYear">None</span></p>
             <p><strong>Current State:</strong> <span id="currentState">main</span></p>
+            <p><strong>Arduino Status:</strong> <span id="arduinoStatus">Unknown</span></p>
         </div>
 
         <div class="controls">
@@ -119,6 +120,12 @@
         </div>
 
         <div class="control-group" style="margin: 20px 0; text-align: center;">
+            <h3>Arduino Controls</h3>
+            <button onclick="getArduinoStatus()" style="background-color: #17a2b8;">Check Arduino Status</button>
+            <button onclick="testArduinoConnection()" style="background-color: #28a745;">Test Arduino Connection</button>
+        </div>
+
+        <div class="control-group" style="margin: 20px 0; text-align: center;">
             <h3>Object Removal</h3>
             <button onclick="simulateObjectDrop()" style="background-color: #dc3545;">Remove Object (Return to Main)</button>
         </div>
@@ -148,10 +155,17 @@
             <h3>Instructions</h3>
             <ol>
                 <li>Start the Python server: <code>python main.py</code></li>
-                <li>Use the controls above to simulate object picking and dropping</li>
+                <li><strong>Arduino Mode:</strong> Connect Arduino with RFID reader and light sensors</li>
+                <li><strong>Simulation Mode:</strong> Use the controls above to simulate object picking and dropping</li>
                 <li>Monitor the socket events in the log below</li>
                 <li>Test the main application at <a href="http://127.0.0.1:5550" target="_blank">127.0.0.1:5550</a></li>
             </ol>
+            <h4>Hardware Setup:</h4>
+            <ul>
+                <li>Light sensors on A0 (NAF), A1 (NAFSFA), A2 (Evolution)</li>
+                <li>RFID reader on pins 9 (RST) and 10 (SS)</li>
+                <li>Configure SERIAL_PORT in .env file (e.g., /dev/ttyUSB0, /dev/ttyACM0, COM3)</li>
+            </ul>
         </div>
     </div>
 
@@ -163,6 +177,7 @@
         const currentObject = document.getElementById('currentObject');
         const currentYear = document.getElementById('currentYear');
         const currentState = document.getElementById('currentState');
+        const arduinoStatus = document.getElementById('arduinoStatus');
 
         function addToLog(message, type = 'info') {
             const timestamp = new Date().toLocaleTimeString();
@@ -193,6 +208,8 @@
             connectionStatus.className = 'status connected';
             connectionStatus.textContent = 'Connected to server';
             addToLog('Connected to server', 'success');
+            // Check Arduino status on connect
+            getArduinoStatus();
         });
 
         socket.on('disconnect', function() {
@@ -237,6 +254,28 @@
         socket.on('return_to_section', function(data) {
             addToLog('Year range not detected - returned to section page', 'warning');
             updateCurrentState(data.object, 'None', 'section');
+        });
+
+        // Arduino-specific event handlers
+        socket.on('arduino_message', function(data) {
+            addToLog(`Arduino: ${data.message}`, 'socket');
+        });
+
+        socket.on('unknown_rfid', function(data) {
+            addToLog(`Unknown RFID detected: ${data.uid}`, 'warning');
+        });
+
+        socket.on('arduino_status', function(data) {
+            const statusText = data.connected ? `Connected (${data.port})` : 'Disconnected';
+            const statusColor = data.connected ? '#28a745' : '#dc3545';
+            arduinoStatus.textContent = statusText;
+            arduinoStatus.style.color = statusColor;
+            addToLog(`Arduino status: ${statusText}`, data.connected ? 'success' : 'error');
+        });
+
+        socket.on('arduino_test_result', function(data) {
+            const logType = data.success ? 'success' : 'error';
+            addToLog(`Arduino test: ${data.message}`, logType);
         });
 
         // Control functions
@@ -285,6 +324,16 @@
         function getStatus() {
             socket.emit('get_status');
             addToLog('Requesting status', 'info');
+        }
+
+        function getArduinoStatus() {
+            socket.emit('get_arduino_status');
+            addToLog('Requesting Arduino status', 'info');
+        }
+
+        function testArduinoConnection() {
+            socket.emit('test_arduino_connection');
+            addToLog('Testing Arduino connection', 'info');
         }
 
         function clearLog() {

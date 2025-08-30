@@ -3,7 +3,7 @@ import os
 import time
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
-# import serial  # Commented out for later Arduino implementation
+import serial  # Uncommented for Arduino implementation
 import threading
 
 import dotenv
@@ -21,31 +21,98 @@ dropped_year = None
 # Track current state for proper navigation
 current_state = 'main'  # 'main', 'section', 'year-list', 'year-detail'
 
-# Configure the serial port (commented out for later Arduino implementation)
-# ser = serial.Serial(port=os.getenv("SERIAL_PORT"), baudrate=9600)
+# Arduino serial connection
+arduino_connected = False
+ser = None
 
-# Simulation state
+# Initialize serial connection
+def init_arduino_connection():
+    global ser, arduino_connected
+    try:
+        port = os.getenv("SERIAL_PORT", "/dev/ttyUSB0")  # Default for Linux, update for your system
+        ser = serial.Serial(port=port, baudrate=9600, timeout=1)
+        arduino_connected = True
+        print(f"Arduino connected on {port}")
+        return True
+    except Exception as e:
+        print(f"Could not connect to Arduino: {e}")
+        print("Running in simulation mode - use test-socket.html for testing")
+        arduino_connected = False
+        return False
+
+# Simulation state for testing without Arduino
 simulation_running = False
 
 
 def read_from_serial():
     """
-    This function will be used for Arduino serial communication later.
-    Currently commented out and replaced with simulation.
+    Read data from Arduino serial connection and process commands.
+    Handles both light sensor object detection and RFID year detection.
     """
-    # uid_pattern = re.compile(r"0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2}")
-    # global picked_object, dropped_year
+    global picked_object, dropped_year, current_state, arduino_connected, ser
 
-    # while True:
-    #     if ser.in_waiting > 0:
-    #         serialValue = ser.readline().decode("utf-8").strip()
-    #         print(serialValue)
-    #         # Check if the serialValue matches the UID pattern
-    #         if uid_pattern.match(serialValue):
-    #             socketio.emit("rfid_status", {"status": f"{serialValue}"})
-    #         elif "Card removed" in serialValue:
-    #             socketio.emit("rfid_status", {"status": "removed"})
-    pass
+    if not arduino_connected or ser is None:
+        print("Arduino not connected, skipping serial reading")
+        return
+
+    try:
+        while arduino_connected:
+            if ser.in_waiting > 0:
+                try:
+                    serial_line = ser.readline().decode("utf-8").strip()
+                    print(f"Arduino: {serial_line}")
+                    
+                    # Parse Arduino commands
+                    if serial_line.startswith("OBJECT_PICKED:"):
+                        object_name = serial_line.split(":")[1].lower()
+                        if object_name in ['naf', 'nafsfa', 'evol']:
+                            picked_object = object_name
+                            current_state = 'section'
+                            print(f"Object '{picked_object}' picked via light sensor - navigating to section")
+                            socketio.emit("object_picked", {"object": picked_object})
+                    
+                    elif serial_line.startswith("OBJECT_REMOVED:"):
+                        object_name = serial_line.split(":")[1].lower()
+                        print(f"Object '{object_name}' removed - returning to main page")
+                        picked_object = None
+                        dropped_year = None
+                        current_state = 'main'
+                        socketio.emit("object_dropped", {"message": "Object removed, returning to main page"})
+                    
+                    elif serial_line.startswith("YEAR_DETECTED:"):
+                        parts = serial_line.split(":")
+                        if len(parts) >= 3:
+                            year_range = parts[1]
+                            object_name = parts[2].lower()
+                            
+                            valid_years = ['1967-1977', '1977-1987', '1987-1997', '1997-2007', '2007-2017', '2017-2027']
+                            
+                            if year_range in valid_years and object_name == picked_object:
+                                dropped_year = year_range
+                                current_state = 'year-list'
+                                print(f"Year range '{dropped_year}' detected via RFID for object '{picked_object}' - navigating to year list")
+                                socketio.emit("year_dropped", {"year": dropped_year, "object": picked_object})
+                    
+                    elif serial_line.startswith("UNKNOWN_RFID:"):
+                        uid = serial_line.split(":")[1]
+                        print(f"Unknown RFID card detected: {uid}")
+                        socketio.emit("unknown_rfid", {"uid": uid, "message": "Unknown RFID card detected"})
+                    
+                    # Handle other Arduino messages (debugging info, etc.)
+                    elif not serial_line.startswith("Sensors -") and not serial_line.startswith("Card UID:"):
+                        # Emit general Arduino messages for debugging
+                        socketio.emit("arduino_message", {"message": serial_line})
+                        
+                except UnicodeDecodeError as e:
+                    print(f"Serial decode error: {e}")
+                except Exception as e:
+                    print(f"Error processing serial data: {e}")
+                    
+            time.sleep(0.1)  # Small delay to prevent excessive CPU usage
+            
+    except Exception as e:
+        print(f"Serial communication error: {e}")
+        arduino_connected = False
 
 
 def simulate_object_detection():
@@ -200,30 +267,6 @@ def handle_object_drop():
     emit('object_dropped', {'message': 'Object removed, returning to main page'}, broadcast=True)
 
 
-def read_from_serial():
-
-    # uid_pattern = re.compile(r"0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2} 0x[0-9A-F]{2}")
-    global picked_object, dropped_year, current_state
-
-    while True:
-        # if ser.in_waiting > 0:
-        #     serialValue = ser.readline().decode("utf-8").strip()
-        #     print(serialValue)
-        #     # Check if the serialValue matches the UID pattern
-        #     if uid_pattern.match(serialValue):
-        #         socketio.emit("rfid_status", {"status": f"{serialValue}"})
-        #     elif "Card removed" in serialValue:
-        #         socketio.emit("rfid_status", {"status": "removed"})
-        if not picked_object or picked_object=='dropped':
-            picked_object = input("Enter picked object: ")
-            current_state = 'section'
-            socketio.emit("object_picked", {"object": picked_object})
-        if not dropped_year and picked_object and picked_object != 'dropped':
-            dropped_year = input("Enter dropped year: ")
-            current_state = 'year-list'
-            socketio.emit("year_dropped", {"year": dropped_year, "object": picked_object})
-
-
 @socketio.on('year_range_not_detected')
 def handle_year_range_not_detected():
     """Handle when year range is not detected - goes back to section page"""
@@ -249,6 +292,35 @@ def handle_no_object_detected():
     emit('no_object_detected', {'message': 'No object detected, ready for next attempt'}, broadcast=True)
 
 
+@socketio.on('get_arduino_status')
+def handle_get_arduino_status():
+    """Get Arduino connection status"""
+    emit('arduino_status', {
+        'connected': arduino_connected,
+        'port': os.getenv("SERIAL_PORT", "/dev/ttyUSB0") if arduino_connected else None
+    })
+
+
+@socketio.on('test_arduino_connection')
+def handle_test_arduino_connection():
+    """Test Arduino connection"""
+    global ser, arduino_connected
+    
+    if arduino_connected and ser:
+        try:
+            # Send a test command or check if serial is still open
+            emit('arduino_test_result', {'success': True, 'message': 'Arduino connection active'})
+        except Exception as e:
+            arduino_connected = False
+            emit('arduino_test_result', {'success': False, 'message': f'Arduino connection lost: {e}'})
+    else:
+        # Try to reconnect
+        if init_arduino_connection():
+            emit('arduino_test_result', {'success': True, 'message': 'Arduino reconnected successfully'})
+        else:
+            emit('arduino_test_result', {'success': False, 'message': 'Could not connect to Arduino'})
+
+
 @app.route("/")
 def main():
     return render_template("index.html")
@@ -271,24 +343,41 @@ def year_detail():
 
 if __name__ == "__main__":
     print("Starting NAF Object Recognition Server...")
-    print("Available simulation commands:")
-    print("- Terminal input for console-based simulation")
-    print("- Socket.IO events for web-based simulation")
+    print("Available modes:")
+    print("- Arduino mode: Connect to Arduino for real hardware interaction")
+    print("- Simulation mode: Use Socket.IO events for web-based testing")
+    print("- Console simulation: Run with --console flag for console-based testing")
     print("- Server running on http://localhost:5550")
+    print("- Test interface available at test-socket.html")
+    
+    # Initialize Arduino connection
+    arduino_ready = init_arduino_connection()
     
     # Choose simulation method
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == '--console':
-        # Run the console simulation in a separate thread
+        # Run the console simulation in a separate thread (for testing without Arduino)
+        print("Starting console simulation mode...")
         simulation_thread = threading.Thread(target=simulate_object_detection)
         simulation_thread.daemon = True
         simulation_thread.start()
+    elif arduino_ready:
+        # Start Arduino serial reading thread
+        print("Starting Arduino communication thread...")
+        serial_thread = threading.Thread(target=read_from_serial)
+        serial_thread.daemon = True
+        serial_thread.start()
     else:
-        # Comment out the old serial reading thread for later Arduino implementation
-        # serial_thread = threading.Thread(target=read_from_serial)
-        # serial_thread.daemon = True
-        # serial_thread.start()
-        print("Console simulation disabled. Use Socket.IO events or run with --console flag.")
+        print("Arduino not connected. Use Socket.IO events for testing or run with --console flag.")
+        print("Check your SERIAL_PORT environment variable and Arduino connection.")
     
     # Start the Flask app with WebSocket support
-    socketio.run(app, host="0.0.0.0", port=5550, debug=True)
+    try:
+        socketio.run(app, host="0.0.0.0", port=5550, debug=True)
+    finally:
+        # Clean up serial connection on exit
+        if ser and arduino_connected:
+            try:
+                ser.close()
+            except:
+                pass
