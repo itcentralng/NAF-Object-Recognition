@@ -7,8 +7,8 @@
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 
 // Light sensor thresholds for object detection
-const int LIGHT_THRESHOLD_BRIGHT = 100;  // Threshold for bright light (no object) - values around 31-32
-const int LIGHT_THRESHOLD_DARK = 200;    // Threshold for dark (object present) - values around 1023
+const int LIGHT_THRESHOLD_BRIGHT = 100;  // Threshold for bright light (no object) - values around 50
+const int LIGHT_THRESHOLD_DARK = 1023;    // Threshold for dark (object present) - values around 1023
 
 // Light sensor pins
 const int NAF_SENSOR_PIN = A0;      // NAF History sensor
@@ -77,22 +77,25 @@ void checkLightSensors() {
     int nafValue = analogRead(NAF_SENSOR_PIN);
     int nafsfaValue = analogRead(NAFSFA_SENSOR_PIN);
     int evolValue = analogRead(EVOL_SENSOR_PIN);
-    
+
+    // Uncomment to debug brightnes and darkness
+    // Serial.println("Light Sensor Readings - NAF: " + String(nafValue) + ", NAFSFA: " + String(nafsfaValue) + ", EVOL: " + String(evolValue));
+
     // Check if any object is picked (light sensor shows high values when blocked)
     // When bright light hits sensor: ~31-32 (no object)
     // When object blocks light: ~1023 (object present)
-    bool nafBlocked = nafValue > LIGHT_THRESHOLD_DARK;
-    bool nafsfaBlocked = nafsfaValue > LIGHT_THRESHOLD_DARK;
-    bool evolBlocked = evolValue > LIGHT_THRESHOLD_DARK;
-    
+    bool nafPicked = nafValue <= LIGHT_THRESHOLD_BRIGHT;
+    bool nafsfaPicked = nafsfaValue <= LIGHT_THRESHOLD_BRIGHT;
+    bool evolPicked = evolValue <= LIGHT_THRESHOLD_BRIGHT;
+
     String detectedObject = "";
     
     // Determine which object is picked (prioritize if multiple detected)
-    if (nafBlocked && !nafsfaBlocked && !evolBlocked) {
+    if (nafPicked && !nafsfaPicked && !evolPicked) {
         detectedObject = "naf";
-    } else if (nafsfaBlocked && !nafBlocked && !evolBlocked) {
+    } else if (nafsfaPicked && !nafPicked && !evolPicked) {
         detectedObject = "nafsfa";
-    } else if (evolBlocked && !nafBlocked && !nafsfaBlocked) {
+    } else if (evolPicked && !nafPicked && !nafsfaPicked) {
         detectedObject = "evol";
     }
     
@@ -104,7 +107,7 @@ void checkLightSensors() {
         Serial.println("Light sensor detection - " + currentPickedObject + " object picked");
     }
     // Handle object removal (all sensors show bright light values)
-    else if (!nafBlocked && !nafsfaBlocked && !evolBlocked && objectPicked) {
+    else if (!nafPicked && !nafsfaPicked && !evolPicked && objectPicked) {
         Serial.println("OBJECT_REMOVED:" + currentPickedObject);
         Serial.println("LIGHT_BRIGHT_DETECTED:" + currentPickedObject);
         Serial.println("Light sensor detection - " + currentPickedObject + " object removed, bright light detected");
