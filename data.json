@@ -920,7 +920,147 @@
             "id":"nafsfa-history",
             "logo":"image/nafsfa-logo.png",
             "title":"NAF School of Finance and Account",
-            "year-ranges":[]
+            "year-ranges":[
+                {
+                    "2015-2021": [
+                        {
+                            "year": "2015",
+                            "highlights": [
+                                {
+                                    "title": "Accounts Upgrading Course A2-A1 Graduation",
+                                    "description": "Graduation ceremony of Accounts Upgrading (A2 – A1) Course 1/2015 with pioneer staff and students. Standing from the left: MWO Banny A (Instr), WO Fagbohun O (Instr), Sgt Fatai AA, Sgt Oruekhigbemen P, Sgt Onuh S, Sgt Imbazi ML, Sgt Zinchak DS, Sgt Ogbu OD, Sgt Jauro BB, Sgt Aworo DR, Sgt Peter I, WO Otegbeye A (Instr), Cpl Oyema CO, FS Olatunji O and WO Sanni MO (Instr). Sitting from the left: Fg Offr PS Onah, Sqn Ldr BS Utoruwei (CI), Gp Capt HA Adebowale (Comdt), Gp Capt RT Ojo and Flt Lt AO Asu.",
+                                    "image": "images/nafsfa-history/19.jpg"
+                                },
+                                {
+                                    "title": "Accounts Upgrading Course A3-A2 Graduation",
+                                    "description": "Graduation ceremony of Accounts Upgrading (A3 – A2) Course 2/2015. Standing from the left: Flt Lt AO Asu, WO Sanni MO, WO Fagbohun O, Cpl Oluwole OC, Cpl Ogunyemi O, Cpl Aburumakun, Cpl Ibeze MI, Lcpl Oloidi SK, Cpl Alozie CO, Cpl Akor FA, Cpl Isaka L, Cpl Lebari LT, Cpl Oyema, FS Olatunji O and WO Otegbeye A. Sitting from the left: Sqn Ldr BS Utoruwei (CI), Gp Capt RT Ojo, Rep of Oba Apa, Gp Capt GN Udoh, CO 243 Recce Bn, Gp Capt HA Adebowale (Comdt), Air Cdre JA Ochomma (Comd 081PAG), Air Cdre C Umolu, Rep DG Ascon, 2iC CO 243 Recce Bn, Wg Cdr FO Dobron, Mr. David Mapaderun (Registrar) and Sqn Ldr CU Ukaonu.",
+                                    "image": "images/nafsfa-history/20.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2016",
+                            "highlights": [
+                                {
+                                    "title": "Pioneer Staff of NAFSFA Badagry",
+                                    "description": "Picture of pioneer staff of NAFSFA Badagry. Standing from the Left: Sgt Ileasu, MWO Banny A, FS Olatunji O, Sgt Zubaru, Sgt Ongba, Sgt Oyema CO, WO Fagbohun O and WO Otegbeye A. Sitting from the Left: Sqn Ldr BS Utoruwei, Gp Capt HA Adebowale (Comdt), Mr David Mapaderun and Flt Lt AO Asu.",
+                                    "image": "images/nafsfa-history/1.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2017",
+                            "highlights": [
+                                {
+                                    "title": "Finance Young Officers Course 1/2017 Graduation",
+                                    "description": "Graduands of Finance Young Officers Course 1/2017 with Academic Registrar. From the left: Fg Offr KT Zakka, Fg Offr AM Soroma, Fg Offr TB Boye, Flt Lt YA Kudu, Mr. David Mapaderun (Registrar), Fg Offr S Audu, Fg Offr S Suleiman and Flt Lt KC Eze.",
+                                    "image": "images/nafsfa-history/2.jpg"
+                                },
+                                {
+                                    "title": "International Public Sector Accounting Standards Workshop",
+                                    "description": "International Public Sector Accounting Standards Workshop for Finance Young Officers Course 1/2017 at Administrative Staff College of Nigeria, Badagry. Standing from the rear left: ASCON Staff, Flt Lt KC Eze, Fg Offr AM Soroma, Fg Offr KT Zakka, Fg Offr H Ibrahim (GFO), Fg Offr S Audu. Middle: Fg Offr S Suleiman, MWO Aderibigbe, Sqn Ldr AU Ahmed, MWO Inedu, Fg Offr TB Boye, MWO Hashim, Fg Offr YA Kudu, Flt Lt Ogboma. Sitting from the left: ASCON Staff, Mr David Mapaderun (NAFSFA Registrar), Wg Cdr OG Olubodun (Comdt), ASCON Staff, Wg Cdr A Samaila (CI) and ASCON Staff.",
+                                    "image": "images/nafsfa-history/3.jpg"
+                                },
+                                {
+                                    "title": "Accounting Profession Lecture",
+                                    "description": "Students of Finance Young Officers Course 1/2017 and guests receiving lecture on Accounting Profession delivered by Mr Kehinde Bisiriyu.",
+                                    "image": "images/nafsfa-history/4.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2018",
+                            "highlights": [
+                                {
+                                    "title": "Finance Young Officers Course 2/2018 Inauguration",
+                                    "description": "Comdt (Gp Capt GN Udoh) delivering speech at the inauguration ceremony of Finance Young Officers Course 2/2018.",
+                                    "image": "images/nafsfa-history/5.jpg"
+                                },
+                                {
+                                    "title": "Finance Young Officers Course 2/2018 Graduation",
+                                    "description": "Graduation ceremony of Finance Young Officers Course 2/2018. Standing from the left: Fg Offr EJ Okenu, Fg Offr JI Joseph, Fg Offr I Musa, Fg Offr EJ Agida, Fg Offr LF Tukur, Fg Offr AA Adelakun, Fg Offr IE Ekinya, Fg Offr E Musa, Fg Offr JI Ozoelo, Fg Offr MA Abubakar, Fg Offr AH Saidu, Fg Offr S Audu, Fg Offr MM Kabiru, Fg Offr JY Haggai and Flt Lt Okunbor. Sitting from the left: Mr David Mapaderun (Registrar), Sec Comd FRSC Owode, Comptroller Custom Owode, CO 243 Recce Battalion, DG Nig. French Village Badagry, Oba of Apa, AVM RN Ekeh (AOC LC), Gp Capt GN Udoh (Comdt), AVM JA Ochomma (Comd 081 PAG), Air Cdre MO Udonibo, Wg Cdr MA Ola, Comptroller Custom Seme, Wg Cdr I Yakubu and Wg Cdr BS Utoruwei.",
+                                    "image": "images/nafsfa-history/6.jpg"
+                                },
+                                {
+                                    "title": "Foreign Payment Procedure Workshop",
+                                    "description": "Finance Young Officers Course 2/2018 during a workshop on Foreign Payment Procedure in the NAF. Standing from the left: Fg Offr EJ Okenu, Fg Offr JI Joseph, Fg Offr I Musa, Fg Offr EJ Agida, Fg Offr IE Ekinya, Fg Offr LF Tukur, Fg Offr JI Ozoelo, Fg Offr MA Abubakar, Fg Offr AA Adelakun, Fg Offr E Musa and Fg Offr AH Saidu. Sitting from the left: Wg Cdr I Yakubu (CI), Air Cdre HA Adebowale (Guest Lecturer), Gp Capt GN Udoh (Comdt) and Mr David Mapaderun (Registrar).",
+                                    "image": "images/nafsfa-history/7.jpg"
+                                },
+                                {
+                                    "title": "081 PAG Role and Activities Lecture",
+                                    "description": "Finance Young Officers Course 2/2018 during a lecture on the Role and Activities of 081 PAG. Standing from the left: Fg Offr EJ Okenu, Fg Offr JI Ozoelo, Fg Offr EJ Agida, Fg Offr AA Adelakun, Fg Offr IE Ekinya, Fg Offr I Musa, Fg Offr MA Abubakar, Fg Offr LF Tukur, Fg Offr E Musa and Fg Offr AH Saidu. Sitting from the left: Fg Offr JI Joseph, Wg Cdr I Yakubu (CI), Gp Capt GN Udoh (Comdt), Sqn Ldr GA Fatai (Guest Lecturer) and Mr David Mapaderun (Registrar).",
+                                    "image": "images/nafsfa-history/8.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2019",
+                            "highlights": [
+                                {
+                                    "title": "Basic Finance Officers Course 3/2019 Inauguration",
+                                    "description": "Inauguration ceremony of Basic Finance Officers Course 3/2019. From the left: Fg MA Daggash, Fg Offr HE John, Fg Offr OJ Fakunle, Fg Offr RO Afolabi, Wg Cdr BS Utoruwei (Ag CI), Fg Offr RI Nkele, Fg Offr M Yakubu, Fg Offr LS Akuma and Fg Offr F Bello.",
+                                    "image": "images/nafsfa-history/9.jpg"
+                                },
+                                {
+                                    "title": "Basic Finance Officers Course 3/2019 Graduation",
+                                    "description": "Graduation ceremony of Basic Finance Officers Course 3/2019. Standing from the left: Fg Offr LS Akuma, Fg Offr MA Daggash, Fg Offr HE John, Fg Offr RO Afolabi, Fg Offr F Bello, Fg Offr RI Nkele, Fg Offr M Yakubu and Fg Offr OJ Fakunle. Sitting from the left: Comptroller of Custom Owode, DG French Village, Wg Cdr FO Dobron, Mr David Mapaderun (Registrar), Rep CO NN FOB Badagry, AVM JA Ochomma (Comd 081 PAG), AVM CA Ogbeche (CAB, HQ NAF), Wg Cdr BS Utoruwei (Ag CI), Air Cdre AE Nweke (Rep AOC GTC), Air Cdre MA Akiode (Comd 121 FOB), Air Cdre GB Nkanang (Comd NAF M&CH), Air Cdre IP Irumheson (DOI) and Rep of DG ASCON.",
+                                    "image": "images/nafsfa-history/10.jpg"
+                                },
+                                {
+                                    "title": "Quarter Guard Salute Ceremony",
+                                    "description": "AVM CA Ogbeche (CAB, HQ NAF) receiving salute from Quarter Guard during the graduation ceremony of Basic Finance Officers Course 3/2019.",
+                                    "image": "images/nafsfa-history/11.jpg"
+                                },
+                                {
+                                    "title": "Special Guest with Students",
+                                    "description": "Special Guest of Honour (CAB, HQ NAF) with students of Basic Finance Officers Course 3/2019. From the left: Fg Offr MA Daggash, Fg Offr LS Akuma, Fg Offr RO Afolabi, Fg Offr RI Nkele, AVM CA Ogbeche (CAB), Fg Offr HE John, Fg Offr F Bello, Fg Offr OJ Fakunle, and Fg Offr M Yakubu.",
+                                    "image": "images/nafsfa-history/12.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2020",
+                            "highlights": [
+                                {
+                                    "title": "Basic Finance Officers Course 4/2020 Students",
+                                    "description": "Students of Basic Finance Officers Course 4/2020. From the left: Flt Lt AI Bello, Fg Offr AO Saka, Fg Offr SO Jimoh, Sqn Ldr MM Jekada, Fg Offr DN Abraham, Flt Lt AM Sabo, Fg Offr BM Dole and Fg Offr CW Owhonda.",
+                                    "image": "images/nafsfa-history/13.jpg"
+                                },
+                                {
+                                    "title": "Basic Finance Officers Course 4/2020 Graduation",
+                                    "description": "Graduation ceremony of Basic Finance Officers Course 4/2020. Standing from the left: Fg Offr CW Owhonda, Fg Offr AO Saka, Flt Lt AM Sabo, Sqn Ldr MM Jekada, Fg Offr SO Jimoh, Fg Offr DN Abraham, Fg Offr BM Dole and Flt Lt AI Bello. Sitting from the left: Fg Offr RO Afolabi, Sqn Ldr AO Ademola, Mr David Mapaderun (Registrar), Wg Cdr OM Alegi, Comptroller Custom Seme Border, Wg Cdr FO Dobron, Air Cdre MO Udonibo (Comd 051 PMG), AVM JA Ochomma (Comd 081 PAG), Wg Cdr RK Olundu (Comdt), CO NN FOB Badagry, Wg Cdr A Samaila (Rep AOC GTC), Wg Cdr A Osasuyi (Comd NAFMCH), Sec Comd FRSC Owode, DG ASCON, Wg Cdr IA Ojibara and Wg Cdr BS Utoruwei (Ag CI).",
+                                    "image": "images/nafsfa-history/14.jpg"
+                                },
+                                {
+                                    "title": "Public Financial Management Lecture",
+                                    "description": "Students of Basic Finance Officers Course 4/2020 receiving lecture on Contemporary Issues in Public Financial Management delivered by Mr David Mapaderun (NAFSFA Registrar).",
+                                    "image": "images/nafsfa-history/15.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2021",
+                            "highlights": [
+                                {
+                                    "title": "Basic Finance Officers Course 5/2021 Inauguration",
+                                    "description": "Inauguration ceremony of Basic Finance Officers Course 5/2021. Standing from the left: Fg Offr, Fg Offr F Bako, Fg Offr Ogunbiye, Sqn Ldr MM Jekada, Fg Offr DN Abraham, Flt Lt AM Sabo, Fg Offr BM Dole and Fg Offr CW Owhonda.",
+                                    "image": "images/nafsfa-history/16.jpg"
+                                },
+                                {
+                                    "title": "Basic Finance Officers Course 5/2021 Graduation",
+                                    "description": "Graduation ceremony of Basic Finance Officers Course 5/2021. Standing from the left: Fg Offr CW Owhonda, Fg Offr AO Saka, Flt Lt AM Sabo, Sqn Ldr MM Jekada, Fg Offr SO Jimoh, Fg Offr DN Abraham, Fg Offr BM Dole and Flt Lt AI Bello. Sitting from the left: Fg Offr RO Afolabi, Sqn Ldr AO Ademola, Mr David Mapaderun (Registrar), Wg Cdr OM Alegi, Comptroller Custom Seme Border, Wg Cdr FO Dobron, Air Cdre MO Udonibo (Comd 051 PMG), AVM JA Ochomma (Comd 081 PAG), Wg Cdr RK Olundu (Comdt), CO NN FOB Badagry, Wg Cdr A Samaila (Rep AOC GTC), Wg Cdr A Osasuyi (Comd NAFMCH), Sec Comd FRSC Owode, DG ASCON, Wg Cdr IA Ojibara and Wg Cdr BS Utoruwei (Ag CI).",
+                                    "image": "images/nafsfa-history/17.jpg"
+                                },
+                                {
+                                    "title": "Service Writing Lecture",
+                                    "description": "Students of Basic Finance Officers Course 5/2021 receiving lecture on Service Writing delivered by Fg Offr RO Afolabi (NAFSFA Admin Officer).",
+                                    "image": "images/nafsfa-history/18.jpg"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id":"finance-evolution",
