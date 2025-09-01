@@ -299,7 +299,7 @@ body.year-detail-page {
 
 .event-images-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
   margin-top: 15px;
 }
@@ -310,6 +310,11 @@ body.year-detail-page {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
 }
 
 .event-image-container:hover {
@@ -318,9 +323,11 @@ body.year-detail-page {
 
 .event-image {
   width: 100%;
-  height: 150px;
-  object-fit: cover;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
   display: block;
+  border-radius: 4px;
 }
 
 .image-overlay {
@@ -496,5 +503,14 @@ body.year-detail-page {
   
   .events-scroll-container {
     height: calc(100vh - 350px);
+  }
+  
+  .event-images-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .event-image {
+    max-height: 200px;
   }
 }
