@@ -793,6 +793,9 @@ function renderEventsTimeline() {
   
   timelineContainer.innerHTML = timelineHTML;
   
+  // Reset click pause state on new content
+  isClickPaused = false;
+  
   // Initialize infinite scroll functionality immediately
   initializeAutoScroll();
 }
@@ -800,6 +803,7 @@ function renderEventsTimeline() {
 // Variables for infinite scroll
 let autoScrollInterval = null;
 let isAutoScrollPaused = false;
+let isClickPaused = false; // Track click-based pause state
 let scrollSpeed = 1; // pixels per interval
 let scrollInterval = 16; // milliseconds (approximately 60fps)
 
@@ -814,9 +818,15 @@ function initializeAutoScroll() {
   // Start auto-scroll
   startSmoothAutoScroll(timeline);
   
+  // Initialize visual feedback
+  updateScrollVisualFeedback();
+  
   // Add interaction event listeners for pause on hover
   timeline.addEventListener('mouseenter', pauseAutoScroll);
   timeline.addEventListener('mouseleave', resumeAutoScroll);
+  
+  // Add click/touch event listeners for toggle pause/resume
+  timeline.addEventListener('click', toggleAutoScrollOnClick);
   timeline.addEventListener('touchstart', pauseAutoScroll, { passive: true });
   timeline.addEventListener('touchend', resumeAutoScroll, { passive: true });
 }
@@ -881,12 +891,81 @@ function stopAutoScroll() {
   }
 }
 
+function updateScrollVisualFeedback() {
+  const timeline = document.getElementById('events-timeline');
+  if (!timeline) return;
+  
+  // Add visual indicator for paused state
+  if (isClickPaused) {
+    timeline.style.cursor = 'pointer';
+    timeline.title = 'Click to resume auto-scroll';
+    
+    // Add a subtle visual indicator
+    if (!timeline.querySelector('.scroll-pause-indicator')) {
+      const indicator = document.createElement('div');
+      indicator.className = 'scroll-pause-indicator';
+      indicator.innerHTML = '⏸️';
+      indicator.style.cssText = `
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(52, 152, 219, 0.9);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0.8;
+      `;
+      
+      const container = timeline.closest('.events-scroll-container');
+      if (container && container.style.position !== 'relative') {
+        container.style.position = 'relative';
+      }
+      (container || timeline.parentNode).appendChild(indicator);
+    }
+  } else {
+    timeline.style.cursor = 'default';
+    timeline.title = 'Click to pause auto-scroll';
+    
+    // Remove visual indicator
+    const indicator = timeline.parentNode.querySelector('.scroll-pause-indicator');
+    if (indicator) {
+      indicator.remove();
+    }
+  }
+}
+
 function pauseAutoScroll() {
   isAutoScrollPaused = true;
 }
 
 function resumeAutoScroll() {
-  isAutoScrollPaused = false;
+  // Only resume if not click-paused
+  if (!isClickPaused) {
+    isAutoScrollPaused = false;
+  }
+}
+
+function toggleAutoScrollOnClick(event) {
+  // Prevent triggering on child elements like images or buttons
+  if (event.target.closest('.event-image-container') || 
+      event.target.closest('button') || 
+      event.target.closest('a')) {
+    return;
+  }
+  
+  isClickPaused = !isClickPaused;
+  
+  if (isClickPaused) {
+    isAutoScrollPaused = true;
+  } else {
+    isAutoScrollPaused = false;
+  }
+  
+  // Add visual feedback for click pause state
+  updateScrollVisualFeedback();
 }
 
 // Initialize the year detail viewer

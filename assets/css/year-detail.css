@@ -260,6 +260,45 @@ body.year-detail-page {
   scrollbar-width: none;  /* Firefox */
 }
 
+/* Auto-scroll pause indicator */
+.scroll-pause-indicator {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(52, 152, 219, 0.95);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.9;
+  box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+/* Clickable timeline cursor feedback */
+.events-timeline[title*="pause"] {
+  cursor: pointer;
+}
+
+.events-timeline[title*="resume"] {
+  cursor: pointer;
+}
+
 .year-navigation {
   margin-top: 20px;
   flex-shrink: 0;
