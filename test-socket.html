@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socket.IO Test - NAF Object Recognition</title>
+    <title>Socket.IO Test & Arduino Monitor - NAF Object Recognition</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,7 +76,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>NAF Object Recognition - Socket.IO Test</h1>
+        <h1>NAF Object Recognition - Socket.IO Test & Arduino Monitor</h1>
         
         <div id="connectionStatus" class="status disconnected">
             Disconnected
@@ -92,7 +92,7 @@
 
         <div class="controls">
             <div class="control-group">
-                <h3>Pick Object</h3>
+                <h3>Test Object Pick (UI Only)</h3>
                 <select id="objectSelect">
                     <option value="">Select object...</option>
                     <option value="naf">NAF</option>
@@ -100,22 +100,23 @@
                     <option value="evol">EVOL</option>
                 </select>
                 <br>
-                <button onclick="simulatePick()">Pick Object</button>
+                <button onclick="simulatePick()">Test Pick Object UI</button>
             </div>
 
             <div class="control-group">
-                <h3>Drop in Year</h3>
+                <h3>Test Year Drop (UI Only)</h3>
                 <select id="yearSelect">
                     <option value="">Select year range...</option>
-                    <option value="1967-1977">1967-1977</option>
-                    <option value="1977-1987">1977-1987</option>
-                    <option value="1987-1997">1987-1997</option>
-                    <option value="1997-2007">1997-2007</option>
-                    <option value="2007-2017">2007-2017</option>
-                    <option value="2017-2027">2017-2027</option>
+                    <option value="1962-1972">1962-1972</option>
+                    <option value="1973-1982">1973-1982</option>
+                    <option value="1983-1992">1983-1992</option>
+                    <option value="1993-2002">1993-2002</option>
+                    <option value="2003-2012">2003-2012</option>
+                    <option value="2013-2022">2013-2022</option>
+                    <option value="2023-2032">2023-2032</option>
                 </select>
                 <br>
-                <button onclick="simulateDrop()">Drop Object</button>
+                <button onclick="simulateDrop()">Test Drop Object UI</button>
             </div>
         </div>
 
@@ -126,23 +127,23 @@
         </div>
 
         <div class="control-group" style="margin: 20px 0; text-align: center;">
-            <h3>Object Removal</h3>
-            <button onclick="simulateObjectDrop()" style="background-color: #dc3545;">Remove Object (Return to Main)</button>
+            <h3>Test Object Removal (UI Only)</h3>
+            <button onclick="simulateObjectDrop()" style="background-color: #dc3545;">Test Remove Object UI</button>
         </div>
 
         <div class="control-group" style="margin: 20px 0; text-align: center;">
-            <h3>Year Range Not Detected</h3>
-            <button onclick="simulateYearRangeNotDetected()" style="background-color: #ffc107; color: #000;">Simulate Year Range Not Detected</button>
+            <h3>Arduino Info</h3>
+            <button onclick="simulateYearRangeNotDetected()" style="background-color: #ffc107; color: #000;">Year Range Detection Info</button>
         </div>
 
         <div class="control-group" style="margin: 20px 0; text-align: center;">
-            <h3>No Object Detected</h3>
-            <button onclick="simulateNoObjectDetected()" style="background-color: #6c757d;">Simulate No Object Detected</button>
+            <h3>Arduino Info</h3>
+            <button onclick="simulateNoObjectDetected()" style="background-color: #6c757d;">Object Detection Info</button>
         </div>
 
         <div style="text-align: center; margin: 20px 0;">
-            <button class="reset" onclick="resetSimulation()">Reset Simulation</button>
-            <button onclick="getStatus()">Get Status</button>
+            <button class="reset" onclick="resetSimulation()">Reset UI State</button>
+            <button onclick="getStatus()">Get System Status</button>
         </div>
 
         <div>
@@ -156,7 +157,7 @@
             <ol>
                 <li>Start the Python server: <code>python main.py</code></li>
                 <li><strong>Arduino Mode:</strong> Connect Arduino with RFID reader and light sensors</li>
-                <li><strong>Simulation Mode:</strong> Use the controls above to simulate object picking and dropping</li>
+                <li><strong>Testing Mode:</strong> Use controls above to test UI behavior (server events only)</li>
                 <li>Monitor the socket events in the log below</li>
                 <li>Test the main application at <a href="http://127.0.0.1:5550" target="_blank">127.0.0.1:5550</a></li>
             </ol>
@@ -164,7 +165,14 @@
             <ul>
                 <li>Light sensors on A0 (NAF), A1 (NAFSFA), A2 (Evolution)</li>
                 <li>RFID reader on pins 9 (RST) and 10 (SS)</li>
-                <li>Configure SERIAL_PORT in .env file (e.g., /dev/ttyUSB0, /dev/ttyACM0, COM3)</li>
+                <li>Configure SERIAL_PORT in .env file (e.g., /dev/cu.usbmodem101, COM3)</li>
+                <li>Year ranges: 1962-1972, 1973-1982, 1983-1992, 1993-2002, 2003-2012, 2013-2022, 2023-2032</li>
+            </ul>
+            <h4>Important Notes:</h4>
+            <ul>
+                <li><strong>Real System:</strong> All object picking and year detection is handled by Arduino hardware</li>
+                <li><strong>Test Controls:</strong> Simulation buttons only test UI behavior, not server logic</li>
+                <li><strong>Arduino Required:</strong> Full functionality requires connected Arduino with sensors</li>
             </ul>
         </div>
     </div>
@@ -241,8 +249,8 @@
             updateCurrentState('None', 'None', 'main');
         });
 
-        socket.on('simulation_status', function(data) {
-            addToLog(`Status - Object: ${data.picked_object || 'None'}, Year: ${data.dropped_year || 'None'}, State: ${data.current_state || 'main'}`, 'socket');
+        socket.on('system_status', function(data) {
+            addToLog(`System Status - Object: ${data.picked_object || 'None'}, Year: ${data.dropped_year || 'None'}, State: ${data.current_state || 'main'}`, 'socket');
             updateCurrentState(data.picked_object, data.dropped_year, data.current_state);
         });
 
@@ -251,9 +259,19 @@
             updateCurrentState('None', 'None', 'main');
         });
 
-        socket.on('return_to_section', function(data) {
-            addToLog('Year range not detected - returned to section page', 'warning');
-            updateCurrentState(data.object, 'None', 'section');
+        socket.on('arduino_ready', function(data) {
+            addToLog('Arduino system is ready', 'success');
+        });
+
+        socket.on('system_reset', function(data) {
+            addToLog('Arduino system reset complete', 'warning');
+            updateCurrentState('None', 'None', 'main');
+        });
+
+        socket.on('arduino_disconnected', function(data) {
+            addToLog('Arduino connection lost', 'error');
+            arduinoStatus.textContent = 'Disconnected';
+            arduinoStatus.style.color = '#dc3545';
         });
 
         // Arduino-specific event handlers
@@ -278,7 +296,8 @@
             addToLog(`Arduino test: ${data.message}`, logType);
         });
 
-        // Control functions
+        // Control functions - Note: These are for testing UI behavior only
+        // The actual main.py implementation only responds to real Arduino hardware
         function simulatePick() {
             const object = document.getElementById('objectSelect').value;
             if (!object) {
@@ -286,44 +305,52 @@
                 return;
             }
             
-            socket.emit('simulate_pick', { object: object });
-            addToLog(`Sending pick command: ${object}`, 'info');
+            // Manually trigger the event that would come from Arduino
+            addToLog(`Simulating object pick: ${object} (Note: Real implementation uses Arduino hardware)`, 'warning');
+            socket.emit('object_picked', { object: object });
+            updateCurrentState(object, null, 'section');
         }
 
         function simulateDrop() {
             const year = document.getElementById('yearSelect').value;
+            const object = currentObject.textContent;
             if (!year) {
                 alert('Please select a year range first');
                 return;
             }
+            if (!object || object === 'None') {
+                alert('Please pick an object first');
+                return;
+            }
             
-            socket.emit('simulate_drop', { year: year });
-            addToLog(`Sending drop command: ${year}`, 'info');
+            // Manually trigger the event that would come from Arduino
+            addToLog(`Simulating year drop: ${year} for ${object} (Note: Real implementation uses Arduino hardware)`, 'warning');
+            socket.emit('year_dropped', { year: year, object: object });
+            updateCurrentState(null, year, 'year-list');
         }
 
         function simulateObjectDrop() {
-            socket.emit('simulate_object_drop');
-            addToLog('Sending object drop/removal command', 'info');
+            addToLog('Simulating object removal (Note: Real implementation uses Arduino hardware)', 'warning');
+            socket.emit('object_dropped', { message: "Object removed, returning to main page" });
+            updateCurrentState('None', 'None', 'main');
         }
 
         function simulateYearRangeNotDetected() {
-            socket.emit('year_range_not_detected');
-            addToLog('Sending year range not detected command', 'info');
+            addToLog('Note: Year range detection handled automatically by Arduino RFID system', 'info');
         }
 
         function simulateNoObjectDetected() {
-            socket.emit('no_object_detected');
-            addToLog('Sending no object detected command', 'info');
+            addToLog('Note: Object detection handled automatically by Arduino light sensors', 'info');
         }
 
         function resetSimulation() {
-            socket.emit('reset_simulation');
-            addToLog('Sending reset command', 'info');
+            addToLog('Resetting local simulation state (Note: Real Arduino system manages its own state)', 'warning');
+            updateCurrentState('None', 'None', 'main');
         }
 
         function getStatus() {
             socket.emit('get_status');
-            addToLog('Requesting status', 'info');
+            addToLog('Requesting system status', 'info');
         }
 
         function getArduinoStatus() {
@@ -341,7 +368,7 @@
         }
 
         // Initialize
-        addToLog('Socket.IO test page loaded');
+        addToLog('Socket.IO test page loaded - Ready to monitor Arduino system');
     </script>
 </body>
 </html>
