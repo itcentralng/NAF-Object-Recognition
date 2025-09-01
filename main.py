@@ -220,6 +220,89 @@ def handle_test_arduino_connection():
             emit('arduino_test_result', {'success': False, 'message': 'Could not connect to Arduino'})
 
 
+# Testing/Simulation Socket Event Handlers
+# These handlers simulate Arduino input for testing purposes when Arduino is not connected
+@socketio.on('simulate_object_picked')
+def handle_simulate_object_picked(data):
+    """Simulate Arduino object picking for testing"""
+    global picked_object, current_state, dropped_year
+    
+    object_name = data.get('object', '').lower()
+    if object_name in ['naf', 'nafsfa', 'evol']:
+        picked_object = object_name
+        current_state = 'section'
+        dropped_year = None  # Reset year when new object is picked
+        print(f"🧪 SIMULATION: Object '{picked_object}' picked - navigating to section")
+        socketio.emit("object_picked", {"object": picked_object})
+        emit('simulation_result', {'success': True, 'message': f'Simulated object pick: {object_name}'})
+    else:
+        emit('simulation_result', {'success': False, 'message': f'Invalid object: {object_name}'})
+
+
+@socketio.on('simulate_object_removed')
+def handle_simulate_object_removed(data):
+    """Simulate Arduino object removal for testing"""
+    global picked_object, current_state, dropped_year
+    
+    if picked_object:
+        removed_object = picked_object
+        print(f"🧪 SIMULATION: Object '{removed_object}' removed - returning to main page")
+        picked_object = None
+        dropped_year = None
+        current_state = 'main'
+        socketio.emit("object_dropped", {"message": "Object removed, returning to main page"})
+        emit('simulation_result', {'success': True, 'message': f'Simulated object removal: {removed_object}'})
+    else:
+        emit('simulation_result', {'success': False, 'message': 'No object to remove'})
+
+
+@socketio.on('simulate_year_detected')
+def handle_simulate_year_detected(data):
+    """Simulate Arduino RFID year detection for testing"""
+    global dropped_year, current_state, picked_object
+    
+    year_range = data.get('year', '')
+    
+    # Valid years from Arduino RFID mapping
+    valid_years = ['1962-1972', '1973-1982', '1983-1992', '1993-2002', 
+                   '2003-2012', '2013-2022', '2023-2032']
+    
+    if not picked_object:
+        emit('simulation_result', {'success': False, 'message': 'No object picked - pick an object first'})
+        return
+    
+    if year_range in valid_years:
+        dropped_year = year_range
+        current_state = 'year-list'
+        print(f"🧪 SIMULATION: Year range '{dropped_year}' detected via RFID for object '{picked_object}' - navigating to year list")
+        socketio.emit("year_dropped", {"year": dropped_year, "object": picked_object})
+        emit('simulation_result', {'success': True, 'message': f'Simulated year detection: {year_range} for {picked_object}'})
+    else:
+        emit('simulation_result', {'success': False, 'message': f'Invalid year range: {year_range}'})
+
+
+@socketio.on('simulate_unknown_rfid')
+def handle_simulate_unknown_rfid(data):
+    """Simulate Arduino unknown RFID detection for testing"""
+    uid = data.get('uid', 'TEST-UID-123')
+    print(f"🧪 SIMULATION: Unknown RFID card detected: {uid}")
+    socketio.emit("unknown_rfid", {"uid": uid, "message": "Unknown RFID card detected"})
+    emit('simulation_result', {'success': True, 'message': f'Simulated unknown RFID: {uid}'})
+
+
+@socketio.on('simulate_system_reset')
+def handle_simulate_system_reset():
+    """Simulate Arduino system reset for testing"""
+    global picked_object, dropped_year, current_state
+    
+    picked_object = None
+    dropped_year = None
+    current_state = 'main'
+    print("🧪 SIMULATION: Arduino system reset complete")
+    socketio.emit("system_reset", {"message": "System reset complete"})
+    emit('simulation_result', {'success': True, 'message': 'Simulated system reset'})
+
+
 @app.route("/")
 def main():
     return render_template("index.html")
