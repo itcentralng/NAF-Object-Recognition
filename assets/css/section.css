@@ -52,7 +52,7 @@ body {
 }
 
 .back-btn {
-  background: linear-gradient(135deg, #c41e3a, #8b0000);
+  background: linear-gradient(135deg, #3498db, #2980b9);
   border: none;
   color: white;
   padding: 0.5rem 1rem;
@@ -67,7 +67,7 @@ body {
 }
 
 .back-btn:hover {
-  background: linear-gradient(135deg, #e02244, #a00000);
+  background: linear-gradient(135deg, #5dade2, #3498db);
   transform: translateX(-3px);
 }
 
@@ -120,8 +120,8 @@ body {
 }
 
 .year-range-drop-zone {
-  background: rgba(196, 30, 58, 0.05);
-  border: 2px dashed rgba(196, 30, 58, 0.3);
+  background: rgba(52, 152, 219, 0.05);
+  border: 2px dashed rgba(52, 152, 219, 0.3);
   border-radius: 1.5rem;
   padding: 4rem 2rem;
   margin: 2rem 0;
@@ -129,8 +129,8 @@ body {
 }
 
 .year-range-drop-zone:hover {
-  background: rgba(196, 30, 58, 0.08);
-  border-color: rgba(196, 30, 58, 0.5);
+  background: rgba(52, 152, 219, 0.08);
+  border-color: rgba(52, 152, 219, 0.5);
   transform: translateY(-2px);
 }
 
@@ -169,8 +169,8 @@ body {
 .pulse-animation {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.3), rgba(139, 0, 0, 0.3));
-  border: 3px solid rgba(196, 30, 58, 0.5);
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.3), rgba(41, 128, 185, 0.3));
+  border: 3px solid rgba(52, 152, 219, 0.5);
   border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
   position: relative;
@@ -184,7 +184,7 @@ body {
   right: -3px;
   bottom: -3px;
   background: transparent;
-  border: 2px solid rgba(196, 30, 58, 0.3);
+  border: 2px solid rgba(52, 152, 219, 0.3);
   border-radius: 50%;
   animation: pulseOuter 2s ease-in-out infinite 0.5s;
 }
@@ -234,7 +234,7 @@ body {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: rgba(196, 30, 58, 0.4);
+  background: rgba(52, 152, 219, 0.4);
   border-radius: 50%;
   animation: floatUp 25s linear infinite;
 }
@@ -265,7 +265,7 @@ body {
 
 .section-icon {
   font-size: 3rem;
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.2), rgba(139, 0, 0, 0.2));
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(41, 128, 185, 0.2));
   border-radius: 50%;
   width: 80px;
   height: 80px;
@@ -294,7 +294,7 @@ body {
 }
 
 .section-summary h3 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.3rem;
   margin-bottom: 1rem;
@@ -318,15 +318,15 @@ body {
 
 .stat-item {
   text-align: center;
-  background: rgba(196, 30, 58, 0.1);
+  background: rgba(52, 152, 219, 0.1);
   padding: 1rem;
   border-radius: 0.5rem;
-  border: 1px solid rgba(196, 30, 58, 0.2);
+  border: 1px solid rgba(52, 152, 219, 0.2);
 }
 
 .stat-number {
   display: block;
-  color: #c41e3a;
+  color: #3498db;
   font-size: 2rem;
   font-weight: bold;
   font-family: "Cinzel", serif;
@@ -374,7 +374,7 @@ body {
 }
 
 .modal-header h2 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Cinzel", serif;
   font-size: 2rem;
   margin: 0;
@@ -396,7 +396,7 @@ body {
 }
 
 .close-btn:hover {
-  color: #c41e3a;
+  color: #3498db;
 }
 
 .modal-body {
@@ -414,7 +414,7 @@ body {
 }
 
 .modal-body::-webkit-scrollbar-thumb {
-  background: rgba(196, 30, 58, 0.5);
+  background: rgba(52, 152, 219, 0.5);
   border-radius: 3px;
 }
 
@@ -440,7 +440,7 @@ body {
 }
 
 .content-section h4 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
@@ -457,7 +457,7 @@ body {
 }
 
 .highlights-section h4 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
@@ -474,7 +474,7 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 0.5rem;
   padding: 1rem;
-  border-left: 3px solid #c41e3a;
+  border-left: 3px solid #3498db;
 }
 
 .highlight-image {
@@ -504,7 +504,7 @@ body {
 }
 
 .activities-section h4 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
@@ -521,7 +521,7 @@ body {
 }
 
 .images-section h4 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
@@ -595,7 +595,7 @@ body {
   align-items: center;
   gap: 2rem;
   padding: 3rem 2rem 2rem 2rem;
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.15), rgba(139, 0, 0, 0.15));
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.15));
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   min-height: 200px;
   position: relative;
@@ -614,7 +614,7 @@ body {
 }
 
 .year-badge {
-  background: linear-gradient(135deg, #c41e3a, #8b0000);
+  background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
   width: 120px;
   height: 120px;
@@ -625,7 +625,7 @@ body {
   font-family: "Cinzel", serif;
   font-size: 1.8rem;
   font-weight: bold;
-  box-shadow: 0 12px 30px rgba(196, 30, 58, 0.4);
+  box-shadow: 0 12px 30px rgba(52, 152, 219, 0.4);
   border: 3px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -664,7 +664,7 @@ body {
 .highlights-section h2,
 .activities-section h2,
 .images-section h2 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.5rem;
   margin: 0 0 1.5rem 0;
@@ -755,7 +755,7 @@ body {
 }
 
 .activity-item::marker {
-  color: #c41e3a;
+  color: #3498db;
 }
 
 .images-gallery {
@@ -818,7 +818,7 @@ body {
 }
 
 .nav-year-btn {
-  background: linear-gradient(135deg, #c41e3a, #8b0000);
+  background: linear-gradient(135deg, #3498db, #2980b9);
   border: none;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -830,13 +830,13 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
 .nav-year-btn:hover {
-  background: linear-gradient(135deg, #e02244, #a00000);
+  background: linear-gradient(135deg, #5dade2, #3498db);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
 
 /* Image Modal */
@@ -868,7 +868,7 @@ body {
   position: absolute;
   top: -60px;
   right: 0;
-  background: rgba(196, 30, 58, 0.8);
+  background: rgba(52, 152, 219, 0.8);
   border: none;
   color: white;
   font-size: 2rem;
@@ -883,7 +883,7 @@ body {
 }
 
 .image-modal-close:hover {
-  background: #c41e3a;
+  background: #3498db;
   transform: rotate(90deg);
 }
 
@@ -909,7 +909,7 @@ body {
 }
 
 .events-section h2 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.8rem;
   margin: 0 0 2rem 0;
@@ -949,13 +949,13 @@ body {
 }
 
 .events-timeline::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.6), rgba(139, 0, 0, 0.6));
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.6), rgba(41, 128, 185, 0.6));
   border-radius: 4px;
   transition: background 0.3s ease;
 }
 
 .events-timeline::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.8), rgba(139, 0, 0, 0.8));
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.8), rgba(41, 128, 185, 0.8));
 }
 
 .events-timeline.auto-scroll {
@@ -983,7 +983,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.8), rgba(139, 0, 0, 0.8));
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.8), rgba(41, 128, 185, 0.8));
   padding: 0.75rem;
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -1011,7 +1011,7 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, #c41e3a, rgba(196, 30, 58, 0.3));
+  background: linear-gradient(to bottom, #3498db, rgba(52, 152, 219, 0.3));
   z-index: 1;
 }
 
@@ -1034,7 +1034,7 @@ body {
   z-index: 2;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #c41e3a, #8b0000);
+  background: linear-gradient(135deg, #3498db, #2980b9);
   border: 3px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   display: flex;
@@ -1042,7 +1042,7 @@ body {
   justify-content: center;
   margin-right: 2rem;
   flex-shrink: 0;
-  box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
 }
 
 .event-number span {
@@ -1101,14 +1101,14 @@ body {
 }
 
 .event-date {
-  background: linear-gradient(135deg, rgba(196, 30, 58, 0.3), rgba(139, 0, 0, 0.3));
-  color: #c41e3a;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.3), rgba(41, 128, 185, 0.3));
+  color: #3498db;
   padding: 0.5rem 1rem;
   border-radius: 15px;
   font-family: "Cinzel", serif;
   font-size: 0.9rem;
   font-weight: bold;
-  border: 1px solid rgba(196, 30, 58, 0.5);
+  border: 1px solid rgba(52, 152, 219, 0.5);
   backdrop-filter: blur(5px);
 }
 
@@ -1162,7 +1162,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(196, 30, 58, 0.3));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(52, 152, 219, 0.3));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1181,8 +1181,8 @@ body {
 }
 
 .event-activities {
-  background: rgba(196, 30, 58, 0.08);
-  border-left: 3px solid #c41e3a;
+  background: rgba(52, 152, 219, 0.08);
+  border-left: 3px solid #3498db;
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-top: 1.5rem;
@@ -1191,7 +1191,7 @@ body {
 }
 
 .event-activities h4 {
-  color: #c41e3a;
+  color: #3498db;
   font-family: "Playfair Display", serif;
   font-size: 1.1rem;
   margin: 0 0 1rem 0;
@@ -1209,7 +1209,7 @@ body {
 }
 
 .event-activities-list li::marker {
-  color: #c41e3a;
+  color: #3498db;
 }
 
 /* Enhanced Image Modal */
@@ -1270,7 +1270,7 @@ body {
   position: absolute;
   top: -60px;
   right: 0;
-  background: linear-gradient(135deg, #c41e3a, #8b0000);
+  background: linear-gradient(135deg, #3498db, #2980b9);
   border: none;
   color: white;
   font-size: 1.8rem;
@@ -1282,11 +1282,11 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
 .image-modal-close:hover {
-  background: linear-gradient(135deg, #e02244, #a00000);
+  background: linear-gradient(135deg, #5dade2, #3498db);
   transform: rotate(90deg);
 }
 
@@ -1302,7 +1302,7 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(196, 30, 58, 0.8);
+  background: rgba(52, 152, 219, 0.8);
   border: none;
   color: white;
   font-size: 2rem;
@@ -1319,7 +1319,7 @@ body {
 }
 
 .modal-nav-btn:hover:not(:disabled) {
-  background: rgba(196, 30, 58, 1);
+  background: rgba(52, 152, 219, 1);
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -1348,7 +1348,7 @@ body {
 }
 
 .image-event-title {
-  color: #c41e3a !important;
+  color: #3498db !important;
   font-family: "Playfair Display", serif;
   font-size: 1rem !important;
   font-weight: bold;
@@ -1356,7 +1356,7 @@ body {
 
 /* Year item arrow indicator */
 .year-arrow {
-  color: #c41e3a;
+  color: #3498db;
   font-size: 1.2rem;
   opacity: 0.7;
   transition: all 0.3s ease;
@@ -1377,7 +1377,7 @@ body {
 .error-message {
   text-align: center;
   padding: 3rem;
-  color: #c41e3a;
+  color: #3498db;
 }
 
 /* Responsive Design */
