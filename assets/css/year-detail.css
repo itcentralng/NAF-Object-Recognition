@@ -7,21 +7,27 @@ body.year-detail-page {
   padding: 0;
   height: 100vh;
   overflow: hidden;
+  font-family: "Poppins", sans-serif;
 }
 
 .main-container {
   display: flex;
+  flex-direction: row;
   height: 100vh;
+  width: 100%;
 }
 
 /* Left Sidebar: Year List */
 .year-list-sidebar {
   width: 280px;
+  min-width: 280px;
+  max-width: 280px;
   background: rgba(12, 12, 22, 0.8);
   border-right: 1px solid rgba(196, 30, 58, 0.3);
   display: flex;
   flex-direction: column;
   height: 100%;
+  flex-shrink: 0;
   backdrop-filter: blur(5px);
 }
 
@@ -103,11 +109,13 @@ body.year-detail-page {
 
 /* Right Content: Year Details */
 .year-detail-container {
+  flex: 1;
   flex-grow: 1;
   padding: 30px;
   overflow-y: auto;
   height: 100vh;
   box-sizing: border-box;
+  min-width: 0; /* Prevents flexbox overflow issues */
 }
 
 .year-header {
@@ -135,25 +143,37 @@ body.year-detail-page {
 }
 
 #year-title {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   margin: 0 0 8px 0;
   color: #ffffff;
+  line-height: 1.2;
+}
+
+#year-title #year-display {
+  color: #c41e3a;
+  font-weight: bold;
 }
 
 #year-summary {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
+}
+
+#year-summary #year-range-display {
+  color: #c41e3a;
+  font-weight: 500;
 }
 
 .events-section h2 {
   font-size: 1.8rem;
   color: #c41e3a;
   margin-bottom: 20px;
+  display: none; /* Hide the section title */
 }
 
 .events-scroll-container {
-  height: calc(100vh - 350px); /* Adjust based on header/footer height */
+  height: calc(100vh - 280px); /* Adjust based on header height */
   overflow: hidden;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -182,4 +202,299 @@ body.year-detail-page {
 
 .year-navigation {
   margin-top: 20px;
+}
+
+/* Event Cards Styling */
+.event-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(196, 30, 58, 0.2);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.event-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.event-card:hover {
+  border-color: rgba(196, 30, 58, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.event-number {
+  background: #c41e3a;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(196, 30, 58, 0.3);
+}
+
+.event-content {
+  flex-grow: 1;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 15px;
+}
+
+.event-title {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin: 0;
+  flex-grow: 1;
+  line-height: 1.3;
+}
+
+.event-date {
+  background: rgba(196, 30, 58, 0.2);
+  color: #c41e3a;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.event-description {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+  font-size: 0.95rem;
+}
+
+.event-activities h4 {
+  color: #c41e3a;
+  font-size: 1rem;
+  margin: 15px 0 10px 0;
+}
+
+.event-activities-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.event-activities-list li {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.event-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.event-image-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.event-image-container:hover {
+  transform: scale(1.02);
+}
+
+.event-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.event-image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+.zoom-icon {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(12, 12, 22, 0.9);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(196, 30, 58, 0.3);
+}
+
+.scroll-indicator.paused #scroll-status {
+  color: #c41e3a;
+}
+
+/* Image Modal Styles */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+}
+
+.image-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: rgba(12, 12, 22, 0.95);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(196, 30, 58, 0.3);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #c41e3a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.image-modal-close:hover {
+  background: #a01729;
+}
+
+.modal-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.image-modal-info {
+  padding: 20px;
+  text-align: center;
+  background: rgba(12, 12, 22, 0.95);
+}
+
+.image-modal-info p {
+  margin: 0 0 10px 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.image-event-title {
+  color: #c41e3a !important;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .main-container {
+    flex-direction: column;
+  }
+  
+  .year-list-sidebar {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .years-grid-sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 8px;
+  }
+  
+  .year-card-sidebar {
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .year-detail-container {
+    padding: 15px;
+  }
+  
+  .year-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .year-badge {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+  
+  #year-title {
+    font-size: 1.4rem;
+  }
+  
+  .event-card {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .events-scroll-container {
+    height: calc(100vh - 350px);
+  }
 }
