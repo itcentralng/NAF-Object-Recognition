@@ -329,7 +329,7 @@ function startAutoScroll() {
     }
     
     timeline.scrollTop = currentScrollPosition;
-  }, 50); // Smooth scrolling - adjust speed as needed
+  }, 200); // Smooth scrolling - adjust speed as needed
 }
 
 function stopAutoScroll() {
