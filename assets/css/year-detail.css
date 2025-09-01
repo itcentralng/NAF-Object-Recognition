@@ -183,21 +183,21 @@ body.year-detail-page {
 
 .events-timeline {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto; /* Allow scrolling for infinite scroll positioning */
   padding: 20px;
   box-sizing: border-box;
+  /* Enable smooth scrolling behavior */
+  scroll-behavior: auto; /* Disable smooth scroll for programmatic control */
 }
 
-/* Custom scrollbar for timeline */
+/* Hide scrollbar for clean infinite scroll appearance */
 .events-timeline::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
-.events-timeline::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-}
-.events-timeline::-webkit-scrollbar-thumb {
-  background-color: #c41e3a;
-  border-radius: 4px;
+
+.events-timeline {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .year-navigation {
@@ -214,8 +214,10 @@ body.year-detail-page {
   display: flex;
   gap: 20px;
   transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1; /* Always visible for infinite scroll */
+  transform: translateY(0); /* Remove initial transform */
+  flex-shrink: 0; /* Prevent card compression */
+  min-height: 120px; /* Ensure consistent height */
 }
 
 .event-card.animate-in {
@@ -226,6 +228,12 @@ body.year-detail-page {
 .event-card:hover {
   border-color: rgba(196, 30, 58, 0.4);
   background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
+}
+
+/* Cloned event cards for infinite scroll */
+.event-card[data-clone="true"] {
+  opacity: 1;
 }
 
 .event-number {
@@ -358,16 +366,30 @@ body.year-detail-page {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(12, 12, 22, 0.9);
+  background: rgba(12, 12, 22, 0.95);
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
-  padding: 10px;
+  padding: 12px;
   font-size: 0.85rem;
   border-top: 1px solid rgba(196, 30, 58, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.scroll-indicator:hover {
+  background: rgba(196, 30, 58, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.scroll-indicator.paused {
+  background: rgba(196, 30, 58, 0.2);
+  border-top-color: rgba(196, 30, 58, 0.6);
 }
 
 .scroll-indicator.paused #scroll-status {
   color: #c41e3a;
+  font-weight: 500;
 }
 
 /* Image Modal Styles */

@@ -790,19 +790,15 @@ function renderEventsTimeline() {
   
   timelineContainer.innerHTML = timelineHTML;
   
-  // Add animation to event cards
-  setTimeout(() => {
-    const eventCards = document.querySelectorAll('.event-card');
-    eventCards.forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add('animate-in');
-      }, index * 200);
-    });
-  }, 100);
-
-  // Initialize scroll functionality
+  // Initialize infinite scroll functionality immediately
   initializeAutoScroll();
 }
+
+// Variables for infinite scroll
+let autoScrollInterval = null;
+let isAutoScrollPaused = false;
+let scrollSpeed = 1; // pixels per interval
+let scrollInterval = 16; // milliseconds (approximately 60fps)
 
 function initializeAutoScroll() {
   const timeline = document.getElementById('events-timeline');
@@ -811,39 +807,118 @@ function initializeAutoScroll() {
   
   if (!timeline || !scrollStatus) return;
 
-  // Check if content is scrollable
-  const isScrollable = timeline.scrollHeight > timeline.clientHeight;
+  // Prepare infinite scroll by duplicating events
+  prepareInfiniteScroll(timeline);
   
-  if (!isScrollable) {
-    // Hide scroll indicator if content doesn't scroll
-    if (scrollIndicator) {
-      scrollIndicator.style.display = 'none';
-    }
-    return;
+  // Start auto-scroll
+  startSmoothAutoScroll(timeline);
+  
+  // Update scroll status
+  scrollStatus.textContent = 'Auto-scrolling through events • Hover to pause';
+  
+  // Add interaction event listeners
+  timeline.addEventListener('mouseenter', pauseAutoScroll);
+  timeline.addEventListener('mouseleave', resumeAutoScroll);
+  timeline.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+  timeline.addEventListener('touchend', resumeAutoScroll, { passive: true });
+  
+  // Click to toggle auto-scroll
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', toggleAutoScroll);
   }
+}
 
-  // Update scroll status text for manual scrolling
-  scrollStatus.textContent = 'Scroll to view more events';
+function prepareInfiniteScroll(timeline) {
+  const originalEvents = timeline.querySelectorAll('.event-card');
+  if (originalEvents.length === 0) return;
   
-  // Add scroll event listener to show scroll progress
-  timeline.addEventListener('scroll', function() {
-    const scrollTop = timeline.scrollTop;
-    const scrollHeight = timeline.scrollHeight;
-    const clientHeight = timeline.clientHeight;
-    const scrollPercentage = Math.round((scrollTop / (scrollHeight - clientHeight)) * 100);
+  // Calculate how many duplicates we need based on container height
+  const containerHeight = timeline.clientHeight;
+  const eventHeight = originalEvents[0].offsetHeight + 20; // Include margin
+  const visibleEvents = Math.ceil(containerHeight / eventHeight);
+  
+  // We need at least double the visible events for smooth infinite scroll
+  const duplicationsNeeded = Math.max(2, Math.ceil((visibleEvents * 2) / originalEvents.length));
+  
+  // Clone events multiple times
+  for (let i = 0; i < duplicationsNeeded; i++) {
+    originalEvents.forEach((event, index) => {
+      const clone = event.cloneNode(true);
+      clone.setAttribute('data-clone', 'true');
+      clone.setAttribute('data-original-index', index);
+      timeline.appendChild(clone);
+    });
+  }
+}
+
+function startSmoothAutoScroll(timeline) {
+  if (autoScrollInterval) clearInterval(autoScrollInterval);
+  
+  const originalEvents = timeline.querySelectorAll('.event-card:not([data-clone="true"])');
+  if (originalEvents.length === 0) return;
+  
+  // Calculate scroll distance for 3 seconds per event
+  const eventHeight = originalEvents[0].offsetHeight + 20; // Include margin
+  const pixelsPerSecond = eventHeight / 3; // Complete one event in 3 seconds
+  scrollSpeed = pixelsPerSecond / (1000 / scrollInterval); // Convert to pixels per interval
+  
+  autoScrollInterval = setInterval(() => {
+    if (isAutoScrollPaused) return;
     
-    const eventCards = timeline.querySelectorAll('.event-card');
-    const totalEvents = eventCards.length;
+    const currentScrollTop = timeline.scrollTop;
+    const newScrollTop = currentScrollTop + scrollSpeed;
     
-    if (scrollPercentage === 100) {
-      scrollStatus.textContent = 'You\'ve reached the end of events';
-    } else if (scrollPercentage === 0) {
-      scrollStatus.textContent = 'Scroll to view more events';
+    // Check if we need to reset scroll position for infinite effect
+    const originalContentHeight = originalEvents.length * eventHeight;
+    const totalHeight = timeline.scrollHeight;
+    
+    if (newScrollTop >= originalContentHeight) {
+      // Reset to beginning for infinite scroll
+      timeline.scrollTop = newScrollTop - originalContentHeight;
     } else {
-      const approximateEventsLeft = Math.max(1, Math.ceil((totalEvents * (100 - scrollPercentage)) / 100));
-      scrollStatus.textContent = `${scrollPercentage}% viewed • ~${approximateEventsLeft} more events below`;
+      timeline.scrollTop = newScrollTop;
     }
-  });
+  }, scrollInterval);
+}
+
+function stopAutoScroll() {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
+}
+
+function pauseAutoScroll() {
+  isAutoScrollPaused = true;
+  updateScrollStatus();
+}
+
+function resumeAutoScroll() {
+  isAutoScrollPaused = false;
+  updateScrollStatus();
+}
+
+function toggleAutoScroll() {
+  if (isAutoScrollPaused) {
+    resumeAutoScroll();
+  } else {
+    pauseAutoScroll();
+  }
+}
+
+function updateScrollStatus() {
+  const scrollStatus = document.getElementById('scroll-status');
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  
+  if (!scrollStatus || !scrollIndicator) return;
+
+  if (isAutoScrollPaused) {
+    scrollStatus.textContent = 'Auto-scroll paused • Click to resume or move mouse away';
+    scrollIndicator.classList.add('paused');
+  } else {
+    scrollStatus.textContent = 'Auto-scrolling through events • Hover to pause';
+    scrollIndicator.classList.remove('paused');
+  }
 }
 
 // Initialize the year detail viewer
@@ -1055,8 +1130,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Cleanup when page is unloaded
 window.addEventListener('beforeunload', function() {
-  // Clean up any remaining intervals
-  if (autoScrollInterval) {
-    clearInterval(autoScrollInterval);
+  stopAutoScroll();
+});
+
+// Pause auto-scroll when page loses focus
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    pauseAutoScroll();
+  } else {
+    resumeAutoScroll();
   }
 });
