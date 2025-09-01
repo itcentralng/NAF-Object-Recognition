@@ -8,6 +8,7 @@ const welcomeScreen = document.getElementById('welcome-screen');
 const mainScreen = document.getElementById('main-screen');
 let objectItems = [];
 let interactionEnabled = false; // Disable interactions by default
+let sectionData = null; // Store loaded section data
 
 // Object categories mapped to socket events
 const objectCategories = [
@@ -124,6 +125,9 @@ function setupSocketListeners() {
 }
 
 async function initializeApp() {
+    // Load section data for logo management
+    await loadSectionData();
+    
     // Create floating particles
     createFloatingParticles();
     
@@ -131,6 +135,18 @@ async function initializeApp() {
     setTimeout(() => {
         handleEnterMuseum();
     }, 3000);
+}
+
+// Load section data from JSON file
+async function loadSectionData() {
+    try {
+        const response = await fetch('data.json');
+        sectionData = await response.json();
+        console.log('Section data loaded successfully');
+    } catch (error) {
+        console.error('Error loading section data:', error);
+        // Fallback to default behavior if data can't be loaded
+    }
 }
 
 // Utility function for smooth transition indicators
@@ -391,8 +407,31 @@ function createSelectionBurst(element) {
 }
 
 function navigateToSection(sectionType, objectId) {
+    // Update header logo based on the selected section before navigation
+    updateHeaderLogoForSection(sectionType);
+    
     // Navigate to the section viewer with both section and object parameters
     window.location.href = `section.html?section=${sectionType}&object=${objectId}`;
+}
+
+function updateHeaderLogoForSection(sectionType) {
+    if (!sectionData) return;
+    
+    // Find the section data that matches the target section
+    const section = sectionData.sections.find(s => s.id === sectionType);
+    if (section && section.logo) {
+        // Update the header logo
+        const headerLogo = document.querySelector('.header-logo');
+        if (headerLogo) {
+            headerLogo.src = section.logo;
+        }
+        
+        // Update the welcome screen logo as well
+        const welcomeLogo = document.querySelector('.logo-container img');
+        if (welcomeLogo) {
+            welcomeLogo.src = section.logo;
+        }
+    }
 }
 
 // Add some interactive effects

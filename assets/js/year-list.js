@@ -141,6 +141,9 @@ async function loadSectionData(object) {
             throw new Error(`Section not found for object: ${object}`);
         }
         
+        // Update the page logo if available
+        updatePageLogo();
+        
     } catch (error) {
         console.error('Error loading section data:', error);
         showErrorMessage('Failed to load section data');
@@ -282,4 +285,20 @@ function showErrorMessage(message) {
             <button onclick="window.location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #c41e3a; color: white; border: none; border-radius: 5px; cursor: pointer;">Retry</button>
         </div>
     `;
+}
+
+function updatePageLogo() {
+    // Update any logo elements on the page with section-specific logo
+    const logoElements = document.querySelectorAll('img[alt="NAF Logo"], .nav-logo');
+    logoElements.forEach(logo => {
+        if (currentSectionData && currentSectionData.logo) {
+            logo.src = currentSectionData.logo;
+        }
+    });
+    
+    // Update the header section logo
+    const headerSectionLogo = document.getElementById('header-section-logo');
+    if (headerSectionLogo && currentSectionData && currentSectionData.logo) {
+        headerSectionLogo.src = currentSectionData.logo;
+    }
 }

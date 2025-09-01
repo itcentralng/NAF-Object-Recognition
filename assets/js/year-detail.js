@@ -28,6 +28,9 @@ async function loadYearData() {
       throw new Error('Section not found');
     }
 
+    // Update sidebar logo with section-specific logo
+    updateSidebarLogo();
+
     // Find the year data that contains this specific year
     const targetYear = parseInt(yearParam);
     currentYearData = findYearDataForSpecificYear(targetYear);
@@ -1066,3 +1069,11 @@ document.addEventListener('visibilitychange', function() {
     resumeAutoScroll();
   }
 });
+
+function updateSidebarLogo() {
+  // Update the sidebar logo with section-specific logo
+  const sidebarLogo = document.querySelector('.nav-logo');
+  if (sidebarLogo && currentSectionData && currentSectionData.logo) {
+    sidebarLogo.src = currentSectionData.logo;
+  }
+}

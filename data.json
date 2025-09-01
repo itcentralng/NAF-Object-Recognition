@@ -2,7 +2,7 @@
     "sections": [
         {
             "id": "naf-history",
-            "logo": "image/naf-logo.png",
+            "logo": "images/naf-logo.png",
             "title": "NAF History",
             "year-ranges": [
                 {
@@ -918,7 +918,7 @@
         },
         {
             "id":"nafsfa-history",
-            "logo":"image/nafsfa-logo.png",
+            "logo":"images/nafsfa-logo.png",
             "title":"NAF School of Finance and Account",
             "year-ranges":[
                 {
@@ -1169,7 +1169,7 @@
         },
         {
             "id":"finance-evolution",
-            "logo":"image/nafsfa-logo.png",
+            "logo":"images/nafsfa-logo.png",
             "title":"Evolution of NAF Finance Specialty",
             "year-ranges":[
                 {

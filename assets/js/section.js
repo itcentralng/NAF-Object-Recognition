@@ -95,6 +95,18 @@ function renderSectionOverview() {
   const sectionIcon = getSectionIcon(currentSectionData.id);
   const sectionDescription = getSectionDescription(currentSectionData.id);
   
+  // Update navigation logo with section-specific logo
+  const navLogo = document.querySelector('.nav-logo');
+  if (navLogo && currentSectionData.logo) {
+    navLogo.src = currentSectionData.logo;
+  }
+  
+  // Update section logo in the header
+  const sectionLogo = document.getElementById('section-logo');
+  if (sectionLogo && currentSectionData.logo) {
+    sectionLogo.src = currentSectionData.logo;
+  }
+  
   // Update overview panel
   document.getElementById('section-icon').textContent = sectionIcon;
   document.getElementById('section-title').textContent = currentSectionData.title;
