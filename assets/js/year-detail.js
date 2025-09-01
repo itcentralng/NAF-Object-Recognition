@@ -315,7 +315,7 @@ function startAutoScroll() {
     if (isAutoScrollPaused) return;
 
     const maxScroll = timeline.scrollHeight - timeline.clientHeight;
-    const scrollStep = 1; // Pixels per step
+    const scrollStep = 2; // Pixels per step (2x faster)
     
     currentScrollPosition += scrollDirection * scrollStep;
     
@@ -329,7 +329,7 @@ function startAutoScroll() {
     }
     
     timeline.scrollTop = currentScrollPosition;
-  }, 10); // Smooth scrolling - adjust speed as needed
+  }, 50); // Smooth scrolling - adjust speed as needed
 }
 
 function stopAutoScroll() {
