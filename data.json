@@ -1171,7 +1171,250 @@
             "id":"finance-evolution",
             "logo":"image/nafsfa-logo.png",
             "title":"Evolution of NAF Finance Specialty",
-            "year-ranges":[]
+            "year-ranges":[
+                {
+                    "1972-1999": [
+                        {
+                            "year": "1972",
+                            "highlights": [
+                                {
+                                    "title": "Establishment of the NAF Pay and Records Group",
+                                    "description": "At inception, the financial administration of the NAF was vested with the Nigerian Army. With the passage of time, the NAF became self-accounting on 1 Apr 72 and was headed by a chief paymaster. With broader roles, growing manpower and expanded force structure witnessed in the early 1980s, the NAF Pay and Records was seperated thereby giving birth to 2 independent establishments designed as the Pay and Accounting Group and the Personnel Management Group respectively.",
+                                    "period": "Apr-72",
+                                    "cas": "Lt Col FO Folaji"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1990s",
+                            "highlights": [
+                                {
+                                    "title": "Abolishment of table payment in the NAF and transition to banking operations",
+                                    "description": "Before the 1980s, NAF personnel were paid salaries, allowances and other entitlements in cash via table payment. The process required a lot of manual actions such as physical cash handling that was slow and largely inaccurate. With the evolution of banking system and operations in Nigeria, the NAF Finance Corps at the time pushed for the abolishment of the table payment method and began to make payments to individual salary accounts of personnel through banks. This change brought about ease for NAF personnel and also improved efficiency and accountability.",
+                                    "period": "Mid-1990s"
+                                },
+                                {
+                                    "title": "Computerization of Salary Payment Processes in Pay and Accounting Group",
+                                    "description": "Prior to computerization, binders were used for computation of salaries and allowances in PAG. This required manual entries, manual computations and manual deductions of charges. A system called ACROL was used to generate and print salary schedules. Each page of the schedule had particulars of only 25 NAF personnel which were printed from the Machine Room in PAG. The NAF leveraged the computer revolution and computerized the salary payment processes in phases. As directed by HQ NAF, PAG subscribed to a programme named dBase III which was first used to process salaries of officers only. Subsequently, more efficient systems were developed leading to the NAF subscribing to a more efficient and flexible software solution called \"Soja Pay\". The system features include payroll processing, reports, summaries and data management. The system also provided a training opportunity for personnel on specialized systems training.",
+                                    "period": "Late 1990s",
+                                    "cas": "Air Mshl IM Alfa",
+                                    "cab": "Gp Capt EU Essien"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "2000-2013": [
+                        {
+                            "year": "2003",
+                            "highlights": [
+                                {
+                                    "title": "Creation of a new logo for NAF Finance Corps",
+                                    "description": "In an efforts towards repositioning and rebranding, a new logo was created for the NAF Finance Corps. The new logo depicted cowry shells symbolizing the medium of exchange widely used in African and some Asian countries.",
+                                    "cas": "Air Mshl JD Wuyep",
+                                    "cab": "Gp Capt BB Sabiyi"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2008",
+                            "highlights": [
+                                {
+                                    "title": "Justification and Allocation of funds for Accounting Machines and Manuals in Unit Overhead Allocations",
+                                    "description": "Pay officers serving in pay offices in NAF units and command HQs are shouldered with the responsibility of periodic rendition of returns for all public funds expended. The rendition of returns required printing of government special accounting forms such as AB57, G.1033 and P.1922 among others. Prior to 2008, special provisions were not made to print the forms, thereby hindering the ability of the pay officers and supervisors to carryout their statutory duties. The CAB, Air Cdre SA Yushau approved the allocation of funds to all pay offices for provision of accounting forms, manuals and servicing of critical machines as well as appliances.",
+                                    "cas": "Air Mshl MD Umar",
+                                    "cab": "Air Cdre SA Yushau"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2009-2010",
+                            "highlights": [
+                                {
+                                    "title": "Introduction of Staff Grant",
+                                    "description": "In 2009, Air Cdre AA Malomo sought the approval of the CAS, Air Mshl OO Petinrin to introduce a monthly staff grant for AVMs in the NAF. The laudable initiative was to provide AVMs with resources to encourage and empower them to effectively carry out the taskings of the respective strategic roles they played towards actualization of NAF objectives. The impact the grant had on welfare of NAF senior officers led the Army and Navy to adopt the same initiative. Subsequently, the grant was standardized, approved and gazetted in the MAFA among other non-regular allowances paid to personnel of the 3 services.",
+                                    "period": "2009 - 2010",
+                                    "cas": "Air Mshl OO Petinrin",
+                                    "cab": "Air Cdre AA Malomo"
+                                },
+                                {
+                                    "title": "Digitization and electronic transmission of payslips to NAF personnel",
+                                    "description": "Payslips were earlier printed in hardcopy slips and distributed to various units and commands. The monthly distributions required significant logistics. Also, a good number of personnel either get their payslips late or do not get them. With the passing of time, the NAF Finance Corps leveraged available solutions to electronically generate payslips and send to respective personnel either via emails or to mobile telephones numbers using bulk messaging services."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "2014-2020": [
+                        {
+                            "year": "2014",
+                            "highlights": [
+                                {
+                                    "title": "Establishment of NAFSFA in Badagry",
+                                    "description": "In order to provide finance personnel with requisite knowledge to effectively carryout their roles and responsibilities, the Nigerian Air Force School of Finance and Accounts was established in Badagry. Finance clerks attended the finance upgrading courses while newly commissioned finance officers attended the Basic Finance Officers' Course. The primary learning objectives were to among others, prepare pay clerks and finance officers to carryout their roles in accordance with unit pay procedures, understand and appreciate the rudiments of audit exercises, taxation and financial accounting and management.",
+                                    "period": "Aug-14",
+                                    "cas": "Air Mshl AN Amosu",
+                                    "cab": "AVM JB Adigun"
+                                },
+                                {
+                                    "title": "Upgrade of Directorate of Finance and Accounts to Accounts and Budget Branch",
+                                    "description": "Due to its growing roles and responsibilities, there was a call for the Directorate of Finance and Accounts to be upgraded to a Branch. Also, the growing number of finance personnel and their specialization in various accounting fields justified the call for the upgrade. In Jul 14, Air Mshl AN Amosu authorized the highly anticipated status upgrade from a Directorate to the Accounts and Budget Branch. The upgrade came with the promotion of the first AVM in the Finance Specialty and appointment of a Chief of Accounts and Budget.",
+                                    "period": "Jul-14",
+                                    "cas": "Air Mshl AN Amosu",
+                                    "cab": "AVM JB Adigun"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2014-2018",
+                            "highlights": [
+                                {
+                                    "title": "Development and publication of training manuals for finance personnel",
+                                    "description": "A team of experienced finance officers and clerks were tasked to draft and produce training manuals. The manuals serve as educational guides to enable finance officers study for the specialist subject during the officers' promotion exams. The manuals also helped clerks adequately prepare for their accounts upgrading courses. These manuals have served as good study materials for the development of finance personnel in the NAF.",
+                                    "cas": "Air Mshl SB Abubakar",
+                                    "cab": "AVM CA Ogbeche"
+                                },
+                                {
+                                    "title": "Change of Nomenclature from PAG to 081 PAG",
+                                    "description": "The NAF leadership embarked on a service-wide restructuring of establishments which saw the change of nomenclature of Pay and Accounting Group (PAG) to 081 PAG.",
+                                    "cas": "Air Mshl SB Abubakar",
+                                    "cab": "AVM CA Ogbeche"
+                                },
+                                {
+                                    "title": "Upgrade of Inspectorate Wing to Directorate of Inspections",
+                                    "description": "The erstwhile Inspectorate Wing in PAG was upgraded to a Directorate. The upgrade was primarily to ensure independence of the Directorate from the Comd PAG who controlled NAF funds. The upgrade to Directorate granted autonomy from PAG and empowered it to inspect all NAF accounts at command and unit levels."
+                                },
+                                {
+                                    "title": "Reorganization of the Directorate of Budget from the Policy and Plans Branch",
+                                    "description": "The Directorate of Budget was created under the Policy and Plans Branch. Due to the specialist nature of the roles required of the Directorate, it was excised from the Policy and Plans Branch and adopted by the A&B Branch."
+                                },
+                                {
+                                    "title": "Creation of the Office of the Deputy Director of Strategic Financial Plans",
+                                    "description": "The Deputy Director of Strategic Financial Plans was created under the Policy and Plans Branch.",
+                                    "cas": "Air Mshl AS Badeh",
+                                    "cab": "Air Cdre YA Yushau"
+                                },
+                                {
+                                    "title": "Establishment of Directorate of Non-Public Funds",
+                                    "description": "The Directorate of Non-Public funds was established to carryout oversight functions of financial activities of NAF entities that receive and expend non-public funds. The primary mandate of the Directorate is to ensure transparency and accountability."
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2018",
+                            "highlights": [
+                                {
+                                    "title": "Re-designation of the Office of the NAF Cashier to Commanding Officer Treasury Wing at 081 PAG",
+                                    "description": "In line with the Federal Government Financial Reforms, the erstwhile Office of the NAF Cashier was re-designated to CO Treasury Wing. The change was in compliance with Federal Government financial policy.",
+                                    "cas": "Air Mshl SB Abubakar",
+                                    "cab": "AVM CA Ogbeche"
+                                },
+                                {
+                                    "title": "Integration of NAF salaries with IPPIS platform",
+                                    "description": "In order to enhance accountability and streamline Federal Government salary payment processes, the NAF integrated the payroll of its personnel into the IPPIS platform. Though it came with a lot of administrative challenges, the A&B Branch ensured constant liaison to ensure strict compliance and operationalization.",
+                                    "cas": "Air Mshl SB Abubakar",
+                                    "cab": "AVM CA Ogbeche"
+                                },
+                                {
+                                    "title": "Adoption of FGN Government Integrated Financial Management Information System (GIFMIS) system for revenue collection and disbursement",
+                                    "description": "In compliance with the Federal Government directive, the A&B Branch adopted the GIFMIS which is a web-based platform designed to streamline and automate government financial transactions in Nigeria. The platform allowed access to finance personnel in the A&B Branch to upload and track payments to the NAF in real-time. The system supported the FGN Treasury Single Account policy. This has overtime proven to enhance efficiency of financial operations.",
+                                    "cas": "Air Mshl SB Abubakar",
+                                    "cab": "AVM CA Ogbeche"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "2021-2025": [
+                        {
+                            "year": "2021",
+                            "highlights": [
+                                {
+                                    "title": "Designation of Ibadan as permanent site for NAFSFA",
+                                    "description": "As a coastal town and its low-lying terrain, Badagry experienced annual flooding as a result of constant rainfall. This led to waterlogging of NAFSFA academic area and students' hostel. The situation gave rise to concerns of health, flooding and transportation challenges. This forced the School to constantly alter its academic calendar which occasionally had an effect on the promotion of finance clerks. In view of the environmental challenges, Ibadan was designed as the permanent site of NAFSFA.",
+                                    "cas": "Air Mshl IO Amao",
+                                    "cab": "AVM CA Ogbeche"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2021-2024",
+                            "highlights": [
+                                {
+                                    "title": "Establishment of the NAF Microfinance Bank",
+                                    "description": "In 2021, the idea to establish a microfinance bank for the NAF was conceived by AVM CA Ogbeche. Later that year, a committee was constituted by AVM JA Ochomma which lead to registrations with CBN and development of a feasibility study for the microfinance bank. AVM HA Adebowale was tasked with the responsibility of sorting out all documentation in accordance with CBN regulations. Also, AVM HA Adebowale led the advocacy to NAFILGC and her subsidiaries to be major shareholders of the microfinance bank. After the fulfillment of all the requirements, NAF Microfinance Bank was established. After obtaining the approval of the CAS, Air Mshl HB Abubakar, the CAB, AVM CU Nwagwu pushed for the commissioning of the bank in NAF Valley, Asokoro, Abuja. The NAF Microfinance Bank was established to primarily avail NAF personnel and their dependents an alternative of specially tailored banking services. Similarly, an objective of the NAF Microfinance Bank was to offer personnel opportunity to enjoy products specially developed to cater to their welfare needs.",
+                                    "period": "2021 - 2024",
+                                    "cas": "Air Mshl HB Abubakar",
+                                    "cab": "AVM CU Nwagwu"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2023",
+                            "highlights": [
+                                {
+                                    "title": "Introduction of CAB Virtual Meetings with all finance officers",
+                                    "description": "In order to facilitate communication and foster a sense of unity and shared purpose among finance personnel, the CAB introduced the conduct of quarterly virtual meetings with all finance officers. The virtual meetings offered a platform for finance officers to listen and participate in discussions. Also, officers were offered the opportunity to brief the Branch on happenings in their respective units.",
+                                    "cas": "Air Mshl HB Abubakar",
+                                    "cab": "AVM CU Nwagwu"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2023-2025",
+                            "highlights": [
+                                {
+                                    "title": "Conceptualization and construction of building for NAFSFA in Ibadan",
+                                    "description": "In order to meet the specific needs and ensure optimum utilization of space and enhanced efficiency, a building design was conceptualized and developed for NAFSFA in Ibadan. The building design was carefully developed to capture all the special needs of a standard academic institution.",
+                                    "period": "2023 - 2025",
+                                    "cas": "Air Mshl IO Amao",
+                                    "cab": "AVM JA Ochomma"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2024",
+                            "highlights": [
+                                {
+                                    "title": "Conduct of a tailored in-house training for finance personnel in the A&B Branch",
+                                    "description": "In an effort to continually develop the capacity of finance officers and clerks, the CAB directed the conduct of an in-house training in the A&B Branch. The purpose was to avail finance personnel an opportunity to have a deeper understanding of the budgeting and payment processes initiated by HQ NAF. Also, the training was aimed at providing an opportunity for the personnel to have a first hand feel of the working nature in the A&B Branch.",
+                                    "period": "Mar-24",
+                                    "cas": "Air Mshl HB Abubakar",
+                                    "cab": "AVM CU Nwagwu"
+                                },
+                                {
+                                    "title": "Introduction of Intermediate and Advanced Courses for finance personnel in NAFSFA",
+                                    "description": "In order to train and develop the capacity of NAF finance personnel, the CAB leveraged a key driver of the CAS to introduce intermediate and advanced finance courses in NAFSFA. The objective was to close the knowledge gap and continually train finance personnel on the constant evolution of the global finance as a profession.",
+                                    "period": "Mar-24",
+                                    "cas": "Air Mshl HB Abubakar",
+                                    "cab": "AVM CU Nwagwu"
+                                },
+                                {
+                                    "title": "Development of a curriculum for Intermediate and Advanced Courses for finance personnel in NAFSFA",
+                                    "description": "A team of experienced finance officers were tasked to develop curricula for an intermediate and an advanced finance course for finance clerks and officers. The curricula covered various academic areas that are generally aimed at equipping finance personnel to execute their roles in a constantly evolving profession.",
+                                    "period": "Mar-24",
+                                    "cas": "Air Mshl HB Abubakar",
+                                    "cab": "AVM CU Nwagwu"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2025",
+                            "highlights": [
+                                {
+                                    "title": "Relocation of NAFSFA from Badagry to Permanent Site in Ibadan",
+                                    "description": "The completion of the permanent NAFSFA facility in Ibadan marked the successful relocation of the school from its temporary site in Badagry to its purpose-built permanent home.",
+                                    "cas": "Air Mshl HB Abubakar",
+                                    "cab": "AVM CU Nwagwu"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
