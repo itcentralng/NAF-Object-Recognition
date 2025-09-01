@@ -151,8 +151,8 @@ function renderYearDetail() {
   // Update sidebar title
   const sidebarTitle = document.getElementById('sidebar-title');
   if (sidebarTitle) {
-    const sectionNames = { 'naf-history': 'NAF History', 'nafsfa-history': 'NAF School of Finance and Account', 'finance-evolution': 'Evolution of NAF Finance Specialty' };
-    sidebarTitle.textContent = sectionNames[sectionId] || 'History';
+    // Use the actual section title from the data instead of hardcoded values
+    sidebarTitle.textContent = currentSectionData.title || 'History';
   }
 
   // Update back button text based on navigation context
@@ -646,8 +646,8 @@ function renderYearDetail() {
   // Update sidebar title
   const sidebarTitle = document.getElementById('sidebar-title');
   if (sidebarTitle) {
-    const sectionNames = { 'naf-history': 'NAF History', 'nafsfa-history': 'NAF School of Finance and Account', 'finance-evolution': 'Evolution of NAF Finance Specialty' };
-    sidebarTitle.textContent = sectionNames[sectionId] || 'History';
+    // Use the actual section title from the data instead of hardcoded values
+    sidebarTitle.textContent = currentSectionData.title || 'History';
   }
 
   // Update back button text based on navigation context
@@ -1075,5 +1075,6 @@ function updateSidebarLogo() {
   const sidebarLogo = document.querySelector('.nav-logo');
   if (sidebarLogo && currentSectionData && currentSectionData.logo) {
     sidebarLogo.src = currentSectionData.logo;
+    sidebarLogo.alt = `${currentSectionData.title} Logo`;
   }
 }
