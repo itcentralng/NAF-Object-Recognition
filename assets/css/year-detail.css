@@ -1,0 +1,185 @@
+/* assets/css/year-detail.css */
+
+body.year-detail-page {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left Sidebar: Year List */
+.year-list-sidebar {
+  width: 280px;
+  background: rgba(12, 12, 22, 0.8);
+  border-right: 1px solid rgba(196, 30, 58, 0.3);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  backdrop-filter: blur(5px);
+}
+
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(196, 30, 58, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+}
+
+#sidebar-title {
+  font-size: 1.4rem;
+  color: #c41e3a;
+  margin: 0;
+}
+
+.years-grid-sidebar {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.year-card-sidebar {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #c41e3a;
+}
+
+.year-card-sidebar:hover {
+  background: rgba(196, 30, 58, 0.2);
+  border-color: #c41e3a;
+}
+
+.year-card-sidebar.selected {
+  background: #c41e3a;
+  color: #ffffff;
+  border-color: #c41e3a;
+  box-shadow: 0 0 15px rgba(196, 30, 58, 0.5);
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(196, 30, 58, 0.3);
+}
+
+.back-btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #c41e3a;
+  color: #c41e3a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.back-btn:hover {
+  background: #c41e3a;
+  color: #ffffff;
+}
+
+/* Right Content: Year Details */
+.year-detail-container {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.year-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 25px;
+}
+
+.year-badge {
+  background: #c41e3a;
+  color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(196, 30, 58, 0.7);
+}
+
+#year-title {
+  font-size: 2.2rem;
+  margin: 0 0 8px 0;
+  color: #ffffff;
+}
+
+#year-summary {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.events-section h2 {
+  font-size: 1.8rem;
+  color: #c41e3a;
+  margin-bottom: 20px;
+}
+
+.events-scroll-container {
+  height: calc(100vh - 350px); /* Adjust based on header/footer height */
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.events-timeline {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Custom scrollbar for timeline */
+.events-timeline::-webkit-scrollbar {
+  width: 8px;
+}
+.events-timeline::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+.events-timeline::-webkit-scrollbar-thumb {
+  background-color: #c41e3a;
+  border-radius: 4px;
+}
+
+.year-navigation {
+  margin-top: 20px;
+}

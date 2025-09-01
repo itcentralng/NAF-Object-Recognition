@@ -20,68 +20,103 @@
     <link rel="stylesheet" href="assets/css/utilities.css" />
     <link rel="stylesheet" href="assets/css/shared.css" />
     <link rel="stylesheet" href="assets/css/section.css" />
+    <link rel="stylesheet" href="assets/css/year-detail.css" />
   </head>
-  <body class="flex justify-center align-start year-detail-page">
-    <!-- Navigation Header -->
-    <nav class="nav-header">
-      <div class="nav-content">
-        <button class="back-btn" onclick="goBackToSection()" id="back-btn">
-          <span>←</span> <span id="back-btn-text">Back to Section</span>
-        </button>
-        <div class="nav-title">
-          <img src="images/Nigerian_Air_Force-Logo.wine 1.png" alt="NAF Logo" class="nav-logo" />
-          <h2 id="nav-year-title">Year Detail</h2>
+  <body class="year-detail-page">
+    <!-- Main container for the two-column layout -->
+    <div class="main-container">
+      <!-- Left Sidebar: Year List -->
+      <div class="year-list-sidebar" id="year-list-sidebar">
+        <div class="sidebar-header">
+          <img
+            src="images/Nigerian_Air_Force-Logo.wine 1.png"
+            alt="NAF Logo"
+            class="nav-logo"
+          />
+          <h2 id="sidebar-title">NAF History</h2>
         </div>
-      </div>
-    </nav>
-
-    <div class="year-detail-container" id="year-detail-container">
-      <!-- Loading State -->
-      <div class="loading-message" id="loading-message">
-        <p>Loading year details...</p>
-      </div>
-
-      <!-- Year Detail Content -->
-      <div class="year-detail-content" id="year-detail-content" style="display: none;">
-        <!-- Year Header -->
-        <div class="year-header">
-          <div class="year-badge">
-            <span id="year-number">1972</span>
-          </div>
-          <div class="year-title-section">
-            <h1 id="year-title">Loading...</h1>
-            <p id="year-summary">Loading summary...</p>
+        <div class="years-grid-sidebar" id="years-grid-sidebar">
+          <!-- Year cards will be loaded here -->
+          <div class="loading-message">
+            <p>Loading years...</p>
           </div>
         </div>
-
-        <!-- Events Timeline -->
-        <div class="events-section">
-          <h2>📋 Historical Events</h2>
-          <div class="events-scroll-container">
-            <div id="events-timeline" class="events-timeline auto-scroll">
-              <!-- Events will be loaded dynamically -->
-            </div>
-            <div class="scroll-indicator">
-              <span id="scroll-status">Auto-scrolling • Click to pause</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Navigation to Previous/Next Years -->
-        <div class="year-navigation">
-          <button id="prev-year-btn" class="nav-year-btn" style="display: none;" onclick="navigateToPreviousYear()">
-            <span>←</span> <span id="prev-year-text">Previous Year</span>
-          </button>
-          <button id="next-year-btn" class="nav-year-btn" style="display: none;" onclick="navigateToNextYear()">
-            <span id="next-year-text">Next Year</span> <span>→</span>
+        <div class="sidebar-footer">
+          <button class="back-btn" onclick="goBackToSection()" id="back-btn">
+            <span>←</span> <span id="back-btn-text">Back to Section</span>
           </button>
         </div>
       </div>
 
-      <!-- Error State -->
-      <div class="error-message" id="error-message" style="display: none;">
-        <p>Error loading year details. Please try again.</p>
-        <button onclick="goBackToSection()" class="btn-secondary">Return to Section</button>
+      <!-- Right Content: Year Details -->
+      <div class="year-detail-container" id="year-detail-container">
+        <!-- Loading State -->
+        <div class="loading-message" id="loading-message">
+          <p>Loading year details...</p>
+        </div>
+
+        <!-- Year Detail Content -->
+        <div
+          class="year-detail-content"
+          id="year-detail-content"
+          style="display: none"
+        >
+          <!-- Year Header -->
+          <div class="year-header">
+            <div class="year-badge">
+              <span id="year-number">1972</span>
+            </div>
+            <div class="year-title-section">
+              <h1 id="year-title">Loading...</h1>
+              <p id="year-summary">Loading summary...</p>
+            </div>
+          </div>
+
+          <!-- Events Timeline -->
+          <div class="events-section">
+            <h2>📋 Historical Events</h2>
+            <div class="events-scroll-container">
+              <div id="events-timeline" class="events-timeline auto-scroll">
+                <!-- Events will be loaded dynamically -->
+              </div>
+              <div class="scroll-indicator">
+                <span id="scroll-status">Auto-scrolling • Click to pause</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation to Previous/Next Years -->
+          <div class="year-navigation">
+            <button
+              id="prev-year-btn"
+              class="nav-year-btn"
+              style="display: none"
+              onclick="navigateToPreviousYear()"
+            >
+              <span>←</span> <span id="prev-year-text">Previous Year</span>
+            </button>
+            <button
+              id="next-year-btn"
+              class="nav-year-btn"
+              style="display: none"
+              onclick="navigateToNextYear()"
+            >
+              <span id="next-year-text">Next Year</span> <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div
+          class="error-message"
+          id="error-message"
+          style="display: none"
+        >
+          <p>Error loading year details. Please try again.</p>
+          <button onclick="goBackToSection()" class="btn-secondary">
+            Return to Section
+          </button>
+        </div>
       </div>
     </div>
 
