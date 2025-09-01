@@ -315,7 +315,7 @@ function startAutoScroll() {
     if (isAutoScrollPaused) return;
 
     const maxScroll = timeline.scrollHeight - timeline.clientHeight;
-    const scrollStep = 2; // Pixels per step (2x faster)
+    const scrollStep = 1;
     
     currentScrollPosition += scrollDirection * scrollStep;
     
