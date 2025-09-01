@@ -361,37 +361,6 @@ body.year-detail-page {
   font-size: 1.5rem;
 }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(12, 12, 22, 0.95);
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-  padding: 12px;
-  font-size: 0.85rem;
-  border-top: 1px solid rgba(52, 152, 219, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.scroll-indicator:hover {
-  background: rgba(52, 152, 219, 0.1);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.scroll-indicator.paused {
-  background: rgba(52, 152, 219, 0.2);
-  border-top-color: rgba(52, 152, 219, 0.6);
-}
-
-.scroll-indicator.paused #scroll-status {
-  color: #3498db;
-  font-weight: 500;
-}
-
 /* Image Modal Styles */
 .image-modal {
   position: fixed;

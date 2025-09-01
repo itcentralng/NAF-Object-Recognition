@@ -802,10 +802,8 @@ let scrollInterval = 16; // milliseconds (approximately 60fps)
 
 function initializeAutoScroll() {
   const timeline = document.getElementById('events-timeline');
-  const scrollIndicator = document.querySelector('.scroll-indicator');
-  const scrollStatus = document.getElementById('scroll-status');
   
-  if (!timeline || !scrollStatus) return;
+  if (!timeline) return;
 
   // Prepare infinite scroll by duplicating events
   prepareInfiniteScroll(timeline);
@@ -813,19 +811,11 @@ function initializeAutoScroll() {
   // Start auto-scroll
   startSmoothAutoScroll(timeline);
   
-  // Update scroll status
-  scrollStatus.textContent = 'Auto-scrolling through events • Hover to pause';
-  
-  // Add interaction event listeners
+  // Add interaction event listeners for pause on hover
   timeline.addEventListener('mouseenter', pauseAutoScroll);
   timeline.addEventListener('mouseleave', resumeAutoScroll);
   timeline.addEventListener('touchstart', pauseAutoScroll, { passive: true });
   timeline.addEventListener('touchend', resumeAutoScroll, { passive: true });
-  
-  // Click to toggle auto-scroll
-  if (scrollIndicator) {
-    scrollIndicator.addEventListener('click', toggleAutoScroll);
-  }
 }
 
 function prepareInfiniteScroll(timeline) {
@@ -890,35 +880,10 @@ function stopAutoScroll() {
 
 function pauseAutoScroll() {
   isAutoScrollPaused = true;
-  updateScrollStatus();
 }
 
 function resumeAutoScroll() {
   isAutoScrollPaused = false;
-  updateScrollStatus();
-}
-
-function toggleAutoScroll() {
-  if (isAutoScrollPaused) {
-    resumeAutoScroll();
-  } else {
-    pauseAutoScroll();
-  }
-}
-
-function updateScrollStatus() {
-  const scrollStatus = document.getElementById('scroll-status');
-  const scrollIndicator = document.querySelector('.scroll-indicator');
-  
-  if (!scrollStatus || !scrollIndicator) return;
-
-  if (isAutoScrollPaused) {
-    scrollStatus.textContent = 'Auto-scroll paused • Click to resume or move mouse away';
-    scrollIndicator.classList.add('paused');
-  } else {
-    scrollStatus.textContent = 'Auto-scrolling through events • Hover to pause';
-    scrollIndicator.classList.remove('paused');
-  }
 }
 
 // Initialize the year detail viewer
@@ -926,46 +891,6 @@ document.addEventListener('DOMContentLoaded', function() {
   loadYearData();
   setupSocketListeners();
 });
-
-function stopAutoScroll() {
-  if (autoScrollInterval) {
-    clearInterval(autoScrollInterval);
-    autoScrollInterval = null;
-  }
-}
-
-function pauseAutoScroll() {
-  isAutoScrollPaused = true;
-  updateScrollStatus();
-}
-
-function resumeAutoScroll() {
-  isAutoScrollPaused = false;
-  updateScrollStatus();
-}
-
-function toggleAutoScroll() {
-  if (isAutoScrollPaused) {
-    resumeAutoScroll();
-  } else {
-    pauseAutoScroll();
-  }
-}
-
-function updateScrollStatus() {
-  const scrollStatus = document.getElementById('scroll-status');
-  const scrollIndicator = document.querySelector('.scroll-indicator');
-  
-  if (!scrollStatus || !scrollIndicator) return;
-
-  if (isAutoScrollPaused) {
-    scrollStatus.textContent = 'Auto-scroll paused • Click to resume';
-    scrollIndicator.classList.add('paused');
-  } else {
-    scrollStatus.textContent = 'Auto-scrolling • Click to pause';
-    scrollIndicator.classList.remove('paused');
-  }
-}
 
 function setupNavigation() {
   const prevBtn = document.getElementById('prev-year-btn');
