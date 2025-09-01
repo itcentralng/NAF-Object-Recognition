@@ -3,6 +3,12 @@ let currentYearData = null;
 let currentYearIndex = -1;
 let currentYearRange = null; // Track the year range for navigation
 
+// Auto-scroll variables
+let autoScrollInterval = null;
+let isAutoScrollPaused = false;
+let scrollDirection = 1; // 1 for down, -1 for up
+let currentScrollPosition = 0;
+
 // Socket.IO Connection
 const socket = io('http://127.0.0.1:5550');
 
@@ -253,6 +259,117 @@ function renderEventsTimeline() {
       }, index * 200);
     });
   }, 100);
+
+  // Initialize auto-scroll functionality
+  initializeAutoScroll();
+}
+
+function initializeAutoScroll() {
+  const timeline = document.getElementById('events-timeline');
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  const scrollStatus = document.getElementById('scroll-status');
+  
+  if (!timeline) return;
+
+  // Check if content is scrollable
+  const isScrollable = timeline.scrollHeight > timeline.clientHeight;
+  
+  if (!isScrollable) {
+    // Hide scroll indicator if content doesn't scroll
+    if (scrollIndicator) {
+      scrollIndicator.style.display = 'none';
+    }
+    return;
+  }
+
+  // Start auto-scroll
+  startAutoScroll();
+
+  // Add event listeners for pause/resume functionality
+  timeline.addEventListener('mousedown', pauseAutoScroll);
+  timeline.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+  
+  timeline.addEventListener('mouseup', resumeAutoScroll);
+  timeline.addEventListener('touchend', resumeAutoScroll, { passive: true });
+  
+  // Also pause on mouse enter and resume on mouse leave for better UX
+  timeline.addEventListener('mouseenter', pauseAutoScroll);
+  timeline.addEventListener('mouseleave', resumeAutoScroll);
+
+  // Click handler for the scroll indicator
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', toggleAutoScroll);
+  }
+
+  // Update scroll status text
+  updateScrollStatus();
+}
+
+function startAutoScroll() {
+  const timeline = document.getElementById('events-timeline');
+  if (!timeline) return;
+
+  stopAutoScroll(); // Clear any existing interval
+
+  autoScrollInterval = setInterval(() => {
+    if (isAutoScrollPaused) return;
+
+    const maxScroll = timeline.scrollHeight - timeline.clientHeight;
+    const scrollStep = 1; // Pixels per step
+    
+    currentScrollPosition += scrollDirection * scrollStep;
+    
+    // Check bounds and reverse direction
+    if (currentScrollPosition >= maxScroll) {
+      scrollDirection = -1;
+      currentScrollPosition = maxScroll;
+    } else if (currentScrollPosition <= 0) {
+      scrollDirection = 1;
+      currentScrollPosition = 0;
+    }
+    
+    timeline.scrollTop = currentScrollPosition;
+  }, 50); // Smooth scrolling - adjust speed as needed
+}
+
+function stopAutoScroll() {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
+}
+
+function pauseAutoScroll() {
+  isAutoScrollPaused = true;
+  updateScrollStatus();
+}
+
+function resumeAutoScroll() {
+  isAutoScrollPaused = false;
+  updateScrollStatus();
+}
+
+function toggleAutoScroll() {
+  if (isAutoScrollPaused) {
+    resumeAutoScroll();
+  } else {
+    pauseAutoScroll();
+  }
+}
+
+function updateScrollStatus() {
+  const scrollStatus = document.getElementById('scroll-status');
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  
+  if (!scrollStatus || !scrollIndicator) return;
+
+  if (isAutoScrollPaused) {
+    scrollStatus.textContent = 'Auto-scroll paused • Click to resume';
+    scrollIndicator.classList.add('paused');
+  } else {
+    scrollStatus.textContent = 'Auto-scrolling • Click to pause';
+    scrollIndicator.classList.remove('paused');
+  }
 }
 
 function setupNavigation() {
@@ -414,4 +531,18 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
   loadYearData();
   setupSocketListeners();
+});
+
+// Cleanup when page is unloaded
+window.addEventListener('beforeunload', function() {
+  stopAutoScroll();
+});
+
+// Pause auto-scroll when page loses focus
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    pauseAutoScroll();
+  } else {
+    resumeAutoScroll();
+  }
 });

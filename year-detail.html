@@ -57,8 +57,13 @@
         <!-- Events Timeline -->
         <div class="events-section">
           <h2>📋 Historical Events</h2>
-          <div id="events-timeline" class="events-timeline">
-            <!-- Events will be loaded dynamically -->
+          <div class="events-scroll-container">
+            <div id="events-timeline" class="events-timeline auto-scroll">
+              <!-- Events will be loaded dynamically -->
+            </div>
+            <div class="scroll-indicator">
+              <span id="scroll-status">Auto-scrolling • Click to pause</span>
+            </div>
           </div>
         </div>
 
