@@ -148,7 +148,7 @@ function renderYearDetail() {
   // Update sidebar title
   const sidebarTitle = document.getElementById('sidebar-title');
   if (sidebarTitle) {
-    const sectionNames = { 'naf-history': 'NAF History', 'nafsfa-history': 'NAFSFA History' };
+    const sectionNames = { 'naf-history': 'NAF History', 'nafsfa-history': 'NAF School of Finance and Account', 'finance-evolution': 'Evolution of NAF Finance Specialty' };
     sidebarTitle.textContent = sectionNames[sectionId] || 'History';
   }
 
@@ -643,7 +643,7 @@ function renderYearDetail() {
   // Update sidebar title
   const sidebarTitle = document.getElementById('sidebar-title');
   if (sidebarTitle) {
-    const sectionNames = { 'naf-history': 'NAF History', 'nafsfa-history': 'NAFSFA History' };
+    const sectionNames = { 'naf-history': 'NAF History', 'nafsfa-history': 'NAF School of Finance and Account', 'finance-evolution': 'Evolution of NAF Finance Specialty' };
     sidebarTitle.textContent = sectionNames[sectionId] || 'History';
   }
 

@@ -127,9 +127,11 @@ async function loadSectionData(object) {
         const response = await fetch('data.json');
         const data = await response.json();
         
-        // Map object to section - updated to only support NAF history
+        // Map object to section - support all available sections
         const sectionMap = {
-            'naf': 'naf-history'
+            'naf': 'naf-history',
+            'nafsfa': 'nafsfa-history',
+            'evol': 'finance-evolution'
         };
         
         const targetSectionId = sectionMap[object] || 'naf-history'; // Default to naf-history
@@ -147,7 +149,9 @@ async function loadSectionData(object) {
 
 function updatePageHeader(yearRange, object) {
     const sectionNames = {
-        'naf': 'NAF History'
+        'naf': 'NAF History',
+        'nafsfa': 'NAF School of Finance and Account',
+        'evol': 'Evolution of NAF Finance Specialty'
     };
     
     const sectionName = sectionNames[object] || 'NAF History';
@@ -225,7 +229,9 @@ function navigateToYear(year, hasData) {
     
     // Navigate to year detail page
     const sectionMap = {
-        'naf': 'naf-history'
+        'naf': 'naf-history',
+        'nafsfa': 'nafsfa-history',
+        'evol': 'finance-evolution'
     };
     
     const sectionId = sectionMap[currentObject] || 'naf-history';
@@ -237,7 +243,9 @@ function navigateToYear(year, hasData) {
 
 function getSectionIdFromObject(object) {
     const sectionMap = {
-        'naf': 'naf-history'
+        'naf': 'naf-history',
+        'nafsfa': 'nafsfa-history',
+        'evol': 'finance-evolution'
     };
     return sectionMap[object] || 'naf-history';
 }
