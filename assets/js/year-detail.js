@@ -20,6 +20,7 @@ if (!sectionId || !yearParam) {
 let autoScrollInterval = null;
 let isAutoScrollPaused = false;
 let isClickPaused = false; // Track click-based pause state
+let isAutoScrollEnabled = false; // Track if auto scroll is enabled by user
 let scrollSpeed = 1; // pixels per interval
 let scrollInterval = 16; // milliseconds (approximately 60fps)
 
@@ -287,6 +288,7 @@ function renderEventsTimeline() {
   
   // Reset click pause state on new content
   isClickPaused = false;
+  isAutoScrollPaused = false;
   
   // Initialize infinite scroll functionality immediately
   initializeAutoScroll();
@@ -300,20 +302,31 @@ function initializeAutoScroll() {
   // Prepare infinite scroll by duplicating events
   prepareInfiniteScroll(timeline);
   
-  // Start auto-scroll
-  startSmoothAutoScroll(timeline);
+  // Don't start auto-scroll automatically - wait for user to enable it
+  // startSmoothAutoScroll(timeline);
   
   // Initialize visual feedback
   updateScrollVisualFeedback();
+  updateAutoScrollButton();
   
-  // Add interaction event listeners for pause on hover
-  timeline.addEventListener('mouseenter', pauseAutoScroll);
-  timeline.addEventListener('mouseleave', resumeAutoScroll);
+  // Add interaction event listeners for pause on hover (only when auto scroll is enabled)
+  timeline.addEventListener('mouseenter', () => {
+    if (isAutoScrollEnabled) pauseAutoScroll();
+  });
+  timeline.addEventListener('mouseleave', () => {
+    if (isAutoScrollEnabled) resumeAutoScroll();
+  });
   
-  // Add click/touch event listeners for toggle pause/resume
-  timeline.addEventListener('click', toggleAutoScrollOnClick);
-  timeline.addEventListener('touchstart', pauseAutoScroll, { passive: true });
-  timeline.addEventListener('touchend', resumeAutoScroll, { passive: true });
+  // Add click/touch event listeners for toggle pause/resume (only when auto scroll is enabled)
+  timeline.addEventListener('click', (e) => {
+    if (isAutoScrollEnabled) toggleAutoScrollOnClick(e);
+  });
+  timeline.addEventListener('touchstart', () => {
+    if (isAutoScrollEnabled) pauseAutoScroll();
+  }, { passive: true });
+  timeline.addEventListener('touchend', () => {
+    if (isAutoScrollEnabled) resumeAutoScroll();
+  }, { passive: true });
 }
 
 function prepareInfiniteScroll(timeline) {
@@ -351,7 +364,7 @@ function startSmoothAutoScroll(timeline) {
   scrollSpeed = pixelsPerSecond / (1000 / scrollInterval); // Convert to pixels per interval
   
   autoScrollInterval = setInterval(() => {
-    if (isAutoScrollPaused) return;
+    if (isAutoScrollPaused || !isAutoScrollEnabled) return;
     
     const currentScrollTop = timeline.scrollTop;
     const newScrollTop = currentScrollTop + scrollSpeed;
@@ -380,8 +393,8 @@ function updateScrollVisualFeedback() {
   const timeline = document.getElementById('events-timeline');
   if (!timeline) return;
   
-  // Add visual indicator for paused state
-  if (isClickPaused) {
+  // Add visual indicator for paused state (only when auto scroll is enabled)
+  if (isClickPaused && isAutoScrollEnabled) {
     timeline.style.cursor = 'pointer';
     timeline.title = 'Click to resume auto-scroll';
     
@@ -411,8 +424,13 @@ function updateScrollVisualFeedback() {
       (container || timeline.parentNode).appendChild(indicator);
     }
   } else {
-    timeline.style.cursor = 'default';
-    timeline.title = 'Click to pause auto-scroll';
+    if (isAutoScrollEnabled) {
+      timeline.style.cursor = 'pointer';
+      timeline.title = 'Click to pause auto-scroll';
+    } else {
+      timeline.style.cursor = 'default';
+      timeline.title = '';
+    }
     
     // Remove visual indicator
     const indicator = timeline.parentNode.querySelector('.scroll-pause-indicator');
@@ -422,18 +440,66 @@ function updateScrollVisualFeedback() {
   }
 }
 
+// Function to toggle auto scroll on/off
+function toggleAutoScroll() {
+  isAutoScrollEnabled = !isAutoScrollEnabled;
+  
+  const timeline = document.getElementById('events-timeline');
+  if (!timeline) return;
+  
+  if (isAutoScrollEnabled) {
+    // Enable auto scroll
+    isClickPaused = false;
+    isAutoScrollPaused = false;
+    startSmoothAutoScroll(timeline);
+  } else {
+    // Disable auto scroll
+    stopAutoScroll();
+    isClickPaused = false;
+    isAutoScrollPaused = false;
+  }
+  
+  updateAutoScrollButton();
+  updateScrollVisualFeedback();
+}
+
+// Function to update the auto scroll button appearance
+function updateAutoScrollButton() {
+  const button = document.getElementById('auto-scroll-toggle');
+  const icon = document.getElementById('auto-scroll-icon');
+  const text = document.getElementById('auto-scroll-text');
+  
+  if (!button || !icon || !text) return;
+  
+  if (isAutoScrollEnabled) {
+    button.classList.add('active');
+    icon.textContent = '⏸️';
+    text.textContent = 'Disable Auto Scroll';
+  } else {
+    button.classList.remove('active');
+    icon.textContent = '▶️';
+    text.textContent = 'Enable Auto Scroll';
+  }
+}
+
 function pauseAutoScroll() {
-  isAutoScrollPaused = true;
+  // Only pause if auto scroll is enabled
+  if (isAutoScrollEnabled) {
+    isAutoScrollPaused = true;
+  }
 }
 
 function resumeAutoScroll() {
-  // Only resume if not click-paused
-  if (!isClickPaused) {
+  // Only resume if not click-paused and auto scroll is enabled
+  if (!isClickPaused && isAutoScrollEnabled) {
     isAutoScrollPaused = false;
   }
 }
 
 function toggleAutoScrollOnClick(event) {
+  // Only work when auto scroll is enabled
+  if (!isAutoScrollEnabled) return;
+  
   // Prevent triggering on child elements like images or buttons
   if (event.target.closest('.event-image-container') || 
       event.target.closest('button') || 
@@ -651,6 +717,8 @@ window.addEventListener('beforeunload', function() {
 
 // Pause auto-scroll when page loses focus
 document.addEventListener('visibilitychange', function() {
+  if (!isAutoScrollEnabled) return;
+  
   if (document.hidden) {
     pauseAutoScroll();
   } else {

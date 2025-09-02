@@ -184,6 +184,41 @@ body.year-detail-page {
   min-height: 0; /* Important for flex child to shrink */
 }
 
+.events-controls {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 15px 0;
+  flex-shrink: 0;
+}
+
+.auto-scroll-btn {
+  background: rgba(52, 152, 219, 0.1);
+  border: 1px solid #3498db;
+  color: #3498db;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.auto-scroll-btn:hover {
+  background: rgba(52, 152, 219, 0.2);
+  transform: translateY(-1px);
+}
+
+.auto-scroll-btn.active {
+  background: #3498db;
+  color: white;
+}
+
+.auto-scroll-btn.active:hover {
+  background: #2980b9;
+}
+
 .events-section h2 {
   font-size: 1.8rem;
   color: #3498db;
@@ -572,5 +607,15 @@ body.year-detail-page {
   
   .event-image {
     max-height: 200px;
+  }
+  
+  .events-controls {
+    justify-content: center;
+    padding: 0 0 10px 0;
+  }
+  
+  .auto-scroll-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
   }
 }
