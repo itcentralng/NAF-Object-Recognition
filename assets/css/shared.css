@@ -8,8 +8,10 @@
   --red-color: hsl(204, 70%, 53%);
   --transition: all 0.3s ease;
 }
-html {
-  scroll-behavior: smooth;
+/* Smooth scrolling disabled to prevent scroll effects on Windows */
+/* Ensure no scroll effects on Windows by setting scroll-behavior to auto globally */
+* {
+  scroll-behavior: auto !important;
 }
 * {
   box-sizing: border-box;
@@ -111,16 +113,20 @@ z-index: 0;
   mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent); */
 }
 
+/* Scroller animation disabled to prevent scroll effects on Windows */
 .scroller[data-animated="true"] .inner-scroller {
   width: max-content;
   flex-wrap: nowrap;
-  animation: scroll 10s linear infinite;
+  /* animation: scroll 10s linear infinite; */
 }
+/* Scroll animation keyframes disabled to prevent scroll effects on Windows */
+/*
 @keyframes scroll {
   to{
     transform: translateY(-50%);
   }
 }
+*/
 .section-2__header{
   color: grey;
 }

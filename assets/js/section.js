@@ -212,6 +212,12 @@ function getSectionDescription(sectionId) {
 }
 
 function createFloatingParticles() {
+    // Floating particles disabled to prevent scroll effects on Windows
+    // Keeping the function but making it do nothing
+    console.log('Floating particles disabled to prevent scroll effects on Windows');
+    return;
+    
+    /* Original particle creation code commented out
     const particlesContainer = document.getElementById('particles-container');
     if (!particlesContainer) return;
     
@@ -227,6 +233,7 @@ function createFloatingParticles() {
     setInterval(() => {
         createParticle(particlesContainer);
     }, 3000);
+    */
 }
 
 function createParticle(container) {
