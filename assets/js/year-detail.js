@@ -69,7 +69,6 @@ async function loadYearData() {
     }
 
     renderYearDetail();
-    setupNavigation();
     
   } catch (error) {
     console.error('Error loading year data:', error);
@@ -513,22 +512,6 @@ function navigateToYearWithinRange(year) {
     queryParams.set('range', currentYearRange);
   }
   window.location.href = `year-detail.html?${queryParams.toString()}`;
-}
-
-function navigateToPreviousYear() {
-  const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
-  const currentYear = parseInt(yearParam);
-  if (currentYear > startYear) {
-    navigateToYearInSection((currentYear - 1).toString());
-  }
-}
-
-function navigateToNextYear() {
-  const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
-  const currentYear = parseInt(yearParam);
-  if (currentYear < endYear) {
-    navigateToYearInSection((currentYear + 1).toString());
-  }
 }
 
 function goBackToSection() {
