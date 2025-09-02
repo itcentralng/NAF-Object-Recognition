@@ -172,8 +172,10 @@ function renderYearDetail() {
 function renderEventsTimeline() {
   const timelineContainer = document.getElementById('events-timeline');
   let timelineHTML = '';
+  let eventCount = 0;
   
   if (currentYearData.highlights && currentYearData.highlights.length > 0) {
+    eventCount = currentYearData.highlights.length;
     // Create events from highlights
     currentYearData.highlights.forEach((highlight, index) => {
       timelineHTML += `
@@ -253,6 +255,7 @@ function renderEventsTimeline() {
     ];
     
     const allEvents = [...baseEvents, ...additionalEvents];
+    eventCount = allEvents.length;
     
     allEvents.forEach((event, index) => {
       timelineHTML += `
@@ -284,6 +287,21 @@ function renderEventsTimeline() {
   }
   
   timelineContainer.innerHTML = timelineHTML;
+  
+  // Show/hide auto scroll button based on event count
+  const autoScrollControls = document.querySelector('.events-controls');
+  if (autoScrollControls) {
+    if (eventCount >= 2) {
+      autoScrollControls.style.display = 'block';
+    } else {
+      autoScrollControls.style.display = 'none';
+      // If auto scroll is currently enabled but we don't have enough events, disable it
+      if (isAutoScrollEnabled) {
+        isAutoScrollEnabled = false;
+        stopAutoScroll();
+      }
+    }
+  }
   
   // Reset click pause state on new content
   isClickPaused = false;
