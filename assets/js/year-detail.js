@@ -146,9 +146,9 @@ function renderYearDetail() {
   // Update back button text based on navigation context
   const backBtnText = document.getElementById('back-btn-text');
   if (currentYearRange) {
-    backBtnText.textContent = `Back to ${currentYearRange} Years`;
+    backBtnText.textContent = `Back`;
   } else {
-    backBtnText.textContent = 'Back to Section';
+    backBtnText.textContent = 'Back';
   }
   
   // Update year header with new structure
