@@ -32,13 +32,13 @@ struct YearMapping {
 
 // Define RFID UIDs for each year range
 YearMapping yearMappings[] = {
-  {"93 09 04 2D", "1962-1972"},
-  {"33 18 E3 13", "1973-1982"},
-  {"B3 4E E6 00", "1983-1992"},
-  {"CA D3 42 00", "1993-2002"},
-  {"D3 4F E6 0C", "2003-2012"},
-  {"53 AA DB 13", "2013-2022"},
-  {"13 35 A7 14", "2023-2032"}
+  {"93 09 04 2D", "1962-1971"},
+  {"33 18 E3 13", "1972-1981"},
+  {"B3 4E E6 00", "1982-1991"},
+  {"CA D3 42 00", "1992-2001"},
+  {"D3 4F E6 0C", "2002-2011"},
+  {"53 AA DB 13", "2012-2021"},
+  {"13 35 A7 14", "2022-2030"}
 };
 
 const int NUM_YEAR_MAPPINGS = sizeof(yearMappings) / sizeof(yearMappings[0]);
