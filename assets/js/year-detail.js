@@ -860,9 +860,9 @@ function startSmoothAutoScroll(timeline) {
   const originalEvents = timeline.querySelectorAll('.event-card:not([data-clone="true"])');
   if (originalEvents.length === 0) return;
   
-  // Calculate scroll distance for 3 seconds per event
+  // Calculate scroll distance for 6 seconds per event (reduced speed by half)
   const eventHeight = originalEvents[0].offsetHeight + 20; // Include margin
-  const pixelsPerSecond = eventHeight / 3; // Complete one event in 3 seconds
+  const pixelsPerSecond = eventHeight / 6; // Complete one event in 6 seconds (was 3 seconds)
   scrollSpeed = pixelsPerSecond / (1000 / scrollInterval); // Convert to pixels per interval
   
   autoScrollInterval = setInterval(() => {
