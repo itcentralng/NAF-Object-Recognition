@@ -32,6 +32,51 @@ if %errorlevel% equ 0 (
     echo.
     echo Latest commit:
     git log -1 --oneline
+    
+    :: Clear Microsoft Edge cache
+    echo.
+    echo Clearing Microsoft Edge cache...
+    
+    :: Clear DawnWebGPUCache
+    if exist "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DawnWebGPUCache" (
+        echo Clearing DawnWebGPUCache...
+        rmdir /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DawnWebGPUCache" 2>nul
+        if %errorlevel% equ 0 (
+            echo DawnWebGPUCache cleared successfully.
+        ) else (
+            echo Warning: Could not clear DawnWebGPUCache. It may be in use.
+        )
+    ) else (
+        echo DawnWebGPUCache not found.
+    )
+    
+    :: Clear DawnGraphiteCache
+    if exist "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DawnGraphiteCache" (
+        echo Clearing DawnGraphiteCache...
+        rmdir /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DawnGraphiteCache" 2>nul
+        if %errorlevel% equ 0 (
+            echo DawnGraphiteCache cleared successfully.
+        ) else (
+            echo Warning: Could not clear DawnGraphiteCache. It may be in use.
+        )
+    ) else (
+        echo DawnGraphiteCache not found.
+    )
+    
+    :: Clear general browser cache
+    if exist "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" (
+        echo Clearing general Edge cache...
+        rmdir /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" 2>nul
+        if %errorlevel% equ 0 (
+            echo General Edge cache cleared successfully.
+        ) else (
+            echo Warning: Could not clear general Edge cache. It may be in use.
+        )
+    ) else (
+        echo General Edge cache not found.
+    )
+    
+    echo Edge cache clearing completed.
 ) else (
     echo.
     echo Error: Failed to pull changes. Please check for merge conflicts or network issues.
