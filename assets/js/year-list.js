@@ -221,8 +221,8 @@ function hasDataForYearInRange(targetYear, yearRange) {
     
     // Check if we have data for this specific year within the specific year range
     return currentSectionData["year-ranges"].some(rangeObj => {
-        // Only look in the specific range object that matches our current year range
-        if (rangeObj[yearRange]) {
+        // Check if this range object contains the year range we're looking for
+        if (rangeObj.hasOwnProperty(yearRange)) {
             const yearArray = rangeObj[yearRange];
             // Check if any year in this specific range matches our target year AND has highlights
             return yearArray.some(yearData => {
