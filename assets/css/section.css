@@ -6,10 +6,43 @@
   scroll-behavior: auto !important;
 }
 
+/* Prevent unwanted scrollbars on Windows without affecting UX */
+html {
+  overflow-x: hidden;
+  height: 100%;
+}
+
 body {
   background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
   min-height: 100vh;
+  height: 100%;
   padding-top: 100px; /* Account for fixed navigation */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar styling for Windows browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(52, 152, 219, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(52, 152, 219, 0.5);
+}
+
+/* Hide scrollbars for Firefox on Windows when not needed */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(52, 152, 219, 0.3) rgba(0, 0, 0, 0.1);
 }
 
 /* Full page view for year detail page */
@@ -104,11 +137,14 @@ body {
   margin: 0 auto;
   padding: 2rem;
   min-height: calc(100vh - 120px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Year Range Detection Area (Full Width) */
 .year-range-detection-area {
   width: 100%;
+  max-width: 100%;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -118,6 +154,7 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .section-description-container {

@@ -10,24 +10,51 @@
 }
 /* Smooth scrolling disabled to prevent scroll effects on Windows */
 /* Ensure no scroll effects on Windows by setting scroll-behavior to auto globally */
+html {
+  overflow-x: hidden;
+  height: 100%;
+}
+
 * {
   scroll-behavior: auto !important;
-}
-* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: "poppins", sans-serif;
   width: 100%;
-
   height: 100%;
   background-color: var(--dark-color);
   color: white;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   margin: 0 auto;
   line-height: 1.2;
+}
+
+/* Custom scrollbar styling for Windows browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(52, 152, 219, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(52, 152, 219, 0.5);
+}
+
+/* Hide scrollbars for Firefox on Windows when not needed */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(52, 152, 219, 0.3) rgba(0, 0, 0, 0.1);
 }
 a {
   text-decoration: none;
