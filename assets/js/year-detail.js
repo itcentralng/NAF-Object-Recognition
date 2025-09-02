@@ -290,7 +290,7 @@ function renderEventsTimeline() {
   isClickPaused = false;
   isAutoScrollPaused = false;
   
-  // Initialize infinite scroll functionality immediately
+  // Initialize auto scroll functionality 
   initializeAutoScroll();
 }
 
@@ -299,9 +299,6 @@ function initializeAutoScroll() {
   
   if (!timeline) return;
 
-  // Prepare infinite scroll by duplicating events
-  prepareInfiniteScroll(timeline);
-  
   // Don't start auto-scroll automatically - wait for user to enable it
   // startSmoothAutoScroll(timeline);
   
@@ -329,37 +326,14 @@ function initializeAutoScroll() {
   }, { passive: true });
 }
 
-function prepareInfiniteScroll(timeline) {
-  const originalEvents = timeline.querySelectorAll('.event-card');
-  if (originalEvents.length === 0) return;
-  
-  // Calculate how many duplicates we need based on container height
-  const containerHeight = timeline.clientHeight;
-  const eventHeight = originalEvents[0].offsetHeight + 20; // Include margin
-  const visibleEvents = Math.ceil(containerHeight / eventHeight);
-  
-  // We need at least double the visible events for smooth infinite scroll
-  const duplicationsNeeded = Math.max(2, Math.ceil((visibleEvents * 2) / originalEvents.length));
-  
-  // Clone events multiple times
-  for (let i = 0; i < duplicationsNeeded; i++) {
-    originalEvents.forEach((event, index) => {
-      const clone = event.cloneNode(true);
-      clone.setAttribute('data-clone', 'true');
-      clone.setAttribute('data-original-index', index);
-      timeline.appendChild(clone);
-    });
-  }
-}
-
 function startSmoothAutoScroll(timeline) {
   if (autoScrollInterval) clearInterval(autoScrollInterval);
   
-  const originalEvents = timeline.querySelectorAll('.event-card:not([data-clone="true"])');
-  if (originalEvents.length === 0) return;
+  const allEvents = timeline.querySelectorAll('.event-card');
+  if (allEvents.length === 0) return;
   
   // Calculate scroll distance for 6 seconds per event (reduced speed by half)
-  const eventHeight = originalEvents[0].offsetHeight + 20; // Include margin
+  const eventHeight = allEvents[0].offsetHeight + 20; // Include margin
   const pixelsPerSecond = eventHeight / 6; // Complete one event in 6 seconds (was 3 seconds)
   scrollSpeed = pixelsPerSecond / (1000 / scrollInterval); // Convert to pixels per interval
   
@@ -368,14 +342,16 @@ function startSmoothAutoScroll(timeline) {
     
     const currentScrollTop = timeline.scrollTop;
     const newScrollTop = currentScrollTop + scrollSpeed;
+    const maxScrollTop = timeline.scrollHeight - timeline.clientHeight;
     
-    // Check if we need to reset scroll position for infinite effect
-    const originalContentHeight = originalEvents.length * eventHeight;
-    const totalHeight = timeline.scrollHeight;
-    
-    if (newScrollTop >= originalContentHeight) {
-      // Reset to beginning for infinite scroll
-      timeline.scrollTop = newScrollTop - originalContentHeight;
+    // Stop auto-scroll when reaching the end instead of looping
+    if (newScrollTop >= maxScrollTop) {
+      timeline.scrollTop = maxScrollTop;
+      // Stop auto-scroll when we reach the end
+      stopAutoScroll();
+      isAutoScrollEnabled = false;
+      updateAutoScrollButton();
+      updateScrollVisualFeedback();
     } else {
       timeline.scrollTop = newScrollTop;
     }
