@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Year Mapping Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #c41e3a;
+        }
+        .mapping-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .mapping-table th, .mapping-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .mapping-table th {
+            background-color: #c41e3a;
+            color: white;
+        }
+        .mapping-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .test-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .test-input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .test-button {
+            padding: 8px 16px;
+            background-color: #c41e3a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NAF Object Recognition System - RFID Year Mapping Test</h1>
+        
+        <h2>Current RFID to Year Range Mappings</h2>
+        <table class="mapping-table" id="mapping-table">
+            <thead>
+                <tr>
+                    <th>RFID UID</th>
+                    <th>Year Range</th>
+                    <th>Decade</th>
+                </tr>
+            </thead>
+            <tbody id="mapping-tbody">
+                <!-- Populated by JavaScript -->
+            </tbody>
+        </table>
+        
+        <div class="test-section">
+            <h2>Test RFID UID Resolution</h2>
+            <p>Enter an RFID UID to test the year range resolution:</p>
+            <input type="text" id="test-uid" class="test-input" placeholder="e.g., 93 09 04 2D" style="width: 200px;">
+            <button onclick="testUID()" class="test-button">Test UID</button>
+            <div id="test-result" class="test-result" style="display: none;"></div>
+            
+            <h3>Quick Test Buttons</h3>
+            <button onclick="testUID('93 09 04 2D')" class="test-button">Test 1960s</button>
+            <button onclick="testUID('33 18 E3 13')" class="test-button">Test 1970s</button>
+            <button onclick="testUID('B3 4E E6 00')" class="test-button">Test 1980s</button>
+            <button onclick="testUID('CA D3 42 00')" class="test-button">Test 1990s</button>
+            <button onclick="testUID('D3 4F E6 0C')" class="test-button">Test 2000s</button>
+            <button onclick="testUID('53 AA DB 13')" class="test-button">Test 2010s</button>
+            <button onclick="testUID('13 35 A7 14')" class="test-button">Test 2020s</button>
+            <button onclick="testUID('XX XX XX XX')" class="test-button">Test Unknown</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Mapping Information</h2>
+            <div id="mapping-info"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/rfid-year-mapping.js"></script>
+    <script>
+        // Populate the mapping table
+        function populateMappingTable() {
+            const tbody = document.getElementById('mapping-tbody');
+            const mappings = window.RFIDYearMapping.RFID_YEAR_MAPPINGS;
+            
+            for (const [uid, yearRange] of Object.entries(mappings)) {
+                const row = tbody.insertRow();
+                const startYear = parseInt(yearRange.split('-')[0]);
+                const decade = Math.floor(startYear / 10) * 10 + 's';
+                
+                row.insertCell(0).textContent = uid;
+                row.insertCell(1).textContent = yearRange;
+                row.insertCell(2).textContent = decade;
+            }
+        }
+        
+        // Test UID resolution
+        function testUID(uid) {
+            if (uid) {
+                document.getElementById('test-uid').value = uid;
+            } else {
+                uid = document.getElementById('test-uid').value;
+            }
+            
+            const resultDiv = document.getElementById('test-result');
+            resultDiv.style.display = 'block';
+            
+            if (!uid.trim()) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = 'Please enter a UID to test';
+                return;
+            }
+            
+            const yearRange = window.RFIDYearMapping.getYearRangeFromUID(uid);
+            
+            if (yearRange) {
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ UID "${uid}" resolves to year range: ${yearRange}`;
+            } else {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ UID "${uid}" not found in mapping`;
+            }
+        }
+        
+        // Show mapping information
+        function showMappingInfo() {
+            const info = window.RFIDYearMapping.getRFIDMappingInfo();
+            const infoDiv = document.getElementById('mapping-info');
+            
+            infoDiv.innerHTML = `
+                <p><strong>Total Mappings:</strong> ${info.count}</p>
+                <p><strong>Available Year Ranges:</strong><br>${info.yearRanges.join(', ')}</p>
+                <p><strong>Available UIDs:</strong><br>${info.uids.join(', ')}</p>
+            `;
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.RFIDYearMapping) {
+                populateMappingTable();
+                showMappingInfo();
+                console.log('✅ RFID Year Mapping loaded successfully');
+            } else {
+                console.error('❌ RFID Year Mapping not loaded');
+                document.body.innerHTML = '<h1 style="color: red;">Error: RFID Year Mapping not loaded!</h1>';
+            }
+        });
+        
+        // Allow Enter key to test UID
+        document.getElementById('test-uid').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testUID();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -90,6 +90,46 @@ function setupSocketListeners() {
         }
     });
     
+    // Listen for RFID detection from Arduino (new system)
+    socket.on('rfid_detected', function(data) {
+        console.log('RFID detected via socket:', data.uid, 'for object:', data.object);
+        
+        // Use JavaScript mapping to resolve year range
+        if (window.RFIDYearMapping) {
+            const yearRange = window.RFIDYearMapping.getYearRangeFromUID(data.uid);
+            
+            if (yearRange) {
+                console.log('Year range resolved:', yearRange);
+                
+                // Send resolved year back to server for state management
+                socket.emit('resolve_year_from_rfid', {
+                    uid: data.uid,
+                    year_range: yearRange,
+                    object: data.object
+                });
+            } else {
+                console.warn('Unknown RFID UID:', data.uid);
+                // Still send to server as unknown for logging
+                socket.emit('unknown_rfid_processed', {
+                    uid: data.uid,
+                    object: data.object,
+                    message: 'RFID UID not found in mapping'
+                });
+            }
+        } else {
+            console.error('RFIDYearMapping not loaded! Cannot resolve year range.');
+        }
+    });
+    
+    // Listen for year resolution result
+    socket.on('year_resolution_result', function(data) {
+        if (data.success) {
+            console.log('✅ Year resolution successful:', data.year, 'for', data.object);
+        } else {
+            console.warn('❌ Year resolution failed:', data.message);
+        }
+    });
+    
     // Listen for object_dropped events - return to main page
     socket.on('object_dropped', function(data) {
         console.log('Object dropped via socket:', data.message);
@@ -99,6 +139,12 @@ function setupSocketListeners() {
         if (window.location.pathname !== '/index.html' && window.location.pathname !== '/') {
             window.location.href = 'index.html';
         }
+    });
+    
+    // Listen for year_dropped events (both legacy and new system)
+    socket.on('year_dropped', function(data) {
+        console.log('Year range detected and resolved:', data.year, 'for object:', data.object);
+        // This event is handled by individual page JavaScript files
     });
     
     // Handle no object detected - gentle feedback without navigation

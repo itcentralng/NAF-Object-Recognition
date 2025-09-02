@@ -15,7 +15,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Possible Picked Objects = ['naf', 'nafsfa', 'evol']
 picked_object = None
-# Valid Year Ranges based on Arduino RFID mapping = ['1962-1972', '1973-1982', '1983-1992', '1993-2002', '2003-2012', '2013-2022', '2023-2032']
+# Valid Year Ranges based on RFID mapping (now handled in JavaScript) = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
 dropped_year = None
 # Track current state for proper navigation
 current_state = 'main'  # 'main', 'section', 'year-list', 'year-detail'
@@ -106,24 +106,36 @@ def read_from_serial():
                         # Additional confirmation that object was removed
                         print("✓ Light sensor confirms object removal")
                     
+                    elif serial_line.startswith("RFID_DETECTED:"):
+                        parts = serial_line.split(":")
+                        if len(parts) >= 3:
+                            rfid_uid = parts[1]
+                            object_name = parts[2].lower()
+
+                            print(f"RFID UID detected: {rfid_uid}, object: {object_name}, picked_object: {picked_object}")
+
+                            if object_name == picked_object:
+                                print(f"✓ RFID UID '{rfid_uid}' detected for object '{picked_object}' - sending to frontend for year mapping")
+                                socketio.emit("rfid_detected", {"uid": rfid_uid, "object": picked_object})
+                            else:
+                                print(f"⚠ RFID object mismatch: expected '{picked_object}', got '{object_name}'")
+                    
                     elif serial_line.startswith("YEAR_DETECTED:"):
+                        # Legacy support - this should not be used anymore since year mapping moved to JS
                         parts = serial_line.split(":")
                         if len(parts) >= 3:
                             year_range = parts[1]
                             object_name = parts[2].lower()
                             
-                            # Valid years from Arduino RFID mapping
-                            valid_years = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
-
-                            print(year_range , valid_years , object_name, picked_object)
-
-                            if year_range in valid_years and object_name == picked_object:
+                            print(f"⚠ Legacy YEAR_DETECTED message received: {year_range} for {object_name}")
+                            print("⚠ Year mapping should now be handled in JavaScript, not Arduino")
+                            
+                            # For backward compatibility, still emit the event
+                            if object_name == picked_object:
                                 dropped_year = year_range
                                 current_state = 'year-list'
-                                print(f"✓ Year range '{dropped_year}' detected via RFID for object '{picked_object}' - navigating to year list")
+                                print(f"✓ Legacy year range '{dropped_year}' processed for object '{picked_object}'")
                                 socketio.emit("year_dropped", {"year": dropped_year, "object": picked_object})
-                            else:
-                                print(f"⚠ Invalid year range '{year_range}' or object mismatch")
                     
                     elif serial_line.startswith("UNKNOWN_RFID:"):
                         uid = serial_line.split(":")[1]
@@ -179,13 +191,50 @@ def handle_get_status():
         'current_state': current_state,
         'arduino_connected': arduino_connected,
         'available_objects': ['naf', 'nafsfa', 'evol'],
-        'available_years': ['1962-1972', '1973-1982', '1983-1992', '1993-2002', 
-                           '2003-2012', '2013-2022', '2023-2032']
+        'available_years': ['1962-1971', '1972-1981', '1982-1991', '1992-2001', 
+                           '2002-2011', '2012-2021', '2022-2031']
     })
 
 
-@socketio.on('get_arduino_status')
-def handle_get_arduino_status():
+@socketio.on('resolve_year_from_rfid')
+def handle_resolve_year_from_rfid(data):
+    """Process RFID UID and return resolved year range"""
+    global dropped_year, current_state, picked_object
+    
+    rfid_uid = data.get('uid', '').strip()
+    year_range = data.get('year_range', '').strip()
+    object_name = data.get('object', '').lower()
+    
+    print(f"🔄 Processing year resolution: UID={rfid_uid}, Year={year_range}, Object={object_name}")
+    
+    # Valid years (same as before, but now validated on both ends)
+    valid_years = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
+    
+    if not picked_object:
+        emit('year_resolution_result', {'success': False, 'message': 'No object picked'})
+        return
+    
+    if object_name != picked_object:
+        emit('year_resolution_result', {'success': False, 'message': f'Object mismatch: expected {picked_object}, got {object_name}'})
+        return
+    
+    if year_range not in valid_years:
+        emit('year_resolution_result', {'success': False, 'message': f'Invalid year range: {year_range}'})
+        return
+    
+    # Update server state
+    dropped_year = year_range
+    current_state = 'year-list'
+    
+    print(f"✅ Year range '{dropped_year}' resolved from RFID UID '{rfid_uid}' for object '{picked_object}' - navigating to year list")
+    
+    # Emit the year_dropped event to trigger navigation
+    socketio.emit("year_dropped", {"year": dropped_year, "object": picked_object})
+    
+    # Confirm resolution success
+    emit('year_resolution_result', {'success': True, 'year': year_range, 'object': object_name})
+
+
     """Get Arduino connection status"""
     emit('arduino_status', {
         'connected': arduino_connected,
@@ -259,26 +308,52 @@ def handle_simulate_object_removed(data):
 
 @socketio.on('simulate_year_detected')
 def handle_simulate_year_detected(data):
-    """Simulate Arduino RFID year detection for testing"""
-    global dropped_year, current_state, picked_object
+    """Simulate Arduino RFID detection for testing (new system)"""
+    global picked_object
     
     year_range = data.get('year', '')
+    uid = data.get('uid', '')
     
-    # Valid years from Arduino RFID mapping
+    # Valid years from mapping
     valid_years = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
-
+    
     if not picked_object:
         emit('simulation_result', {'success': False, 'message': 'No object picked - pick an object first'})
         return
     
-    if year_range in valid_years:
-        dropped_year = year_range
-        current_state = 'year-list'
-        print(f"🧪 SIMULATION: Year range '{dropped_year}' detected via RFID for object '{picked_object}' - navigating to year list")
-        socketio.emit("year_dropped", {"year": dropped_year, "object": picked_object})
-        emit('simulation_result', {'success': True, 'message': f'Simulated year detection: {year_range} for {picked_object}'})
+    # If UID provided, simulate RFID detection (new system)
+    if uid:
+        print(f"🧪 SIMULATION: RFID UID '{uid}' detected for object '{picked_object}'")
+        socketio.emit("rfid_detected", {"uid": uid, "object": picked_object})
+        emit('simulation_result', {'success': True, 'message': f'Simulated RFID detection: {uid} for {picked_object}'})
+    # If year range provided, simulate legacy system for backward compatibility
+    elif year_range in valid_years:
+        print(f"🧪 SIMULATION: Direct year range '{year_range}' for object '{picked_object}' (legacy mode)")
+        socketio.emit("rfid_detected", {"uid": "SIMULATED", "object": picked_object})
+        # Also emit legacy format for compatibility
+        socketio.emit("year_dropped", {"year": year_range, "object": picked_object})
+        emit('simulation_result', {'success': True, 'message': f'Simulated year detection: {year_range} for {picked_object} (legacy)'})
     else:
-        emit('simulation_result', {'success': False, 'message': f'Invalid year range: {year_range}'})
+        emit('simulation_result', {'success': False, 'message': f'Invalid parameters: uid={uid}, year={year_range}'})
+
+
+@socketio.on('simulate_rfid_uid')
+def handle_simulate_rfid_uid(data):
+    """Simulate specific RFID UID detection for testing"""
+    global picked_object
+    
+    uid = data.get('uid', '').strip()
+    
+    if not picked_object:
+        emit('simulation_result', {'success': False, 'message': 'No object picked - pick an object first'})
+        return
+    
+    if uid:
+        print(f"🧪 SIMULATION: RFID UID '{uid}' detected for object '{picked_object}'")
+        socketio.emit("rfid_detected", {"uid": uid, "object": picked_object})
+        emit('simulation_result', {'success': True, 'message': f'Simulated RFID UID: {uid} for {picked_object}'})
+    else:
+        emit('simulation_result', {'success': False, 'message': 'No UID provided'})
 
 
 @socketio.on('simulate_unknown_rfid')
@@ -336,8 +411,8 @@ if __name__ == "__main__":
     print("System Configuration:")
     print(f"- Server running on http://localhost:5550")
     print(f"- Available objects: naf, nafsfa, evol")
-    print(f"- Year ranges: 1962-1972, 1973-1982, 1983-1992, 1993-2002,")
-    print(f"                2003-2012, 2013-2022, 2023-2032")
+    print(f"- Year ranges: 1962-1971, 1972-1981, 1982-1991, 1992-2001,")
+    print(f"                2002-2011, 2012-2021, 2022-2031")
     print("=" * 60)
     
     # Initialize Arduino connection

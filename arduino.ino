@@ -17,31 +17,24 @@ const int EVOL_SENSOR_PIN = A2;     // Finance Evolution sensor
 
 // State tracking
 String currentPickedObject = "";
-String currentYearRange = "";
 bool objectPicked = false;
 unsigned long lastSensorRead = 0;
 unsigned long lastRFIDRead = 0;
 const unsigned long SENSOR_INTERVAL = 300;  // Read sensors every 300ms
 const unsigned long RFID_INTERVAL = 500;    // Read RFID every 500ms
 
-// RFID to year range mapping
-struct YearMapping {
-  String uid;
-  String yearRange;
+// Known RFID UIDs (year mapping now handled in JavaScript)
+String knownUIDs[] = {
+  "93 09 04 2D",
+  "33 18 E3 13",
+  "B3 4E E6 00",
+  "CA D3 42 00",
+  "D3 4F E6 0C",
+  "53 AA DB 13",
+  "13 35 A7 14"
 };
 
-// Define RFID UIDs for each year range
-YearMapping yearMappings[] = {
-  {"93 09 04 2D", "1962-1971"},
-  {"33 18 E3 13", "1972-1981"},
-  {"B3 4E E6 00", "1982-1991"},
-  {"CA D3 42 00", "1992-2001"},
-  {"D3 4F E6 0C", "2002-2011"},
-  {"53 AA DB 13", "2012-2021"},
-  {"13 35 A7 14", "2022-2031"}
-};
-
-const int NUM_YEAR_MAPPINGS = sizeof(yearMappings) / sizeof(yearMappings[0]);
+const int NUM_KNOWN_UIDS = sizeof(knownUIDs) / sizeof(knownUIDs[0]);
 
 void setup() {
     Serial.begin(9600);
@@ -112,7 +105,6 @@ void checkLightSensors() {
         Serial.println("LIGHT_BRIGHT_DETECTED:" + currentPickedObject);
         Serial.println("Light sensor detection - " + currentPickedObject + " object removed, bright light detected");
         currentPickedObject = "";
-        currentYearRange = "";
         objectPicked = false;
         Serial.println("All objects removed - system reset");
     }
@@ -150,15 +142,10 @@ void checkRFID() {
     }
     uidString.toUpperCase();
     
-    // Check if this UID matches any year range
-    String detectedYear = getYearRangeFromUID(uidString);
-    
-    if (detectedYear.length() > 0) {
-        if (currentYearRange != detectedYear) {
-            currentYearRange = detectedYear;
-            Serial.println("YEAR_DETECTED:" + currentYearRange + ":" + currentPickedObject);
-            Serial.println("RFID card detected - Year range: " + currentYearRange);
-        }
+    // Check if this UID is known (validation only)
+    if (isKnownUID(uidString)) {
+        Serial.println("RFID_DETECTED:" + uidString + ":" + currentPickedObject);
+        Serial.println("RFID card detected - UID: " + uidString);
     } else {
         Serial.println("UNKNOWN_RFID:" + uidString);
         Serial.println("Unknown RFID card: " + uidString);
@@ -170,13 +157,13 @@ void checkRFID() {
     mfrc522.PCD_StopCrypto1();
 }
 
-String getYearRangeFromUID(String uid) {
-    for (int i = 0; i < NUM_YEAR_MAPPINGS; i++) {
-        if (uid.equals(yearMappings[i].uid)) {
-            return yearMappings[i].yearRange;
+bool isKnownUID(String uid) {
+    for (int i = 0; i < NUM_KNOWN_UIDS; i++) {
+        if (uid.equals(knownUIDs[i])) {
+            return true;
         }
     }
-    return "";  // Return empty string if UID not found
+    return false;
 }
 
 void printCardInfo() {

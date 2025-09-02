@@ -13,6 +13,31 @@ if (!sectionId) {
 
 // Socket.IO Event Listeners
 function setupSocketListeners() {
+    // Listen for RFID detection from Arduino (new system)
+    socket.on('rfid_detected', function(data) {
+        console.log('RFID detected on section page:', data.uid, 'for object:', data.object);
+        
+        // Use JavaScript mapping to resolve year range
+        if (window.RFIDYearMapping) {
+            const yearRange = window.RFIDYearMapping.getYearRangeFromUID(data.uid);
+            
+            if (yearRange) {
+                console.log('Year range resolved:', yearRange);
+                
+                // Send resolved year back to server for state management
+                socket.emit('resolve_year_from_rfid', {
+                    uid: data.uid,
+                    year_range: yearRange,
+                    object: data.object
+                });
+            } else {
+                console.warn('Unknown RFID UID on section page:', data.uid);
+            }
+        } else {
+            console.error('RFIDYearMapping not loaded on section page! Cannot resolve year range.');
+        }
+    });
+    
     // Listen for year_dropped events from Python backend
     socket.on('year_dropped', function(data) {
         console.log('Year range dropped via socket:', data.year);
