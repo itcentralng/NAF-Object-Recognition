@@ -16,13 +16,6 @@ if (!sectionId || !yearParam) {
   window.location.href = 'index.html';
 }
 
-// Variables for infinite scroll
-let autoScrollInterval = null;
-let isAutoScrollPaused = false;
-let isClickPaused = false; // Track click-based pause state
-let scrollSpeed = 1; // pixels per interval
-let scrollInterval = 16; // milliseconds (approximately 60fps)
-
 // Load section and year data
 async function loadYearData() {
   try {
@@ -122,6 +115,460 @@ function adaptDataForSpecificYear(yearData, targetYear) {
   }
   
   return adaptedData;
+}
+
+function renderYearDetail() {
+  // Hide loading message and show content
+  document.getElementById('loading-message').style.display = 'none';
+  document.getElementById('year-detail-content').style.display = 'block';
+  
+  // Update page title and navigation
+  const pageTitle = currentYearData.isGeneric ? 
+    `${currentYearData.year} - Nigerian Air Force - Historical Period` :
+    `${currentYearData.year} - ${currentSectionData.title}`;
+    
+  document.getElementById('page-title').textContent = `${pageTitle} - Nigerian Air Force Museum`;
+  
+  // Update sidebar title
+  const sidebarTitle = document.getElementById('sidebar-title');
+  if (sidebarTitle) {
+    // Use the actual section title from the data instead of hardcoded values
+    sidebarTitle.textContent = currentSectionData.title || 'History';
+  }
+
+  // Update back button text based on navigation context
+  const backBtnText = document.getElementById('back-btn-text');
+  if (currentYearRange) {
+    backBtnText.textContent = `Back to ${currentYearRange} Years`;
+  } else {
+    backBtnText.textContent = 'Back to Section';
+  }
+  
+  // Update year header
+  document.getElementById('year-number').textContent = currentYearData.year;
+  document.getElementById('year-title').textContent = currentYearData.title;
+  document.getElementById('year-summary').textContent = currentYearData.summary;
+  
+  // Render events timeline
+  renderEventsTimeline();
+}
+
+function renderEventsTimeline() {
+// ... existing code ...
+// ... existing code ...
+  const timelineContainer = document.getElementById('events-timeline');
+  let timelineHTML = '';
+  
+  if (currentYearData.highlights && currentYearData.highlights.length > 0) {
+    // Create events from highlights
+    currentYearData.highlights.forEach((highlight, index) => {
+      timelineHTML += `
+        <div class="event-card" data-event-index="${index}">
+          <div class="event-number">
+            <span>${index + 1}</span>
+          </div>
+          <div class="event-content">
+            <div class="event-header">
+              <h3 class="event-title">${highlight.title}</h3>
+              <div class="event-date">${currentYearData.year}</div>
+            </div>
+            <p class="event-description">${highlight.description}</p>
+            
+            ${highlight.image ? `
+              <div class="event-images-grid">
+                <div class="event-image-container" onclick="openImageModal('${highlight.image}', 0, ${index})">
+                  <img src="${highlight.image}" alt="${highlight.title}" class="event-image" />
+                  <div class="image-overlay">
+                    <span class="zoom-icon">🔍</span>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    });
+  } else {
+    // Create a general event from available data
+    timelineHTML = `
+      <div class="event-card">
+        <div class="event-number">
+          <span>1</span>
+        </div>
+        <div class="event-content">
+          <div class="event-header">
+            <h3 class="event-title">${currentYearData.title}</h3>
+            <div class="event-date">${currentYearData.year}</div>
+          </div>
+          <p class="event-description">${currentYearData.content || currentYearData.summary}</p>
+          
+          ${currentYearData.activities && currentYearData.activities.length > 0 ? `
+            <div class="event-activities">
+              <h4>Key Activities:</h4>
+              <ul class="event-activities-list">
+                ${currentYearData.activities.map(activity => `
+                  <li>${activity}</li>
+                `).join('')}
+              </ul>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }
+  
+  timelineContainer.innerHTML = timelineHTML;
+  
+  // Add animation to event cards
+  setTimeout(() => {
+    const eventCards = document.querySelectorAll('.event-card');
+    eventCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('animate-in');
+      }, index * 200);
+    });
+  }, 100);
+
+  // Initialize auto-scroll functionality
+  initializeAutoScroll();
+}
+
+function initializeAutoScroll() {
+// ... existing code ...
+// ... existing code ...
+  const timeline = document.getElementById('events-timeline');
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  const scrollStatus = document.getElementById('scroll-status');
+  
+  if (!timeline) return;
+
+  // Check if content is scrollable
+  const isScrollable = timeline.scrollHeight > timeline.clientHeight;
+  
+  if (!isScrollable) {
+    // Hide scroll indicator if content doesn't scroll
+    if (scrollIndicator) {
+      scrollIndicator.style.display = 'none';
+    }
+    return;
+  }
+
+  // Start auto-scroll
+  startAutoScroll();
+
+  // Add event listeners for pause/resume functionality
+  timeline.addEventListener('mousedown', pauseAutoScroll);
+  timeline.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+  
+  timeline.addEventListener('mouseup', resumeAutoScroll);
+  timeline.addEventListener('touchend', resumeAutoScroll, { passive: true });
+  
+  // Also pause on mouse enter and resume on mouse leave for better UX
+  timeline.addEventListener('mouseenter', pauseAutoScroll);
+  timeline.addEventListener('mouseleave', resumeAutoScroll);
+
+  // Click handler for the scroll indicator
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', toggleAutoScroll);
+  }
+
+  // Update scroll status text
+  updateScrollStatus();
+}
+
+function startAutoScroll() {
+// ... existing code ...
+// ... existing code ...
+  const timeline = document.getElementById('events-timeline');
+  if (!timeline) return;
+
+  stopAutoScroll(); // Clear any existing interval
+
+  autoScrollInterval = setInterval(() => {
+    if (isAutoScrollPaused) return;
+
+    const maxScroll = timeline.scrollHeight - timeline.clientHeight;
+    const scrollStep = 1;
+    
+    currentScrollPosition += scrollDirection * scrollStep;
+    
+    // Check bounds and reverse direction
+    if (currentScrollPosition >= maxScroll) {
+      scrollDirection = -1;
+      currentScrollPosition = maxScroll;
+    } else if (currentScrollPosition <= 0) {
+      scrollDirection = 1;
+      currentScrollPosition = 0;
+    }
+    
+    timeline.scrollTop = currentScrollPosition;
+  }, 50); // Smooth scrolling - adjust speed as needed
+}
+
+function stopAutoScroll() {
+// ... existing code ...
+// ... existing code ...
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
+}
+
+function pauseAutoScroll() {
+// ... existing code ...
+// ... existing code ...
+  isAutoScrollPaused = true;
+  updateScrollStatus();
+}
+
+function resumeAutoScroll() {
+// ... existing code ...
+// ... existing code ...
+  isAutoScrollPaused = false;
+  updateScrollStatus();
+}
+
+function toggleAutoScroll() {
+// ... existing code ...
+// ... existing code ...
+  if (isAutoScrollPaused) {
+    resumeAutoScroll();
+  } else {
+    pauseAutoScroll();
+  }
+}
+
+function updateScrollStatus() {
+// ... existing code ...
+// ... existing code ...
+  const scrollStatus = document.getElementById('scroll-status');
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  
+  if (!scrollStatus || !scrollIndicator) return;
+
+  if (isAutoScrollPaused) {
+    scrollStatus.textContent = 'Auto-scroll paused • Click to resume';
+    scrollIndicator.classList.add('paused');
+  } else {
+    scrollStatus.textContent = 'Auto-scrolling • Click to pause';
+    scrollIndicator.classList.remove('paused');
+  }
+}
+
+function setupNavigation() {
+  const prevBtn = document.getElementById('prev-year-btn');
+  const nextBtn = document.getElementById('next-year-btn');
+  const prevText = document.getElementById('prev-year-text');
+  const nextText = document.getElementById('next-year-text');
+  
+  // If we have a year range, set up navigation within that range
+  if (currentYearRange) {
+    const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
+    const currentYear = parseInt(yearParam);
+    
+    // Check if there's a previous year within the range
+    if (currentYear > startYear) {
+      const prevYear = currentYear - 1;
+      prevBtn.style.display = 'flex';
+      prevText.textContent = `${prevYear}`;
+      prevBtn.onclick = () => navigateToYearInSection(prevYear.toString());
+    } else {
+      prevBtn.style.display = 'none';
+    }
+    
+    // Check if there's a next year within the range
+    if (currentYear < endYear) {
+      const nextYear = currentYear + 1;
+      nextBtn.style.display = 'flex';
+      nextText.textContent = `${nextYear}`;
+      nextBtn.onclick = () => navigateToYearInSection(nextYear.toString());
+    } else {
+      nextBtn.style.display = 'none';
+    }
+  } else {
+    // Fallback to hide buttons if no range is present
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+  }
+}
+
+function navigateToYearInSection(year) {
+// ... existing code ...
+// ... existing code ...
+  const queryParams = new URLSearchParams();
+  queryParams.set('section', sectionId);
+  queryParams.set('year', year);
+  if (currentYearRange) {
+    queryParams.set('range', currentYearRange);
+  }
+  window.location.href = `year-detail.html?${queryParams.toString()}`;
+}
+
+function navigateToYearWithinRange(year) {
+// ... existing code ...
+// ... existing code ...
+  const queryParams = new URLSearchParams();
+  queryParams.set('section', sectionId);
+  queryParams.set('year', year.toString());
+  if (currentYearRange) {
+    queryParams.set('range', currentYearRange);
+  }
+  window.location.href = `year-detail.html?${queryParams.toString()}`;
+}
+
+function navigateToPreviousYear() {
+  const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
+  const currentYear = parseInt(yearParam);
+  if (currentYear > startYear) {
+    navigateToYearInSection((currentYear - 1).toString());
+  }
+}
+
+function navigateToNextYear() {
+  const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
+  const currentYear = parseInt(yearParam);
+  if (currentYear < endYear) {
+    navigateToYearInSection((currentYear + 1).toString());
+  }
+}
+
+function goBackToSection() {
+  // If we came from a year range, go back to the year list instead of section
+  if (currentYearRange) {
+    // Complete mapping from sectionId to object parameter
+    const sectionToObjectMap = {
+      'naf-history': 'naf',
+      'nafsfa-history': 'nafsfa', 
+      'finance-evolution': 'evol'
+    };
+    const objectParam = sectionToObjectMap[sectionId] || 'naf';
+    window.location.href = `year-list.html?section=${sectionId}&year=${currentYearRange}&object=${objectParam}`;
+  } else {
+    window.location.href = `section.html?section=${sectionId}`;
+  }
+}
+
+function openImageModal(imageSrc, imageIndex, eventIndex) {
+// ... existing code ...
+// ... existing code ...
+  // Create and show image modal
+  const modal = document.createElement('div');
+  modal.className = 'image-modal';
+  
+  modal.innerHTML = `
+    <div class="image-modal-content">
+      <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
+      <div class="modal-image-container">
+        <img src="${imageSrc}" alt="Historical Image" class="modal-image" />
+      </div>
+      <div class="image-modal-info">
+        <p>Historical Image - ${currentYearData.year}</p>
+        <p class="image-event-title">${currentYearData.highlights && currentYearData.highlights[eventIndex] ? currentYearData.highlights[eventIndex].title : currentYearData.title}</p>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  document.body.style.overflow = 'hidden';
+  
+  // Close modal when clicking outside
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeImageModal();
+    }
+  });
+}
+
+function navigateModalImage(direction) {
+// ... existing code ...
+// ... existing code ...
+  // Simplified version - no navigation for now
+  // This function can be expanded later if multi-image support is needed
+}
+
+function closeImageModal() {
+// ... existing code ...
+// ... existing code ...
+  const modal = document.querySelector('.image-modal');
+  if (modal) {
+    modal.remove();
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function showError() {
+// ... existing code ...
+// ... existing code ...
+  document.getElementById('loading-message').style.display = 'none';
+  document.getElementById('error-message').style.display = 'block';
+}
+
+// Handle escape key for image modal and arrow keys for navigation
+document.addEventListener('keydown', function(e) {
+// ... existing code ...
+// ... existing code ...
+  if (e.key === 'Escape') {
+    closeImageModal();
+  } else if (document.querySelector('.image-modal')) {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      navigateModalImage(-1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      navigateModalImage(1);
+    }
+  }
+});
+
+// Initialize the year detail viewer
+document.addEventListener('DOMContentLoaded', function() {
+// ... existing code ...
+// ... existing code ...
+  loadYearData();
+  setupSocketListeners();
+});
+
+// Cleanup when page is unloaded
+window.addEventListener('beforeunload', function() {
+// ... existing code ...
+// ... existing code ...
+  stopAutoScroll();
+});
+
+// Pause auto-scroll when page loses focus
+document.addEventListener('visibilitychange', function() {
+// ... existing code ...
+// ... existing code ...
+  if (document.hidden) {
+    pauseAutoScroll();
+  } else {
+    resumeAutoScroll();
+  }
+});
+
+// Socket.IO Event Listeners
+function setupSocketListeners() {
+    // Listen for object_dropped events - return to main page
+    socket.on('object_dropped', function(data) {
+        console.log('Object dropped via socket, returning to main page:', data.message);
+        
+        // Navigate back to main page immediately
+        window.location.href = 'index.html';
+    });
+    
+    // Handle socket connection events
+    socket.on('connect', function() {
+        console.log('Connected to Socket.IO server');
+    });
+    
+    socket.on('disconnect', function() {
+        console.log('Disconnected from Socket.IO server');
+    });
+    
+    // Handle any socket errors
+    socket.on('error', function(error) {
+        console.error('Socket.IO error:', error);
+    });
 }
 
 function renderYearDetail() {
@@ -292,6 +739,13 @@ function renderEventsTimeline() {
   initializeAutoScroll();
 }
 
+// Variables for infinite scroll
+let autoScrollInterval = null;
+let isAutoScrollPaused = false;
+let isClickPaused = false; // Track click-based pause state
+let scrollSpeed = 1; // pixels per interval
+let scrollInterval = 16; // milliseconds (approximately 60fps)
+
 function initializeAutoScroll() {
   const timeline = document.getElementById('events-timeline');
   
@@ -453,6 +907,12 @@ function toggleAutoScrollOnClick(event) {
   updateScrollVisualFeedback();
 }
 
+// Initialize the year detail viewer
+document.addEventListener('DOMContentLoaded', function() {
+  loadYearData();
+  setupSocketListeners();
+});
+
 function setupNavigation() {
   const prevBtn = document.getElementById('prev-year-btn');
   const nextBtn = document.getElementById('next-year-btn');
@@ -470,8 +930,6 @@ function setupNavigation() {
       prevBtn.style.display = 'flex';
       prevText.textContent = `${prevYear}`;
       prevBtn.onclick = () => navigateToYearInSection(prevYear.toString());
-    } else {
-      prevBtn.style.display = 'none';
     }
     
     // Check if there's a next year within the range
@@ -480,13 +938,24 @@ function setupNavigation() {
       nextBtn.style.display = 'flex';
       nextText.textContent = `${nextYear}`;
       nextBtn.onclick = () => navigateToYearInSection(nextYear.toString());
-    } else {
-      nextBtn.style.display = 'none';
     }
   } else {
-    // Fallback to hide buttons if no range is present
-    prevBtn.style.display = 'none';
-    nextBtn.style.display = 'none';
+    // Fallback: navigate through all available documented years
+    if (currentSectionData && currentSectionData.allYears && currentYearIndex >= 0) {
+      if (currentYearIndex > 0) {
+        const prevYear = currentSectionData.allYears[currentYearIndex - 1];
+        prevBtn.style.display = 'flex';
+        prevText.textContent = `${prevYear.year}`;
+        prevBtn.onclick = () => navigateToYearInSection(prevYear.year);
+      }
+      
+      if (currentYearIndex < currentSectionData.allYears.length - 1) {
+        const nextYear = currentSectionData.allYears[currentYearIndex + 1];
+        nextBtn.style.display = 'flex';
+        nextText.textContent = `${nextYear.year}`;
+        nextBtn.onclick = () => navigateToYearInSection(nextYear.year);
+      }
+    }
   }
 }
 
@@ -511,34 +980,16 @@ function navigateToYearWithinRange(year) {
 }
 
 function navigateToPreviousYear() {
-  const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
-  const currentYear = parseInt(yearParam);
-  if (currentYear > startYear) {
-    navigateToYearInSection((currentYear - 1).toString());
+  if (currentSectionData.allYears && currentYearIndex > 0) {
+    const prevYear = currentSectionData.allYears[currentYearIndex - 1];
+    window.location.href = `year-detail.html?section=${sectionId}&year=${prevYear.year}`;
   }
 }
 
 function navigateToNextYear() {
-  const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
-  const currentYear = parseInt(yearParam);
-  if (currentYear < endYear) {
-    navigateToYearInSection((currentYear + 1).toString());
-  }
-}
-
-function goBackToSection() {
-  // If we came from a year range, go back to the year list instead of section
-  if (currentYearRange) {
-    // Complete mapping from sectionId to object parameter
-    const sectionToObjectMap = {
-      'naf-history': 'naf',
-      'nafsfa-history': 'nafsfa', 
-      'finance-evolution': 'evol'
-    };
-    const objectParam = sectionToObjectMap[sectionId] || 'naf';
-    window.location.href = `year-list.html?section=${sectionId}&year=${currentYearRange}&object=${objectParam}`;
-  } else {
-    window.location.href = `section.html?section=${sectionId}`;
+  if (currentSectionData.allYears && currentYearIndex < currentSectionData.allYears.length - 1) {
+    const nextYear = currentSectionData.allYears[currentYearIndex + 1];
+    window.location.href = `year-detail.html?section=${sectionId}&year=${nextYear.year}`;
   }
 }
 
@@ -589,40 +1040,6 @@ function showError() {
   document.getElementById('error-message').style.display = 'block';
 }
 
-function updateSidebarLogo() {
-  // Update the sidebar logo with section-specific logo
-  const sidebarLogo = document.querySelector('.nav-logo');
-  if (sidebarLogo && currentSectionData && currentSectionData.logo) {
-    sidebarLogo.src = currentSectionData.logo;
-    sidebarLogo.alt = `${currentSectionData.title} Logo`;
-  }
-}
-
-// Socket.IO Event Listeners
-function setupSocketListeners() {
-    // Listen for object_dropped events - return to main page
-    socket.on('object_dropped', function(data) {
-        console.log('Object dropped via socket, returning to main page:', data.message);
-        
-        // Navigate back to main page immediately
-        window.location.href = 'index.html';
-    });
-    
-    // Handle socket connection events
-    socket.on('connect', function() {
-        console.log('Connected to Socket.IO server');
-    });
-    
-    socket.on('disconnect', function() {
-        console.log('Disconnected from Socket.IO server');
-    });
-    
-    // Handle any socket errors
-    socket.on('error', function(error) {
-        console.error('Socket.IO error:', error);
-    });
-}
-
 // Handle escape key for image modal and arrow keys for navigation
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
@@ -657,3 +1074,12 @@ document.addEventListener('visibilitychange', function() {
     resumeAutoScroll();
   }
 });
+
+function updateSidebarLogo() {
+  // Update the sidebar logo with section-specific logo
+  const sidebarLogo = document.querySelector('.nav-logo');
+  if (sidebarLogo && currentSectionData && currentSectionData.logo) {
+    sidebarLogo.src = currentSectionData.logo;
+    sidebarLogo.alt = `${currentSectionData.title} Logo`;
+  }
+}
