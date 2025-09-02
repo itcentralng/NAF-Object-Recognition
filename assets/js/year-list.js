@@ -168,22 +168,30 @@ function renderYearsFromRange(yearRange) {
     const yearsGrid = document.getElementById('years-grid');
     
     let yearsHTML = '';
+    let yearsWithData = [];
     
     // Parse the year range to get start and end years
     const [startYear, endYear] = yearRange.split('-').map(y => parseInt(y));
     
-    // Generate individual years within the range
+    // First, collect all years that have data within the range
     for (let year = startYear; year <= endYear; year++) {
-        // Check if we have specific data for this year in our NAF history
-        const hasSpecificData = hasDataForYear(year);
-        yearsHTML += createYearCard(year.toString(), null, null, hasSpecificData);
+        // Check if we have specific data for this year in our section data
+        if (hasDataForYear(year)) {
+            yearsWithData.push(year);
+        }
     }
+    
+    // Generate year cards only for years that have data
+    yearsWithData.forEach(year => {
+        yearsHTML += createYearCard(year.toString(), null, null, true);
+    });
     
     if (yearsHTML === '') {
         yearsHTML = `
-            <div class="error-message" style="grid-column: 1 / -1; text-align: center; color: #c41e3a; padding: 40px;">
-                <h3>Invalid Year Range</h3>
-                <p>Unable to parse the year range: ${yearRange}</p>
+            <div class="error-message" style="grid-column: 1 / -1; text-align: center; color: #f39c12; padding: 40px;">
+                <h3>No Data Available</h3>
+                <p>No historical information is available for the year range ${yearRange} in this section.</p>
+                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">Try dropping a different year range object to explore other time periods.</p>
             </div>
         `;
     }
@@ -199,20 +207,22 @@ function hasDataForYear(targetYear) {
         // Each range object has keys like "1962-1972", "1973-1982", etc.
         return Object.keys(rangeObj).some(rangeKey => {
             const yearArray = rangeObj[rangeKey];
-            // Check if any year in this range matches our target year
+            // Check if any year in this range matches our target year AND has highlights
             return yearArray.some(yearData => {
-                return parseInt(yearData.year) === targetYear;
+                return parseInt(yearData.year) === targetYear && 
+                       yearData.highlights && 
+                       yearData.highlights.length > 0;
             });
         });
     });
 }
 
 function createYearCard(year, title, description, hasData, yearData = null) {
-    const dataIndicator = hasData ? '📋' : '📅';
-    const dataText = hasData ? 'Historical Data Available' : 'General Historical Period';
+    const dataIndicator = '📋';
+    const dataText = 'Historical Data Available';
     
     return `
-        <div class="year-card ${hasData ? 'has-data' : 'no-data'}" onclick="navigateToYear('${year}', ${hasData})" data-year="${year}">
+        <div class="year-card has-data" onclick="navigateToYear('${year}', true)" data-year="${year}">
             <div style="text-align: center;">
                 <div class="year-number">${year}</div>
                 <div class="year-status">
@@ -230,7 +240,7 @@ function navigateToYear(year, hasData) {
         return;
     }
     
-    // Navigate to year detail page
+    // Navigate to year detail page - only years with data are shown now
     const sectionMap = {
         'naf': 'naf-history',
         'nafsfa': 'nafsfa-history',
