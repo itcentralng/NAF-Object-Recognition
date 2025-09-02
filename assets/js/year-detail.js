@@ -61,7 +61,6 @@ async function loadYearData() {
     }
 
     renderYearDetail();
-    renderYearListSidebar(); // Render the sidebar
     setupNavigation();
     
   } catch (error) {
@@ -71,27 +70,9 @@ async function loadYearData() {
 }
 
 function renderYearListSidebar() {
-  const yearsGrid = document.getElementById('years-grid-sidebar');
-  if (!yearsGrid || !currentYearRange) {
-    if (yearsGrid) yearsGrid.innerHTML = '<p>No year range found.</p>';
-    return;
-  }
-
-  const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
-  let yearsHTML = '';
-
-  for (let year = startYear; year <= endYear; year++) {
-    const isSelected = year === parseInt(yearParam);
-    yearsHTML += `
-      <div 
-        class="year-card-sidebar ${isSelected ? 'selected' : ''}" 
-        onclick="navigateToYearInSection('${year}')"
-      >
-        ${year}
-      </div>
-    `;
-  }
-  yearsGrid.innerHTML = yearsHTML;
+  // Year list has been removed from the sidebar
+  // Only the back button remains
+  return;
 }
 
 function findYearDataForSpecificYear(targetYear) {
@@ -674,7 +655,6 @@ function renderYearDetail() {
   
   // Render events timeline
   renderEventsTimeline();
-  renderYearListSidebar(); // Render the sidebar
 }
 
 function renderEventsTimeline() {
