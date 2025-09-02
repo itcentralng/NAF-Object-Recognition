@@ -1054,17 +1054,6 @@ body {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.events-timeline::before {
-  content: '';
-  position: absolute;
-  left: 30px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #3498db, rgba(52, 152, 219, 0.3));
-  z-index: 1;
-}
-
 .event-card {
   display: flex;
   margin-bottom: 3rem;
@@ -1590,10 +1579,6 @@ body {
     max-height: 500px;
   }
   
-  .events-timeline::before {
-    left: 20px;
-  }
-  
   .scroll-indicator {
     padding: 0.5rem;
   }
@@ -1768,10 +1753,6 @@ body {
   .events-timeline {
     padding: 1rem 0.25rem;
     max-height: 400px;
-  }
-  
-  .events-timeline::before {
-    left: 15px;
   }
   
   .scroll-indicator {
