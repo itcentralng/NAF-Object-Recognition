@@ -1034,19 +1034,6 @@ function navigateToNextYear() {
   }
 }
 
-function goBackToSection() {
-  // If we came from a year range, go back to the year list instead of section
-  if (currentYearRange) {
-    const objectMap = {
-      'naf-history': 'naf'
-    };
-    const objectParam = objectMap[sectionId] || 'naf';
-    window.location.href = `year-list.html?section=${sectionId}&year=${currentYearRange}&object=${objectParam}`;
-  } else {
-    window.location.href = `section.html?section=${sectionId}`;
-  }
-}
-
 function openImageModal(imageSrc, imageIndex, eventIndex) {
   // Create and show image modal
   const modal = document.createElement('div');

@@ -161,7 +161,6 @@ function updatePageHeader(yearRange, object) {
     
     document.getElementById('page-title').textContent = `Years ${yearRange} - ${sectionName} - Nigerian Air Force Museum`;
     document.getElementById('year-range-title').textContent = `Years ${yearRange}`;
-    document.getElementById('section-info').textContent = `${sectionName} - Select a specific year to explore`;
 }
 
 function renderYearsFromRange(yearRange) {
@@ -173,15 +172,15 @@ function renderYearsFromRange(yearRange) {
     // Parse the year range to get start and end years
     const [startYear, endYear] = yearRange.split('-').map(y => parseInt(y));
     
-    // First, collect all years that have data within the range
+    // First, collect all years that have data within the specific range
     for (let year = startYear; year <= endYear; year++) {
-        // Check if we have specific data for this year in our section data
-        if (hasDataForYear(year)) {
+        // Check if we have specific data for this year in the current year range
+        if (hasDataForYearInRange(year, yearRange)) {
             yearsWithData.push(year);
         }
     }
     
-    // Generate year cards only for years that have data
+    // Generate year cards only for years that have data in this specific range
     yearsWithData.forEach(year => {
         yearsHTML += createYearCard(year.toString(), null, null, true);
     });
@@ -214,6 +213,25 @@ function hasDataForYear(targetYear) {
                        yearData.highlights.length > 0;
             });
         });
+    });
+}
+
+function hasDataForYearInRange(targetYear, yearRange) {
+    if (!currentSectionData || !currentSectionData["year-ranges"]) return false;
+    
+    // Check if we have data for this specific year within the specific year range
+    return currentSectionData["year-ranges"].some(rangeObj => {
+        // Only look in the specific range object that matches our current year range
+        if (rangeObj[yearRange]) {
+            const yearArray = rangeObj[yearRange];
+            // Check if any year in this specific range matches our target year AND has highlights
+            return yearArray.some(yearData => {
+                return parseInt(yearData.year) === targetYear && 
+                       yearData.highlights && 
+                       yearData.highlights.length > 0;
+            });
+        }
+        return false;
     });
 }
 
