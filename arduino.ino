@@ -38,7 +38,7 @@ YearMapping yearMappings[] = {
   {"CA D3 42 00", "1992-2001"},
   {"D3 4F E6 0C", "2002-2011"},
   {"53 AA DB 13", "2012-2021"},
-  {"13 35 A7 14", "2022-2030"}
+  {"13 35 A7 14", "2022-2031"}
 };
 
 const int NUM_YEAR_MAPPINGS = sizeof(yearMappings) / sizeof(yearMappings[0]);

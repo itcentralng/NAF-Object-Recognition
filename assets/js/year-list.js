@@ -161,6 +161,7 @@ function updatePageHeader(yearRange, object) {
     
     document.getElementById('page-title').textContent = `Years ${yearRange} - ${sectionName} - Nigerian Air Force Museum`;
     document.getElementById('year-range-title').textContent = `Years ${yearRange}`;
+    document.getElementById('section-info').textContent = `${sectionName} - Select a specific year to explore its historical content`;
 }
 
 function renderYearsFromRange(yearRange) {

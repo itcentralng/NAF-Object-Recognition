@@ -113,9 +113,10 @@ def read_from_serial():
                             object_name = parts[2].lower()
                             
                             # Valid years from Arduino RFID mapping
-                            valid_years = ['1962-1972', '1973-1982', '1983-1992', '1993-2002', 
-                                         '2003-2012', '2013-2022', '2023-2032']
-                            
+                            valid_years = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
+
+                            print(year_range , valid_years , object_name, picked_object)
+
                             if year_range in valid_years and object_name == picked_object:
                                 dropped_year = year_range
                                 current_state = 'year-list'
@@ -264,9 +265,8 @@ def handle_simulate_year_detected(data):
     year_range = data.get('year', '')
     
     # Valid years from Arduino RFID mapping
-    valid_years = ['1962-1972', '1973-1982', '1983-1992', '1993-2002', 
-                   '2003-2012', '2013-2022', '2023-2032']
-    
+    valid_years = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
+
     if not picked_object:
         emit('simulation_result', {'success': False, 'message': 'No object picked - pick an object first'})
         return
