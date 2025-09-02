@@ -495,43 +495,6 @@ function toggleAutoScrollOnClick(event) {
   updateScrollVisualFeedback();
 }
 
-function setupNavigation() {
-  const prevBtn = document.getElementById('prev-year-btn');
-  const nextBtn = document.getElementById('next-year-btn');
-  const prevText = document.getElementById('prev-year-text');
-  const nextText = document.getElementById('next-year-text');
-  
-  // If we have a year range, set up navigation within that range
-  if (currentYearRange) {
-    const [startYear, endYear] = currentYearRange.split('-').map(y => parseInt(y));
-    const currentYear = parseInt(yearParam);
-    
-    // Check if there's a previous year within the range
-    if (currentYear > startYear) {
-      const prevYear = currentYear - 1;
-      prevBtn.style.display = 'flex';
-      prevText.textContent = `${prevYear}`;
-      prevBtn.onclick = () => navigateToYearInSection(prevYear.toString());
-    } else {
-      prevBtn.style.display = 'none';
-    }
-    
-    // Check if there's a next year within the range
-    if (currentYear < endYear) {
-      const nextYear = currentYear + 1;
-      nextBtn.style.display = 'flex';
-      nextText.textContent = `${nextYear}`;
-      nextBtn.onclick = () => navigateToYearInSection(nextYear.toString());
-    } else {
-      nextBtn.style.display = 'none';
-    }
-  } else {
-    // Fallback to hide buttons if no range is present
-    prevBtn.style.display = 'none';
-    nextBtn.style.display = 'none';
-  }
-}
-
 function navigateToYearInSection(year) {
   const queryParams = new URLSearchParams();
   queryParams.set('section', sectionId);
