@@ -25,13 +25,13 @@ const unsigned long RFID_INTERVAL = 500;    // Read RFID every 500ms
 
 // Known RFID UIDs (year mapping now handled in JavaScript)
 String knownUIDs[] = {
-  "93 09 04 2D",
+  "D3 2F 29 14",
   "33 18 E3 13",
-  "B3 4E E6 00",
+  "D3 AB 07 2D",
   "CA D3 42 00",
   "D3 4F E6 0C",
   "53 AA DB 13",
-  "13 35 A7 14"
+  "D3 21 39 DD"
 };
 
 const int NUM_KNOWN_UIDS = sizeof(knownUIDs) / sizeof(knownUIDs[0]);
