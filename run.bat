@@ -1,8 +1,8 @@
 @echo off
 :: Start the app
-start "" python -m http.server 8000
-start "" python main.py
+start /MIN "" python -m http.server 8000
+start /MIN "" python main.py
 timeout /t 5 /nobreak
 
-:: Uncomment the line below if you prefer to use Microsoft Edge
-start "" "msedge" --app=http://127.0.0.1:8000
+:: Launch Edge in fullscreen kiosk mode
+start "" "msedge" --kiosk --edge-kiosk-type=fullscreen --no-first-run --disable-features=msEdgeEnterpriseModePolicies http://127.0.0.1:8000/index.html
