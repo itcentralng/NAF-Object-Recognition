@@ -178,7 +178,7 @@ async function loadSectionData(object) {
 function updatePageHeader(yearRange, object) {
     const sectionNames = {
         'naf': 'NAF History',
-        'nafsfa': 'NAF School of Finance and Account',
+        'nafsfa': 'NAF School of Finance and Accounts',
         'evol': 'Evolution of NAF Finance Specialty'
     };
     

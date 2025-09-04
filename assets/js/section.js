@@ -205,7 +205,7 @@ function getSectionIcon(sectionId) {
 function getSectionDescription(sectionId) {
   const descriptionMap = {
     'naf-history': 'Explore the rich history and heritage of the Nigerian Air Force from its inception to the present day.',
-    'nafsfa-history': 'Discover the evolution and achievements of the NAF School of Finance and Administration through the years.',
+    'nafsfa-history': 'Discover the evolution and achievements of the NAF School of Finance and Accounts through the years.',
     'finance-evolution': 'Learn about the development and modernization of NAF finance specialty and its impact on operations.'
   };
   return descriptionMap[sectionId] || 'Explore the history and heritage of this section.';
