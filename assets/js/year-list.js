@@ -178,7 +178,7 @@ async function loadSectionData(object) {
 function extendYearRangeByOne(yearRange) {
     // Parse the year range (e.g., "1962-1971") and add 1 to the end year
     const [startYear, endYear] = yearRange.split('-').map(y => parseInt(y));
-    return `${startYear}-${endYear + 1}`;
+    return startYear == 1962 ? `${startYear}-${endYear + 1}` : `${startYear + 1}-${endYear + 1}`;
 }
 
 function updatePageHeader(yearRange, object) {
