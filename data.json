@@ -888,34 +888,24 @@
                                 {
                                     "title": "Fatal Plane Crash",
                                     "description": "Fatal plane crash killed Chief of Army Staff and other military officers.",
+                                    "image": "images/naf-history/2021-2-2.jpg"
+                                },
+                                {
+                                    "title": "Fatal Plane Crash",
+                                    "description": "Fatal plane crash killed Chief of Army Staff and other military officers.",
                                     "image": "images/naf-history/2021-2-1.jpg"
                                 },
                                 {
                                     "title": "Heroic Pilot Survival",
-                                    "description": "Flt Lt Abayomi Dairo's heroic evasion after being shot down by bandits.",
-                                    "image": "images/naf-history/2021-2-2.jpg"
-                                },
-                                {
-                                    "title": "Operational Challenges",
-                                    "description": "NAF faced significant operational challenges and security threats.",
-                                    "image": "images/naf-history/2021-2-3.jpg"
-                                },
-                                {
-                                    "title": "Counter-Insurgency Operations",
-                                    "description": "Continued counter-insurgency and anti-banditry operations nationwide.",
-                                    "image": "images/naf-history/2021-3-1.png"
-                                },
-                                {
-                                    "title": "Operational Resilience",
-                                    "description": "Demonstrated operational resilience despite security challenges.",
+                                    "description": "Flt Lt Abayomi Dairo's heroic evasion after being shot down by bandits. Demonstrating operational resilience despite security challenges while NAF continued counter-insurgency and anti-banditry operations nationwide.",
                                     "image": "images/naf-history/2021-3-2.jpg"
-                                }
+                                } 
                             ]
                         }
                     ]
                 },
                 {
-                    "2022-2030": [
+                    "2022-2031": [
                         {
                             "year": "2022",
                             "highlights": [
@@ -1402,7 +1392,7 @@
                     ]
                 },
                 {
-                    "2022-2030": [
+                    "2022-2031": [
                         {
                             "year": "2021",
                             "highlights": [

@@ -108,13 +108,13 @@
                 <h3>Simulate Year Drop (Arduino Simulation)</h3>
                 <select id="yearSelect">
                     <option value="">Select year range...</option>
-                    <option value="1962-1972">1962-1972</option>
-                    <option value="1973-1982">1973-1982</option>
-                    <option value="1983-1992">1983-1992</option>
-                    <option value="1993-2002">1993-2002</option>
-                    <option value="2003-2012">2003-2012</option>
-                    <option value="2013-2022">2013-2022</option>
-                    <option value="2023-2032">2023-2032</option>
+                    <option value="1962-1971">1962-1971</option>
+                    <option value="1972-1981">1972-1981</option>
+                    <option value="1982-1991">1982-1991</option>
+                    <option value="1992-2001">1992-2001</option>
+                    <option value="2002-2011">2002-2011</option>
+                    <option value="2012-2021">2012-2021</option>
+                    <option value="2022-2031">2022-2031</option>
                 </select>
                 <br>
                 <button onclick="simulateDrop()">Simulate Drop Year</button>
@@ -166,7 +166,7 @@
                 <li>Light sensors on A0 (NAF), A1 (NAFSFA), A2 (Evolution)</li>
                 <li>RFID reader on pins 9 (RST) and 10 (SS)</li>
                 <li>Configure SERIAL_PORT in .env file (e.g., /dev/cu.usbmodem101, COM3)</li>
-                <li>Year ranges: 1962-1972, 1973-1982, 1983-1992, 1993-2002, 2003-2012, 2013-2022, 2023-2032</li>
+                <li>Year ranges: 1962-1971, 1972-1981, 1982-1991, 1992-2001, 2002-2011, 2012-2021, 2022-2031</li>
             </ul>
             <h4>Simulation vs Real Hardware:</h4>
             <ul>
@@ -302,6 +302,18 @@
             addToLog(`Simulation: ${data.message}`, logType);
         });
 
+        socket.on('rfid_detected', function(data) {
+            addToLog(`RFID detected: ${data.uid} for object: ${data.object}`, 'socket');
+            // For simulation, we need to handle the RFID mapping here
+            // In a real app, this would be handled by rfid-year-mapping.js
+            simulateRFIDMapping(data.uid, data.object);
+        });
+
+        socket.on('year_resolution_result', function(data) {
+            const logType = data.success ? 'success' : 'error';
+            addToLog(`Year resolution: ${data.message}`, logType);
+        });
+
         // Control functions - These now properly simulate Arduino input to main.py
         function simulatePick() {
             const object = document.getElementById('objectSelect').value;
@@ -321,8 +333,52 @@
                 return;
             }
             
-            addToLog(`Sending simulate_year_detected: ${year}`, 'info');
-            socket.emit('simulate_year_detected', { year: year });
+            // Generate a fake RFID UID for the selected year
+            const uid = generateFakeRFIDForYear(year);
+            
+            addToLog(`Sending simulate_rfid_uid: ${uid} for year: ${year}`, 'info');
+            socket.emit('simulate_rfid_uid', { uid: uid });
+        }
+
+        function generateFakeRFIDForYear(yearRange) {
+            // Create a simple mapping for simulation
+            const yearToUID = {
+                '1962-1971': '04A1B2C3',
+                '1972-1981': '04D4E5F6',
+                '1982-1991': '04A7B8C9',
+                '1992-2001': '04D0E1F2',
+                '2002-2011': '04A3B4C5',
+                '2012-2021': '04D6E7F8',
+                '2022-2031': '04A9B0C1'
+            };
+            return yearToUID[yearRange] || `SIM-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
+        }
+
+        function simulateRFIDMapping(uid, object) {
+            // Simple RFID to year mapping for simulation
+            const uidToYear = {
+                '04A1B2C3': '1962-1971',
+                '04D4E5F6': '1972-1981',
+                '04A7B8C9': '1982-1991',
+                '04D0E1F2': '1992-2001',
+                '04A3B4C5': '2002-2011',
+                '04D6E7F8': '2012-2021',
+                '04A9B0C1': '2022-2031'
+            };
+            
+            const yearRange = uidToYear[uid];
+            if (yearRange) {
+                addToLog(`RFID mapping: ${uid} → ${yearRange}`, 'success');
+                // Send the resolved year back to the server
+                socket.emit('resolve_year_from_rfid', {
+                    uid: uid,
+                    year_range: yearRange,
+                    object: object
+                });
+            } else {
+                addToLog(`Unknown RFID UID: ${uid}`, 'error');
+                socket.emit('simulate_unknown_rfid', { uid: uid });
+            }
         }
 
         function simulateObjectDrop() {

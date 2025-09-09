@@ -235,6 +235,8 @@ def handle_resolve_year_from_rfid(data):
     emit('year_resolution_result', {'success': True, 'year': year_range, 'object': object_name})
 
 
+@socketio.on('get_arduino_status')
+def handle_get_arduino_status():
     """Get Arduino connection status"""
     emit('arduino_status', {
         'connected': arduino_connected,
