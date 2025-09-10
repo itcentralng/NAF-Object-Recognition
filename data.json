@@ -4,7 +4,154 @@
             "id": "naf-history",
             "logo": "images/naf-logo.png",
             "title": "NAF History",
-            "year-ranges": []
+            "year-ranges": [
+                {
+                    "1962-1972": [
+                        {
+                            "year": "1962",
+                            "highlights": [
+                                {
+                                    "description": "The Nigerian Government agreed in principle the establishment of the Nigerian Air Force (NAF).",
+                                    "images": []
+                                },
+                                {
+                                    "description": "June 1962 - First Batch of 10 cadets were enlisted to undergo training with the Imperial Ethiopian Air Force with only 4 successfully completing their training in 1964 and were enlisted as pioneer pilots of the Nigerian Air Force. These 4 pilots are: John Yisa-Doko (Northern Region), Daniel Suleiman (Northern region), Kola Falokpe (Western Region), and Onyerimba Faka (Eastern Region).",
+                                    "images": ["images/naf-history/1962-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1963",
+                            "highlights": [
+                                {
+                                    "description": "February 1963 – A Second Batch of 16 cadets were enlisted to train with the Royal Canadian Air Force.",
+                                    "images": ["images/naf-history/1963-1-1.jpg", "images/naf-history/1963-1-2.jpg"]
+                                },
+                                {
+                                    "description": "A Third Batch of 6 cadets were sent to train with the Indian Air Force.",
+                                    "images": ["images/naf-history/1963-2-1.jpg"]
+                                },
+                                {
+                                    "description": "West Germany received the contract for the establishment of the Nigerian Air Force with technical assistance from the German Air Force Technical Assistance Group (GAFTAG). The head of GAFTAG was Colonel Gerhard Kahtz. He was later appointed as the first Commander of the Nigerian Air Force upon its formal establishment.",
+                                    "images": ["images/naf-history/1963-3-1.jpg"]
+                                },
+                                {
+                                    "description": "The Fourth Batch of cadets were sent to train with the German Air Force.",
+                                    "images": ["images/naf-history/1963-4-1.jpg"]
+                                },
+                                {
+                                    "description": "The Nigerian Air Force Tactical and Training Wing (NAFTTW) was built by the German Air Force Technical Assistance Group.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1964",
+                            "highlights": [
+                                {
+                                    "description": "18 April 1964 – The Nigerian Air Force was formally established with the passage of the Air Force Act 1964 by the National Assembly.",
+                                    "images": ["images/naf-history/1964-1-1.jpg"]
+                                },
+                                {
+                                    "description": "Alhaji Tanko Galadima was the First Minister of the Nigerian Air Force (1964-1966).",
+                                    "images": ["images/naf-history/1964-2-1.jpg"]
+                                },
+                                {
+                                    "description": "Ministry of Defence was the Headquarters of the Nigerian Air Force with Alhaji Muhammadu Ribadu as Minister of Defence (1960-1965).",
+                                    "images": []
+                                },
+                                {
+                                    "description": "The Nigerian Air Force commenced operations as an air transport and training unit. The Germans supplied the first-generation air assets which included the Aerospatiale Allouette helicopter, 20 Dornier DO-27 transport aircraft, 14 Piaggio 149D trainer aircraft, and Nord Noratlas platforms for transport.",
+                                    "images": ["images/naf-history/1964-3-1.jpg", "images/naf-history/1964-3-2.jpg", "images/naf-history/1964-3-3.jpg"]
+                                },
+                                {
+                                    "description": "Construction of the first Nigerian Air Force base begun and was established in Kaduna.",
+                                    "images": ["images/naf-history/1964-4-1.jpg", "images/naf-history/1964-4-2.jpg", "images/naf-history/1964-4-3.jpg", "images/naf-history/1964-4-4.jpg", "images/naf-history/1964-4-5.jpg", "images/naf-history/1964-4-6.jpg"]
+                                },
+                                {
+                                    "description": "The First 4 Nigerian Army officers seconded to the Nigerian Air Force were: Lieutenant Colonel George T Kurobo, Colonel Shittu Akanji Alao, Lieutenant Colonel Emmanuel E Ikwue, and Major John Esio Obada.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "Malachy Njoku was the First Sergeant of the Nigerian Air Force.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "Squadron Leader John Chukwu was the First Qualified Flight Instructor (QFI) of the Nigerian Air Force.",
+                                    "images": ["images/naf-history/1964-5-1.jpg"]
+                                },
+                                {
+                                    "description": "Lance Corporal Adamu and Lance Corporal Doyle were amongst the First Corporals of the Nigerian Air Force.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "Air Vice Marshal AD Bello was the First NAF officer to attend the prestigious Air War College in the United States. Light Liaison Transport Squadron (Present day 401Flying Training School) was established in Kaduna for converting NAF pilots trained overseas.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "Light Liaison Transport Squadron (Present day 401Flying Training School) was established in Kaduna for converting NAF pilots trained overseas.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1965",
+                            "highlights": [
+                                {
+                                    "description": "24 November 1965 - Colonel W Timming was appointed the Second Commander of the Nigerian Air Force.",
+                                    "images": ["images/naf-history/1965-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1966",
+                            "highlights": [
+                                {
+                                    "description": "Jan 1966 - German Air Force Technical Assistance Group (GAFTAG) departed Nigeria and handed over command.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "19 Jan 1966 - George T Kurubo was appointed the Third Commander and was the first indigenous Commander of the Nigerian Air Force. He held this office till 12 August 1967 when he was appointed Ambassador to the Soviet Union.",
+                                    "images": ["images/naf-history/1966-1-1.jpg", "images/naf-history/1966-1-2.jpg"]
+                                },
+                                {
+                                    "description": "Jan 1966 –The First Nigerian Air Force hangar was commissioned at the Nigerian Air Force Base Kaduna.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "23 May 1966 – The First Nigerian Air Force plane crash occurred at Ibadan Airport killing Lieutenant Jasper Onyeji and Lieutenant D.F Onyirimba in a Piaggio P-149D while doing aerobatics that went sour.",
+                                    "images": ["images/naf-history/1966-3-1.jpg", "images/naf-history/1966-3-2.png"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1967",
+                            "highlights": [
+                                {
+                                    "description": "6 July 1967 - The Nigerian Civil War begins.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "5 August 1967 - The First Nigerian Air Force helicopter crash occurred killing Colonel Joseph Akahan who was the Chief of Army Staff and two young pilots: 2nd Lieutenant G Ozie and 2nd Lieutenant Olawale Lawal. The aircraft crashed in Wannune village located between Gboko and Makurdi.",
+                                    "images": ["images/naf-history/1967-1-1.jpg", "images/naf-history/1967-1-2.jpg"]
+                                },
+                                {
+                                    "description": "5 August 1967 - Colonel Shittu Akanji Alao was appointed the Fourth Commander of the Nigerian Air Force. He held this office until his death on 15 December 1969 while on a solo flight in an L-29 aircraft in the Southern-western part of the country when he ran into bad weather and subsequently ran out of fuel. He tried to make an emergency landing, but instead, ran into a tree and died in the process. He died at Uzebba, about 50 miles Northwest of Benin. He became the First Commander and Chief of the Air Staff to die on active duty.",
+                                    "images": ["images/naf-history/1967-2-1.jpg", "images/naf-history/1967-2-2.jpg"]
+                                },
+                                {
+                                    "description": "13 August 1967 - Biafran Aircraft bombs Lagos causing damages to the Nigerian Air Force fleet and installations.",
+                                    "images": ["images/naf-history/1967-3-1.jpg"]
+                                },
+                                {
+                                    "description": "Acquisition of the First Batch of combat aircraft from the Soviet Union. The Nigerian Air Force received some unknown numbers of Mikoyan-Hurevich MiG-17Fs which were delivered to Kano from Egypt. Later, 6 Ilyushin Il-28 medium Bombers were delivered from Egypt and stationed at Calabar and Port Harcourt. The Light Liaison Transport Squadron was renamed Primary Flying Training Wing (PFTW) to undertake ab-initial flying training and earlier task of transport conversion.",
+                                    "images": ["images/naf-history/1967-4-1.jpg", "images/naf-history/1967-4-2.jpg"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id":"nafsfa-history",
