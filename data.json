@@ -185,6 +185,482 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "1973-1983": [
+                        {
+                            "year": "1975",
+                            "highlights": [
+                                {
+                                    "description": "29 July 1975 - Air Vice Marshall John Nmadu Yisa-Doko was appointed the Sixth Chief of the Air Staff. He was the First Airman to be appointed Chief of the Air Staff. He is also the First to attain the rank of Air Vice Marshall in the Nigerian Air Force.",
+                                    "images": ["images/naf-history/1975-1-1.jpg", "images/naf-history/1975-1-2.jpg"]
+                                },
+                                {
+                                    "description": "25 Mikoyan-Gurevich MiG-21MFs and 6 MiG-21UM were purchased and delivered by the Murtala-Obasanjo administration.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1976",
+                            "highlights": [
+                                {
+                                    "description": "The Nigerian Air Force was presented with its Colours by General Olusegun Obasanjo the Head of the Federal Military Government and Commander-in-Chief of the Armed Forces at the occasion of the First Air Force Day.",
+                                    "images": ["images/naf-history/1976-1-1.jpg"]
+                                },
+                                {
+                                    "description": "1 April 1976 - The Federal Military Government authorized the adoption of a complete Air Force rank structure to give the Nigerian Air Force full-service independence.",
+                                    "images": ["images/naf-history/1976-2-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1977",
+                            "highlights": [
+                                {
+                                    "description": "Nigerian Air Force Training supply school (TSS) was established in Kaduna as an indigenous technical supply school.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1978",
+                            "highlights": [
+                                {
+                                    "description": "In a bid to restructure the Nigerian Air Force, the Tactical Air Command and the Training Command were established.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1979",
+                            "highlights": [
+                                {
+                                    "description": "The Technical Supply School was renamed Technical Training Wing and redesignated NAF Technical Training Group (NAFTTG) Kaduna. It was responsible for providing basic training in aircraft maintenance, armament, communication and supply management.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1980",
+                            "highlights": [
+                                {
+                                    "description": "15 April 1980 - Air Vice Marshal Abdullahi Dominic Bello was appointed the Seventh Chief of the Air Staff. He held this Office till 31 December 1983.",
+                                    "images": ["images/naf-history/1980-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1982",
+                            "highlights": [
+                                {
+                                    "description": "The Nigerian Air Force Logistics Command was established in Lagos.",
+                                    "images": ["images/naf-history/1982-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1983",
+                            "highlights": [
+                                {
+                                    "description": "New wings for the Nigerian Air Force aircrew were introduced to replace the near foreign ones in use.",
+                                    "images": ["images/naf-history/1983-1-1.jpg"]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "1984-1994": [
+                        {
+                            "year": "1984",
+                            "highlights": [
+                                {
+                                    "description": "01 January 1984 – Air Marshal Ibrahim Mahmud Alfa was appointed the Eight Chief of the Air Staff. He held this office until 01 January 1990.",
+                                    "images": ["images/naf-history/1984-1-1.jpg"]
+                                },
+                                {
+                                    "description": "18 SEPECAT Jaguar fighters were delivered and operated from Makurdi.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1986",
+                            "highlights": [
+                                {
+                                    "description": "December 1986 – The Tactical Air Command announced the establishment of a unit of Aermacchi MB-339AN trainers at Calabar.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "24 Aero L-39 Albatros armed jet trainers were purchased.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "The L-39 were purchased after having retired its fleet of Aero L-29 Delfin.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "PFTW was upgraded to a group status and renamed 301 Flying Training School (301 FTS).",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1987",
+                            "highlights": [
+                                {
+                                    "description": "1 October 1987 - Ibrahim Mahmud Alfa was the First Nigerian Air Force officer to be promoted to the rank of Air Marshal.",
+                                    "images": ["images/naf-history/1987-1-1.jpg"]
+                                },
+                                {
+                                    "description": "March 1987 - The Nigerian Air Force completed the installation of the Inter-command Communication System.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1988",
+                            "highlights": [
+                                {
+                                    "description": "June 1988 - The Nigerian Air Force was organized into 4 specialized Commands which are: Tactical Command (Makurdi), Training Command (Kaduna), Logistics Command (Lagos), and Airlift Command (Ibadan).",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1989",
+                            "highlights": [
+                                {
+                                    "description": "The Nigerian Air Force unveiled its first Locally built trainer aircraft dubbed the \"Air Beetle\".",
+                                    "images": ["images/naf-history/1989-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1990",
+                            "highlights": [
+                                {
+                                    "description": "Air Marshal Nuraini Oladimeji Yussuff was appointed the Ninth Chief of the Air Staff. He held this Office until his retirement on 30 January 1992.",
+                                    "images": ["images/naf-history/1990-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1992",
+                            "highlights": [
+                                {
+                                    "description": "31 January 1992 – Air Marshal Akin Dada was appointed the Tenth Chief of the Air Staff. He held this Office until his retirement on 16 September 1993.",
+                                    "images": ["images/naf-history/1992-1-1.jpg"]
+                                },
+                                {
+                                    "description": "26 Sept 1992 – A fatal air crash involving a Nigerian Air Force Lockheed C-130H Hercules 911, 3 minutes after take-off from Lagos when 3 engines failed killing all 158 passengers and crew members. It crashed at the Ejigbo Canal.",
+                                    "images": ["images/naf-history/1992-2-1.jpg", "images/naf-history/1992-2-2.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1993",
+                            "highlights": [
+                                {
+                                    "description": "17 September 1993 – Air Vice Marshal Femi John Femi was appointed the Eleventh Chief of the Air Staff. He held this Office until his retirement on 29 March 1996.",
+                                    "images": ["images/naf-history/1993-1-1.jpg"]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "1995-2005": [
+                        {
+                            "year": "1996",
+                            "highlights": [
+                                {
+                                    "description": "30 March 1996 – Air Marshal Nsikak-Abasi Essien Eduok was appointed as the Twelfth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his retirement on 29 May 1999.",
+                                    "images": ["images/naf-history/1996-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1998",
+                            "highlights": [
+                                {
+                                    "description": "9 June 1998 - Air Marshal Al-Amin Daggash was the First Nigerian Air Force Chief of Defence Staff.",
+                                    "images": ["images/naf-history/1998-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1999",
+                            "highlights": [
+                                {
+                                    "description": "10 March 1999 - Habibah Ruth Garba was the First female Air Commodore in the Nigerian Air Force.",
+                                    "images": ["images/naf-history/1999-1-1.jpg"]
+                                },
+                                {
+                                    "description": "29 May 1999 – Air Marshal Isaac Mohammed Alfa was appointed as the Thirteenth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his retirement on 23 April 2001.",
+                                    "images": ["images/naf-history/1999-2-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2000",
+                            "highlights": [
+                                {
+                                    "description": "Technical Training Group was designated as 320 Technical Training Group (320 TTG), Kaduna.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2001",
+                            "highlights": [
+                                {
+                                    "description": "24 April 2001 – Air Marshal Jonah Domfa Wuyep was appointed as the Fourteenth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his retirement on 31 May 2006.",
+                                    "images": ["images/naf-history/2001-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2005",
+                            "highlights": [
+                                {
+                                    "description": "The Nigerian Government approved $251 million for the purchase of 15 Chengdu F-7 fighter jets from China. The package included $220 million for the 15 aircraft and $32 million for armaments.",
+                                    "images": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "2006-2016": [
+                        {
+                            "year": "2006",
+                            "highlights": [
+                                {
+                                    "description": "01 June 2006 - Air Marshal Paul Dike was appointed as the Fifteenth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his appointment as Chief of the Defence Staff on 19 August 2008.",
+                                    "images": ["images/naf-history/2006-1-1.jpg"]
+                                },
+                                {
+                                    "description": "17 Sept 2006 – Air crash involving several Army officers in Obudu, Cross-River State.",
+                                    "images": ["images/naf-history/2006-2-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2008",
+                            "highlights": [
+                                {
+                                    "description": "12 March 2008 – The 320 Technical Training Group on expansion and full accreditation by NBTE and NUC as well as its affiliation to Cranfield University was renamed Air Force Institute of Technology (AFIT).",
+                                    "images": ["images/naf-history/2008-1-1.jpg"]
+                                },
+                                {
+                                    "description": "12 March 2008 - The Nigerian Air Force Institute of Technology (AFIT) was established.",
+                                    "images": ["images/naf-history/2008-1-2.jpg"]
+                                },
+                                {
+                                    "description": "20 August 2008 - The First Nigerian Air Force officer to attain the rank of Air Chief Marshal was Air Marshal Paul Dike upon his appointment as the Chief of Defence Staff.",
+                                    "images": ["images/naf-history/2008-2-1.jpg"]
+                                },
+                                {
+                                    "description": "20 August 2008 - Air Marshal Oluseyi Petinrin was appointed as the Sixteenth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his appointment as Chief of the Defence Staff on 18 September 2010.",
+                                    "images": ["images/naf-history/2008-3-1.jpg"]
+                                },
+                                {
+                                    "description": "The Nigerian Air Force trained the pioneer Chengdu F-7 fighter pilots in China while delivery of the aircraft began in 2009.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2009",
+                            "highlights": [
+                                {
+                                    "description": "September 2009 - The Nigerian Air Force began refurbishing some of its C-130 aircraft beginning with the NAF 917.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2010",
+                            "highlights": [
+                                {
+                                    "description": "The Nigerian Air Force designed and built its First indigenous Unmanned Aerial Vehicle (UAV) dubbed \"GULMA\" and was unveiled by former President Goodluck Jonathan in Kaduna.",
+                                    "images": ["images/naf-history/2010-1-1.jpg", "images/naf-history/2010-1-2.jpg"]
+                                },
+                                {
+                                    "description": "19 September 2010 - Air Marshal MD Umar was appointed as the Seventeenth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his retirement on 03 October 2012.",
+                                    "images": ["images/naf-history/2010-2-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2011",
+                            "highlights": [
+                                {
+                                    "description": "29 March 2011 - The Nigerian Air Force established the Mobility Command with its Headquarters in Yenogoa.",
+                                    "images": ["images/naf-history/2011-1-1.jpg", "images/naf-history/2011-1-2.jpg"]
+                                },
+                                {
+                                    "description": "9 December 2011 - The Nigerian Air Force commissioned its First female pilot, Flt Lt Blessing Liman.",
+                                    "images": ["images/naf-history/2011-2-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2012",
+                            "highlights": [
+                                {
+                                    "description": "04 October 2012 - Air Marshal Alex Sabundu Badeh was appointed the Eighteenth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his appointment as the Fifteenth Chief of Defence Staff on 15 January 2014.",
+                                    "images": ["images/naf-history/2012-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2014",
+                            "highlights": [
+                                {
+                                    "description": "16 January 2014 - Air Marshal Adesola Nunayon Amosu was appointed the Nineteenth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his retirement on 12 July 2015.",
+                                    "images": ["images/naf-history/2014-1-1.jpg"]
+                                },
+                                {
+                                    "description": "18 April 2014 - The Nigerian Air Force marked its 50 years Golden Jubilee Celebration.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "25 September 2014 - The CH-3A UCAV was inducted into the Nigerian Air Force fleet.",
+                                    "images": ["images/naf-history/2014-3-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2015",
+                            "highlights": [
+                                {
+                                    "description": "13 July 2015 - Air Marshal Sadique Baba Abubakar was appointed the Twentieth Chief of the Air Staff of the Nigerian Air Force. He held this Office until his retirement on 25 January 2021.",
+                                    "images": ["images/naf-history/2015-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2016",
+                            "highlights": [
+                                {
+                                    "description": "19 November 2016 - The Nigerian Air Force established the Special Operations Command (SOC) in Bauchi.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "301 FTS was redesignated 401 Flying Training School (401 FTS).",
+                                    "images": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "2017-2027": [
+                        {
+                            "year": "2017",
+                            "highlights": [
+                                {
+                                    "description": "8 June 2017 - The Nigerian Air Force established the Nigerian Air Force Tailoring Workshop in Kaduna.",
+                                    "images": ["images/naf-history/2017-1-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2018",
+                            "highlights": [
+                                {
+                                    "description": "15 February 2018 – The Nigerian Air Force inducted its first locally-built operational UAV drone dubbed the \"TSAIGUMI\". The induction was done by the President and Commander-in-Chief of the Armed Forces, Muhammadu Buhari. The drone was made by the Nigerian Air Force Institute of Technology.",
+                                    "images": ["images/naf-history/2018-1-1.jpg", "images/naf-history/2018-1-2.jpg", "images/naf-history/2018-1-3.jpg"]
+                                },
+                                {
+                                    "description": "16 April 2018 - Winging of the First Set of Liberian pilots that were trained for the Liberian Armed Forces.",
+                                    "images": ["images/naf-history/2018-2-1.jpg"]
+                                },
+                                {
+                                    "description": "2 May 2018 - The Nigerian Air Force established the Ground Training Command (GTC) in Enugu having been unbundled from the erstwhile Training Command on 4 July 2017.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "28 September 2018 - A fatal air collision involving two F-7 jets as they practiced flight maneuvers for the 58th Independence Day Celebrations in Abuja. The 3 pilots ejected out of the crippled jets with 2 sustaining minor G-force injuries while the third pilot died on his way to the hospital after sustaining head injuries due to problems from the parachute as it deployed.",
+                                    "images": ["images/naf-history/2018-4-1.jpg", "images/naf-history/2018-4-2.png"]
+                                },
+                                {
+                                    "description": "November 2018 - Sierra Nevada was officially awarded the contract for twelve A-29 Super Tucano aircraft for the Nigerian Air Force with an estimated completion date by 2024.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2019",
+                            "highlights": [
+                                {
+                                    "description": "2 January 2019 - A Mi-35M attack helicopter crashed in Damasak, Borno State while providing close-air support for troops of the 145 Battalion combating Boko Haram insurgents, killing all onboard.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "15 October 2019 - The Nigerian Air Force winged Lieutenant Kafayat Sanni as its First female combat fighter jet pilot.",
+                                    "images": ["images/naf-history/2019-1-1.jpg", "images/naf-history/2019-1-2.jpg"]
+                                },
+                                {
+                                    "description": "15 October 2019 – The Nigerian Air Force winged Lieutenant Tolulope Arotile as its first female combat helicopter pilot. She was amongst thirteen other pilots also winged that same day.",
+                                    "images": ["images/naf-history/2019-2-1.jpg", "images/naf-history/2019-2-2.jpg", "images/naf-history/2019-2-3.png"]
+                                },
+                                {
+                                    "description": "15 October 2019 - Master Warrant Officer Grace Garba became the First female Senior Non-Commissioned Officer (SNCO) to be promoted to the rank of Air Warrant Officer.",
+                                    "images": ["images/naf-history/2019-3-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2020",
+                            "highlights": [
+                                {
+                                    "description": "28 May 2020 - The Nigerian Air Force recorded its First all-female crew to conduct an operational Intelligence, Surveillance and Reconnaissance (ISR) mission using the NAF Beechcraft King Air ISR aircraft.",
+                                    "images": ["images/naf-history/2020-1-1.jpg", "images/naf-history/2020-1-2.jpg"]
+                                },
+                                {
+                                    "description": "Flying Officer Oluwabunmi Ijelu was the First female officer to become a Captain on a NAF aircraft.",
+                                    "images": ["images/naf-history/2020-2-1.jpg"]
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2021",
+                            "highlights": [
+                                {
+                                    "description": "26 January 2021 - Air Marshal Oladayo Isiaka Amao was appointed the Twenty-first Chief of the Air Staff, an Office he holds till date.",
+                                    "images": ["images/naf-history/2021-1-1.jpg"]
+                                },
+                                {
+                                    "description": "31 March 2021 - An Alpha jet with pilot, Flight Lieutenant Chappelle and another crew member crashed near Borno State after conducting air interdiction on Boko Haram. The jet was reported to have stopped pinging on radar at about 5:08pm and was presumed to have crashed. The wreckage was reported missing and found nineteen months later by the Nigerian Army troops.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "20 May 2021 - Induction of three Pakistani JF-17 Thunder to the Nigerian Air Force. The Ceremony was done to mark the end of the 2021 Nigerian Air Force Day Celebration.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "22 May 2021 - A Fatal plane crash occurred killing the Chief of Army Staff, Lt Gen Ibrahim Attahiru and 10 other Nigerian Army officers including the crew members. The crash occurred when the plane was trying to land in bad weather at the Kaduna International Airport. The crew members were Flt Lt TO Asaniyi, Flt Lt AA Olufade, Sgt Adesina and ACM Oyedepo.",
+                                    "images": ["images/naf-history/2021-2-1.jpg", "images/naf-history/2021-2-2.jpg", "images/naf-history/2021-2-3.jpg"]
+                                },
+                                {
+                                    "description": "18 July 2021 - Alpha Jet pilot Flight Lieutenant Abayomi Dairo was shot down by armed bandits in Zamfara State while returning from an air interdiction mission along the Kaduna-Zamfara boundaries. He successfully ejected from the plane, evaded capture and made his way to the base in the area having sustained minor injuries. He was received by the Chief of Defence Staff and the Chief of Air Staff.",
+                                    "images": ["images/naf-history/2021-3-1.png", "images/naf-history/2021-3-2.jpg"]
+                                },
+                                {
+                                    "description": "22 July 2021 - The First Batch of 6 A-29 Super Tucano aircraft arrived Kano, Nigeria. The aircraft were received by the Honourable Minister of Defence, Major General Bashir Magashi (Rtd), alongside the Chief of Army Staff, Lieutenant General Faruk Yahaya and the Chief of Air Staff, Air Marshal Oladayo Amao.",
+                                    "images": []
+                                },
+                                {
+                                    "description": "31 August 2021 - The newly acquired A-29 Super Tucano aircraft were inducted into the Nigerian Air Force (NAF) Order of Battle at the 011 Presidential Air Fleet Apron, Nnamdi Azikiwe International Airport, Abuja. The Commander-in-Chief of the Armed Forces of the Federal Republic of Nigeria, President Muhammadu Buhari, GCFR, presided over the Induction Ceremony as the Special Guest of Honour. The Super Tucanos received the following serials: NAF845, NAF846, NAF848, NAF850, NAF851 and NAF852.",
+                                    "images": []
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
