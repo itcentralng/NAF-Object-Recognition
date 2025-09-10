@@ -185,107 +185,27 @@ function renderEventsTimeline() {
           </div>
           <div class="event-content">
             <div class="event-header">
-              <h3 class="event-title">${highlight.title}</h3>
               <div class="event-date">${currentYearData.year}</div>
             </div>
             <p class="event-description">${highlight.description}</p>
             
-            ${highlight.image ? `
+            ${highlight.images && highlight.images.length > 0 ? `
               <div class="event-images-grid">
-                <div class="event-image-container" onclick="openImageModal('${highlight.image}', 0, ${index})">
-                  <img src="${highlight.image}" alt="${highlight.title}" class="event-image" loading="lazy" />
-                  <div class="image-overlay">
-                    <span class="zoom-icon">🔍</span>
+                ${highlight.images.map((image, imageIndex) => `
+                  <div class="event-image-container" onclick="openImageModal('${image}', ${imageIndex}, ${index})">
+                    <img src="${image}" alt="${highlight.description}" class="event-image" loading="lazy" />
+                    <div class="image-overlay">
+                      <span class="zoom-icon">🔍</span>
+                    </div>
                   </div>
-                </div>
+                `).join('')}
               </div>
             ` : ''}
           </div>
         </div>
       `;
     });
-  } else {
-    // Create a general event from available data, then add some sample events for demonstration
-    const baseEvents = [
-      {
-        title: currentYearData.title || `Nigerian Air Force Operations - ${currentYearData.year}`,
-        description: currentYearData.content || currentYearData.summary || `Overview of Nigerian Air Force activities and developments during ${currentYearData.year}.`,
-        activities: currentYearData.activities || []
-      }
-    ];
-    
-    // Add some additional contextual events to create a richer timeline
-    const additionalEvents = [
-      {
-        title: "Personnel Development and Training",
-        description: `Continued focus on personnel development and specialized training programs throughout ${currentYearData.year}.`,
-        activities: [
-          "Ongoing pilot training programs",
-          "Technical skills enhancement",
-          "Leadership development initiatives"
-        ]
-      },
-      {
-        title: "Operational Readiness",
-        description: `Maintained high levels of operational readiness and defense capabilities during ${currentYearData.year}.`,
-        activities: [
-          "Aircraft maintenance and servicing",
-          "Mission readiness exercises",
-          "Strategic defense planning"
-        ]
-      },
-      {
-        title: "Infrastructure and Technology",
-        description: `Infrastructure development and technological advancement initiatives in ${currentYearData.year}.`,
-        activities: [
-          "Base facilities improvement",
-          "Communications systems upgrade",
-          "Equipment modernization"
-        ]
-      },
-      {
-        title: "Community Engagement",
-        description: `Nigerian Air Force community outreach and public engagement activities in ${currentYearData.year}.`,
-        activities: [
-          "Public awareness programs",
-          "Educational partnerships",
-          "Community service initiatives"
-        ]
-      }
-    ];
-    
-    const allEvents = [...baseEvents, ...additionalEvents];
-    eventCount = allEvents.length;
-    
-    allEvents.forEach((event, index) => {
-      timelineHTML += `
-        <div class="event-card" data-event-index="${index}">
-          <div class="event-number">
-            <span>${index + 1}</span>
-          </div>
-          <div class="event-content">
-            <div class="event-header">
-              <h3 class="event-title">${event.title}</h3>
-              <div class="event-date">${currentYearData.year}</div>
-            </div>
-            <p class="event-description">${event.description}</p>
-            
-            ${event.activities && event.activities.length > 0 ? `
-              <div class="event-activities">
-                <h4>Key Activities:</h4>
-                <ul class="event-activities-list">
-                  ${event.activities.map(activity => `
-                    <li>${activity}</li>
-                  `).join('')}
-                </ul>
-              </div>
-            ` : ''}
-          </div>
-        </div>
-      `;
-    });
-  }
-  
+  } 
   timelineContainer.innerHTML = timelineHTML;
   
   // Show/hide auto scroll button based on event count
@@ -560,8 +480,7 @@ function openImageModal(imageSrc, imageIndex, eventIndex) {
         <img src="${imageSrc}" alt="Historical Image" class="modal-image" />
       </div>
       <div class="image-modal-info">
-        <p>Historical Image - ${currentYearData.year}</p>
-        <p class="image-event-title">${currentYearData.highlights && currentYearData.highlights[eventIndex] ? currentYearData.highlights[eventIndex].title : currentYearData.title}</p>
+        <p class="image-event-title">${currentYearData.highlights && currentYearData.highlights[eventIndex] ? currentYearData.highlights[eventIndex].description : currentYearData.title}</p>
       </div>
     </div>
   `;
