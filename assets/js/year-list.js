@@ -229,7 +229,7 @@ function hasDataForYear(targetYear) {
     
     // Check if we have data for this specific year in any year range
     return currentSectionData["year-ranges"].some(rangeObj => {
-        // Each range object has keys like "1962-1972", "1973-1982", etc.
+        // Each range object has keys like "1962-1972", "1973-1983", etc.
         return Object.keys(rangeObj).some(rangeKey => {
             const yearArray = rangeObj[rangeKey];
             // Check if any year in this range matches our target year AND has highlights

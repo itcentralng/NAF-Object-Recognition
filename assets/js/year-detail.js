@@ -87,7 +87,7 @@ function findYearDataForSpecificYear(targetYear) {
   
   // Find the year data entry that contains this specific year
   for (const rangeObj of currentSectionData["year-ranges"]) {
-    // Each range object has keys like "1962-1972", "1973-1982", etc.
+    // Each range object has keys like "1962-1972", "1973-1983", etc.
     for (const rangeKey of Object.keys(rangeObj)) {
       const yearArray = rangeObj[rangeKey];
       // Look for a year object that matches our target year

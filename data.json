@@ -12,7 +12,7 @@
             "title":"NAF School of Finance and Accounts",
             "year-ranges":[
                 {
-                    "2012-2021": [
+                    "2006-2016": [
                         {
                             "year": "2015",
                             "highlights": [
@@ -46,7 +46,9 @@
                                     "images": ["images/nafsfa-history/23.jpg"]
                                 }
                             ]
-                        },
+                        }
+                    ],
+                    "2017-2027": [
                         {
                             "year": "2017",
                             "highlights": [
@@ -223,7 +225,7 @@
             "title":"Evolution of NAF Finance Specialty",
             "year-ranges":[
                 {
-                    "1972-1981": [
+                    "1962-1972": [
                         {
                             "year": "1972",
                             "highlights": [
@@ -232,10 +234,25 @@
                                     "images": []
                                 }
                             ]
-                        },
+                        }
+                    ]
+                },
+                {
+                    "1973-1983": []
+                },
+                {
+                    "1984-1994": [
                         {
-                            "year": "1990s",
+                            "year": "1990",
                             "highlights": [
+                                {
+                                    "description": "Before the 1980s, NAF personnel were paid salaries, allowances and other entitlements in cash via table payment. The process required a lot of manual actions such as physical cash handling that was slow and largely inaccurate. With the evolution of banking system and operations in Nigeria, the NAF Finance Corps at the time pushed for the abolishment of the table payment method and began to make payments to individual salary accounts of personnel through banks. This change brought about ease for NAF personnel and also improved efficiency and accountability.",
+                                    "images":[]
+                                },
+                                {
+                                    "description": "Prior to computerization, binders were used for computation of salaries and allowances in PAG. This required manual entries, manual computations and manual deductions of charges. A system called ACROL was used to generate and print salary schedules. Each page of the schedule had particulars of only 25 NAF personnel which were printed from the Machine Room in PAG. The NAF leveraged the computer revolution and computerized the salary payment processes in phases. As directed by HQ NAF, PAG subscribed to a programme named dBase III which was first used to process salaries of officers only. Subsequently, more efficient systems were developed leading to the NAF subscribing to a more efficient and flexible software solution called \"Soja Pay\". The system features include payroll processing, reports, summaries and data management. The system also provided a training opportunity for personnel on specialized systems training.",
+                                    "images":[]
+                                },
                                 {
                                     "description": "Before the 1980s, NAF personnel were paid salaries, allowances and other entitlements in cash via table payment. The process required a lot of manual actions such as physical cash handling that was slow and largely inaccurate. With the evolution of banking system and operations in Nigeria, the NAF Finance Corps at the time pushed for the abolishment of the table payment method and began to make payments to individual salary accounts of personnel through banks. This change brought about ease for NAF personnel and also improved efficiency and accountability.",
                                     "images":[]
@@ -249,33 +266,7 @@
                     ]
                 },
                 {
-                    "1982-1991": [
-                        {
-                            "year": "1990s",
-                            "highlights": [
-                                {
-                                    "description": "Before the 1980s, NAF personnel were paid salaries, allowances and other entitlements in cash via table payment. The process required a lot of manual actions such as physical cash handling that was slow and largely inaccurate. With the evolution of banking system and operations in Nigeria, the NAF Finance Corps at the time pushed for the abolishment of the table payment method and began to make payments to individual salary accounts of personnel through banks. This change brought about ease for NAF personnel and also improved efficiency and accountability.",
-                                    "images":[]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "1992-2001": [
-                        {
-                            "year": "1990s",
-                            "highlights": [
-                                {
-                                    "description": "Prior to computerization, binders were used for computation of salaries and allowances in PAG. This required manual entries, manual computations and manual deductions of charges. A system called ACROL was used to generate and print salary schedules. Each page of the schedule had particulars of only 25 NAF personnel which were printed from the Machine Room in PAG. The NAF leveraged the computer revolution and computerized the salary payment processes in phases. As directed by HQ NAF, PAG subscribed to a programme named dBase III which was first used to process salaries of officers only. Subsequently, more efficient systems were developed leading to the NAF subscribing to a more efficient and flexible software solution called \"Soja Pay\". The system features include payroll processing, reports, summaries and data management. The system also provided a training opportunity for personnel on specialized systems training.",
-                                    "images":[]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "2002-2011": [
+                    "1995-2005": [
                         {
                             "year": "2003",
                             "highlights": [
@@ -284,7 +275,11 @@
                                     "images": []
                                 }
                             ]
-                        },
+                        }
+                    ]
+                },
+                {
+                    "2006-2016": [
                         {
                             "year": "2008",
                             "highlights": [
@@ -295,7 +290,7 @@
                             ]
                         },
                         {
-                            "year": "2009-2010",
+                            "year": "2009",
                             "highlights": [
                                 {
                                     "description": "In 2009, Air Cdre AA Malomo sought the approval of the CAS, Air Mshl OO Petinrin to introduce a monthly staff grant for AVMs in the NAF. The laudable initiative was to provide AVMs with resources to encourage and empower them to effectively carry out the taskings of the respective strategic roles they played towards actualization of NAF objectives. The impact the grant had on welfare of NAF senior officers led the Army and Navy to adopt the same initiative. Subsequently, the grant was standardized, approved and gazetted in the MAFA among other non-regular allowances paid to personnel of the 3 services.",
@@ -310,49 +305,7 @@
                     ]
                 },
                 {
-                    "2012-2021": [
-                        {
-                            "year": "2014",
-                            "highlights": [
-                                {
-                                    "description": "In order to provide finance personnel with requisite knowledge to effectively carryout their roles and responsibilities, the Nigerian Air Force School of Finance and Accounts was established in Badagry. Finance clerks attended the finance upgrading courses while newly commissioned finance officers attended the Basic Finance Officers' Course. The primary learning objectives were to among others, prepare pay clerks and finance officers to carryout their roles in accordance with unit pay procedures, understand and appreciate the rudiments of audit exercises, taxation and financial accounting and management.",
-                                    "images":[]
-                                },
-                                {
-                                    "description": "Due to its growing roles and responsibilities, there was a call for the Directorate of Finance and Accounts to be upgraded to a Branch. Also, the growing number of finance personnel and their specialization in various accounting fields justified the call for the upgrade. In Jul 14, Air Mshl AN Amosu authorized the highly anticipated status upgrade from a Directorate to the Accounts and Budget Branch. The upgrade came with the promotion of the first AVM in the Finance Specialty and appointment of a Chief of Accounts and Budget.",
-                                    "images":[]
-                                }
-                            ]
-                        },
-                        {
-                            "year": "2014-2018",
-                            "highlights": [
-                                {
-                                    "description": "A team of experienced finance officers and clerks were tasked to draft and produce training manuals. The manuals serve as educational guides to enable finance officers study for the specialist subject during the officers' promotion exams. The manuals also helped clerks adequately prepare for their accounts upgrading courses. These manuals have served as good study materials for the development of finance personnel in the NAF.",
-                                    "images":[]
-                                },
-                                {
-                                    "description": "The NAF leadership embarked on a service-wide restructuring of establishments which saw the change of nomenclature of Pay and Accounting Group (PAG) to 081 PAG.",
-                                    "images":[]
-                                },
-                                {
-                                    "description": "The erstwhile Inspectorate Wing in PAG was upgraded to a Directorate. The upgrade was primarily to ensure independence of the Directorate from the Comd PAG who controlled NAF funds. The upgrade to Directorate granted autonomy from PAG and empowered it to inspect all NAF accounts at command and unit levels.",
-                                    "images":[]
-                                },
-                                {
-                                    "description": "The Directorate of Budget was created under the Policy and Plans Branch. Due to the specialist nature of the roles required of the Directorate, it was excised from the Policy and Plans Branch and adopted by the A&B Branch.",
-                                    "images":[]
-                                },
-                                {
-                                    "description": "The Deputy Director of Strategic Financial Plans was created under the Policy and Plans Branch.",
-                                    "images":[]
-                                },
-                                {
-                                    "description": "The Directorate of Non-Public funds was established to carryout oversight functions of financial activities of NAF entities that receive and expend non-public funds. The primary mandate of the Directorate is to ensure transparency and accountability.",
-                                    "images":[]
-                                }
-                            ]
-                        },
+                    "2017-2027": [
                         {
                             "year": "2018",
                             "highlights": [
@@ -369,23 +322,14 @@
                                     "images":[]
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    "2022-2031": [
+                        },
                         {
                             "year": "2021",
                             "highlights": [
                                 {
                                     "description": "As a coastal town and its low-lying terrain, Badagry experienced annual flooding as a result of constant rainfall. This led to waterlogging of NAFSFA academic area and students' hostel. The situation gave rise to concerns of health, flooding and transportation challenges. This forced the School to constantly alter its academic calendar which occasionally had an effect on the promotion of finance clerks. In view of the environmental challenges, Ibadan was designed as the permanent site of NAFSFA.",
                                     "images":[]
-                                }
-                            ]
-                        },
-                        {
-                            "year": "2021-2024",
-                            "highlights": [
+                                },
                                 {
                                     "description": "In 2021, the idea to establish a microfinance bank for the NAF was conceived by AVM CA Ogbeche. Later that year, a committee was constituted by AVM JA Ochomma which lead to registrations with CBN and development of a feasibility study for the microfinance bank. AVM HA Adebowale was tasked with the responsibility of sorting out all documentation in accordance with CBN regulations. Also, AVM HA Adebowale led the advocacy to NAFILGC and her subsidiaries to be major shareholders of the microfinance bank. After the fulfillment of all the requirements, NAF Microfinance Bank was established. After obtaining the approval of the CAS, Air Mshl HB Abubakar, the CAB, AVM CU Nwagwu pushed for the commissioning of the bank in NAF Valley, Asokoro, Abuja. The NAF Microfinance Bank was established to primarily avail NAF personnel and their dependents an alternative of specially tailored banking services. Similarly, an objective of the NAF Microfinance Bank was to offer personnel opportunity to enjoy products specially developed to cater to their welfare needs.",
                                     "images":[]
@@ -398,12 +342,7 @@
                                 {
                                     "description": "In order to facilitate communication and foster a sense of unity and shared purpose among finance personnel, the CAB introduced the conduct of quarterly virtual meetings with all finance officers. The virtual meetings offered a platform for finance officers to listen and participate in discussions. Also, officers were offered the opportunity to brief the Branch on happenings in their respective units.",
                                     "images":[]
-                                }
-                            ]
-                        },
-                        {
-                            "year": "2023-2025",
-                            "highlights": [
+                                },
                                 {
                                     "description": "In order to meet the specific needs and ensure optimum utilization of space and enhanced efficiency, a building design was conceptualized and developed for NAFSFA in Ibadan. The building design was carefully developed to capture all the special needs of a standard academic institution.",
                                     "images":[]

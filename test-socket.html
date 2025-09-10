@@ -108,13 +108,13 @@
                 <h3>Simulate Year Drop (Arduino Simulation)</h3>
                 <select id="yearSelect">
                     <option value="">Select year range...</option>
-                    <option value="1962-1971">1962-1971</option>
-                    <option value="1972-1981">1972-1981</option>
-                    <option value="1982-1991">1982-1991</option>
-                    <option value="1992-2001">1992-2001</option>
-                    <option value="2002-2011">2002-2011</option>
-                    <option value="2012-2021">2012-2021</option>
-                    <option value="2022-2031">2022-2031</option>
+                    <option value="1962-1972">1962-1972</option>
+                    <option value="1973-1983">1973-1983</option>
+                    <option value="1984-1994">1984-1994</option>
+                    <option value="1995-2005">1995-2005</option>
+                    <option value="2006-2016">2006-2016</option>
+                    <option value="2017-2027">2017-2027</option>
+                    <option value="2028-2038">2028-2038</option>
                 </select>
                 <br>
                 <button onclick="simulateDrop()">Simulate Drop Year</button>
@@ -166,7 +166,7 @@
                 <li>Light sensors on A0 (NAF), A1 (NAFSFA), A2 (Evolution)</li>
                 <li>RFID reader on pins 9 (RST) and 10 (SS)</li>
                 <li>Configure SERIAL_PORT in .env file (e.g., /dev/cu.usbmodem101, COM3)</li>
-                <li>Year ranges: 1962-1971, 1972-1981, 1982-1991, 1992-2001, 2002-2011, 2012-2021, 2022-2031</li>
+                <li>Year ranges: 1962-1972, 1973-1983, 1984-1994, 1995-2005, 2006-2016, 2017-2027, 2028-2038</li>
             </ul>
             <h4>Simulation vs Real Hardware:</h4>
             <ul>
@@ -343,13 +343,13 @@
         function generateFakeRFIDForYear(yearRange) {
             // Create a simple mapping for simulation
             const yearToUID = {
-                '1962-1971': '04A1B2C3',
-                '1972-1981': '04D4E5F6',
-                '1982-1991': '04A7B8C9',
-                '1992-2001': '04D0E1F2',
-                '2002-2011': '04A3B4C5',
-                '2012-2021': '04D6E7F8',
-                '2022-2031': '04A9B0C1'
+                '1962-1972': '04A1B2C3',
+                '1973-1983': '04D4E5F6',
+                '1984-1994': '04A7B8C9',
+                '1995-2005': '04D0E1F2',
+                '2006-2016': '04A3B4C5',
+                '2017-2027': '04D6E7F8',
+                '2028-2038': '04A9B0C1'
             };
             return yearToUID[yearRange] || `SIM-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
         }
@@ -357,13 +357,13 @@
         function simulateRFIDMapping(uid, object) {
             // Simple RFID to year mapping for simulation
             const uidToYear = {
-                '04A1B2C3': '1962-1971',
-                '04D4E5F6': '1972-1981',
-                '04A7B8C9': '1982-1991',
-                '04D0E1F2': '1992-2001',
-                '04A3B4C5': '2002-2011',
-                '04D6E7F8': '2012-2021',
-                '04A9B0C1': '2022-2031'
+                '04A1B2C3': '1962-1972',
+                '04D4E5F6': '1973-1983',
+                '04A7B8C9': '1984-1994',
+                '04D0E1F2': '1995-2005',
+                '04A3B4C5': '2006-2016',
+                '04D6E7F8': '2017-2027',
+                '04A9B0C1': '2028-2038'
             };
             
             const yearRange = uidToYear[uid];

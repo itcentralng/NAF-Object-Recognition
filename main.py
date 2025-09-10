@@ -15,7 +15,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Possible Picked Objects = ['naf', 'nafsfa', 'evol']
 picked_object = None
-# Valid Year Ranges based on RFID mapping (now handled in JavaScript) = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
+# Valid Year Ranges based on RFID mapping (now handled in JavaScript) = ['1962-1972', '1973-1983', '1984-1994', '1995-2005', '2006-2016', '2017-2027', '2028-2038']
 dropped_year = None
 # Track current state for proper navigation
 current_state = 'main'  # 'main', 'section', 'year-list', 'year-detail'
@@ -191,8 +191,8 @@ def handle_get_status():
         'current_state': current_state,
         'arduino_connected': arduino_connected,
         'available_objects': ['naf', 'nafsfa', 'evol'],
-        'available_years': ['1962-1971', '1972-1981', '1982-1991', '1992-2001', 
-                           '2002-2011', '2012-2021', '2022-2031']
+        'available_years': ['1962-1972', '1973-1983', '1984-1994', '1995-2005', 
+                           '2006-2016', '2017-2027', '2028-2038']
     })
 
 
@@ -208,7 +208,7 @@ def handle_resolve_year_from_rfid(data):
     print(f"🔄 Processing year resolution: UID={rfid_uid}, Year={year_range}, Object={object_name}")
     
     # Valid years (same as before, but now validated on both ends)
-    valid_years = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
+    valid_years = ['1962-1972', '1973-1983', '1984-1994', '1995-2005', '2006-2016', '2017-2027', '2028-2038']
     
     if not picked_object:
         emit('year_resolution_result', {'success': False, 'message': 'No object picked'})
@@ -317,7 +317,7 @@ def handle_simulate_year_detected(data):
     uid = data.get('uid', '')
     
     # Valid years from mapping
-    valid_years = ['1962-1971', '1972-1981', '1982-1991', '1992-2001', '2002-2011', '2012-2021', '2022-2031']
+    valid_years = ['1962-1972', '1973-1983', '1984-1994', '1995-2005', '2006-2016', '2017-2027', '2028-2038']
     
     if not picked_object:
         emit('simulation_result', {'success': False, 'message': 'No object picked - pick an object first'})
@@ -413,8 +413,8 @@ if __name__ == "__main__":
     print("System Configuration:")
     print(f"- Server running on http://localhost:5550")
     print(f"- Available objects: naf, nafsfa, evol")
-    print(f"- Year ranges: 1962-1971, 1972-1981, 1982-1991, 1992-2001,")
-    print(f"                2002-2011, 2012-2021, 2022-2031")
+    print(f"- Year ranges: 1962-1972, 1973-1983, 1984-1994, 1995-2005,")
+    print(f"                2006-2016, 2017-2027, 2028-2038")
     print("=" * 60)
     
     # Initialize Arduino connection
