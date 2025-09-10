@@ -148,6 +148,41 @@
                                     "images": ["images/naf-history/1967-4-1.jpg", "images/naf-history/1967-4-2.jpg"]
                                 }
                             ]
+                        },
+                        {
+                            "year": "1969",
+                            "highlights": [
+                                {
+                                    "description": "5 June 1969 - Nigerian Air Force MiG-17 allegedly operated by a British mercenary pilot guns down a Swedish Red Cross DC 7 plane while delivering relief supplies to Biafra. As a result, the Red Cross ceases air deliveries of aid.",
+                                    "images": ["images/naf-history/1969-1-1.jpg"]
+                                },
+                                {
+                                    "description": "17 December 1969 - Brigadier Emmanuel E Ikwue was appointed the Fifth Commander of the Nigerian Air Force and later became the First Nigerian Air Force Commander to hold the office now designated as the Office of the Chief of the Air Staff of the Nigerian Air Force. He held this Office till the 28 July 1975.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1970",
+                            "highlights": [
+                                {
+                                    "description": "15 January 1970 - The Civil War ended. Below is an inventory of the total equipment damage inflicted on the Nigerian Armed Forces:",
+                                    "images": []
+                                },
+                                {
+                                    "description": "13 June 1970 - The First Group of Nigerian trained Nigerian Air Force cadet pilots graduated in Kaduna.",
+                                    "images": []
+                                }
+                            ]
+                        },
+                        {
+                            "year": "1971",
+                            "highlights": [
+                                {
+                                    "description": "Estimated figures showed the Nigerian Air Force owned about 7,000 personnel and 32 combat aircraft.",
+                                    "images": []
+                                }
+                            ]
                         }
                     ]
                 }
