@@ -175,12 +175,6 @@ async function loadSectionData(object) {
     }
 }
 
-function extendYearRangeByOne(yearRange) {
-    // Parse the year range (e.g., "1962-1971") and add 1 to the end year
-    const [startYear, endYear] = yearRange.split('-').map(y => parseInt(y));
-    return startYear == 1962 ? `${startYear}-${endYear + 1}` : `${startYear + 1}-${endYear + 1}`;
-}
-
 function updatePageHeader(yearRange, object) {
     const sectionNames = {
         'naf': 'NAF History',
@@ -190,10 +184,8 @@ function updatePageHeader(yearRange, object) {
     
     const sectionName = sectionNames[object] || 'NAF History';
     
-    // Use extended year range only for the page-title element
-    const extendedYearRange = extendYearRangeByOne(yearRange);
-    document.getElementById('page-title').textContent = `Years ${extendedYearRange} - ${sectionName} - NAF Finance Specialty Hall of Fame`;
-    document.getElementById('year-range-title').textContent = `Years ${extendedYearRange}`;
+    document.getElementById('page-title').textContent = `Years ${yearRange} - ${sectionName} - NAF Finance Specialty Hall of Fame`;
+    document.getElementById('year-range-title').textContent = `Years ${yearRange}`;
     document.getElementById('section-info').textContent = `${sectionName} - Select a specific year to explore its historical content`;
 }
 
